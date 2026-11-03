@@ -1,0 +1,11 @@
+[project]
+name = "adv2026-google-labs"
+version = "0.1.0"
+description = "Google Labs の実験的AIツールを Google GenAI SDK で検証・再現するサンプルコード"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai>=2.34.0",
+    "pydantic>=2.14.2",
+    "python-dotenv>=1.2.4",
+]

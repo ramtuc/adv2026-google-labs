@@ -1,0 +1,17 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.env
+
+# Editor
+.vscode/
+
+# Article drafts (published on Qiita, not in this repo)
+doc/
