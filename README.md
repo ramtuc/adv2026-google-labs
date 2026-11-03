@@ -1,6 +1,6 @@
 # adv2026-google-labs
 
-Qiita アドベントカレンダー「25 Days of Google Labs: Dissecting Experimental AI from Specs to Under the Hood」のサンプルコードです。
+Qiita「[google-labs-deep-dive Advent Calendar 2026](https://qiita.com/advent-calendar/2026/google-labs-deep-dive)」のサンプルコードです。
 Google Labs の実験的AIツールの裏側を、Google GenAI SDK（`google-genai`）で検証・再現します。
 
 ## 必要なもの
