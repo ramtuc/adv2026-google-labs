@@ -24,15 +24,22 @@ cp .env.example .env   # .env を開いて GEMINI_API_KEY を自分のキーに�
 ```bash
 uv run day01/baseline.py
 uv run day02/grounded_qa.py
+
+# Day 3（順に実行）
+uv run day03/make_script.py       # データシート → 対話台本
+uv run day03/synthesize.py        # 台本 → 2人の声の音声
+uv run day03/interactive.py       # 割り込みへの応答（台本を書き足す版）
+uv run day03/live_interrupt.py    # 割り込みへの応答（Live API 版）
+uv run day03/style_experiment.py  # 話し方の指示と事実の誤りの関係
 ```
 
 ## 使用した資料
 
 | 記事 | 資料 |
 | --- | --- |
-| Day 2 | [ESP32-S3 Series Datasheet v2.2](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)（Espressif Systems） |
+| Day 2, Day 3 | [ESP32-S3 Series Datasheet v2.2](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)（Espressif Systems） |
 
-資料はこのリポジトリには含めていません。`day02/grounded_qa.py` は初回実行時に上のURLから `day02/data/` へダウンロードします。版が更新されるとページ番号や内容が変わり、`questions.json` の正解と合わなくなることがあります。
+資料はこのリポジトリには含めていません。各スクリプトは初回実行時に上のURLから `day02/data/`・`day03/data/` へダウンロードします。版が更新されるとページ番号や内容が変わり、`questions.json` の正解と合わなくなることがあります。
 
 ## 構成
 
@@ -41,6 +48,8 @@ uv run day02/grounded_qa.py
 | `day01/baseline.py` | API疎通・モデル一覧・構造化出力の確認 | Day 1: Google Labs総点検 |
 | `day02/grounded_qa.py` | データシートだけを根拠にしたQAと引用の検証 | Day 2: Gemini Notebook（旧 NotebookLM）の境界値テスト |
 | `day02/questions.json` | Day 2 の質問と正解 | |
+| `day03/make_script.py` ほか | 音声解説の台本生成・マルチスピーカーTTS・割り込みの再現 | Day 3: Gemini Notebook（旧 NotebookLM）Audio Overview解剖 |
+| `day03/samples/` | Day 3 で作った音声（MP3） | |
 
 ## 注意
 

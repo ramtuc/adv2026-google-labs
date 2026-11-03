@@ -1,0 +1,23 @@
+[
+  {
+    "id": "I1",
+    "category": "ソースの範囲内",
+    "question": "ちょっといいですか、Deep-sleep のときって実際どれくらい電流を食うんですか？",
+    "question_en": "Sorry to jump in — how much current does it actually draw in Deep-sleep?",
+    "expected": "Deep-sleep は条件によって 7〜8 µA（RTC メモリのみ 7 µA、RTC 周辺回路もオンなら 8 µA）。ULP を動かすと 170〜190 µA（p.68 表 5-10）。"
+  },
+  {
+    "id": "I2",
+    "category": "ソース外の知識",
+    "question": "ESP32-C6 と比べたら、どっちのほうが省電力なんですか？",
+    "question_en": "How does it compare to the ESP32-C6? Which one uses less power?",
+    "expected": "ESP32-C6 は資料にないので比較できないと答える。"
+  },
+  {
+    "id": "I3",
+    "category": "前提の誤り",
+    "question": "Wi-Fi 6 に対応してるなら、TWT で省電力にできますよね？",
+    "question_en": "Since it supports Wi-Fi 6, can I use TWT to save power, right?",
+    "expected": "Wi-Fi は 802.11b/g/n のみで Wi-Fi 6 には対応していないと前提の誤りを指摘する（p.1, p.3）。"
+  }
+]

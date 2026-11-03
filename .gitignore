@@ -18,3 +18,10 @@ doc/
 
 # Downloaded datasheets (redistribution not allowed)
 day*/data/
+
+# Generated audio (large)
+day*/results/*.wav
+
+# Gemini Notebook outputs (downloaded audio and its transcript)
+day*/*.m4a
+day*/results/notebook_*
