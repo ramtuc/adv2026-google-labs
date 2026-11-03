@@ -23,7 +23,16 @@ cp .env.example .env   # .env を開いて GEMINI_API_KEY を自分のキーに�
 
 ```bash
 uv run day01/baseline.py
+uv run day02/grounded_qa.py
 ```
+
+## 使用した資料
+
+| 記事 | 資料 |
+| --- | --- |
+| Day 2 | [ESP32-S3 Series Datasheet v2.2](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)（Espressif Systems） |
+
+資料はこのリポジトリには含めていません。`day02/grounded_qa.py` は初回実行時に上のURLから `day02/data/` へダウンロードします。版が更新されるとページ番号や内容が変わり、`questions.json` の正解と合わなくなることがあります。
 
 ## 構成
 
