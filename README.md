@@ -37,7 +37,7 @@ uv run day03/style_experiment.py  # 話し方の指示と事実の誤りの関�
 
 | 記事 | 資料 |
 | --- | --- |
-| Day 2, Day 3 | [ESP32-S3 Series Datasheet v2.2](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)（Espressif Systems） |
+| Day 2〜Day 4 | [ESP32-S3 Series Datasheet v2.2](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)（Espressif Systems） |
 
 資料はこのリポジトリには含めていません。各スクリプトは初回実行時に上のURLから `day02/data/`・`day03/data/` へダウンロードします。版が更新されるとページ番号や内容が変わり、`questions.json` の正解と合わなくなることがあります。
 
@@ -50,6 +50,7 @@ uv run day03/style_experiment.py  # 話し方の指示と事実の誤りの関�
 | `day02/questions.json` | Day 2 の質問と正解 | |
 | `day03/make_script.py` ほか | 音声解説の台本生成・マルチスピーカーTTS・割り込みの再現 | Day 3: Gemini Notebook（旧 NotebookLM）Audio Overview解剖 |
 | `day03/samples/` | Day 3 で作った音声（MP3） | |
+| `day04/samples/` | Day 4 で Gemini Notebook の Studio から書き出したもの（スライド・動画・表・画像） | Day 4: Gemini Notebook（旧 NotebookLM）Studio の機能紹介 |
 
 ## 注意
 
