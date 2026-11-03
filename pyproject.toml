@@ -7,5 +7,6 @@ requires-python = ">=3.12"
 dependencies = [
     "google-genai>=2.34.0",
     "pydantic>=2.14.2",
+    "pypdf>=6.21.4",
     "python-dotenv>=1.2.4",
 ]

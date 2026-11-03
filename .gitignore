@@ -15,3 +15,6 @@ wheels/
 
 # Article drafts (published on Qiita, not in this repo)
 doc/
+
+# Downloaded datasheets (redistribution not allowed)
+day*/data/

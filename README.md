@@ -30,6 +30,8 @@ uv run day01/baseline.py
 | パス | 内容 | 記事 |
 | --- | --- | --- |
 | `day01/baseline.py` | API疎通・モデル一覧・構造化出力の確認 | Day 1: Google Labs総点検 |
+| `day02/grounded_qa.py` | データシートだけを根拠にしたQAと引用の検証 | Day 2: Gemini Notebook（旧 NotebookLM）の境界値テスト |
+| `day02/questions.json` | Day 2 の質問と正解 | |
 
 ## 注意
 
