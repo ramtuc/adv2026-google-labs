@@ -1,0 +1,138 @@
+{
+  "summary": {
+    "claims": 18,
+    "correct": 16,
+    "incorrect": 1,
+    "not_in_source": 1,
+    "incorrect_rate": 0.056,
+    "not_in_source_rate": 0.056
+  },
+  "claims": [
+    {
+      "quote": "ESP32-S3は、Wi-FiとBluetoothを内蔵したシステム・オン・チップなんですが",
+      "claim": "ESP32-S3はWi-FiとBluetoothを内蔵したSoCである。",
+      "verdict": "correct",
+      "page": 2,
+      "note": "「ESP32-S3 is a low-power MCU-based system on a chip (SoC) with integrated 2.4 GHz Wi-Fi and Bluetooth® Low Energy (Bluetooth LE).」と記載されているため。"
+    },
+    {
+      "quote": "最大240MHzで動くXtensaの32ビットLX7デュアルコアプロセッサを積んでいるんです。",
+      "claim": "最大240MHzで動作するXtensa 32-bit LX7デュアルコアプロセッサを搭載している。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "「Xtensa® dual-core 32-bit LX7 microprocessor」および「Clock speed: up to 240 MHz」と記載されているため。"
+    },
+    {
+      "quote": "「PIE」というプロセッサ命令拡張があって、128ビットのベクトル演算ができるんです。",
+      "claim": "PIEというプロセッサ命令拡張により、128ビットのベクトル演算が可能である。",
+      "verdict": "correct",
+      "page": 36,
+      "note": "「4.1.1.2 Processor Instruction Extensions (PIE)」および「128-bit vector operations」と記載されているため。"
+    },
+    {
+      "quote": "これにより、AIやデジタル信号処理アルゴリズムの計算効率がグンと上がります。",
+      "claim": "PIEにより、AIやデジタル信号処理アルゴリズムの計算効率が向上する。",
+      "verdict": "correct",
+      "page": 36,
+      "note": "「ESP32-S3 contains a series of new extended instruction set in order to improve the operation efficiency of specific AI and DSP (Digital Signal Processing) algorithms.」と記載されているため。"
+    },
+    {
+      "quote": "実際にデータシートのアプリケーションの項目にも、音声認識や画像認識、スマートホーム機器などへの応用がしっかり書かれています。",
+      "claim": "アプリケーションとして音声認識、画像認識、スマートホーム機器への応用が記載されている。",
+      "verdict": "correct",
+      "page": 6,
+      "note": "「Applications」の項に「Smart Home」「Speech Recognition」「Image Recognition」が記載されているため。"
+    },
+    {
+      "quote": "「Deep-sleep」モードの時の消費電力は、たったの7マイクロアンペアなんです。",
+      "claim": "Deep-sleepモードの時の消費電力は7 µAである。",
+      "verdict": "incorrect",
+      "page": 5,
+      "note": "データシートには「Power consumption in Deep-sleep mode is 7 µA」と記載されているが、µAは電流の単位であり電力ではない。"
+    },
+    {
+      "quote": "一般的なスマートフォンのバッテリーが3000ミリアンペアアワーくらいだとして、もしこの7マイクロアンペアの電流だけで動き続けたとしたら…計算上、なんと400年以上もバッテリーが持つ少なさです。",
+      "claim": "3000 mAhのバッテリーで7 µAの電流を消費し続けた場合、計算上400年以上持つ。",
+      "verdict": "not_in_source",
+      "page": null,
+      "note": "データシートにはスマートフォンのバッテリー容量や、400年持つといった計算についての記載はない。"
+    },
+    {
+      "quote": "メインのCPUがそのDeep-sleepで眠っている間も、「ULP」という超低消費電力のコプロセッサだけを起こしておくことができます。",
+      "claim": "Deep-sleepモードでメインCPUが停止している間も、ULPコプロセッサを動作させることができる。",
+      "verdict": "correct",
+      "page": 37,
+      "note": "「The ULP coprocessor and RTC memory remain powered up during the Deep-sleep mode.」と記載されているため。"
+    },
+    {
+      "quote": "これにはRISC-Vベースのものと、有限状態マシンの2種類が搭載されているんです。",
+      "claim": "ULPコプロセッサにはRISC-Vベースのものと有限状態マシン(FSM)の2種類が搭載されている。",
+      "verdict": "correct",
+      "page": 37,
+      "note": "「ESP32-S3 has two ULP coprocessors, one based on RISC-V instruction set architecture (ULP-RISC-V) and the other on finite state machine (ULP-FSM).」と記載されているため。"
+    },
+    {
+      "quote": "このULPがRTCメモリやセンサーを監視し続けて、何か変化があった時だけメインCPUを叩き起こす、といった賢い使い方ができるんですよ。",
+      "claim": "ULPコプロセッサはRTCメモリやセンサーにアクセスでき、メインCPUをウェイクアップさせることができる。",
+      "verdict": "correct",
+      "page": 37,
+      "note": "「the developer can store a program for the ULP coprocessor in the RTC slow memory to access RTC GPIO, RTC peripheral devices, RTC timers and internal sensors in Deep-sleep mode.」およびPage 59「By using threshold settings or other methods, we can awaken the CPU from sleep modes.」と記載されているため。"
+    },
+    {
+      "quote": "2.4 GHzのWi-FiはIEEE 802.11b/g/nに対応していて、データレートは最大150 Mbpsまで出ます。",
+      "claim": "2.4 GHz Wi-FiはIEEE 802.11b/g/nに対応し、最大150 Mbpsのデータレートをサポートする。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "「Complies with IEEE 802.11b/g/n」および「1T1R mode with data rate up to 150 Mbps」と記載されているため。"
+    },
+    {
+      "quote": "データシートにもビデオストリーミングのカメラに最適だと書かれています。",
+      "claim": "データシートにビデオストリーミングのカメラへの応用が記載されている。",
+      "verdict": "correct",
+      "page": 6,
+      "note": "「Applications」の項に「Cameras for Video Streaming」と記載されているため。"
+    },
+    {
+      "quote": "さらにBluetooth LEはバージョン5に対応していて、2 Mbpsの高速通信はもちろん、長距離向けの125 Kbpsや500 Kbpsの通信モードも持っています。",
+      "claim": "Bluetooth LEはバージョン5に対応し、2 Mbps、125 Kbps、500 Kbpsの通信速度をサポートする。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "「Bluetooth LE: Bluetooth 5」および「Speed: 125 Kbps, 500 Kbps, 1 Mbps, 2 Mbps」と記載されているため。"
+    },
+    {
+      "quote": "Wi-FiとBluetoothで同じアンテナを共有するための内部共存メカニズムまで備わっているんです。",
+      "claim": "Wi-FiとBluetoothで同じアンテナを共有するための内部共存メカニズムを備えている。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "「Internal co-existence mechanism between Wi-Fi and Bluetooth to share the same antenna」と記載されているため。"
+    },
+    {
+      "quote": "「セキュアブート」機能では、RSA-PSSという署名で確認された正規のファームウェアしか起動できないようになっています。",
+      "claim": "セキュアブート機能は、RSA-PSS署名で確認されたファームウェアのみを起動できるようにする。",
+      "verdict": "correct",
+      "page": 48,
+      "note": "「Secure Boot feature uses a hardware root of trust to ensure only signed firmware (with RSA-PSS signature) can be booted.」と記載されているため。"
+    },
+    {
+      "quote": "フラッシュメモリや外部RAMのデータを自動で暗号化・復号するXTS-AES準拠のモジュールも載っています。",
+      "claim": "フラッシュメモリや外部RAMのデータを自動で暗号化・復号するXTS-AES準拠のモジュールを搭載している。",
+      "verdict": "correct",
+      "page": 49,
+      "note": "「ESP32-S3 integrates an External Memory Encryption and Decryption module that complies with the XTS-AES standard.」および「High-speed auto encryption... High-speed auto decryption」と記載されているため。"
+    },
+    {
+      "quote": "AESやSHA、RSA、HMACなどの計算をハードウェアで高速に行う専用のアクセラレータがある",
+      "claim": "AES、SHA、RSA、HMACなどの計算を高速に行うハードウェアアクセラレータを搭載している。",
+      "verdict": "correct",
+      "page": 5,
+      "note": "「Cryptographic hardware acceleration: SHA Accelerator... AES Accelerator... RSA Accelerator... HMAC Accelerator」と記載されているため。"
+    },
+    {
+      "quote": "これらがすべて、たった7ミリ角のQFN56パッケージに収まっているんです。",
+      "claim": "ESP32-S3は7×7 mmのQFN56パッケージに収められている。",
+      "verdict": "correct",
+      "page": 1,
+      "note": "「QFN56 (7×7 mm) Package」と記載されているため。"
+    }
+  ]
+}

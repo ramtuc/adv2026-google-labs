@@ -1,0 +1,152 @@
+{
+  "summary": {
+    "claims": 20,
+    "correct": 20,
+    "incorrect": 0,
+    "not_in_source": 0,
+    "incorrect_rate": 0.0,
+    "not_in_source_rate": 0.0
+  },
+  "claims": [
+    {
+      "quote": "ESP32-S3は、2.4 GHzのWi-FiとBluetooth Low Energyを統合した、低消費電力なMCUベースのSoCなんですよ。",
+      "claim": "ESP32-S3は2.4 GHz Wi-FiとBluetooth Low Energyを統合した低消費電力MCUベースのSoCである。",
+      "verdict": "correct",
+      "page": 2,
+      "note": "Product Overviewに「ESP32-S3 is a low-power MCU-based system on a chip (SoC) with integrated 2.4 GHz Wi-Fi and Bluetooth® Low Energy (Bluetooth LE).」と記載されています。"
+    },
+    {
+      "quote": "CPUには、高性能な「Xtensa 32-bit LX7 デュアルコアマイクロプロセッサ」が搭載されていて、最大240 MHzのクロック速度で動作します。",
+      "claim": "CPUとしてXtensa 32-bit LX7 デュアルコアマイクロプロセッサを搭載し、最大240 MHzで動作する。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "FeaturesのCPU and Memoryに「Xtensa® dual-core 32-bit LX7 microprocessor」「Clock speed: up to 240 MHz」と記載されています。"
+    },
+    {
+      "quote": "内部メモリとしては、384 KBのROMと、512 KBのSRAMを搭載しています。",
+      "claim": "内部メモリとして384 KBのROMと512 KBのSRAMを搭載している。",
+      "verdict": "correct",
+      "page": 4,
+      "note": "FeaturesのCPU and Memoryに「ROM: 384 KB」「SRAM: 512 KB」と記載されています。"
+    },
+    {
+      "quote": "AIやデジタル信号処理のアルゴリズムの演算効率を上げるために、128ビットのベクトル演算などができるプロセッサ命令拡張セットも追加されているんですよ。",
+      "claim": "AIやDSPアルゴリズムの効率向上のため、128ビットベクトル演算などをサポートするプロセッサ命令拡張セット（PIE）が搭載されている。",
+      "verdict": "correct",
+      "page": 36,
+      "note": "4.1.1.2 Processor Instruction Extensions (PIE)に「ESP32-S3 contains a series of new extended instruction set in order to improve the operation efficiency of specific AI and DSP (Digital Signal Processing) algorithms.」「128-bit vector operations」と記載されています。"
+    },
+    {
+      "quote": "Wi-FiはIEEE 802.11b/g/nに準拠していて、2.4 GHz帯で20 MHzと40 MHzの帯域幅をサポートしています。",
+      "claim": "Wi-FiはIEEE 802.11b/g/nに準拠し、2.4 GHz帯で20 MHzおよび40 MHzの帯域幅をサポートする。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "FeaturesのWi-Fiに「Complies with IEEE 802.11b/g/n」「Supports 20 MHz and 40 MHz bandwidth in 2.4 GHz band」と記載されています。"
+    },
+    {
+      "quote": "1T1Rモードで、最大150 Mbpsのデータレートをサポートしていますよ。",
+      "claim": "1T1Rモードで最大150 Mbpsのデータレートをサポートする。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "FeaturesのWi-Fiに「1T1R mode with data rate up to 150 Mbps」と記載されています。"
+    },
+    {
+      "quote": "Bluetoothは、Bluetooth 5とBluetooth MeshをサポートするBluetooth Low Energy、つまりBLEですね。",
+      "claim": "Bluetooth 5およびBluetooth MeshをサポートするBluetooth Low Energy（BLE）に対応している。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "FeaturesのBluetoothに「Bluetooth LE: Bluetooth 5, Bluetooth Mesh」と記載されています。"
+    },
+    {
+      "quote": "速度としては、125 Kbps、500 Kbps、1 Mbps、2 Mbpsの4種類に対応しています。",
+      "claim": "Bluetooth LEの通信速度として125 Kbps、500 Kbps、1 Mbps、2 Mbpsをサポートする。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "FeaturesのBluetoothに「Speed: 125 Kbps, 500 Kbps, 1 Mbps, 2 Mbps」と記載されています。"
+    },
+    {
+      "quote": "特に125 Kbpsと500 Kbpsは「Coded PHY」という機能で、高い受信感度と長距離通信をサポートしています。",
+      "claim": "125 Kbpsと500 KbpsはCoded PHYにより高い受信感度と長距離通信をサポートする。",
+      "verdict": "correct",
+      "page": 63,
+      "note": "4.3.3.1 Bluetooth LE PHYに「Coded PHY for high RX sensitivity and long range (125 Kbps and 500 Kbps)」と記載されています。"
+    },
+    {
+      "quote": "最大20 dBmの送信パワーを出せるハイパワーモードも搭載されているんです。",
+      "claim": "最大20 dBmの送信パワーを出力できるハイパワーモードを搭載している。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "FeaturesのBluetoothに「High-power mode with up to 20 dBm transmission power」と記載されています。"
+    },
+    {
+      "quote": "典型的なシナリオ向けに設計された4つの電源モード、「Active」「Modem-sleep」「Light-sleep」「Deep-sleep」が用意されています。",
+      "claim": "Active、Modem-sleep、Light-sleep、Deep-sleepの4つの電源モードが用意されている。",
+      "verdict": "correct",
+      "page": 5,
+      "note": "FeaturesのPower Managementに「Four power modes designed for typical scenarios: Active, Modem-sleep, Light-sleep, Deep-sleep」と記載されています。"
+    },
+    {
+      "quote": "Deep-sleepモードでの消費電力は、なんと7 µAです。",
+      "claim": "Deep-sleepモードでの消費電力は7 µAである。",
+      "verdict": "correct",
+      "page": 5,
+      "note": "FeaturesのPower Managementに「Power consumption in Deep-sleep mode is 7 µA」と記載されています。"
+    },
+    {
+      "quote": "メインの電源などは落ちますが、RTCメモリと「ULPコプロセッサ」という超低消費電力のサブマイコンは動かし続けることができるんです。これでDeep-sleepモード中でもRTC GPIOや内部センサーにアクセスできます。",
+      "claim": "Deep-sleepモード中もRTCメモリとULPコプロセッサは動作し続け、RTC GPIOや内部センサーにアクセスできる。",
+      "verdict": "correct",
+      "page": 37,
+      "note": "4.1.1.3 Ultra-Low-Power Coprocessor (ULP)に「The ULP coprocessor and RTC memory remain powered up during the Deep-sleep mode. Hence, the developer can store a program for the ULP coprocessor in the RTC slow memory to access RTC GPIO, RTC peripheral devices, RTC timers and internal sensors in Deep-sleep mode.」と記載されています。"
+    },
+    {
+      "quote": "チップ内部の温度変化を感知する温度センサーや、指の接近などを検知する14個の静電容量式タッチセンサー用のGPIOがあります。",
+      "claim": "チップ内部の温度変化を感知する温度センサーと、14個の静電容量式タッチセンサー用GPIOを搭載している。",
+      "verdict": "correct",
+      "page": 59,
+      "note": "4.2.2.2 Temperature Sensorに「designed primarily to sense the temperature changes inside the chip」、4.2.2.3 Touch Sensorに「14 capacitive-sensing GPIOs, which detect variations induced by touching or approaching the GPIOs with a finger or other objects」と記載されています。"
+    },
+    {
+      "quote": "12ビットのSAR ADCが2つ統合されていて、最大20チャンネルでアナログ測定も可能です。",
+      "claim": "2つの12ビットSAR ADCを統合し、最大20チャンネルのアナログ測定が可能である。",
+      "verdict": "correct",
+      "page": 59,
+      "note": "4.2.2.1 SAR ADCに「ESP32-S3 integrates two 12-bit SAR ADCs and supports measurements on 20 channels」と記載されています。"
+    },
+    {
+      "quote": "ESP32-S3には「ULP-RISC-V」とステートマシンの「ULP-FSM」という2種類のULPコプロセッサが入っています。ただし、データシートにはこれら2つのコプロセッサは同時には動作できないと明記されています。",
+      "claim": "ULP-RISC-VとULP-FSMの2種類のULPコプロセッサを搭載しているが、これらは同時には動作できない。",
+      "verdict": "correct",
+      "page": 37,
+      "note": "4.1.1.3 Ultra-Low-Power Coprocessor (ULP)に「ESP32-S3 has two ULP coprocessors, one based on RISC-V instruction set architecture (ULP-RISC-V) and the other on finite state machine (ULP-FSM).」および「Note that these two coprocessors cannot work simultaneously.」と記載されています。"
+    },
+    {
+      "quote": "「セキュアブート」は、ハードウェアのRoot of Trustを使って、RSA-PSS署名されたファームウェアだけを起動できるようにする仕組みです。",
+      "claim": "セキュアブートはハードウェアのRoot of Trustを使用し、RSA-PSS署名されたファームウェアのみを起動可能にする。",
+      "verdict": "correct",
+      "page": 48,
+      "note": "4.1.4.4 Secure Bootに「Secure Boot feature uses a hardware root of trust to ensure only signed firmware (with RSA-PSS signature) can be booted.」と記載されています。"
+    },
+    {
+      "quote": "XTS-AES規格に準拠した「フラッシュ暗号化」機能で、外部メモリの暗号化と復号化をソフトウェアなしで高速に行えます。",
+      "claim": "XTS-AES規格に準拠したフラッシュ暗号化機能により、ソフトウェアの介入なしに外部メモリの高速な暗号化・復号化が可能である。",
+      "verdict": "correct",
+      "page": 49,
+      "note": "4.1.4.7 External Memory Encryption and Decryptionに「complies with the XTS-AES standard」「High-speed auto encryption, without software’s participation」「High-speed auto decryption, without software’s participation」と記載されています。"
+    },
+    {
+      "quote": "他にもSHAやAES、RSA、HMACのハードウェアアクセラレータも搭載されているんですよ。",
+      "claim": "SHA、AES、RSA、HMACのハードウェアアクセラレータを搭載している。",
+      "verdict": "correct",
+      "page": 5,
+      "note": "FeaturesのSecurityに「Cryptographic hardware acceleration: SHA Accelerator... AES Accelerator... RSA Accelerator... HMAC Accelerator」と記載されています。"
+    },
+    {
+      "quote": "データシートでも、スマートホームや産業自動化、ヘルスケア、音声認識や画像認識など、幅広いアプリケーションが理想的だと紹介されています。",
+      "claim": "スマートホーム、産業自動化、ヘルスケア、音声認識、画像認識などのアプリケーションに適している。",
+      "verdict": "correct",
+      "page": 6,
+      "note": "Applicationsのセクションに「Smart Home」「Industrial Automation」「Health Care」「Speech Recognition」「Image Recognition」などが挙げられています。"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "style": "accurate",
+    "run": 0,
+    "turns": 30,
+    "claims": 18,
+    "correct": 18,
+    "incorrect": 0,
+    "not_in_source": 0,
+    "incorrect_rate": 0.0,
+    "not_in_source_rate": 0.0
+  },
+  {
+    "style": "accurate",
+    "run": 1,
+    "turns": 35,
+    "claims": 20,
+    "correct": 20,
+    "incorrect": 0,
+    "not_in_source": 0,
+    "incorrect_rate": 0.0,
+    "not_in_source_rate": 0.0
+  },
+  {
+    "style": "accurate",
+    "run": 2,
+    "turns": 30,
+    "claims": 14,
+    "correct": 14,
+    "incorrect": 0,
+    "not_in_source": 0,
+    "incorrect_rate": 0.0,
+    "not_in_source_rate": 0.0
+  },
+  {
+    "style": "dramatic",
+    "run": 0,
+    "turns": 32,
+    "claims": 19,
+    "correct": 17,
+    "incorrect": 2,
+    "not_in_source": 0,
+    "incorrect_rate": 0.105,
+    "not_in_source_rate": 0.0
+  },
+  {
+    "style": "dramatic",
+    "run": 1,
+    "turns": 32,
+    "claims": 18,
+    "correct": 16,
+    "incorrect": 1,
+    "not_in_source": 1,
+    "incorrect_rate": 0.056,
+    "not_in_source_rate": 0.056
+  },
+  {
+    "style": "dramatic",
+    "run": 2,
+    "turns": 31,
+    "claims": 15,
+    "correct": 15,
+    "incorrect": 0,
+    "not_in_source": 0,
+    "incorrect_rate": 0.0,
+    "not_in_source_rate": 0.0
+  }
+]

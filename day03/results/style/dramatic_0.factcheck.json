@@ -1,0 +1,145 @@
+{
+  "summary": {
+    "claims": 19,
+    "correct": 17,
+    "incorrect": 2,
+    "not_in_source": 0,
+    "incorrect_rate": 0.105,
+    "not_in_source_rate": 0.0
+  },
+  "claims": [
+    {
+      "quote": "最大240MHzで動くXtensa 32-bit LX7デュアルコアのマイクロプロセッサなんです。",
+      "claim": "ESP32-S3は最大240MHzで動作するXtensa 32-bit LX7デュアルコアマイクロプロセッサである。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "資料のCPU and Memoryセクションに記載されている。"
+    },
+    {
+      "quote": "CoreMarkというベンチマークスコアでは、1329.92という数値を叩き出しています。",
+      "claim": "ESP32-S3のCoreMarkスコアは1329.92である。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "資料のCPU and Memoryセクションに記載されている。"
+    },
+    {
+      "quote": "2.4GHzのWi-Fiは802.11b/g/nに対応し、データレートは最大150Mbps。",
+      "claim": "2.4GHz Wi-Fiは802.11b/g/nに対応し、最大150Mbpsのデータレートをサポートする。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "資料のWi-Fiセクションに記載されている。"
+    },
+    {
+      "quote": "さらにBluetooth 5とBluetooth Meshにも対応しています。",
+      "claim": "ESP32-S3はBluetooth 5およびBluetooth Meshに対応している。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "資料のBluetoothセクションに記載されている。"
+    },
+    {
+      "quote": "Bluetooth LEは、遠くまで届く125Kbpsから、高速な2Mbpsまで用途に合わせてスピードを選べますよ。",
+      "claim": "Bluetooth LEは125Kbpsから2Mbpsの通信速度をサポートする。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "資料のBluetoothセクションに記載されている。"
+    },
+    {
+      "quote": "「PIE」というプロセッサ命令拡張があって、AIやデジタル信号処理のために、128ビットのベクトル演算ができるんです。",
+      "claim": "PIEというプロセッサ命令拡張により、AIやDSP向けに128ビットのベクトル演算が可能である。",
+      "verdict": "correct",
+      "page": 36,
+      "note": "資料のProcessor Instruction Extensions (PIE)セクションに記載されている。"
+    },
+    {
+      "quote": "LCDインターフェースと、8ビットから16ビットのDVPイメージセンサーを繋げるカメラコントローラーも内蔵していて、ビデオストリーミングも可能な設計です。",
+      "claim": "LCDインターフェースと8〜16ビットのDVPカメラコントローラーを内蔵し、ビデオストリーミングが可能である。",
+      "verdict": "correct",
+      "page": 52,
+      "note": "資料のLCD and Camera ControllerセクションおよびApplicationsセクション(p.6)に記載されている。"
+    },
+    {
+      "quote": "このチップは用途に合わせて4つのパワーモードを持っていて、最も節電するDeep-sleepモードの消費電力は、なんとたったの7µAなんです。",
+      "claim": "ESP32-S3は4つのパワーモードを持ち、Deep-sleepモードの消費電力は7µAである。",
+      "verdict": "incorrect",
+      "page": 5,
+      "note": "7µAは電流の単位であり、電力ではない。資料には「Power consumption in Deep-sleep mode is 7 µA」とあるが、物理量としては電流であるため単位の取り違えに該当する。"
+    },
+    {
+      "quote": "データシートによると、Wi-Fiで全力送信している時のピーク電流が最大340mAです。",
+      "claim": "Wi-Fi送信時のピーク電流は最大340mAである。",
+      "verdict": "correct",
+      "page": 66,
+      "note": "資料のTable 5-7に記載されている。"
+    },
+    {
+      "quote": "つまり、Deep-sleepモードはその約5万分の1の電力しか使わない計算になります。",
+      "claim": "Deep-sleepモードはWi-Fi送信時の約5万分の1の電力を使用する。",
+      "verdict": "incorrect",
+      "page": 66,
+      "note": "比較の元となっている340mAと7µAは電流の値であり、電力ではない。"
+    },
+    {
+      "quote": "冬眠中にも「ULP」という超低消費電力のコプロセッサが起きていて、メインのCPUが寝ていてもセンサーの測定などをし続けてくれるんです。",
+      "claim": "Deep-sleepモード中もULPコプロセッサが稼働し、センサーの測定などを行うことができる。",
+      "verdict": "correct",
+      "page": 37,
+      "note": "資料のUltra-Low-Power Coprocessor (ULP)セクションに記載されている。"
+    },
+    {
+      "quote": "「セキュアブート」と「フラッシュ暗号化」があり、署名された正しいファームウェアしか起動できないようになっています。",
+      "claim": "セキュアブートとフラッシュ暗号化機能により、署名されたファームウェアのみが起動可能である。",
+      "verdict": "correct",
+      "page": 48,
+      "note": "資料のSecure Bootセクションに記載されている。"
+    },
+    {
+      "quote": "さらにAES、RSA、SHA、HMACといった暗号化処理を行うハードウェアアクセラレータを備えています。",
+      "claim": "AES、RSA、SHA、HMACのハードウェアアクセラレータを備えている。",
+      "verdict": "correct",
+      "page": 5,
+      "note": "資料のSecurityセクションに記載されている。"
+    },
+    {
+      "quote": "最大4096ビットのキーを使ったRSAデジタル署名の検証もできるんです。",
+      "claim": "最大4096ビットのキーを使用したRSAデジタル署名の検証が可能である。",
+      "verdict": "correct",
+      "page": 49,
+      "note": "資料のRSA Digital Signature Peripheral (RSA_DS)セクションに記載されている。"
+    },
+    {
+      "quote": "「クロックグリッチ検出」です。もし攻撃者が3ナノ秒より短い異常なノイズをクロック信号に混ぜて誤作動を狙っても、それを検知してブロックしてしまいます。",
+      "claim": "クロックグリッチ検出機能により、3ナノ秒より短いクロック信号のノイズを検知してブロックする。",
+      "verdict": "correct",
+      "page": 50,
+      "note": "資料のClock Glitch Detectionセクションに記載されている。"
+    },
+    {
+      "quote": "外部のフラッシュメモリやRAMは、最大1GBまでサポートしています。",
+      "claim": "外部フラッシュメモリおよびRAMを最大1GBまでサポートしている。",
+      "verdict": "correct",
+      "page": 39,
+      "note": "資料のExternal Flash and RAMセクションに記載されている。"
+    },
+    {
+      "quote": "そこに保存されるデータもハードウェアで自動的に暗号化と復号が行われますよ。",
+      "claim": "外部メモリに保存されるデータはハードウェアによって自動的に暗号化および復号される。",
+      "verdict": "correct",
+      "page": 49,
+      "note": "資料のExternal Memory Encryption and Decryptionセクションに記載されている。"
+    },
+    {
+      "quote": "さらに、45個のプログラマブルなGPIOピンがあり、そのうち14個は静電容量式のタッチセンサーとして使えます。",
+      "claim": "45個のプログラマブルGPIOピンを備え、そのうち14個は静電容量式タッチセンサーとして使用可能である。",
+      "verdict": "correct",
+      "page": 4,
+      "note": "資料のPeripheralsセクション(p.4)およびAnalog signal processingセクション(p.5)に記載されている。"
+    },
+    {
+      "quote": "スマートホームやスマート農業、サービスロボットなど、応用範囲は無限大です。",
+      "claim": "ESP32-S3はスマートホーム、スマート農業、サービスロボットなどに応用可能である。",
+      "verdict": "correct",
+      "page": 6,
+      "note": "資料のApplicationsセクションに記載されている。"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "summary": {
+    "claims": 15,
+    "correct": 15,
+    "incorrect": 0,
+    "not_in_source": 0,
+    "incorrect_rate": 0.0,
+    "not_in_source_rate": 0.0
+  },
+  "claims": [
+    {
+      "quote": "Xtensaの32ビットLX7デュアルコア・マイクロプロセッサを搭載し、最大240MHzで動くんですよ。",
+      "claim": "ESP32-S3はXtensa 32-bit LX7デュアルコア・マイクロプロセッサを搭載し、最大240MHzで動作する。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "資料の「CPU and Memory」セクションに「Xtensa® dual-core 32-bit LX7 microprocessor」「Clock speed: up to 240 MHz」と記載されています。"
+    },
+    {
+      "quote": "さらに2.4GHz帯のWi-FiとBluetooth 5の機能も内蔵しています。",
+      "claim": "ESP32-S3は2.4GHz帯のWi-FiとBluetooth 5を内蔵している。",
+      "verdict": "correct",
+      "page": 1,
+      "note": "資料の表紙に「2.4 GHz Wi-Fi (IEEE 802.11b/g/n) and Bluetooth® 5 (LE)」と記載されています。"
+    },
+    {
+      "quote": "Wi-Fiはデータレート最大150Mbpsをサポートしているんです。",
+      "claim": "ESP32-S3のWi-Fiは最大150Mbpsのデータレートをサポートしている。",
+      "verdict": "correct",
+      "page": 3,
+      "note": "資料の「Wi-Fi」セクションに「1T1R mode with data rate up to 150 Mbps」と記載されています。"
+    },
+    {
+      "quote": "実はこのESP32-S3、AIやDSPアルゴリズムの実行効率を上げるための特別な命令拡張「PIE」を備えているんです。",
+      "claim": "ESP32-S3はAIやDSPアルゴリズムの実行効率を向上させるための命令拡張「PIE」を備えている。",
+      "verdict": "correct",
+      "page": 36,
+      "note": "資料の「4.1.1.2 Processor Instruction Extensions (PIE)」に「ESP32-S3 contains a series of new extended instruction set in order to improve the operation efficiency of specific AI and DSP (Digital Signal Processing) algorithms.」と記載されています。"
+    },
+    {
+      "quote": "128ビットの新しい汎用レジスタを持っていて、複素数の掛け算や足し算などのベクトル演算を128ビット単位で処理できるんです。",
+      "claim": "ESP32-S3は128ビットの汎用レジスタを持ち、複素数の乗算や加算などのベクトル演算を128ビット単位で処理できる。",
+      "verdict": "correct",
+      "page": 36,
+      "note": "資料の「4.1.1.2 Processor Instruction Extensions (PIE)」のFeature Listに「128-bit new general-purpose registers」「128-bit vector operations, e.g., complex multiplication, addition, subtraction, multiplication, shifting, comparison, etc」と記載されています。"
+    },
+    {
+      "quote": "だからこそ、音声認識や画像認識のデバイスにも理想的だとデータシートに明記されています。",
+      "claim": "ESP32-S3は音声認識や画像認識デバイスに理想的であるとデータシートに記載されている。",
+      "verdict": "correct",
+      "page": 6,
+      "note": "資料の「Applications」セクションに「ESP32-S3 is an ideal choice for IoT devices in the following areas:」として「Speech Recognition」「Image Recognition」が挙げられています。"
+    },
+    {
+      "quote": "ESP32-S3には4つの電源モードがあって、「ディープスリープモード」の時の消費電力は、なんとたったの7マイクロアンペアなんです。",
+      "claim": "ESP32-S3には4つの電源モードがあり、ディープスリープモード時の消費電力は7 µAである。",
+      "verdict": "correct",
+      "page": 5,
+      "note": "資料の「Power Management」セクションに「Four power modes designed for typical scenarios: Active, Modem-sleep, Light-sleep, Deep-sleep」「Power consumption in Deep-sleep mode is 7 µA」と記載されています。"
+    },
+    {
+      "quote": "超低消費電力のULPコプロセッサとRTCメモリだけは動かし続けることができるんです。深い眠りの中でも、センサーの監視などはこなせるんですよ。",
+      "claim": "ディープスリープモード中もULPコプロセッサとRTCメモリは動作し続け、センサーの監視などを行える。",
+      "verdict": "correct",
+      "page": 37,
+      "note": "資料の「4.1.1.3 Ultra-Low-Power Coprocessor (ULP)」に「The ULP coprocessor and RTC memory remain powered up during the Deep-sleep mode. Hence, the developer can store a program for the ULP coprocessor in the RTC slow memory to access RTC GPIO, RTC peripheral devices, RTC timers and internal sensors in Deep-sleep mode.」と記載されています。"
+    },
+    {
+      "quote": "フラッシュメモリの暗号化や、セキュアブート機能が搭載されています。",
+      "claim": "ESP32-S3にはフラッシュメモリの暗号化機能とセキュアブート機能が搭載されている。",
+      "verdict": "correct",
+      "page": 5,
+      "note": "資料の「Security」セクションに「Secure boot」「Flash encryption」と記載されています。"
+    },
+    {
+      "quote": "ハードウェアの「信頼の基点」を使って、署名されたファームウェアだけを起動させる仕組みです。",
+      "claim": "セキュアブートはハードウェアの「信頼の基点」を使用し、署名されたファームウェアのみを起動させる。",
+      "verdict": "correct",
+      "page": 48,
+      "note": "資料の「4.1.4.4 Secure Boot」に「Secure Boot feature uses a hardware root of trust to ensure only signed firmware (with RSA-PSS signature) can be booted.」と記載されています。"
+    },
+    {
+      "quote": "AES、SHA、RSAといった暗号化アルゴリズムをハードウェアで高速に処理します。",
+      "claim": "ESP32-S3はAES、SHA、RSAなどの暗号化アルゴリズムを処理するハードウェアアクセラレータを搭載している。",
+      "verdict": "correct",
+      "page": 5,
+      "note": "資料の「Security」セクションの「Cryptographic hardware acceleration:」に「SHA Accelerator」「AES Accelerator」「RSA Accelerator」と記載されています。"
+    },
+    {
+      "quote": "例えばRSAなら最大4096ビットの大きな桁の計算もサポートしているんですよ。",
+      "claim": "RSAアクセラレータは最大4096ビットの計算をサポートしている。",
+      "verdict": "correct",
+      "page": 48,
+      "note": "資料の「4.1.4.3 RSA Accelerator」に「Large-number modular multiplication, up to 4096 bits」と記載されています。"
+    },
+    {
+      "quote": "乱数生成器、RNGも内蔵しています。アルゴリズムではなく、物理的なプロセスから「真の乱数」を生成するんです。",
+      "claim": "ESP32-S3はRNG（乱数生成器）を内蔵しており、アルゴリズムではなく物理的なプロセスから真の乱数を生成する。",
+      "verdict": "correct",
+      "page": 50,
+      "note": "資料の「4.1.4.9 Random Number Generator」に「The random number generator (RNG) in ESP32-S3 generates true random numbers, which means random number generated from a physical process, rather than by means of an algorithm.」と記載されています。"
+    },
+    {
+      "quote": "スマートホームだけでなく、産業の自動化やヘルスケア、スマート農業、サービスロボットなど、幅広い分野に最適とされています。",
+      "claim": "ESP32-S3はスマートホーム、産業の自動化、ヘルスケア、スマート農業、サービスロボットなどの分野に最適である。",
+      "verdict": "correct",
+      "page": 6,
+      "note": "資料の「Applications」セクションに「Smart Home」「Industrial Automation」「Health Care」「Smart Agriculture」「Service Robot」が挙げられています。"
+    },
+    {
+      "quote": "たった7ミリ角のQFN56というパッケージの中に、これだけの機能がすべて詰め込まれているんです。",
+      "claim": "ESP32-S3は7ミリ角のQFN56パッケージで提供されている。",
+      "verdict": "correct",
+      "page": 1,
+      "note": "資料の表紙に「QFN56 (7×7 mm) Package」と記載されています。"
+    }
+  ]
+}
