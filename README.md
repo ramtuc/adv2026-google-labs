@@ -49,7 +49,7 @@ uv run day03/style_experiment.py  # 話し方の指示と事実の誤りの関�
 | `day02/grounded_qa.py` | データシートだけを根拠にしたQAと引用の検証 | Day 2: Gemini Notebook（旧 NotebookLM）の境界値テスト |
 | `day02/questions.json` | Day 2 の質問と正解 | |
 | `day03/make_script.py` ほか | 音声解説の台本生成・マルチスピーカーTTS・割り込みの再現 | Day 3: Gemini Notebook（旧 NotebookLM）Audio Overview解剖 |
-| `day03/samples/` | Day 3 で作った音声（MP3） | |
+| `day03/samples/` | Day 3 で作った音声と、比較用の Gemini Notebook の音声解説（MP3） | |
 | `day04/samples/` | Day 4 で Gemini Notebook の Studio から書き出したもの（スライド・動画・表・画像） | Day 4: Gemini Notebook（旧 NotebookLM）Studio の機能紹介 |
 
 ## 注意

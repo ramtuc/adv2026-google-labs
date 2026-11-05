@@ -1,6 +1,6 @@
 # Day 3 再現版の音声サンプル
 
-ESP32-S3 データシート v2.2 をもとに、Gemini API で作った音声です。Gemini Notebook（旧 NotebookLM）の音声解説そのものは含みません。
+ESP32-S3 データシート v2.2 をもとに、Gemini API で作った音声です。最後の2件だけは、比較用に Gemini Notebook（旧 NotebookLM）の音声解説をダウンロードしたものです。
 
 | ファイル | 内容 | 作り方 |
 | --- | --- | --- |
@@ -11,6 +11,8 @@ ESP32-S3 データシート v2.2 をもとに、Gemini API で作った音声で
 | [live_I1.mp3](live_I1.mp3) | I1 の英語版への応答 | `live_interrupt.py`：Live API（`gemini-3.8-live`）で音声のまま応答（0.82 秒） |
 | [live_I2.mp3](live_I2.mp3) | I2 の英語版への応答 | 同上（1.16 秒） |
 | [live_I3.mp3](live_I3.mp3) | I3 の英語版への応答 | 同上（1.09 秒） |
+| [notebook_overview_ja.mp3](notebook_overview_ja.mp3) | Gemini Notebook の音声解説「7マイクロアンペアの極小頭脳ESP32-S3」（日本語・21分39秒） | Gemini Notebook の Studio で作成・ダウンロード（AI が生成したもので、数値に誤りを含むことがあります） |
+| [notebook_overview_en.mp3](notebook_overview_en.mp3) | Gemini Notebook の音声解説「Inside the ESP32-S3 Microcontroller Architecture」（英語・22分39秒）。Interactive モードを試した版 | 同上 |
 
 括弧内の秒数は、質問を受けてから最初の声が出るまでの時間です。
-`results/` に出力される WAV を `ffmpeg -ac 1 -b:a 64k` で MP3 に変換しています。
+`results/` に出力される WAV（Gemini Notebook の2件は m4a）を `ffmpeg -ac 1 -b:a 64k` で MP3 に変換しています。
