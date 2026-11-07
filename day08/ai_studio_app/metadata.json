@@ -1,0 +1,10 @@
+{
+  "name": "ESP32-S3 Web Serial Log Analyzer",
+  "description": "ESP32-S3のWeb Serialリアルタイムログビューア。ESP-IDFログの色分け・タグフィルタ・DTR/RTS再起動・Gemini AIによるGuru Meditationやエラーの日本語原因診断。",
+  "requestFramePermissions": [
+    "serial"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -70,6 +70,7 @@ uv run day07/firmware/pack_www.py # 画面を gzip にしてファームウェ�
 | `day07/mock_server.py` | ESP32 と同じ API を仮の値で返す確認用のサーバー | |
 | `day07/www/` | ESP32 で配信する画面（`index.html` = SDK 版、`stitch/` = Stitch 版） | |
 | `day07/firmware/` | ESP32-S3 のファームウェア（SoftAP、esp_http_server、/api/*、NVS） | |
+| `day08/ai_studio_app/` | Google AI Studio の Build モードが作った ESP32-S3 のシリアルログ解析アプリ（書き出したまま。[説明](day08/README.md)） | Day 8: Google AI Studio Build モード |
 
 ## 注意
 
