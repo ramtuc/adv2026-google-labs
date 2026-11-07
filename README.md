@@ -33,6 +33,7 @@ uv run day03/live_interrupt.py    # 割り込みへの応答（Live API 版）
 uv run day03/style_experiment.py  # 話し方の指示と事実の誤りの関係
 
 uv run day05/evaluate.py          # System Prompt の比較（コード判定 + LLM 採点）
+uv run day06/check_export.py day06/stitch_export  # Stitch の書き出しの外部依存を調べる
 ```
 
 ## 使用した資料
@@ -55,6 +56,8 @@ uv run day05/evaluate.py          # System Prompt の比較（コード判定 + 
 | `day04/samples/` | Day 4 で Gemini Notebook の Studio から書き出したもの（スライド・動画・表・画像） | Day 4: Gemini Notebook（旧 NotebookLM）Studio の機能紹介 |
 | `day05/evaluate.py` | 2つの System Prompt をテストケースで比べる評価ハーネス（Stax 風の LLM 採点） | Day 5: LLM の出力を数値で評価する |
 | `day05/testcases.json` | Day 5 のテストケース（質問・正解例・必須の語） | |
+| `day06/check_export.py` | Stitch が書き出した HTML の外部依存と、ボタンの処理を調べる | Day 6: Stitch(1) 自然言語から UI を作る |
+| `day06/stitch_export/` | Stitch から .zip で書き出したもの（HTML・画面の画像・DESIGN.md）。AI が生成したもので、数値には誤りを含む | |
 
 ## 注意
 
