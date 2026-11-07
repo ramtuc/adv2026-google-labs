@@ -1,0 +1,15 @@
+{
+  "model": "gemini-omni-1.2-flash",
+  "id": "v1_Chd6Q1B2YXN5Y0lzS2o5dE1QaW9XczRBWRIXTmlUdmF0aXFJdkdUdnIwUGpKS21pQTA",
+  "previous_interaction_id": "v1_Chd6Q1B2YXN5Y0lzS2o5dE1QaW9XczRBWRIXekNQdmFzeWNJc0tqOXRNUGlvV3M0QVk",
+  "prompt": "基板の右端の USB-C コネクタに、白い USB ケーブルが差し込まれる場面にしてください。それ以外はそのままにしてください。",
+  "format": {
+    "type": "video",
+    "duration": "8s",
+    "resolution": "720p",
+    "aspect_ratio": "16:9"
+  },
+  "seconds": 83.2,
+  "bytes": 5756545,
+  "text": ""
+}

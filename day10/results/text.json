@@ -1,0 +1,15 @@
+{
+  "model": "gemini-omni-1.2-flash",
+  "id": "v1_ChdjQ1B2YW9hckF1WDkxZThQLXF2TG9BcxIXY0NQdmFvYXJBdVg5MWU4UC1xdkxvQXM",
+  "previous_interaction_id": null,
+  "prompt": "ESP32-S3 というマイコンの開発ボードを紹介する、8 秒の製品紹介動画。暗い机の上に置かれた青い基板に、カメラがゆっくり寄っていく。落ち着いた女性の声で、日本語のナレーション：「ESP32-S3。240 メガヘルツのデュアルコアで、眠れば 7 マイクロアンペア。」",
+  "format": {
+    "type": "video",
+    "duration": "8s",
+    "resolution": "720p",
+    "aspect_ratio": "16:9"
+  },
+  "seconds": 42.0,
+  "bytes": 3582664,
+  "text": ""
+}

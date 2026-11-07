@@ -1,0 +1,15 @@
+{
+  "model": "gemini-omni-1.2-flash",
+  "id": "v1_Chd6Q1B2YXN5Y0lzS2o5dE1QaW9XczRBWRIXekNQdmFzeWNJc0tqOXRNUGlvV3M0QVk",
+  "previous_interaction_id": null,
+  "prompt": "この写真の基板を、実写の映像にしてください。基板の部品や文字はそのままで、カメラが基板の上をゆっくり横に動く。USB-C の近くにある小さな LED が光り、RX と TX の LED が点滅する。音は静かな電子音だけで、ナレーションは入れない。",
+  "format": {
+    "type": "video",
+    "duration": "8s",
+    "resolution": "720p",
+    "aspect_ratio": "16:9"
+  },
+  "seconds": 41.0,
+  "bytes": 6034921,
+  "text": ""
+}
