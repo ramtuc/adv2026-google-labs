@@ -31,6 +31,8 @@ uv run day03/synthesize.py        # 台本 → 2人の声の音声
 uv run day03/interactive.py       # 割り込みへの応答（台本を書き足す版）
 uv run day03/live_interrupt.py    # 割り込みへの応答（Live API 版）
 uv run day03/style_experiment.py  # 話し方の指示と事実の誤りの関係
+
+uv run day05/evaluate.py          # System Prompt の比較（コード判定 + LLM 採点）
 ```
 
 ## 使用した資料
@@ -51,6 +53,8 @@ uv run day03/style_experiment.py  # 話し方の指示と事実の誤りの関�
 | `day03/make_script.py` ほか | 音声解説の台本生成・マルチスピーカーTTS・割り込みの再現 | Day 3: Gemini Notebook（旧 NotebookLM）Audio Overview解剖 |
 | `day03/samples/` | Day 3 で作った音声と、比較用の Gemini Notebook の音声解説（MP3） | |
 | `day04/samples/` | Day 4 で Gemini Notebook の Studio から書き出したもの（スライド・動画・表・画像） | Day 4: Gemini Notebook（旧 NotebookLM）Studio の機能紹介 |
+| `day05/evaluate.py` | 2つの System Prompt をテストケースで比べる評価ハーネス（Stax 風の LLM 採点） | Day 5: LLM の出力を数値で評価する |
+| `day05/testcases.json` | Day 5 のテストケース（質問・正解例・必須の語） | |
 
 ## 注意
 
