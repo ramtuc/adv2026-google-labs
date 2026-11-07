@@ -1,0 +1,45 @@
+[
+  {
+    "id": "X1",
+    "category": "取り違え",
+    "question": "ESP32-S3 の SRAM は何 KB？",
+    "expected": "512 KB（RTC の SRAM 16 KB は別）。初代 ESP32 の 520 KB と取り違えない。",
+    "chip": "ESP32-S3"
+  },
+  {
+    "id": "X2",
+    "category": "取り違え",
+    "question": "ESP32-S3 の CPU コアの種類と、最大の動作周波数は？",
+    "expected": "Xtensa 32-bit LX7 のデュアルコア、最大 240 MHz。初代 ESP32 の LX6、ESP32-C6 の RISC-V 160 MHz と取り違えない。",
+    "chip": "ESP32-S3"
+  },
+  {
+    "id": "X3",
+    "category": "取り違え",
+    "question": "ESP32-S3 で Bluetooth Classic（BR/EDR）は使える？",
+    "expected": "使えない。ESP32-S3 は Bluetooth 5（LE）だけ。BR/EDR に対応するのは初代 ESP32。",
+    "chip": "ESP32-S3"
+  },
+  {
+    "id": "X4",
+    "category": "取り違え",
+    "question": "ESP32-S3 の GPIO は何本？",
+    "expected": "45 本。初代 ESP32 の 34 本、ESP32-C6 の 30 本（QFN40）／22 本（QFN32）と取り違えない。",
+    "chip": "ESP32-S3"
+  },
+  {
+    "id": "X5",
+    "category": "取り違え",
+    "question": "ESP32-S3 は Zigbee や Thread に対応している？",
+    "expected": "対応していない（無線は Wi-Fi 802.11b/g/n と Bluetooth LE だけ）。IEEE 802.15.4（Zigbee、Thread）に対応するのは ESP32-C6。",
+    "chip": "ESP32-S3"
+  },
+  {
+    "id": "X6",
+    "category": "あいまいな質問",
+    "question": "ESP32 の Deep-sleep の消費電流は？",
+    "expected": "「ESP32」は初代 ESP32 を指すので 10 µA。ESP32-S3 と ESP32-C6 は 7 µA。どの ESP32 かを確かめるか、型番ごとに分けて答えるのが理想。",
+    "expected_s3": "資料（ESP32-S3 だけ）には初代 ESP32 の値はない。ESP32-S3 の値（7 µA）として答えるなら、ESP32-S3 の値だと断るべき。",
+    "chip": "ESP32"
+  }
+]
