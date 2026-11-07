@@ -1,0 +1,217 @@
+[
+  {
+    "n": 1,
+    "site": "espressif.com",
+    "url": "https://www.espressif.com/ja-jp/products/socs/esp32-s3"
+  },
+  {
+    "n": 2,
+    "site": "hatenablog.com",
+    "url": "https://jijiken0417.hatenablog.com/entry/2025/01/03/135835"
+  },
+  {
+    "n": 3,
+    "site": "jlcpcb.com",
+    "url": "https://jlcpcb.com/jp/blog/esp32-c3-vs-s3"
+  },
+  {
+    "n": 4,
+    "site": "coocan.jp",
+    "url": "http://galaxystar.image.coocan.jp/esp32s3.htm"
+  },
+  {
+    "n": 5,
+    "site": "qiita.com",
+    "url": "https://qiita.com/fukufukusonreiz/items/39286a4610fdd64fee96"
+  },
+  {
+    "n": 6,
+    "site": "ariat-tech.com",
+    "url": "https://jp.ariat-tech.com/blog/understanding-the-differences-esp32-and-esp32-s3-technical-and-performance-analysis.html"
+  },
+  {
+    "n": 7,
+    "site": "lang-ship.com",
+    "url": "https://lang-ship.com/blog/work/esp32-2022-01/"
+  },
+  {
+    "n": 8,
+    "site": "note.com",
+    "url": "https://note.com/tk_solution_arch/n/na0a5b95b7e14"
+  },
+  {
+    "n": 9,
+    "site": "jisaku.com",
+    "url": "https://jisaku.com/posts/esp32-s3-projects-2026"
+  },
+  {
+    "n": 10,
+    "site": "switch-science.com",
+    "url": "https://www.switch-science.com/blogs/magazine/core2-vs-cores3-sram-comparison"
+  },
+  {
+    "n": 11,
+    "site": "manuals.plus",
+    "url": "https://ja.manuals.plus/asin/B0FX3T2HN7"
+  },
+  {
+    "n": 12,
+    "site": "espressif.com",
+    "url": "https://documentation.espressif.com/esp32-s3_datasheet_en.pdf"
+  },
+  {
+    "n": 13,
+    "site": "akizukidenshi.com",
+    "url": "https://akizukidenshi.com/catalog/g/g117256/"
+  },
+  {
+    "n": 14,
+    "site": "52pi.com",
+    "url": "https://wiki.52pi.com/index.php?title=EB-0028"
+  },
+  {
+    "n": 15,
+    "site": "switch-science.com",
+    "url": "https://www.switch-science.com/blogs/magazine/core2-vs-cores3-psram-performance-comparison"
+  },
+  {
+    "n": 16,
+    "site": "File Search",
+    "url": "esp32-s3_datasheet_en.pdf"
+  },
+  {
+    "n": 17,
+    "site": "espressif.com",
+    "url": "https://documentation.espressif.com/esp32-s3_datasheet_cn.pdf"
+  },
+  {
+    "n": 18,
+    "site": "adafruit.com",
+    "url": "https://cdn-shop.adafruit.com/product-files/5477/esp32-s3_datasheet_en.pdf"
+  },
+  {
+    "n": 19,
+    "site": "electwork.net",
+    "url": "https://electwork.net/posts/esp32-series-comparison/"
+  },
+  {
+    "n": 20,
+    "site": "jisaku.com",
+    "url": "https://jisaku.com/posts/esphome-sensor-projects"
+  },
+  {
+    "n": 21,
+    "site": "sensbench.com",
+    "url": "https://sensbench.com/ja/esp32-s3-c3-faq/"
+  },
+  {
+    "n": 22,
+    "site": "seeedstudio.com",
+    "url": "https://wiki.seeedstudio.com/ja/xiao_esp32s3_bluetooth/"
+  },
+  {
+    "n": 23,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/v5.2.1/esp32s3/api-guides/bluetooth.html"
+  },
+  {
+    "n": 24,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/1ftxvpf/new_to_esp_bluetooth_controller_without_using_ble/?tl=ja"
+  },
+  {
+    "n": 25,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/13gy8i6/a2dp_for_bluetooth_audio_streaming_on_esp32s3/?tl=ja"
+  },
+  {
+    "n": 26,
+    "site": "digick.jp",
+    "url": "http://tamanegi.digick.jp/computer-embedded/mcuboa/esp32s3devkitc1/"
+  },
+  {
+    "n": 27,
+    "site": "hatakekara.com",
+    "url": "https://hatakekara.com/post-10137/"
+  },
+  {
+    "n": 28,
+    "site": "lang-ship.com",
+    "url": "https://lang-ship.com/blog/work/esp32-datasheet/"
+  },
+  {
+    "n": 29,
+    "site": "lang-ship.com",
+    "url": "https://lang-ship.com/blog/work/esp32-s3-devkit/"
+  },
+  {
+    "n": 30,
+    "site": "randomnerdtutorials.com",
+    "url": "https://randomnerdtutorials.com/esp32-s3-devkitc-pinout-guide/"
+  },
+  {
+    "n": 31,
+    "site": "pcbcool.com",
+    "url": "https://pcbcool.com/ja/technical-guides/esp32-gpio-pinout-guide/"
+  },
+  {
+    "n": 32,
+    "site": "note.com",
+    "url": "https://note.com/ndenki/n/nbc7ad97fb921"
+  },
+  {
+    "n": 33,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/1jl257o/esp32s3_gpio_help/?tl=ja"
+  },
+  {
+    "n": 34,
+    "site": "engineer-go.net",
+    "url": "https://engineer-go.net/esp32-deep-sleep-battery-power-2026/"
+  },
+  {
+    "n": 35,
+    "site": "codesprintconsulting.com",
+    "url": "https://www.codesprintconsulting.com/blog/esp32-deep-sleep-power-consumption"
+  },
+  {
+    "n": 36,
+    "site": "banana-pi.org",
+    "url": "https://docs.banana-pi.org/zh/BPI-Leaf-S3/BananaPi_BPI-Leaf-S3"
+  },
+  {
+    "n": 37,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/11yjvvk/deep_sleep_power_consumption_esp32s3_way_too_high/?tl=ja"
+  },
+  {
+    "n": 38,
+    "site": "cat-one.net",
+    "url": "https://www.cat-one.net/2022/01/28/deep-sleep-current-consumption-of-esp32-development-board/3968/"
+  },
+  {
+    "n": 39,
+    "site": "lucidar.me",
+    "url": "https://lucidar.me/en/esp32/power-consumption-of-esp32-s3-devkitm-1/"
+  },
+  {
+    "n": 40,
+    "site": "seeedstudio.com",
+    "url": "https://wiki.seeedstudio.com/ja/XIAO_ESP32S3_Consumption/"
+  },
+  {
+    "n": 41,
+    "site": "lang-ship.com",
+    "url": "https://lang-ship.com/blog/work/esp32-deep-sleep/"
+  },
+  {
+    "n": 42,
+    "site": "ipros.com",
+    "url": "https://mono.ipros.com/product/detail/2001530250/"
+  },
+  {
+    "n": 43,
+    "site": "tatepro.com",
+    "url": "https://kumicla.tatepro.com/esp32-choice/"
+  }
+]

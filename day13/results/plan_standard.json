@@ -1,0 +1,71 @@
+{
+  "status": "completed",
+  "agent": "deep-research-preview-04-2026",
+  "agent_config": {
+    "collaborative_planning": true,
+    "type": "deep-research"
+  },
+  "created": "2026-11-07T14:38:01Z",
+  "id": "v1_Chd4amZ2YXI2Y01JRzkwLWtQbXY3RXNBURIXeGpmdmFyNmNNSUc5MC1rUG12N0VzQVE",
+  "output_text": "**Title:** ESP32-S3 Web Spec Analysis\n**Input:** ESP32-S3 の主な仕様（SRAM の容量、CPU、GPIO の本数、Deep-sleep の消費電流、Bluetooth の対応）について、\nWeb 上の記事（ブログ、ショップの商品ページ、解説サイト、動画の説明など）にどのような値が書かれているかを調べてください。\n\nファイル検索にある Espressif の公式データシート（ESP32、ESP32-S3、ESP32-C6）を正解として、Web の記事の値と照らし合わせてください。\n- 誤った値を書いている記事を挙げ、その誤りが初代 ESP32 や ESP32-C6 の値と一致しているか（取り違え）を示す\n- 出典ごとに URL を付けた表を入れる\n- 誤りが多い項目と、その理由の推測もまとめる\n日本語で書いてください。\n**Research Plan:**\n(1) Find official Espressif specifications for ESP32, ESP32-S3, and ESP32-C6 focusing on SRAM capacity, CPU, GPIO count, Deep-sleep current, and Bluetooth support.\n(2) Search for Japanese web articles, blogs, shop pages, and tutorials that list the specifications of the ESP32-S3.\n(3) Extract the stated values for the five targeted specifications from the sources found in step 2.\n(4) Cross-reference the extracted values against the official ESP32-S3 datasheet to identify inaccuracies.\n(5) Evaluate the incorrect values by comparing them with the official specs of the original ESP32 and ESP32-C6 to determine if the models were confused.\n(6) Compile the data into a table containing the source names, URLs, reported values, and notes on any errors or model mix-ups.\n(7) Summarize the most frequently incorrect specification items and hypothesize the reasons behind these common errors.\n(8) Ensure the final output is written in Japanese, presenting the table, the error analysis, and the official baseline data.",
+  "steps": [
+    {
+      "content": [
+        {
+          "text": "ESP32-S3 の主な仕様（SRAM の容量、CPU、GPIO の本数、Deep-sleep の消費電流、Bluetooth の対応）について、\nWeb 上の記事（ブログ、ショップの商品ページ、解説サイト、動画の説明など）にどのような値が書かれているかを調べてください。\n\nファイル検索にある Espressif の公式データシート（ESP32、ESP32-S3、ESP32-C6）を正解として、Web の記事の値と照らし合わせてください。\n- 誤った値を書いている記事を挙げ、その誤りが初代 ESP32 や ESP32-C6 の値と一致しているか（取り違え）を示す\n- 出典ごとに URL を付けた表を入れる\n- 誤りが多い項目と、その理由の推測もまとめる\n日本語で書いてください。",
+          "type": "text"
+        }
+      ],
+      "type": "user_input"
+    },
+    {
+      "content": [
+        {
+          "text": "**Title:** ESP32-S3 Web Spec Analysis\n**Input:** ESP32-S3 の主な仕様（SRAM の容量、CPU、GPIO の本数、Deep-sleep の消費電流、Bluetooth の対応）について、\nWeb 上の記事（ブログ、ショップの商品ページ、解説サイト、動画の説明など）にどのような値が書かれているかを調べてください。\n\nファイル検索にある Espressif の公式データシート（ESP32、ESP32-S3、ESP32-C6）を正解として、Web の記事の値と照らし合わせてください。\n- 誤った値を書いている記事を挙げ、その誤りが初代 ESP32 や ESP32-C6 の値と一致しているか（取り違え）を示す\n- 出典ごとに URL を付けた表を入れる\n- 誤りが多い項目と、その理由の推測もまとめる\n日本語で書いてください。\n**Research Plan:**\n(1) Find official Espressif specifications for ESP32, ESP32-S3, and ESP32-C6 focusing on SRAM capacity, CPU, GPIO count, Deep-sleep current, and Bluetooth support.\n(2) Search for Japanese web articles, blogs, shop pages, and tutorials that list the specifications of the ESP32-S3.\n(3) Extract the stated values for the five targeted specifications from the sources found in step 2.\n(4) Cross-reference the extracted values against the official ESP32-S3 datasheet to identify inaccuracies.\n(5) Evaluate the incorrect values by comparing them with the official specs of the original ESP32 and ESP32-C6 to determine if the models were confused.\n(6) Compile the data into a table containing the source names, URLs, reported values, and notes on any errors or model mix-ups.\n(7) Summarize the most frequently incorrect specification items and hypothesize the reasons behind these common errors.\n(8) Ensure the final output is written in Japanese, presenting the table, the error analysis, and the official baseline data.",
+          "type": "text"
+        }
+      ],
+      "type": "model_output"
+    }
+  ],
+  "tools": [
+    {
+      "type": "google_search"
+    },
+    {
+      "type": "url_context"
+    },
+    {
+      "type": "code_execution"
+    },
+    {
+      "file_search_store_names": [
+        "fileSearchStores/adv2026day12esp32sisters-ju6vzp26vplv"
+      ],
+      "type": "file_search"
+    }
+  ],
+  "updated": "2026-11-07T14:38:01Z",
+  "usage": {
+    "initial_input_tokens": 250,
+    "input_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 250
+      }
+    ],
+    "output_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 464
+      }
+    ],
+    "total_cached_tokens": 0,
+    "total_input_tokens": 250,
+    "total_output_tokens": 464,
+    "total_thought_tokens": 2414,
+    "total_tokens": 3128,
+    "total_tool_use_tokens": 0
+  },
+  "object": "interaction"
+}

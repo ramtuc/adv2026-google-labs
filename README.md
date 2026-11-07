@@ -58,6 +58,11 @@ uv run --with pillow --with numpy --with scipy day11/spot_the_difference.py make
 uv run day12/make_store.py                  # File Search のストアを作り、3姉妹のデータシートを入れる（data/ に PDF を置く）
 uv run day12/file_search_qa.py all          # 15 問に答える（s3 で ESP32-S3 に絞る、none で資料なし）
 uv run --with matplotlib day12/plot_results.py   # 判定とトークン数のグラフ
+
+# Day 13
+uv run day13/deep_research.py plan           # Deep Research に計画を出させる（run で承認して実行、--max で Max、--strict で厳しい依頼）
+uv run day13/check_sources.py                 # 出典のリダイレクト先を読む（出典のサイトには直接アクセスしない）
+uv run --with matplotlib day13/plot_runs.py   # 3 回の実行を比べるグラフ
 ```
 
 ## 使用した資料
@@ -92,6 +97,7 @@ uv run --with matplotlib day12/plot_results.py   # 判定とトークン数の�
 | `day10/` | Gemini Omni 1.2 Flash（Gemini API）で ESP32-S3 の紹介動画を作るスクリプトと、Google Flow で作った動画 | Day 10: Google Flow × Gemini Omni API |
 | `day11/` | Nano Banana 2.1 と Pro で ESP32-S3 を擬人化した設定画・4コマ漫画・昭和の広告と、間違い探しを作って解かせるスクリプト | Day 11: Nano Banana で ESP32-S3 を擬人化 |
 | `day12/` | File Search（Gemini API の RAG）に ESP32・ESP32-S3・ESP32-C6 のデータシートを入れ、Day 2 の質問と取り違えを誘う質問に答えさせるスクリプト | Day 12: File Search API |
+| `day13/` | Deep Research（通常・Max）に Web の ESP32-S3 の仕様の誤りを調べさせ、出典を確かめるスクリプト | Day 13: Deep Research API |
 
 ## 注意
 

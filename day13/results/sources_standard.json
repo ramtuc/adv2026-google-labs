@@ -1,0 +1,317 @@
+[
+  {
+    "n": 1,
+    "site": "leadsintec.com",
+    "url": "https://leadsintec.com/in-depth-analysis-of-the-esp32-s3-module-performance-security-and-ecosystem/"
+  },
+  {
+    "n": 2,
+    "site": "pcbway.com",
+    "url": "https://www.pcbway.com/blog/PCB_Design_Layout/ESP32_vs_ESP32_S3_Key_Differences_Performance_Comparison_and_PCB_Design_Consi_2c205f9a.html"
+  },
+  {
+    "n": 3,
+    "site": "sengoku.co.jp",
+    "url": "https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-6L6R"
+  },
+  {
+    "n": 4,
+    "site": "wikipedia.org",
+    "url": "https://ja.wikipedia.org/wiki/ESP32"
+  },
+  {
+    "n": 5,
+    "site": "fabscene.com",
+    "url": "https://fabscene.com/new/special/esp32-complete-guide-history-specifications/"
+  },
+  {
+    "n": 6,
+    "site": "lang-ship.com",
+    "url": "https://lang-ship.com/blog/work/esp32-esp8266/"
+  },
+  {
+    "n": 7,
+    "site": "espressif.com",
+    "url": "https://www.espressif.com/ja-jp/products/socs/esp32-s3"
+  },
+  {
+    "n": 8,
+    "site": "File Search",
+    "url": "esp32-c6_datasheet_en.pdf"
+  },
+  {
+    "n": 9,
+    "site": "nextpcb.com",
+    "url": "https://www.nextpcb.com/blog/esp32-s3-vs-c3-vs-c6-which-to-choose"
+  },
+  {
+    "n": 10,
+    "site": "flywing-tech.com",
+    "url": "https://www.flywing-tech.com/blog/esp32-s3-vs-esp32-c3-vs-esp32-c6-which-esp32-variants-are-best/"
+  },
+  {
+    "n": 11,
+    "site": "esp32cube.com",
+    "url": "https://www.esp32cube.com/post/esp32-c3-s3-c6-selection-guide"
+  },
+  {
+    "n": 12,
+    "site": "sensbench.com",
+    "url": "https://sensbench.com/esp32-architecture-faq/"
+  },
+  {
+    "n": 13,
+    "site": "elecbee.com",
+    "url": "https://www.elecbee.com/ja/blog/esp32-c3-vs-s3-vs-c6-which-one-fits-your-project_2950"
+  },
+  {
+    "n": 14,
+    "site": "electwork.net",
+    "url": "https://electwork.net/posts/esp32-series-comparison/"
+  },
+  {
+    "n": 15,
+    "site": "github.com",
+    "url": "https://gist.github.com/jonathanpmartins/6ef0348c47ab57c5a7068d042d5cf9bc"
+  },
+  {
+    "n": 16,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/v5.0-rc1/esp32/hw-reference/chip-series-comparison.html"
+  },
+  {
+    "n": 17,
+    "site": "qiita.com",
+    "url": "https://qiita.com/fukufukusonreiz/items/39286a4610fdd64fee96"
+  },
+  {
+    "n": 18,
+    "site": "scribd.com",
+    "url": "https://www.scribd.com/document/881233509/Esp32-s3-Datasheet-Cn"
+  },
+  {
+    "n": 19,
+    "site": "jlcpcb.com",
+    "url": "https://jlcpcb.com/jp/blog/esp32-c3-vs-s3"
+  },
+  {
+    "n": 20,
+    "site": "deepbluembedded.com",
+    "url": "https://deepbluembedded.com/esp32-sleep-modes-power-consumption/"
+  },
+  {
+    "n": 21,
+    "site": "prtimes.jp",
+    "url": "https://prtimes.jp/main/html/rd/p/000000116.000064534.html"
+  },
+  {
+    "n": 22,
+    "site": "ariat-tech.com",
+    "url": "https://jp.ariat-tech.com/blog/understanding-the-differences-esp32-and-esp32-s3-technical-and-performance-analysis.html"
+  },
+  {
+    "n": 23,
+    "site": "switch-science.com",
+    "url": "https://www.switch-science.com/blogs/magazine/core2-vs-cores3-sram-comparison"
+  },
+  {
+    "n": 24,
+    "site": "kobesoft.co.jp",
+    "url": "https://kobesoft.co.jp/embedded/glossary/xtensa/"
+  },
+  {
+    "n": 25,
+    "site": "norvi.io",
+    "url": "https://norvi.io/products/esp32-based-hmi-controller-s3-lvg-plc-arduino/"
+  },
+  {
+    "n": 26,
+    "site": "littlebirdelectronics.com.au",
+    "url": "https://littlebirdelectronics.com.au/products/esp32-s3-round-touch-display-development-board-1-85-ai-voice-wireless-charging"
+  },
+  {
+    "n": 27,
+    "site": "grobotronics.com",
+    "url": "https://grobotronics.com/waveshare-esp32-16mb-flash-8mb-psram-with-external-antenna.html?sl=en"
+  },
+  {
+    "n": 28,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/advanced-development/ble-application-note/overview.html"
+  },
+  {
+    "n": 29,
+    "site": "industrialmonitordirect.com",
+    "url": "https://industrialmonitordirect.com/ja/blogs/knowledgebase/esp32-c6-wi-fi-6-twt-power-saving-vs-deep-sleep-analysis"
+  },
+  {
+    "n": 30,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/v5.2/esp32/api-guides/bluetooth.html"
+  },
+  {
+    "n": 31,
+    "site": "y-ic.com",
+    "url": "https://www.y-ic.com/blog/Choosing-Between-ESP32-and-ESP32-S3-For-Your-Project.html"
+  },
+  {
+    "n": 32,
+    "site": "github.com",
+    "url": "https://github.com/espressif/arduino-esp32/issues/6882"
+  },
+  {
+    "n": 33,
+    "site": "home-assistant.io",
+    "url": "https://community.home-assistant.io/t/great-esp32-board-for-an-esphome-bluetooth-proxy/916767"
+  },
+  {
+    "n": 34,
+    "site": "electronicsforu.com",
+    "url": "https://www.electronicsforu.com/technology-trends/esp32"
+  },
+  {
+    "n": 35,
+    "site": "esp32pins.com",
+    "url": "https://esp32pins.com/boards/esp32-s3/"
+  },
+  {
+    "n": 36,
+    "site": "learniot.in",
+    "url": "https://learniot.in/esp32-pinout-reference/"
+  },
+  {
+    "n": 37,
+    "site": "luisllamas.es",
+    "url": "https://www.luisllamas.es/en/esp32-hardware-details-pinout/"
+  },
+  {
+    "n": 38,
+    "site": "prototypeguru.com",
+    "url": "https://prototypeguru.com/esp32-pinout/"
+  },
+  {
+    "n": 39,
+    "site": "sunfounder.com",
+    "url": "https://www.sunfounder.com/blogs/news/esp32-pinout-guide-gpio-adc-dac-touch-complete-hardware-reference-for-stable-circuit-design"
+  },
+  {
+    "n": 40,
+    "site": "makersdeck.com",
+    "url": "https://makersdeck.com/articles/esp32-gpio-input-only-pins"
+  },
+  {
+    "n": 41,
+    "site": "randomnerdtutorials.com",
+    "url": "https://randomnerdtutorials.com/esp32-pinout-reference-gpios/"
+  },
+  {
+    "n": 42,
+    "site": "luisllamas.es",
+    "url": "https://www.luisllamas.es/en/esp32-s3-hardware-details-pinout/"
+  },
+  {
+    "n": 43,
+    "site": "note.com",
+    "url": "https://note.com/rcat999/n/n8d6cf1134b57"
+  },
+  {
+    "n": 44,
+    "site": "kohacraft.com",
+    "url": "https://kohacraft.com/archives/202104231107.html"
+  },
+  {
+    "n": 45,
+    "site": "ebay.com",
+    "url": "https://www.ebay.com/itm/407233522500"
+  },
+  {
+    "n": 46,
+    "site": "dfrobot.com",
+    "url": "https://www.dfrobot.com/product-2964.html"
+  },
+  {
+    "n": 47,
+    "site": "circuitdigest.com",
+    "url": "https://circuitdigest.com/microcontroller-projects/esp32-active-mode-and-deep-sleep-mode-power-consumption"
+  },
+  {
+    "n": 48,
+    "site": "engineer-go.net",
+    "url": "https://engineer-go.net/esp32-deep-sleep-battery-power-2026/"
+  },
+  {
+    "n": 49,
+    "site": "seeedstudio.com",
+    "url": "https://wiki.seeedstudio.com/ja/XIAO_ESP32S3_Consumption/"
+  },
+  {
+    "n": 50,
+    "site": "projectech.in",
+    "url": "https://projectech.in/guides/esp32-deep-sleep-battery-projects/"
+  },
+  {
+    "n": 51,
+    "site": "balinedge.com.tw",
+    "url": "https://www.balinedge.com.tw/ja/insights/esp32-low-power.html"
+  },
+  {
+    "n": 52,
+    "site": "randomnerdtutorials.com",
+    "url": "https://randomnerdtutorials.com/esp32-deep-sleep-arduino-ide-wake-up-sources/"
+  },
+  {
+    "n": 53,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/1htcjo7/is_this_powerdraw_in_sleep_realistic/"
+  },
+  {
+    "n": 54,
+    "site": "jlcpcb.com",
+    "url": "https://jlcpcb.com/blog/esp32-power-consumption-explained"
+  },
+  {
+    "n": 55,
+    "site": "arduino.cc",
+    "url": "https://forum.arduino.cc/t/power-hungry-in-deep-sleep/1204775"
+  },
+  {
+    "n": 56,
+    "site": "lucidar.me",
+    "url": "https://lucidar.me/en/esp32/power-consumption-of-esp32-s3-devkitm-1/"
+  },
+  {
+    "n": 57,
+    "site": "qoitech.com",
+    "url": "https://www.qoitech.com/blog/esp32-s3-c3-c6-sleep-power-consumption/"
+  },
+  {
+    "n": 58,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/AskElectronics/comments/1jh71bz/how_to_power_a_33v_microprocessor_at_10ua_deep/"
+  },
+  {
+    "n": 59,
+    "site": "m5stack.com",
+    "url": "https://docs.m5stack.com/ja/quick_start/about_m5stack/all_about_m5stack"
+  },
+  {
+    "n": 60,
+    "site": "espressif.com",
+    "url": "https://espressif.com/sites/default/files/documentation/esp32-s3_errata_en.pdf"
+  },
+  {
+    "n": 61,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-chip-errata/zh_CN/latest/esp32s3/index.html"
+  },
+  {
+    "n": 62,
+    "site": "zenn.dev",
+    "url": "https://zenn.dev/ace_toshi/articles/esp32-s3-dma-psram-afterimage"
+  },
+  {
+    "n": 63,
+    "site": "xiaozhi.dev",
+    "url": "https://xiaozhi.dev/ja/docs/esp32/troubleshooting/"
+  }
+]

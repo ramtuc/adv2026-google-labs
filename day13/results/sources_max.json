@@ -1,0 +1,172 @@
+[
+  {
+    "n": 1,
+    "site": "fabscene.com",
+    "url": "https://fabscene.com/new/special/esp32-complete-guide-history-specifications/"
+  },
+  {
+    "n": 2,
+    "site": "otronic.nl",
+    "url": "https://www.otronic.nl/en/esp32-cam-development-board-with-camera-wifi-and-bluetooth"
+  },
+  {
+    "n": 3,
+    "site": "ampheo.com",
+    "url": "https://www.ampheo.com/blog/esp32-module-comparison-wroom-wrover-c3-s3-c6-and-p4-explained"
+  },
+  {
+    "n": 4,
+    "site": "File Search",
+    "url": "esp32-s3_datasheet_en.pdf"
+  },
+  {
+    "n": 5,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/v5.2/esp32/api-guides/bluetooth.html"
+  },
+  {
+    "n": 6,
+    "site": "youtube.com",
+    "url": "https://www.youtube.com/watch?v=wv8KdMIG2gY"
+  },
+  {
+    "n": 7,
+    "site": "viewedisplay.com",
+    "url": "https://viewedisplay.com/product/esp32-s3-1-5-inch-amoled-touch-screen-dev-board-uart-smart-display/"
+  },
+  {
+    "n": 8,
+    "site": "sheen.bot",
+    "url": "https://www.sheen.bot/store/esp32-s3-round-touch-display-development-board-1-85-ai-voice-wireless-charging"
+  },
+  {
+    "n": 9,
+    "site": "thinkrobotics.com",
+    "url": "https://thinkrobotics.com/products/esp32-s3-cam-ai-vision-module?_pos=25&_sid=be3b15ca8&_ss=r"
+  },
+  {
+    "n": 10,
+    "site": "luisllamas.es",
+    "url": "https://www.luisllamas.es/en/esp32-s3/"
+  },
+  {
+    "n": 11,
+    "site": "microcontrollerslab.com",
+    "url": "https://microcontrollerslab.com/esp32-pinout-use-gpio-pins/"
+  },
+  {
+    "n": 12,
+    "site": "circuitpython.org",
+    "url": "https://circuitpython.org/board/waveshare_esp32_s3_zero/"
+  },
+  {
+    "n": 13,
+    "site": "youtube.com",
+    "url": "https://www.youtube.com/watch?v=wWu2ZAAvjgo"
+  },
+  {
+    "n": 14,
+    "site": "elprocus.com",
+    "url": "https://www.elprocus.com/difference-between-esp32-s3-vs-esp32/"
+  },
+  {
+    "n": 15,
+    "site": "projectech.in",
+    "url": "https://projectech.in/guides/esp32-deep-sleep-battery-projects/"
+  },
+  {
+    "n": 16,
+    "site": "icbbuy.com",
+    "url": "https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-s3-leaf"
+  },
+  {
+    "n": 17,
+    "site": "newegg.com",
+    "url": "https://www.newegg.com/p/3D0-0053-000P0"
+  },
+  {
+    "n": 18,
+    "site": "ebay.com",
+    "url": "https://www.ebay.com/itm/407233522500"
+  },
+  {
+    "n": 19,
+    "site": "youtube.com",
+    "url": "https://www.youtube.com/watch?v=Na9w5zA7Rk0"
+  },
+  {
+    "n": 20,
+    "site": "geeky-gadgets.com",
+    "url": "https://www.geeky-gadgets.com/esp32-s3-super-mini-guide/"
+  },
+  {
+    "n": 21,
+    "site": "antoniadis.com.cy",
+    "url": "https://www.antoniadis.com.cy/en/stem-robotics-programming/esp32esp8266-boards/esp32-s3-n16r8-wifi-bluetooth-ble-50-development-board"
+  },
+  {
+    "n": 22,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/memory-types.html"
+  },
+  {
+    "n": 23,
+    "site": "i-programmer.info",
+    "url": "https://www.i-programmer.info/news/91-hardware/18785-new-esp32-s31-super-dual-risc-v-with-wifi-6.html"
+  },
+  {
+    "n": 24,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/v5.1/esp32s3/api-reference/system/ulp-risc-v.html"
+  },
+  {
+    "n": 25,
+    "site": "mikroelectron.com",
+    "url": "https://mikroelectron.com/product/me-14915"
+  },
+  {
+    "n": 26,
+    "site": "tecnoyfoto.com",
+    "url": "https://tecnoyfoto.com/esp32-review"
+  },
+  {
+    "n": 27,
+    "site": "teamzlab.com",
+    "url": "https://tool.teamzlab.com/dev/esp32-pinout-reference/"
+  },
+  {
+    "n": 28,
+    "site": "hubble.com",
+    "url": "https://hubble.com/community/guides/esp32-power-consumption-datasheet-vs-reality/"
+  },
+  {
+    "n": 29,
+    "site": "industrialmonitordirect.com",
+    "url": "https://industrialmonitordirect.com/blogs/knowledgebase/esp32-deep-sleep-current-achieving-%CE%BCa-range-from-7ma"
+  },
+  {
+    "n": 30,
+    "site": "infishark.com",
+    "url": "https://infishark.com/blogs/learn/comparing-esp32-variants-original-s2-s3-c3-and-h2"
+  },
+  {
+    "n": 31,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/advanced-development/ble-application-note/overview.html"
+  },
+  {
+    "n": 32,
+    "site": "pcbpit.com",
+    "url": "https://pcbpit.com/esp32-vs-esp32-s3"
+  },
+  {
+    "n": 33,
+    "site": "pcbway.com",
+    "url": "https://www.pcbway.com/blog/14/ESP32_vs_ESP32_S3_Key_Differences_Performance_Comparison_and_PCB_Design_Consi_2c205f9a.html"
+  },
+  {
+    "n": 34,
+    "site": "github.com",
+    "url": "https://github.com/aabbtree77/esp32-vpn"
+  }
+]
