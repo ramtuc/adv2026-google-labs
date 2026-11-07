@@ -49,6 +49,10 @@ uv run day09/make_lyric_videos.py           # 歌詞の字幕と波形を入れ�
 
 # Day 10
 uv run day10/make_video.py text             # Gemini Omni 1.2 Flash で動画（image で写真から、edit で image を編集）
+
+# Day 11
+uv run day11/make_manga.py character         # Nano Banana 2.1 で設定画（ep1〜ep3 で4コマ、showa で昭和の広告、--model pro で Pro）
+uv run --with pillow --with numpy --with scipy day11/spot_the_difference.py make   # 間違い探しを作る（diff で差分、solve で Gemini が解く）
 ```
 
 ## 使用した資料
@@ -81,6 +85,7 @@ uv run day10/make_video.py text             # Gemini Omni 1.2 Flash で動画（
 | `day08/ai_studio_app/` | Google AI Studio の Build モードが作った ESP32-S3 のシリアルログ解析アプリ（書き出したまま。[説明](day08/README.md)） | Day 8: Google AI Studio Build モード |
 | `day09/` | Lyria 3.5（Gemini API）と Google Flow Music で作った ESP32-S3 の歌と、字幕入りの動画を作るスクリプト（[説明](day09/README.md)） | Day 9: Google Flow Music × Lyria 3.5 API |
 | `day10/` | Gemini Omni 1.2 Flash（Gemini API）で ESP32-S3 の紹介動画を作るスクリプトと、Google Flow で作った動画 | Day 10: Google Flow × Gemini Omni API |
+| `day11/` | Nano Banana 2.1 と Pro で ESP32-S3 を擬人化した設定画・4コマ漫画・昭和の広告と、間違い探しを作って解かせるスクリプト | Day 11: Nano Banana で ESP32-S3 を擬人化 |
 
 ## 注意
 
