@@ -41,6 +41,11 @@ uv run day07/generate_ui.py       # SDK で画面を作る → day07/www/index.h
 uv run day07/mock_server.py       # ESP32 の代わりに画面と /api を返す（http://127.0.0.1:8080/）
 uv run day07/firmware/pack_www.py # 画面を gzip にしてファームウェアに埋め込む
 # ファームウェアは ESP-IDF v5.5 で: idf.py -C day07/firmware set-target esp32s3 build flash
+
+# Day 9
+uv run day09/make_song.py auto              # Lyria 3.5 に歌詞を任せて作曲（custom で正しい歌詞を渡す）
+uv run --with pillow day09/make_videos.py   # 曲を静止画付きの動画に
+uv run day09/make_lyric_videos.py           # 歌詞の字幕と波形を入れた動画に
 ```
 
 ## 使用した資料
@@ -71,6 +76,7 @@ uv run day07/firmware/pack_www.py # 画面を gzip にしてファームウェ�
 | `day07/www/` | ESP32 で配信する画面（`index.html` = SDK 版、`stitch/` = Stitch 版） | |
 | `day07/firmware/` | ESP32-S3 のファームウェア（SoftAP、esp_http_server、/api/*、NVS） | |
 | `day08/ai_studio_app/` | Google AI Studio の Build モードが作った ESP32-S3 のシリアルログ解析アプリ（書き出したまま。[説明](day08/README.md)） | Day 8: Google AI Studio Build モード |
+| `day09/` | Lyria 3.5（Gemini API）と Google Flow Music で作った ESP32-S3 の歌と、字幕入りの動画を作るスクリプト（[説明](day09/README.md)） | Day 9: Google Flow Music × Lyria 3.5 API |
 
 ## 注意
 
