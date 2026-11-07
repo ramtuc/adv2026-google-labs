@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>ESP32-S3 環境モニター</title>
+<style>
+:root{--bg:#121820;--card:#1c2430;--card-sub:#253040;--text:#e6edf3;--text-dim:#8b949e;--prim:#388bfd;--prim-glow:#1f6feb33;--green:#3fb950;--orange:#d29922;--red:#f85149;--co2-c:#a371f7;--border:#30363d}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);padding-bottom:72px;min-height:100vh}
+header{background:#161b22ee;backdrop-filter:blur(8px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+h1{font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
+.hdr-meta{font-size:11px;color:var(--text-dim);text-align:right}
+.nav{position:fixed;bottom:0;left:0;right:0;height:56px;background:#161b22fa;backdrop-filter:blur(8px);border-top:1px solid var(--border);display:flex;z-index:100}
+.nav-btn{flex:1;border:none;background:none;color:var(--text-dim);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;cursor:pointer}
+.nav-btn.act{color:var(--prim);font-weight:600}
+.nav-btn svg{width:20px;height:20px;fill:currentColor}
+main{padding:14px;max-width:540px;margin:0 auto}
+.tab{display:none}
+.tab.act{display:block}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px}
+.card-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.card-t{font-size:12px;color:var(--text-dim);font-weight:500}
+.val-box{text-align:center;padding:6px 0}
+.val{font-size:24px;font-weight:700;line-height:1.2}
+.unit{font-size:11px;color:var(--text-dim);margin-left:2px}
+.badge{display:inline-block;padding:2px 6px;border-radius:10px;font-size:10px;font-weight:600}
+.b-norm{background:#3fb95022;color:var(--green)}
+.b-warn{background:#d2992222;color:var(--orange)}
+.b-crit{background:#f8514922;color:var(--red)}
+.tabs-chart{display:flex;gap:6px;margin-bottom:10px}
+.c-btn{background:var(--card-sub);border:1px solid var(--border);color:var(--text-dim);border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer}
+.c-btn.act{background:var(--prim);color:#fff;border-color:var(--prim)}
+#chartBox{width:100%;height:180px;position:relative}
+canvas{width:100%;height:100%;display:block}
+input,select{width:100%;background:var(--card-sub);border:1px solid var(--border);border-radius:6px;padding:9px 12px;color:var(--text);font-size:14px;margin-top:6px;margin-bottom:12px;outline:none}
+input:focus,select:focus{border-color:var(--prim)}
+.btn{width:100%;padding:10px;border-radius:6px;border:none;background:var(--prim);color:#fff;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn:active{opacity:0.8}
+.btn-scan{background:var(--card-sub);border:1px solid var(--border);margin-bottom:12px}
+.ap-list{max-height:180px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;margin-bottom:12px}
+.ap-item{padding:8px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);font-size:13px;cursor:pointer}
+.ap-item:last-child{border-bottom:none}
+.ap-item:hover{background:var(--card-sub)}
+.note{font-size:11px;color:var(--text-dim);line-height:1.5;margin-top:8px}
+.highlight-stat{background:linear-gradient(135deg,#1f6feb1a,#a371f71a);border:1px solid #388bfd44;border-radius:8px;padding:12px;text-align:center;margin:12px 0}
+.big-stat{font-size:28px;font-weight:700;color:var(--prim);line-height:1.2}
+.stat-lbl{font-size:11px;color:var(--text-dim)}
+.toast{position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#161b22f0;border:1px solid var(--border);padding:8px 16px;border-radius:20px;font-size:12px;z-index:200;display:none;backdrop-filter:blur(6px)}
+</style>
+</head>
+<body>
+<header>
+  <h1>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    ESP32-S3 モニター
+  </h1>
+  <div class="hdr-meta">
+    <div id="batStat">電池: -- V</div>
+    <div id="uptStat">起動: --</div>
+  </div>
+</header>
+
+<main>
+  <!-- TAB 1: ダッシュボード -->
+  <section id="tab-dash" class="tab act">
+    <div class="grid3">
+      <div class="card val-box">
+        <div class="card-t">温度</div>
+        <div class="val" id="currTemp">--</div>
+        <span class="unit">°C</span>
+      </div>
+      <div class="card val-box">
+        <div class="card-t">湿度</div>
+        <div class="val" id="currHum">--</div>
+        <span class="unit">%</span>
+      </div>
+      <div class="card val-box">
+        <div class="card-t">CO2</div>
+        <div class="val" id="currCO2">--</div>
+        <span class="unit">ppm</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr">
+        <span class="card-t">CO2 室内環境状態</span>
+        <span id="co2Badge" class="badge b-norm">計測中</span>
+      </div>
+      <p id="co2Msg" style="font-size:12px;color:var(--text-dim)">センサーデータを取得しています...</p>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr">
+        <span class="card-t">過去24時間の履歴</span>
+        <div class="tabs-chart">
+          <button class="c-btn act" onclick="setChart('temp')">温度</button>
+          <button class="c-btn" onclick="setChart('hum')">湿度</button>
+          <button class="c-btn" onclick="setChart('co2')">CO2</button>
+        </div>
+      </div>
+      <div id="chartBox">
+        <canvas id="cvs"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2: Wi-Fi設定 -->
+  <section id="tab-wifi" class="tab">
+    <div class="card">
+      <div class="card-hdr"><span class="card-t">周辺Wi-Fiの検索</span></div>
+      <button class="btn btn-scan" id="scanBtn" onclick="scanWifi()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+        アクセスポイントを検索
+      </button>
+      <div id="apBox" class="ap-list" style="display:none"></div>
+
+      <label class="card-t">接続先 SSID</label>
+      <input type="text" id="wifiSsid" placeholder="例: MyHome-WiFi" required>
+
+      <label class="card-t">Wi-Fi パスワード</label>
+      <input type="password" id="wifiPass" placeholder="パスワードを入力">
+
+      <button class="btn" onclick="saveWifi()">保存して接続</button>
+      <div class="note">※設定保存後、ESP32-S3は指定のアクセスポイントへの接続を試行します。接続失敗時は本APモードを維持します。</div>
+    </div>
+  </section>
+
+  <!-- TAB 3: 省電力設定 -->
+  <section id="tab-power" class="tab">
+    <div class="card">
+      <div class="card-hdr"><span class="card-t">Deep-sleep スリープ間隔設定</span></div>
+      <label class="card-t">測定・送信インターバル</label>
+      <select id="sleepInt" onchange="calcLife(this.value)">
+        <option value="1">1 分</option>
+        <option value="5">5 分 (推奨)</option>
+        <option value="10">10 分</option>
+        <option value="15">15 分</option>
+        <option value="30">30 分</option>
+        <option value="60">60 分 (1時間)</option>
+      </select>
+      <button class="btn" onclick="saveSleep()">スリープ設定を反映</button>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr"><span class="card-t">バッテリー駆動予測 (3000 mAh)</span></div>
+      
+      <div class="highlight-stat">
+        <div class="stat-lbl">設定した間隔での推定稼働日数</div>
+        <div class="big-stat" id="estDays">-- 日</div>
+        <div class="stat-lbl" id="estMonths">約 -- ヶ月</div>
+      </div>
+
+      <div style="background:var(--card-sub);padding:10px;border-radius:6px;font-size:12px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span>待機時電流 (Deep-sleep)</span>
+          <strong>7.0 µA</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between">
+          <span>覚醒中想定消費 (測定+通信 3秒)</span>
+          <strong>約 100 mA</strong>
+        </div>
+      </div>
+
+      <div class="card-hdr" style="margin-top:14px"><span class="card-t">Deep-sleep のまま眠り続けた場合の理論寿命</span></div>
+      <div style="text-align:center;padding:8px 0;background:#3fb95015;border:1px solid #3fb95044;border-radius:8px">
+        <div class="stat-lbl">常時 Deep-sleep (7µA) 継続時</div>
+        <div class="big-stat" style="color:var(--green)">約 48.9 年</div>
+        <div class="stat-lbl">（3000 mAh ÷ 0.007 mA ＝ 約 428,571 時間 ※自然放電を除く）</div>
+      </div>
+      <div class="note">※電池自体の自然放電（年1〜3%程度）やLDOの自己消費電流により、実環境では5〜10年程度が上限目安となります。</div>
+    </div>
+  </section>
+</main>
+
+<nav class="nav">
+  <button class="nav-btn act" onclick="switchTab('dash',this)">
+    <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+    状況
+  </button>
+  <button class="nav-btn" onclick="switchTab('wifi',this)">
+    <svg viewBox="0 0 24 24"><path d="M12 4a17.9 17.9 0 0 0-11 3.8A1 1 0 0 0 1.9 9.4L11.3 21a1 1 0 0 0 1.4 0l9.4-11.6a1 1 0 0 0 .9-1.6A17.9 17.9 0 0 0 12 4z"/></svg>
+    Wi-Fi
+  </button>
+  <button class="nav-btn" onclick="switchTab('power',this)">
+    <svg viewBox="0 0 24 24"><path d="M16 4h-2V2h-4v2H8c-.55 0-1 .45-1 1v16c0 .55.45 1 1 1h8c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm-1 9h-2v4h-2v-4H9l3-6v4h2z"/></svg>
+    省電力
+  </button>
+</nav>
+
+<div id="toast" class="toast"></div>
+
+<script>
+let histData = [];
+let chartMode = 'temp';
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(()=>{ t.style.display='none'; }, 3000);
+}
+
+function switchTab(id, btn){
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('act'));
+  document.querySelectorAll('.nav-btn').forEach(el=>el.classList.remove('act'));
+  document.getElementById('tab-'+id).classList.add('act');
+  btn.classList.add('act');
+  if(id === 'dash') renderChart();
+}
+
+function calcLife(min){
+  const m = parseInt(min) || 5;
+  const batMah = 3000;
+  const iSleepMa = 0.007; // 7 uA
+  const iActiveMa = 100; // 覚醒時約100mA
+  const tActiveS = 3;    // 3秒稼働
+  const tTotalS = m * 60;
+  const iAvg = ((iActiveMa * tActiveS) + (iSleepMa * (tTotalS - tActiveS))) / tTotalS;
+  const totalHours = batMah / iAvg;
+  const days = Math.floor(totalHours / 24);
+  const months = (days / 30.4).toFixed(1);
+  document.getElementById('estDays').textContent = days + " 日";
+  document.getElementById('estMonths').textContent = "約 " + months + " ヶ月";
+}
+
+function fetchStatus(){
+  fetch('/api/status')
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById('currTemp').textContent = d.temp_c != null ? d.temp_c.toFixed(1) : '--';
+      document.getElementById('currHum').textContent = d.humidity != null ? Math.round(d.humidity) : '--';
+      document.getElementById('currCO2').textContent = d.co2_ppm != null ? d.co2_ppm : '--';
+
+      if(d.battery_mv) document.getElementById('batStat').textContent = '電池: ' + (d.battery_mv / 1000).toFixed(2) + 'V';
+      if(d.uptime_s) {
+        const u = d.uptime_s;
+        const h = Math.floor(u / 3600);
+        const m = Math.floor((u % 3600) / 60);
+        document.getElementById('uptStat').textContent = '起動: ' + (h > 0 ? h + 'h' : '') + m + 'm';
+      }
+
+      const co2 = d.co2_ppm || 0;
+      const b = document.getElementById('co2Badge');
+      const msg = document.getElementById('co2Msg');
+      if(co2 === 0){
+        b.className = 'badge b-norm'; b.textContent = '未計測'; msg.textContent = 'データ待機中';
+      } else if(co2 < 1000){
+        b.className = 'badge b-norm'; b.textContent = '良好'; msg.textContent = '換気良好です。快適な空気質が保たれています。';
+      } else if(co2 < 1500){
+        b.className = 'badge b-warn'; b.textContent = '要換気'; msg.textContent = 'CO2濃度がやや高めです。換気を推奨します。';
+      } else {
+        b.className = 'badge b-crit'; b.textContent = '危険'; msg.textContent = '換気が必要です！眠気や集中力低下の恐れがあります。';
+      }
+
+      if(d.history) {
+        histData = d.history;
+        renderChart();
+      }
+    }).catch(e=>console.error(e));
+}
+
+function setChart(m){
+  chartMode = m;
+  document.querySelectorAll('.c-btn').forEach((b,i)=>{
+    b.classList.toggle('act', (i===0&&m==='temp')||(i===1&&m==='hum')||(i===2&&m==='co2'));
+  });
+  renderChart();
+}
+
+function renderChart(){
+  const cvs = document.getElementById('cvs');
+  const dpr = window.devicePixelRatio || 1;
+  const w = cvs.clientWidth;
+  const h = cvs.clientHeight;
+  cvs.width = w * dpr;
+  cvs.height = h * dpr;
+  const ctx = cvs.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  ctx.clearRect(0,0,w,h);
+  if(!histData || histData.length < 2){
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('履歴データが蓄積されていません', w/2, h/2);
+    return;
+  }
+
+  const key = chartMode === 'temp' ? 'temp_c' : (chartMode === 'hum' ? 'humidity' : 'co2_ppm');
+  const vals = histData.map(d => d[key]);
+  let min = Math.min(...vals);
+  let max = Math.max(...vals);
+  if(min === max) { min -= 1; max += 1; }
+  const pad = (max - min) * 0.15;
+  min -= pad; max += pad;
+
+  const color = chartMode === 'temp' ? '#f85149' : (chartMode === 'hum' ? '#388bfd' : '#a371f7');
+  const ptL = 36, ptR = 12, ptT = 16, ptB = 24;
+  const chW = w - ptL - ptR;
+  const chH = h - ptT - ptB;
+
+  // Grid
+  ctx.strokeStyle = '#30363d';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for(let i=0; i<=3; i++){
+    const y = ptT + (chH / 3) * i;
+    ctx.moveTo(ptL, y);
+    ctx.lineTo(w - ptR, y);
+    const val = max - (i * (max - min)/3);
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '9px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(Math.round(val), ptL - 6, y + 3);
+  }
+  ctx.stroke();
+
+  // Line & Area
+  const pts = histData.map((d, i) => {
+    const x = ptL + (i / (histData.length - 1)) * chW;
+    const y = ptT + (1 - (d[key] - min) / (max - min)) * chH;
+    return {x, y};
+  });
+
+  const grad = ctx.createLinearGradient(0, ptT, 0, ptT + chH);
+  grad.addColorStop(0, color + '55');
+  grad.addColorStop(1, color + '00');
+
+  ctx.beginPath();
+  pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+  ctx.lineTo(pts[pts.length-1].x, ptT + chH);
+  ctx.lineTo(pts[0].x, ptT + chH);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  ctx.beginPath();
+  pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // X軸ラベル (最初と最後)
+  ctx.fillStyle = '#8b949e';
+  ctx.font = '9px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('24時間前', ptL, h - 6);
+  ctx.textAlign = 'right';
+  ctx.fillText('現在', w - ptR, h - 6);
+}
+
+function scanWifi(){
+  const btn = document.getElementById('scanBtn');
+  btn.disabled = true;
+  btn.textContent = 'スキャン中...';
+  fetch('/api/scan')
+    .then(r => r.json())
+    .then(aps => {
+      btn.disabled = false;
+      btn.textContent = '再スキャン';
+      const b = document.getElementById('apBox');
+      b.innerHTML = '';
+      if(!aps || aps.length === 0){
+        b.innerHTML = '<div class="ap-item">Wi-Fiが見つかりませんでした</div>';
+      } else {
+        aps.sort((a,b)=>b.rssi - a.rssi).forEach(a => {
+          const div = document.createElement('div');
+          div.className = 'ap-item';
+          div.innerHTML = `<span><strong>${a.ssid}</strong> <small style="color:var(--text-dim)">(${a.auth})</small></span><span>${a.rssi} dBm</span>`;
+          div.onclick = () => { document.getElementById('wifiSsid').value = a.ssid; };
+          b.appendChild(div);
+        });
+      }
+      b.style.display = 'block';
+    }).catch(()=>{
+      btn.disabled = false;
+      btn.textContent = '検索失敗';
+    });
+}
+
+function saveWifi(){
+  const ssid = document.getElementById('wifiSsid').value.trim();
+  const pass = document.getElementById('wifiPass').value;
+  if(!ssid){ toast('SSIDを入力してください'); return; }
+  fetch('/api/wifi', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ssid: ssid, password: pass})
+  }).then(r => {
+    toast('Wi-Fi設定を送信しました');
+  }).catch(()=> toast('送信に失敗しました'));
+}
+
+function fetchSleep(){
+  fetch('/api/sleep')
+    .then(r => r.json())
+    .then(d => {
+      if(d.interval_min){
+        document.getElementById('sleepInt').value = d.interval_min;
+        calcLife(d.interval_min);
+      }
+    }).catch(e=>calcLife(5));
+}
+
+function saveSleep(){
+  const v = parseInt(document.getElementById('sleepInt').value);
+  fetch('/api/sleep', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({interval_min: v})
+  }).then(r => {
+    toast('省電力設定を保存しました (' + v + '分)');
+    calcLife(v);
+  }).catch(()=> toast('送信に失敗しました'));
+}
+
+window.addEventListener('load', ()=>{
+  fetchStatus();
+  fetchSleep();
+  setInterval(fetchStatus, 15000);
+});
+window.addEventListener('resize', renderChart);
+</script>
+</body>
+</html>

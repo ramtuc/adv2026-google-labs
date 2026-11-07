@@ -1,0 +1,8 @@
+{
+  "name": "day07-stitch-offline",
+  "private": true,
+  "devDependencies": {
+    "@google/design.md": "*",
+    "tailwindcss": "3.4.19"
+  }
+}

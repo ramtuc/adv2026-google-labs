@@ -26,3 +26,6 @@ day*/results/*.wav
 day*/*.m4a
 day*/results/notebook_*
 day*/results/video/
+
+# npm packages (day07 の Tailwind ビルドなど)
+node_modules/

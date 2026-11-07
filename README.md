@@ -34,6 +34,13 @@ uv run day03/style_experiment.py  # 話し方の指示と事実の誤りの関�
 
 uv run day05/evaluate.py          # System Prompt の比較（コード判定 + LLM 採点）
 uv run day06/check_export.py day06/stitch_export  # Stitch の書き出しの外部依存を調べる
+
+# Day 7（Stitch の書き出しのオフライン化は、先に day07/ui/stitch_offline で npm install）
+uv run day07/make_offline.py      # Stitch の書き出し → day07/www/stitch/
+uv run day07/generate_ui.py       # SDK で画面を作る → day07/www/index.html
+uv run day07/mock_server.py       # ESP32 の代わりに画面と /api を返す（http://127.0.0.1:8080/）
+uv run day07/firmware/pack_www.py # 画面を gzip にしてファームウェアに埋め込む
+# ファームウェアは ESP-IDF v5.5 で: idf.py -C day07/firmware set-target esp32s3 build flash
 ```
 
 ## 使用した資料
@@ -58,6 +65,11 @@ uv run day06/check_export.py day06/stitch_export  # Stitch の書き出しの外
 | `day05/testcases.json` | Day 5 のテストケース（質問・正解例・必須の語） | |
 | `day06/check_export.py` | Stitch が書き出した HTML の外部依存と、ボタンの処理を調べる | Day 6: Stitch(1) 自然言語から UI を作る |
 | `day06/stitch_export/` | Stitch から .zip で書き出したもの（HTML・画面の画像・DESIGN.md）。AI が生成したもので、数値には誤りを含む | |
+| `day07/make_offline.py` | Stitch の書き出しをインターネットなしで表示できる形にする（Tailwind の CSS を先に作る、アイコンを切り出す、ボタンを API につなぐ） | Day 7: Stitch(2) 書き出した UI を ESP32-S3 で動かす |
+| `day07/generate_ui.py` | 同じ画面を gemini-3.8-flash で、ESP32 から配信する前提で作る | |
+| `day07/mock_server.py` | ESP32 と同じ API を仮の値で返す確認用のサーバー | |
+| `day07/www/` | ESP32 で配信する画面（`index.html` = SDK 版、`stitch/` = Stitch 版） | |
+| `day07/firmware/` | ESP32-S3 のファームウェア（SoftAP、esp_http_server、/api/*、NVS） | |
 
 ## 注意
 
