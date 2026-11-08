@@ -72,6 +72,10 @@ idf.py -C day14/door_sensor -p <ポート> flash monitor
 powershell -File day14/door_sensor/test/run_host_tests.ps1   # パソコン上のテスト（MSVC）
 uv run day15/mutate.py host --all             # ミューテーション（device --port <ポート> で実機、--new で N1〜N6）
 uv run --with matplotlib day15/plot_mutants.py
+
+# Day 16（Antigravity の Automations の合間に、day14/door_sensor をこっそり変える）
+uv run day16/plant.py E1                      # E1〜E5 を入れる。restore で元に戻す
+uv run --with matplotlib day16/plot_runs.py
 ```
 
 ## 使用した資料
@@ -109,6 +113,7 @@ uv run --with matplotlib day15/plot_mutants.py
 | `day13/` | Deep Research（通常・Max）に Web の ESP32-S3 の仕様の誤りを調べさせ、出典を確かめるスクリプト | Day 13: Deep Research API |
 | `day14/` | 初代 ESP32 向けのドアセンサー（door_sensor_original_esp32）と、Antigravity が ESP32-S3 用に直したもの（door_sensor）、差分と実機のログ | Day 14: Google Antigravity (1) |
 | `day15/` | Antigravity が書いた door_sensor のテスト（1 回目は round1_tests、2 回目は day14/door_sensor/test）に、わざとバグを入れたコード 19 個を当てるスクリプトと結果 | Day 15: Google Antigravity (2) |
+| `day16/` | Antigravity の Automations に渡した夜間当番の指示、当番の合間にコードを変えるスクリプト、当番が書いた log.csv とアラート、実行の記録 | Day 16: Google Antigravity (3) |
 
 ## 注意
 
