@@ -67,6 +67,11 @@ uv run --with matplotlib day13/plot_runs.py   # 3 回の実行を比べるグラ
 # Day 14（ESP-IDF v5.5.3。Antigravity が S3 用に直したもの）
 idf.py -C day14/door_sensor set-target esp32s3
 idf.py -C day14/door_sensor -p <ポート> flash monitor
+
+# Day 15（day14/door_sensor のテストに、わざとバグを入れたコードを当てる）
+powershell -File day14/door_sensor/test/run_host_tests.ps1   # パソコン上のテスト（MSVC）
+uv run day15/mutate.py host --all             # ミューテーション（device --port <ポート> で実機、--new で N1〜N6）
+uv run --with matplotlib day15/plot_mutants.py
 ```
 
 ## 使用した資料
@@ -103,6 +108,7 @@ idf.py -C day14/door_sensor -p <ポート> flash monitor
 | `day12/` | File Search（Gemini API の RAG）に ESP32・ESP32-S3・ESP32-C6 のデータシートを入れ、Day 2 の質問と取り違えを誘う質問に答えさせるスクリプト | Day 12: File Search API |
 | `day13/` | Deep Research（通常・Max）に Web の ESP32-S3 の仕様の誤りを調べさせ、出典を確かめるスクリプト | Day 13: Deep Research API |
 | `day14/` | 初代 ESP32 向けのドアセンサー（door_sensor_original_esp32）と、Antigravity が ESP32-S3 用に直したもの（door_sensor）、差分と実機のログ | Day 14: Google Antigravity (1) |
+| `day15/` | Antigravity が書いた door_sensor のテスト（1 回目は round1_tests、2 回目は day14/door_sensor/test）に、わざとバグを入れたコード 19 個を当てるスクリプトと結果 | Day 15: Google Antigravity (2) |
 
 ## 注意
 

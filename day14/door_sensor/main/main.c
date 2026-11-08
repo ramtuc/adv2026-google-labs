@@ -23,28 +23,21 @@
 #include "driver/gpio.h"
 #include "driver/rtc_io.h"
 #include "driver/touch_pad.h"
+#include "door_sensor.h"
 
 static const char *TAG = "door";
 
-#define WAKE_INTERVAL_US   (10ULL * 60 * 1000 * 1000)  // 10 分
-#define BUTTON_GPIO        GPIO_NUM_10                 // 呼び出しボタン（RTC GPIO、外付け、押すと LOW）
-#define DOOR_GPIO          GPIO_NUM_11                 // リードスイッチ（10kΩ で外部プルアップ、閉じると LOW）
-#define BATTERY_ADC_CH     ADC_CHANNEL_7               // GPIO8（ADC1_CH7）。電池の電圧を 1/2 に分圧して入れる
-#define TOUCH_PAD          TOUCH_PAD_NUM4              // GPIO4（T4）
-#define TOUCH_THRESHOLD    1500                        // ESP32-S3 は触ると値が増える。基準値との差がこれを超えたら起きる
+#define BUTTON_GPIO        ((gpio_num_t)BUTTON_GPIO_NUM)
+#define DOOR_GPIO          ((gpio_num_t)DOOR_GPIO_NUM)
+#define BATTERY_ADC_CH     ((adc_channel_t)BATTERY_ADC_CH_NUM)
+#define TOUCH_PAD          ((touch_pad_t)TOUCH_PAD_CH_NUM)
+
+_Static_assert(DOOR_WAKEUP_EXT0 == ESP_SLEEP_WAKEUP_EXT0, "EXT0 enum mismatch");
+_Static_assert(DOOR_WAKEUP_TIMER == ESP_SLEEP_WAKEUP_TIMER, "TIMER enum mismatch");
+_Static_assert(DOOR_WAKEUP_TOUCHPAD == ESP_SLEEP_WAKEUP_TOUCHPAD, "TOUCHPAD enum mismatch");
 
 RTC_DATA_ATTR static uint32_t boot_count = 0;
 RTC_DATA_ATTR static int last_door = -1;
-
-static const char *wake_reason(esp_sleep_wakeup_cause_t cause)
-{
-    switch (cause) {
-    case ESP_SLEEP_WAKEUP_TIMER:    return "タイマー";
-    case ESP_SLEEP_WAKEUP_EXT0:     return "ボタン";
-    case ESP_SLEEP_WAKEUP_TOUCHPAD: return "タッチ";
-    default:                        return "電源投入";
-    }
-}
 
 static int read_battery_mv(void)
 {
@@ -56,8 +49,7 @@ static int read_battery_mv(void)
     int raw = 0;
     ESP_ERROR_CHECK(adc_oneshot_read(adc, BATTERY_ADC_CH, &raw));
     ESP_ERROR_CHECK(adc_oneshot_del_unit(adc));
-    // 12dB のおおよその換算（0〜4095 → 0〜3100 mV）。分圧の分を 2 倍で戻す
-    return raw * 3100 / 4095 * 2;
+    return door_raw_to_battery_mv(raw);
 }
 
 static int read_door(void)
@@ -96,15 +88,15 @@ void app_main(void)
 {
     boot_count++;
     esp_sleep_wakeup_cause_t cause = esp_sleep_get_wakeup_cause();
-    ESP_LOGI(TAG, "起動 %" PRIu32 " 回目（%s）", boot_count, wake_reason(cause));
+    ESP_LOGI(TAG, "起動 %" PRIu32 " 回目（%s）", boot_count, door_wake_reason(cause));
 
     int battery = read_battery_mv();
     int door = read_door();
-    ESP_LOGI(TAG, "電池 %d mV、ドア %s", battery, door ? "開" : "閉");
-    if (last_door >= 0 && door != last_door) {
-        ESP_LOGW(TAG, "ドアの状態が変わった（%s → %s）", last_door ? "開" : "閉", door ? "開" : "閉");
+    ESP_LOGI(TAG, "電池 %d mV、ドア %s", battery, door_state_str(door));
+    int prev_door = last_door;
+    if (door_update_state(&last_door, door)) {
+        ESP_LOGW(TAG, "ドアの状態が変わった（%s → %s）", door_state_str(prev_door), door_state_str(door));
     }
-    last_door = door;
 
     // 起きる条件を 3 つ設定して、Deep-sleep に入る
     ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(WAKE_INTERVAL_US));

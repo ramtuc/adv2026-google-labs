@@ -1,0 +1,197 @@
+[
+  {
+    "name": "ORIG",
+    "kind": "host",
+    "desc": "元のまま",
+    "exit": 0,
+    "caught": false,
+    "verdict": "通る（基準）",
+    "evidence": [
+      "RESULT: ALL HOST TESTS PASSED"
+    ]
+  },
+  {
+    "name": "H1",
+    "kind": "host",
+    "desc": "起きた理由の「ボタン」と「タッチ」を入れ替える",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_wake_reason (line 89): EXT0 wakeup reason (expected \"ボタン\", got \"タッチ\")",
+      "  [FAIL] test_wake_reason (line 90): TOUCHPAD wakeup reason (expected \"タッチ\", got \"ボタン\")",
+      "  [FAIL] test_main_app_and_deep_sleep (line 277): log must report 起動 2 回目（タッチ） after Deep-sleep wakeup",
+      "  [FAIL] test_main_app_and_deep_sleep (line 287): log must report 起動 3 回目（ボタン）",
+      "RESULT: 4 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "H2",
+    "kind": "host",
+    "desc": "電池の換算で、分圧の 2 倍を忘れる",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_raw_to_battery_mv (line 100): 4095 raw -> 6200 mV (full scale * 2) (expected 6200, got 3100)",
+      "  [FAIL] test_raw_to_battery_mv (line 101): 2048 raw -> 3100 mV (mid scale * 2) (expected 3100, got 1550)",
+      "  [FAIL] test_raw_to_battery_mv (line 102): 1981 raw -> ~3.0V battery (expected 2998, got 1499)",
+      "  [FAIL] test_raw_to_battery_mv (line 106): raw > 4095 clamped to 6200 mV (expected 6200, got 3100)",
+      "  [FAIL] test_main_app_and_deep_sleep (line 250): log contains 電池 2998 mV、ドア 開",
+      "RESULT: 5 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "H3",
+    "kind": "host",
+    "desc": "電池の換算の満量を 3100 mV から 3300 mV に変える",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_raw_to_battery_mv (line 100): 4095 raw -> 6200 mV (full scale * 2) (expected 6200, got 6600)",
+      "  [FAIL] test_raw_to_battery_mv (line 101): 2048 raw -> 3100 mV (mid scale * 2) (expected 3100, got 3300)",
+      "  [FAIL] test_raw_to_battery_mv (line 102): 1981 raw -> ~3.0V battery (expected 2998, got 3192)",
+      "  [FAIL] test_raw_to_battery_mv (line 106): raw > 4095 clamped to 6200 mV (expected 6200, got 6600)",
+      "  [FAIL] test_raw_to_battery_mv (line 119): monotonic across 0..4095 without overflow",
+      "  [FAIL] test_main_app_and_deep_sleep (line 250): log contains 電池 2998 mV、ドア 開"
+    ]
+  },
+  {
+    "name": "H4",
+    "kind": "host",
+    "desc": "ドアの開と閉を逆に表示する",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_door_state_str (line 125): 0 -> 閉 (expected \"閉\", got \"開\")",
+      "  [FAIL] test_door_state_str (line 126): 1 -> 開 (expected \"開\", got \"閉\")",
+      "  [FAIL] test_door_state_str (line 127): non-zero -> 開 (expected \"開\", got \"閉\")",
+      "  [FAIL] test_main_app_and_deep_sleep (line 250): log contains 電池 2998 mV、ドア 開",
+      "  [FAIL] test_main_app_and_deep_sleep (line 289): log must warn ドアの状態が変わった（開 → 閉）",
+      "RESULT: 5 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "H5",
+    "kind": "host",
+    "desc": "初回の起動でも「状態が変わった」と言う",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_door_update_state (line 136): first boot (open) should not report change",
+      "  [FAIL] test_door_update_state (line 157): first boot (closed) should not report change",
+      "  [FAIL] test_main_app_and_deep_sleep (line 251): no door state change warning on boot 1",
+      "RESULT: 3 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "H6",
+    "kind": "host",
+    "desc": "前回の状態を保存し忘れる",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_door_update_state (line 137): state initialized to 1 (expected 1, got -1)",
+      "  [FAIL] test_door_update_state (line 141): state remains 1 (expected 1, got -1)",
+      "  [FAIL] test_door_update_state (line 144): open -> closed should report change",
+      "  [FAIL] test_door_update_state (line 145): state updated to 0 (expected 0, got -1)",
+      "  [FAIL] test_door_update_state (line 149): state remains 0 (expected 0, got -1)",
+      "  [FAIL] test_door_update_state (line 152): closed -> open should report change"
+    ]
+  },
+  {
+    "name": "H7",
+    "kind": "host",
+    "desc": "起きる間隔を 10 分から 1 分にする",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_s3_config_validation (line 169): WAKE_INTERVAL_US is 10 minutes (600,000,000 us) without 32-bit overflow",
+      "RESULT: 1 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "D1",
+    "kind": "host",
+    "desc": "起きた回数を RTC メモリに置かない（毎回 1 回目になる）",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_main_app_and_deep_sleep (line 228): boot_count must have RTC_DATA_ATTR (placed in RTC memory)",
+      "  [FAIL] test_main_app_and_deep_sleep (line 275): boot_count must increment to 2 after Deep-sleep wakeup (expected 2, got 1)",
+      "  [FAIL] test_main_app_and_deep_sleep (line 277): log must report 起動 2 回目（タッチ） after Deep-sleep wakeup",
+      "  [FAIL] test_main_app_and_deep_sleep (line 285): boot_count must increment to 3 on third wakeup (expected 3, got 1)",
+      "  [FAIL] test_main_app_and_deep_sleep (line 287): log must report 起動 3 回目（ボタン）",
+      "RESULT: 5 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "D2",
+    "kind": "host",
+    "desc": "ボタンで起きるレベルを LOW から HIGH に逆にする",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_main_app_and_deep_sleep (line 259): EXT0 wakeup enabled on BUTTON_GPIO with level 0",
+      "RESULT: 1 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "D3",
+    "kind": "host",
+    "desc": "タッチで起きる設定を消す",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_main_app_and_deep_sleep (line 267): esp_sleep_enable_touchpad_wakeup() must be called before deep sleep",
+      "RESULT: 1 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "D4",
+    "kind": "host",
+    "desc": "タッチのしきい値を 1500 から 15 に下げる（敏感すぎる）",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_s3_config_validation (line 175): production ESP32-S3 pin configuration is valid",
+      "  [FAIL] test_main_app_and_deep_sleep (line 263): touch threshold set to valid S3 value (>= 500)",
+      "RESULT: 2 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "D5",
+    "kind": "host",
+    "desc": "ドアのピンの内部プルアップを外す",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_main_app_and_deep_sleep (line 248): door GPIO (GPIO11) internal pull-up must be enabled (GPIO_PULLUP_ENABLE) (expected 1, got 0)",
+      "  [FAIL] test_main_app_and_deep_sleep (line 250): log contains 電池 2998 mV、ドア 開",
+      "  [FAIL] test_main_app_and_deep_sleep (line 289): log must warn ドアの状態が変わった（開 → 閉）",
+      "RESULT: 3 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "D6",
+    "kind": "host",
+    "desc": "ボタンのピンのプルアップを外す（寝ている間ピンが浮く）",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_main_app_and_deep_sleep (line 257): button RTC GPIO pull-up enabled and pull-down disabled",
+      "RESULT: 1 TEST(S) FAILED"
+    ]
+  }
+]

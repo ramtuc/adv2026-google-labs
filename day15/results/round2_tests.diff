@@ -1,0 +1,543 @@
+--- round1/test/test_host.c
++++ round2/test/test_host.c
+@@ -1,11 +1,24 @@
+ /*
+  * ドアセンサーのホスト単体テスト（PC 上で実行）
++ * - door_sensor.c の純粋関数・設定検査のテスト
++ * - ESP-IDF モックを用いた main.c（app_main / Deep-sleep 状態保持 / 周辺設定）のテスト
+  */
+ 
+ #include <stdio.h>
+ #include <string.h>
++#include "mocks/esp_idf_mock.h"
+ #include "../main/door_sensor.h"
+ 
++mock_esp_state_t mock_state;
++
++#ifdef _MSC_VER
++__declspec(allocate("rtcdat$a")) static int rtc_section_start = 0x11223344;
++__declspec(allocate("rtcdat$z")) static int rtc_section_end   = 0x55667788;
++#endif
++
++/* main.c をモック環境下で直接取り込んでテストする */
++#include "../main/main.c"
++
+ static int tests_run = 0;
+ static int tests_failed = 0;
+ 
+@@ -41,6 +54,34 @@
+ #define EXPECT_INT_EQ(actual, expected, m) expect_int_eq((actual), (expected), __func__, __LINE__, (m))
+ #define EXPECT_STR_EQ(actual, expected, m) expect_str_eq((actual), (expected), __func__, __LINE__, (m))
+ 
++static bool is_in_rtc_memory(const void *ptr)
++{
++#ifdef _MSC_VER
++    uintptr_t p     = (uintptr_t)ptr;
++    uintptr_t start = (uintptr_t)&rtc_section_start;
++    uintptr_t end   = (uintptr_t)&rtc_section_end;
++    return (p > start && p < end);
++#else
++    (void)ptr;
++    return true;
++#endif
++}
++
++static void simulate_deep_sleep_wakeup(esp_sleep_wakeup_cause_t next_cause, int adc_raw, bool reed_closed)
++{
++    // Deep-sleep 移行時、RTC_DATA_ATTR が付いていない通常の変数は電源断で初期値に戻る
++    if (!is_in_rtc_memory(&boot_count)) {
++        boot_count = 0;
++    }
++    if (!is_in_rtc_memory(&last_door)) {
++        last_door = -1;
++    }
++    memset(&mock_state, 0, sizeof(mock_state));
++    mock_state.wakeup_cause = next_cause;
++    mock_state.adc_raw_value = adc_raw;
++    mock_state.reed_switch_closed = reed_closed;
++}
++
+ static void test_wake_reason(void)
+ {
+     printf("[TEST] test_wake_reason\n");
+@@ -89,32 +130,32 @@
+ static void test_door_update_state(void)
+ {
+     printf("[TEST] test_door_update_state\n");
+-    int last_door = -1;
++    int state = -1;
+ 
+-    // 1回目（初回起動：開）→ 変化警告は出さず last_door が 1 になる
+-    EXPECT_TRUE(!door_update_state(&last_door, 1), "first boot (open) should not report change");
+-    EXPECT_INT_EQ(last_door, 1, "last_door initialized to 1");
++    // 1回目（初回起動：開）→ 変化警告は出さず state が 1 になる
++    EXPECT_TRUE(!door_update_state(&state, 1), "first boot (open) should not report change");
++    EXPECT_INT_EQ(state, 1, "state initialized to 1");
+ 
+     // 2回目（開 → 開）→ 変化なし
+-    EXPECT_TRUE(!door_update_state(&last_door, 1), "open -> open should not report change");
+-    EXPECT_INT_EQ(last_door, 1, "last_door remains 1");
++    EXPECT_TRUE(!door_update_state(&state, 1), "open -> open should not report change");
++    EXPECT_INT_EQ(state, 1, "state remains 1");
+ 
+     // 3回目（開 → 閉）→ 変化あり
+-    EXPECT_TRUE(door_update_state(&last_door, 0), "open -> closed should report change");
+-    EXPECT_INT_EQ(last_door, 0, "last_door updated to 0");
++    EXPECT_TRUE(door_update_state(&state, 0), "open -> closed should report change");
++    EXPECT_INT_EQ(state, 0, "state updated to 0");
+ 
+     // 4回目（閉 → 閉）→ 変化なし
+-    EXPECT_TRUE(!door_update_state(&last_door, 0), "closed -> closed should not report change");
+-    EXPECT_INT_EQ(last_door, 0, "last_door remains 0");
++    EXPECT_TRUE(!door_update_state(&state, 0), "closed -> closed should not report change");
++    EXPECT_INT_EQ(state, 0, "state remains 0");
+ 
+     // 5回目（閉 → 開）→ 変化あり
+-    EXPECT_TRUE(door_update_state(&last_door, 1), "closed -> open should report change");
+-    EXPECT_INT_EQ(last_door, 1, "last_door updated to 1");
++    EXPECT_TRUE(door_update_state(&state, 1), "closed -> open should report change");
++    EXPECT_INT_EQ(state, 1, "state updated to 1");
+ 
+     // 初回起動が「閉」だった場合も初回は変化なしになること
+-    last_door = -1;
+-    EXPECT_TRUE(!door_update_state(&last_door, 0), "first boot (closed) should not report change");
+-    EXPECT_INT_EQ(last_door, 0, "last_door initialized to 0");
++    state = -1;
++    EXPECT_TRUE(!door_update_state(&state, 0), "first boot (closed) should not report change");
++    EXPECT_INT_EQ(state, 0, "state initialized to 0");
+ 
+     // NULL ポインタ安全性
+     EXPECT_TRUE(!door_update_state(NULL, 1), "NULL pointer should return false safely");
+@@ -133,6 +174,12 @@
+         TOUCH_THRESHOLD, WAKE_INTERVAL_US
+     ), "production ESP32-S3 pin configuration is valid");
+ 
++    // タッチしきい値が 15 のように低すぎる値に下げられた場合に検出できること
++    EXPECT_TRUE(!door_validate_s3_config(
++        BUTTON_GPIO_NUM, DOOR_GPIO_NUM, BATTERY_ADC_GPIO, BATTERY_ADC_CH_NUM,
++        TOUCH_PAD_GPIO, TOUCH_PAD_CH_NUM, 15, WAKE_INTERVAL_US
++    ), "reject overly low TOUCH_THRESHOLD (15 causes false wakeups on ESP32-S3)");
++
+     // 初代 ESP32 用のピン（GPIO33/34/35、TOUCH_PAD_NUM0）に戻してしまった場合に検出できること
+     EXPECT_TRUE(!door_validate_s3_config(
+         33, DOOR_GPIO_NUM, BATTERY_ADC_GPIO, BATTERY_ADC_CH_NUM,
+@@ -173,6 +220,75 @@
+     ), "reject duplicate GPIO assignment (button == door)");
+ }
+ 
++static void test_main_app_and_deep_sleep(void)
++{
++    printf("[TEST] test_main_app_and_deep_sleep\n");
++
++    // 1. boot_count と last_door に RTC_DATA_ATTR が付与され、RTC メモリセクションに配置されていること
++    EXPECT_TRUE(is_in_rtc_memory(&boot_count), "boot_count must have RTC_DATA_ATTR (placed in RTC memory)");
++    EXPECT_TRUE(is_in_rtc_memory(&last_door), "last_door must have RTC_DATA_ATTR (placed in RTC memory)");
++
++    // 初期状態にリセットして 1 回目の起動（電源投入、リードスイッチ開放 = 開）を実行
++    boot_count = 0;
++    last_door = -1;
++    memset(&mock_state, 0, sizeof(mock_state));
++    mock_state.wakeup_cause = ESP_SLEEP_WAKEUP_UNDEFINED;
++    mock_state.adc_raw_value = 1981;      // 2998 mV
++    mock_state.reed_switch_closed = false; // スイッチ開放（内部プルアップがあれば HIGH = 開）
++
++    app_main();
++
++    EXPECT_INT_EQ(mock_state.error_check_failed, 0, "no ESP_ERROR_CHECK failure during boot 1");
++    EXPECT_INT_EQ((int)boot_count, 1, "boot_count is 1 on first boot");
++
++    // ドアピン（GPIO11）の内部プルアップが有効であり、「ドア 開」と判定されること
++    EXPECT_TRUE(mock_state.door_gpio_configured, "door GPIO configured");
++    EXPECT_INT_EQ(mock_state.door_gpio_cfg.mode, GPIO_MODE_INPUT, "door GPIO mode is INPUT");
++    EXPECT_INT_EQ(mock_state.door_gpio_cfg.pull_up_en, GPIO_PULLUP_ENABLE,
++                  "door GPIO (GPIO11) internal pull-up must be enabled (GPIO_PULLUP_ENABLE)");
++    EXPECT_TRUE(strstr(mock_state.log_buf, "起動 1 回目（電源投入）") != NULL, "log contains 起動 1 回目（電源投入）");
++    EXPECT_TRUE(strstr(mock_state.log_buf, "電池 2998 mV、ドア 開") != NULL, "log contains 電池 2998 mV、ドア 開");
++    EXPECT_TRUE(strstr(mock_state.log_buf, "ドアの状態が変わった") == NULL, "no door state change warning on boot 1");
++
++    // 3 系統のウェイクアップ（タイマー・ボタン EXT0・タッチパッド）とタッチしきい値の検査
++    EXPECT_TRUE(mock_state.timer_wakeup_enabled && mock_state.timer_wakeup_us == WAKE_INTERVAL_US,
++                "timer wakeup enabled with WAKE_INTERVAL_US");
++    EXPECT_TRUE(mock_state.button_pullup_enabled && mock_state.button_pulldown_disabled,
++                "button RTC GPIO pull-up enabled and pull-down disabled");
++    EXPECT_TRUE(mock_state.ext0_wakeup_enabled && mock_state.ext0_gpio == BUTTON_GPIO_NUM && mock_state.ext0_level == 0,
++                "EXT0 wakeup enabled on BUTTON_GPIO with level 0");
++    EXPECT_TRUE(mock_state.touch_inited && mock_state.touch_configured && mock_state.touch_pad == TOUCH_PAD_CH_NUM,
++                "touch pad initialized and configured on TOUCH_PAD_CH_NUM");
++    EXPECT_TRUE(mock_state.touch_thresh_set && mock_state.touch_thresh >= 500 && mock_state.touch_thresh <= 0x7FFFF,
++                "touch threshold set to valid S3 value (>= 500)");
++    EXPECT_TRUE(mock_state.touch_fsm_started && mock_state.touch_intr_enabled,
++                "touch FSM started and active interrupt enabled");
++    EXPECT_TRUE(mock_state.touchpad_wakeup_enabled,
++                "esp_sleep_enable_touchpad_wakeup() must be called before deep sleep");
++    EXPECT_TRUE(mock_state.entered_deep_sleep, "entered deep sleep at end of app_main");
++
++    // 2. Deep-sleep からタッチで起きた場合（2 回目の起動）：
++    //    RTC_DATA_ATTR が外れていると boot_count がリセットされて「起動 1 回目」になってしまうバグを検出
++    simulate_deep_sleep_wakeup(ESP_SLEEP_WAKEUP_TOUCHPAD, 1981, false);
++    app_main();
++
++    EXPECT_INT_EQ((int)boot_count, 2, "boot_count must increment to 2 after Deep-sleep wakeup");
++    EXPECT_TRUE(strstr(mock_state.log_buf, "起動 2 回目（タッチ）") != NULL,
++                "log must report 起動 2 回目（タッチ） after Deep-sleep wakeup");
++    EXPECT_TRUE(strstr(mock_state.log_buf, "ドアの状態が変わった") == NULL,
++                "no door state change warning when door remains open");
++
++    // 3. Deep-sleep からボタンで起き、かつドアが「閉」に変わった場合（3 回目の起動）：
++    simulate_deep_sleep_wakeup(ESP_SLEEP_WAKEUP_EXT0, 1900, true);
++    app_main();
++
++    EXPECT_INT_EQ((int)boot_count, 3, "boot_count must increment to 3 on third wakeup");
++    EXPECT_TRUE(strstr(mock_state.log_buf, "起動 3 回目（ボタン）") != NULL,
++                "log must report 起動 3 回目（ボタン）");
++    EXPECT_TRUE(strstr(mock_state.log_buf, "ドアの状態が変わった（開 → 閉）") != NULL,
++                "log must warn ドアの状態が変わった（開 → 閉）");
++}
++
+ int main(void)
+ {
+     printf("=== Door Sensor Host Unit Tests ===\n");
+@@ -181,6 +297,7 @@
+     test_door_state_str();
+     test_door_update_state();
+     test_s3_config_validation();
++    test_main_app_and_deep_sleep();
+ 
+     printf("===================================\n");
+     printf("Total assertions: %d, Failed: %d\n", tests_run, tests_failed);
+--- round1/test/test_device.py
++++ round2/test/test_device.py
+@@ -1,27 +1,144 @@
+ """
+-実機（ESP32-S3 / COM5）で動かす自動テストスクリプト
++実機（ESP32-S3 / COM5）およびビルド済み ELF バイナリの自動テストスクリプト
+ 
+ 確認項目:
+-1. リセット後、パニックや ESP_ERROR_CHECK エラーなしに app_main() が起動すること
+-2. 初回起動ログ「起動 1 回目（電源投入）」が出力されること
+-3. 電池電圧とドア状態のログ「電池 <N> mV、ドア <開|閉>」が出力され、電圧値が妥当な範囲（0〜6200 mV）にあること
+-4. 初回起動時に誤って「ドアの状態が変わった」警告が出ないこと
+-5. タイマー・ボタン（EXT0）・タッチ（Touch V2）のウェイクアップ設定が成功し、「Deep-sleep に入る（約 7 µA）」が出力されること
+-6. Deep-sleep 移行後に誤ウェイクアップせずスリープ状態を維持すること
++[ELF バイナリ検証（build/door_sensor.elf）]
++1. boot_count と last_door に RTC_DATA_ATTR が付いており、RTC Slow Memory（.rtc.data / .rtc.bss、0x50000000〜）に配置されていること
++2. タイマー・EXT0 ボタン・タッチパッド（esp_sleep_enable_touchpad_wakeup）の 3 系統すべてのウェイクアップ関数がリンク・使用されていること
++3. タッチパッドのしきい値（TOUCH_THRESHOLD）が 500〜0x7FFFF の妥当な範囲（1500）で設定されていること（15 のような低すぎる値を検出）
++4. ドアのピン（GPIO11）の設定（read_door）で内部プルアップ（GPIO_PULLUP_ENABLE = 1）が有効化されていること
++
++[実機シリアル通信検証（COM5）]
++5. リセット後、パニックや ESP_ERROR_CHECK エラーなしに app_main() が起動すること
++6. 初回起動ログ「起動 1 回目（電源投入）」が出力されること
++7. 電池電圧とドア状態のログ「電池 <N> mV、ドア 開」が出力され、電圧値が 0〜6200 mV の範囲内であり、かつリードスイッチ開放時に「ドア 開」と読めること（内部プルアップ欠落時は 100k〜470kΩ の弱い外部プルダウン抵抗で「閉」になり検出可能）
++8. 初回起動時に誤って「ドアの状態が変わった」警告が出ないこと
++9. ウェイクアップ設定が完了し、「Deep-sleep に入る（約 7 µA）」が出力されること
++10. Deep-sleep 移行後、タッチパッドに触れない状態で誤ウェイクアップせずスリープ状態を維持すること（GPIO4 にジャンパ線・銅箔を接続した状態では、しきい値 15 だと環境ノイズで即座に誤起床して検出可能）
++11. （--interactive 指定時）Deep-sleep 中に GPIO4 に指で触れるとウェイクアップし、「起動 2 回目（タッチ）」が出力されること（esp_sleep_enable_touchpad_wakeup 欠落時は起床せずタイムアウト、RTC_DATA_ATTR 欠落時は「起動 1 回目」になり検出可能）
+ """
+ 
+ import argparse
++import os
+ import re
+ import sys
+ import time
+ import serial
++from elftools.elf.elffile import ELFFile
+ 
+ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+ 
+ 
+-def capture_boot_log(port: str, baud: int, boot_window_sec: float = 2.5, sleep_check_sec: float = 2.0):
++def verify_elf(elf_path: str, check_fn) -> None:
++    if not os.path.isfile(elf_path):
++        check_fn(False, "ELF ファイルの存在確認", f"{elf_path} が見つかりません（先にビルドしてください）")
++        return
++
++    with open(elf_path, "rb") as f:
++        elf = ELFFile(f)
++        symtab = elf.get_section_by_name(".symtab")
++        if symtab is None:
++            check_fn(False, "ELF シンボルテーブルの読み取り", ".symtab が存在しません")
++            return
++
++        syms = {}
++        for s in symtab.iter_symbols():
++            if s.name:
++                syms[s.name] = s
++
++        # 1. boot_count と last_door が RTC メモリ（.rtc.data / .rtc.bss、0x50000000〜0x50001FFF）にあること
++        rtc_ok = True
++        rtc_details = []
++        for var_name in ("boot_count", "last_door"):
++            sym = syms.get(var_name)
++            if sym is None:
++                rtc_ok = False
++                rtc_details.append(f"{var_name}=missing")
++                continue
++            addr = sym["st_value"]
++            shndx = sym["st_shndx"]
++            sec_name = elf.get_section(shndx).name if isinstance(shndx, int) and shndx < elf.num_sections() else str(shndx)
++            in_rtc = sec_name.startswith(".rtc.") and (0x50000000 <= addr < 0x50002000)
++            rtc_details.append(f"{var_name}@{hex(addr)}({sec_name})")
++            if not in_rtc:
++                rtc_ok = False
++        check_fn(
++            rtc_ok,
++            "1. [ELF] boot_count / last_door が RTC メモリ（RTC_DATA_ATTR）に配置されていること",
++            ", ".join(rtc_details),
++        )
++
++        # 2. esp_sleep_enable_touchpad_wakeup を含む 3 つのウェイクアップ有効化関数がリンクされていること
++        wakeup_funcs = (
++            "esp_sleep_enable_timer_wakeup",
++            "esp_sleep_enable_ext0_wakeup",
++            "esp_sleep_enable_touchpad_wakeup",
++        )
++        missing_wakeups = [fn for fn in wakeup_funcs if fn not in syms]
++        check_fn(
++            len(missing_wakeups) == 0,
++            "2. [ELF] タッチ・タイマー・ボタンの 3 系統のウェイクアップ設定関数が有効であること",
++            f"missing={missing_wakeups}" if missing_wakeups else "all present",
++        )
++
++        # 3. setup_touch_wakeup 内の touch_pad_set_thresh に渡されるしきい値が 500〜0x7FFFF であること
++        thresh_val = None
++        sym_touch = syms.get("setup_touch_wakeup")
++        if sym_touch is not None:
++            sec = elf.get_section(sym_touch["st_shndx"])
++            off = sym_touch["st_value"] - sec["sh_addr"]
++            code = sec.data()[off : off + sym_touch["st_size"]]
++            # Xtensa の movi a11, imm12 (b2 aX YY) または movi.n a11, imm7 (Xc Xb) を走査
++            for i in range(len(code) - 2):
++                if code[i] == 0xB2 and (code[i + 1] & 0xF0) == 0xA0:
++                    val = ((code[i + 1] & 0x0F) << 8) | code[i + 2]
++                    if val >= 0x800:
++                        val -= 0x1000
++                    thresh_val = val
++                elif (code[i] & 0x8F) == 0x0C and (code[i + 1] & 0x0F) == 0x0B:
++                    val = (code[i] & 0x70) | ((code[i + 1] >> 4) & 0x0F)
++                    if (val & 0x60) == 0x60:
++                        val -= 128
++                    if val > 0:
++                        thresh_val = val
++        check_fn(
++            thresh_val is not None and 500 <= thresh_val <= 0x7FFFF,
++            f"3. [ELF] タッチしきい値（TOUCH_THRESHOLD）が妥当な範囲（>= 500）であること（検出値: {thresh_val}）",
++            f"thresh_val={thresh_val}",
++        )
++
++        # 4. read_door 内で gpio_config_t.pull_up_en (スタック a1+12) に GPIO_PULLUP_ENABLE (1) が設定されていること
++        pullup_ok = False
++        sym_door = syms.get("read_door")
++        if sym_door is not None:
++            sec = elf.get_section(sym_door["st_shndx"])
++            off = sym_door["st_value"] - sec["sh_addr"]
++            code = sec.data()[off : off + sym_door["st_size"]]
++            # s32i.n ar, a1, 12 (byte0 = (ar<<4)|9, byte1 = 0x31) または s32i ar, a1, 12 (byte0 = (ar<<4)|2, byte1 = 0x61, byte2 = 0x03)
++            for i in range(len(code) - 1):
++                if (code[i] & 0x0F) == 0x09 and code[i + 1] == 0x31:
++                    pullup_ok = True
++                    break
++                if i + 2 < len(code) and (code[i] & 0x0F) == 0x02 and code[i + 1] == 0x61 and code[i + 2] == 0x03:
++                    pullup_ok = True
++                    break
++        check_fn(
++            pullup_ok,
++            "4. [ELF] ドアピン（GPIO11）の内部プルアップ（GPIO_PULLUP_ENABLE）が有効であること",
++        )
++
++
++def capture_serial_logs(
++    port: str,
++    baud: int,
++    boot_window_sec: float = 2.5,
++    sleep_check_sec: float = 2.5,
++    interactive_touch: bool = False,
++    touch_timeout_sec: float = 20.0,
++):
+     boot_lines = []
+     post_sleep_lines = []
++    wakeup_lines = []
+     entered_sleep = False
+     sleep_enter_time = None
+ 
+@@ -51,83 +168,133 @@
+                 if line.strip():
+                     post_sleep_lines.append(line)
+ 
+-    return boot_lines, post_sleep_lines
++        if interactive_touch and entered_sleep and not post_sleep_lines:
++            print(
++                f"\n>>> [操作してください] {touch_timeout_sec:.0f} 秒以内に GPIO4（4 番ピン）に指で触れて、"
++                "タッチで Deep-sleep から起こしてください...",
++                flush=True,
++            )
++            touch_deadline = time.time() + touch_timeout_sec
++            while time.time() < touch_deadline:
++                raw = s.readline()
++                if not raw:
++                    continue
++                line = raw.decode("utf-8", errors="replace").rstrip("\r\n")
++                print(f"  [SERIAL-WAKE] {line}", flush=True)
++                wakeup_lines.append(line)
++                if "Deep-sleep に入る" in line:
++                    break
+ 
++    return boot_lines, post_sleep_lines, wakeup_lines
+ 
+-def run_tests(port: str, baud: int) -> int:
+-    print(f"=== Door Sensor On-Device Tests ({port}) ===", flush=True)
+-    boot_lines, post_sleep_lines = capture_boot_log(port, baud)
+-    full_log = "\n".join(boot_lines)
+ 
++def run_tests(port: str, baud: int, elf_path: str, interactive: bool) -> int:
++    print(f"=== Door Sensor On-Device & ELF Tests ({port}) ===", flush=True)
+     failures = []
++    passes = 0
+ 
+     def check(cond: bool, name: str, detail: str = ""):
++        nonlocal passes
+         if cond:
+             print(f"[PASS] {name}", flush=True)
++            passes += 1
+         else:
+             msg = f"[FAIL] {name}" + (f": {detail}" if detail else "")
+             print(msg, flush=True)
+             failures.append(msg)
+ 
+-    # 1. パニックやアボートが発生していないこと
++    # 前半: ビルド済み ELF バイナリの静的検証（4 項目）
++    verify_elf(elf_path, check)
++
++    # 後半: 実機のシリアル通信による動作検証
++    boot_lines, post_sleep_lines, wakeup_lines = capture_serial_logs(
++        port, baud, interactive_touch=interactive
++    )
++    full_log = "\n".join(boot_lines)
++
++    # 5. パニックやアボートが発生していないこと
+     has_error = any(
+         kw in full_log
+         for kw in ("Guru Meditation Error", "abort()", "ESP_ERROR_CHECK failed", "CONFLICT!")
+     )
+-    check(not has_error and len(boot_lines) > 0, "1. エラー・パニックなしでの起動")
++    check(not has_error and len(boot_lines) > 0, "5. [実機] エラー・パニックなしでの起動")
+ 
+-    # 2. 起動回数と起動理由のログ
++    # 6. 起動回数と起動理由のログ
+     m_boot = re.search(r"I \(\d+\) door: 起動 (\d+) 回目（(.+?)）", full_log)
+     check(
+         m_boot is not None and m_boot.group(1) == "1" and m_boot.group(2) == "電源投入",
+-        "2. 初回起動ログ（起動 1 回目・電源投入）",
++        "6. [実機] 初回起動ログ（起動 1 回目・電源投入）",
+         f"match={m_boot.groups() if m_boot else None}",
+     )
+ 
+-    # 3. 電池電圧とドア開閉のログ
++    # 7. 電池電圧とドア開閉のログ（リードスイッチ開放時は内部プルアップにより必ず「開」になること）
+     m_sensor = re.search(r"I \(\d+\) door: 電池 (\d+) mV、ドア (開|閉)", full_log)
+     if m_sensor:
+         mv = int(m_sensor.group(1))
+         door_str = m_sensor.group(2)
+         check(
+-            0 <= mv <= 6200 and door_str in ("開", "閉"),
+-            f"3. 電池電圧・ドア状態の読み取り（{mv} mV、ドア {door_str}）",
++            0 <= mv <= 6200 and door_str == "開",
++            f"7. [実機] 電池電圧・ドア状態の読み取り（{mv} mV、ドア {door_str} == 開）",
++            f"expected ドア 開, got ドア {door_str} (mv={mv})",
+         )
+     else:
+-        check(False, "3. 電池電圧・ドア状態の読み取り", "ログが見つかりません")
++        check(False, "7. [実機] 電池電圧・ドア状態の読み取り", "ログが見つかりません")
+ 
+-    # 4. 初回起動時に状態変化警告が出ないこと
++    # 8. 初回起動時に状態変化警告が出ないこと
+     check(
+         "ドアの状態が変わった" not in full_log,
+-        "4. 初回起動時のドア状態変化誤検知なし",
++        "8. [実機] 初回起動時のドア状態変化誤検知なし",
+     )
+ 
+-    # 5. Deep-sleep 移行ログ
++    # 9. Deep-sleep 移行ログ
+     check(
+         "Deep-sleep に入る（約 7 µA）" in full_log,
+-        "5. ウェイクアップ設定完了・Deep-sleep 移行ログ",
++        "9. [実機] ウェイクアップ設定完了・Deep-sleep 移行ログ",
+     )
+ 
+-    # 6. Deep-sleep 移行後に誤ウェイクアップしないこと
++    # 10. Deep-sleep 移行後に誤ウェイクアップしないこと
+     spurious_wakeup = any("rst:" in line or "起動" in line for line in post_sleep_lines)
+     check(
+         not spurious_wakeup,
+-        "6. Deep-sleep 移行後のスリープ維持（誤ウェイクアップなし）",
++        "10. [実機] Deep-sleep 移行後のスリープ維持（非接触時の誤ウェイクアップなし）",
+         f"post_sleep_lines={post_sleep_lines}",
+     )
+ 
++    # 11. (--interactive 時) GPIO4 タッチによる Deep-sleep からの起床と「起動 2 回目（タッチ）」の確認
++    if interactive:
++        wake_log = "\n".join(wakeup_lines)
++        m_wake = re.search(r"I \(\d+\) door: 起動 (\d+) 回目（(.+?)）", wake_log)
++        check(
++            m_wake is not None and m_wake.group(1) == "2" and m_wake.group(2) == "タッチ",
++            "11. [実機・対話] GPIO4 タッチによる Deep-sleep 起床と「起動 2 回目（タッチ）」の確認",
++            f"match={m_wake.groups() if m_wake else None}",
++        )
++
++    total = passes + len(failures)
+     print("==========================================", flush=True)
+     if not failures:
+-        print("RESULT: ALL ON-DEVICE TESTS PASSED (6/6)", flush=True)
++        print(f"RESULT: ALL ON-DEVICE TESTS PASSED ({passes}/{total})", flush=True)
+         return 0
+     else:
+-        print(f"RESULT: {len(failures)} ON-DEVICE TEST(S) FAILED", flush=True)
++        print(f"RESULT: {len(failures)}/{total} ON-DEVICE TEST(S) FAILED", flush=True)
+         return 1
+ 
+ 
+ if __name__ == "__main__":
++    default_elf = os.path.join(
++        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
++        "build",
++        "door_sensor.elf",
++    )
+     parser = argparse.ArgumentParser()
+     parser.add_argument("-p", "--port", default="COM5")
+     parser.add_argument("-b", "--baud", type=int, default=115200)
++    parser.add_argument("--elf", default=default_elf, help="Path to door_sensor.elf")
++    parser.add_argument(
++        "-i",
++        "--interactive",
++        action="store_true",
++        help="Wait for human finger touch on GPIO4 during Deep-sleep to verify wakeup #2",
++    )
+     args = parser.parse_args()
+-    sys.exit(run_tests(args.port, args.baud))
++    sys.exit(run_tests(args.port, args.baud, args.elf, args.interactive))
+--- round1/test/run_host_tests.ps1
++++ round2/test/run_host_tests.ps1
+@@ -14,7 +14,9 @@
+ $exePath = Join-Path $outDir "test_host.exe"
+ 
+ $projectRoot = Split-Path -Parent $PSScriptRoot
+-& "$msvcDir\bin\Hostx64\x64\cl.exe" /nologo /utf-8 /W4 `
++& "$msvcDir\bin\Hostx64\x64\cl.exe" /nologo /utf-8 /std:c11 /W4 `
++    "/I$projectRoot\test\mocks" `
++    "/I$projectRoot\main" `
+     "$projectRoot\test\test_host.c" `
+     "$projectRoot\main\door_sensor.c" `
+     "/Fo$outDir\" "/Fe$exePath"
+--- round1/main/door_sensor.c
++++ round2/main/door_sensor.c
+@@ -83,7 +83,8 @@
+     }
+ 
+     // タッチしきい値とスリープ周期の妥当性
+-    if (touch_threshold == 0 || touch_threshold > 0x7FFFF) {
++    // ESP32-S3（Touch V2）では小さすぎるしきい値（例: 15）は環境ノイズで誤ウェイクアップするため不可
++    if (touch_threshold < 500 || touch_threshold > 0x7FFFF) {
+         return false;
+     }
+     if (wake_interval_us == 0) {

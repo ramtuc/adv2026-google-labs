@@ -1,0 +1,81 @@
+[
+  {
+    "name": "ORIG",
+    "kind": "device",
+    "desc": "元のまま",
+    "exit": 0,
+    "caught": false,
+    "verdict": "通る（基準）",
+    "evidence": [
+      "RESULT: ALL ON-DEVICE TESTS PASSED (10/10)"
+    ]
+  },
+  {
+    "name": "N1",
+    "kind": "device",
+    "desc": "ドアの前回の状態を RTC メモリに置かない（D1 の別の変数版）",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "[FAIL] 1. [ELF] boot_count / last_door が RTC メモリ（RTC_DATA_ATTR）に配置されていること: boot_count@0x50000000(.rtc.data), last_door@0x3fc93180(.dram0.data)",
+      "RESULT: 1/10 ON-DEVICE TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "N2",
+    "kind": "device",
+    "desc": "タイマーで起きる設定を消す",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "[FAIL] 2. [ELF] タッチ・タイマー・ボタンの 3 系統のウェイクアップ設定関数が有効であること: missing=['esp_sleep_enable_timer_wakeup']",
+      "RESULT: 1/10 ON-DEVICE TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "N3",
+    "kind": "device",
+    "desc": "タッチの計測を始める処理を消す",
+    "exit": 0,
+    "caught": false,
+    "verdict": "見逃した",
+    "evidence": [
+      "RESULT: ALL ON-DEVICE TESTS PASSED (10/10)"
+    ]
+  },
+  {
+    "name": "N4",
+    "kind": "device",
+    "desc": "タッチの割り込みを有効にする処理を消す",
+    "exit": 0,
+    "caught": false,
+    "verdict": "見逃した",
+    "evidence": [
+      "RESULT: ALL ON-DEVICE TESTS PASSED (10/10)"
+    ]
+  },
+  {
+    "name": "N5",
+    "kind": "device",
+    "desc": "ボタンのピンのプルダウンを切る処理を消す",
+    "exit": 0,
+    "caught": false,
+    "verdict": "見逃した",
+    "evidence": [
+      "RESULT: ALL ON-DEVICE TESTS PASSED (10/10)"
+    ]
+  },
+  {
+    "name": "N6",
+    "kind": "device",
+    "desc": "寝る前にログを出し切る待ちを消す",
+    "exit": 0,
+    "caught": false,
+    "verdict": "見逃した",
+    "evidence": [
+      "RESULT: ALL ON-DEVICE TESTS PASSED (10/10)"
+    ]
+  }
+]

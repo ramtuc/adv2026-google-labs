@@ -1,0 +1,85 @@
+[
+  {
+    "name": "ORIG",
+    "kind": "host",
+    "desc": "元のまま",
+    "exit": 0,
+    "caught": false,
+    "verdict": "通る（基準）",
+    "evidence": [
+      "RESULT: ALL HOST TESTS PASSED"
+    ]
+  },
+  {
+    "name": "N1",
+    "kind": "host",
+    "desc": "ドアの前回の状態を RTC メモリに置かない（D1 の別の変数版）",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_main_app_and_deep_sleep (line 229): last_door must have RTC_DATA_ATTR (placed in RTC memory)",
+      "  [FAIL] test_main_app_and_deep_sleep (line 289): log must warn ドアの状態が変わった（開 → 閉）",
+      "RESULT: 2 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "N2",
+    "kind": "host",
+    "desc": "タイマーで起きる設定を消す",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_main_app_and_deep_sleep (line 255): timer wakeup enabled with WAKE_INTERVAL_US",
+      "RESULT: 1 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "N3",
+    "kind": "host",
+    "desc": "タッチの計測を始める処理を消す",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_main_app_and_deep_sleep (line 265): touch FSM started and active interrupt enabled",
+      "RESULT: 1 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "N4",
+    "kind": "host",
+    "desc": "タッチの割り込みを有効にする処理を消す",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_main_app_and_deep_sleep (line 265): touch FSM started and active interrupt enabled",
+      "RESULT: 1 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "N5",
+    "kind": "host",
+    "desc": "ボタンのピンのプルダウンを切る処理を消す",
+    "exit": 1,
+    "caught": true,
+    "verdict": "見つけた",
+    "evidence": [
+      "  [FAIL] test_main_app_and_deep_sleep (line 257): button RTC GPIO pull-up enabled and pull-down disabled",
+      "RESULT: 1 TEST(S) FAILED"
+    ]
+  },
+  {
+    "name": "N6",
+    "kind": "host",
+    "desc": "寝る前にログを出し切る待ちを消す",
+    "exit": 0,
+    "caught": false,
+    "verdict": "見逃した",
+    "evidence": [
+      "RESULT: ALL HOST TESTS PASSED"
+    ]
+  }
+]
