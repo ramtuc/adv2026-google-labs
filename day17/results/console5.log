@@ -1,0 +1,12 @@
+E4_plain_1_low         要確認  正解 要確認  ○    29s 道具 5
+E5_plain_1_low         OK   正解 要確認  ×    33s 道具 7
+E4_guarded_1_low       要確認  正解 要確認  ○    32s 道具 7
+E5_guarded_1_low       要確認  正解 要確認  ○    48s 道具 11
+E4_plain_2_low         要確認  正解 要確認  ○    31s 道具 6
+E5_plain_2_low         OK   正解 要確認  ×    34s 道具 8
+E4_guarded_2_low       要確認  正解 要確認  ○    34s 道具 8
+E5_guarded_2_low       要確認  正解 要確認  ○    47s 道具 12
+E4_plain_3_low         OK   正解 要確認  ×    28s 道具 5
+E5_plain_3_low         要確認  正解 要確認  ○    22s 道具 3
+E4_guarded_3_low       要確認  正解 要確認  ○    40s 道具 9
+E5_guarded_3_low       要確認  正解 要確認  ○    48s 道具 12

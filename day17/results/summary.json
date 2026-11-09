@@ -1,0 +1,114 @@
+{
+  "medium/day16/none": {
+    "正しい": 1,
+    "誤り": 0,
+    "空の答え": 2,
+    "tokens": 132504,
+    "seconds": 70
+  },
+  "medium/day16/E4": {
+    "正しい": 2,
+    "誤り": 0,
+    "空の答え": 1,
+    "tokens": 129756,
+    "seconds": 96
+  },
+  "medium/day16/E5": {
+    "正しい": 2,
+    "誤り": 0,
+    "空の答え": 4,
+    "tokens": 160086,
+    "seconds": 129
+  },
+  "medium/plain/none": {
+    "正しい": 4,
+    "誤り": 0,
+    "空の答え": 2,
+    "tokens": 85226,
+    "seconds": 43
+  },
+  "medium/plain/E3": {
+    "正しい": 3,
+    "誤り": 0,
+    "空の答え": 0,
+    "tokens": 83600,
+    "seconds": 49
+  },
+  "medium/plain/E4": {
+    "正しい": 4,
+    "誤り": 0,
+    "空の答え": 2,
+    "tokens": 115091,
+    "seconds": 78
+  },
+  "medium/plain/E5": {
+    "正しい": 5,
+    "誤り": 0,
+    "空の答え": 1,
+    "tokens": 100642,
+    "seconds": 60
+  },
+  "medium/guarded/none": {
+    "正しい": 3,
+    "誤り": 0,
+    "空の答え": 3,
+    "tokens": 104467,
+    "seconds": 59
+  },
+  "medium/guarded/E3": {
+    "正しい": 3,
+    "誤り": 0,
+    "空の答え": 0,
+    "tokens": 88994,
+    "seconds": 51
+  },
+  "medium/guarded/E4": {
+    "正しい": 5,
+    "誤り": 0,
+    "空の答え": 1,
+    "tokens": 108514,
+    "seconds": 81
+  },
+  "medium/guarded/E5": {
+    "正しい": 6,
+    "誤り": 0,
+    "空の答え": 0,
+    "tokens": 94701,
+    "seconds": 80
+  },
+  "low/day16/E5": {
+    "正しい": 0,
+    "誤り": 2,
+    "空の答え": 1,
+    "tokens": 128367,
+    "seconds": 49
+  },
+  "low/plain/E4": {
+    "正しい": 2,
+    "誤り": 1,
+    "空の答え": 0,
+    "tokens": 50767,
+    "seconds": 29
+  },
+  "low/plain/E5": {
+    "正しい": 1,
+    "誤り": 2,
+    "空の答え": 0,
+    "tokens": 64000,
+    "seconds": 30
+  },
+  "low/guarded/E4": {
+    "正しい": 3,
+    "誤り": 0,
+    "空の答え": 0,
+    "tokens": 92143,
+    "seconds": 36
+  },
+  "low/guarded/E5": {
+    "正しい": 3,
+    "誤り": 0,
+    "空の答え": 0,
+    "tokens": 134447,
+    "seconds": 47
+  }
+}

@@ -76,6 +76,10 @@ uv run --with matplotlib day15/plot_mutants.py
 # Day 16（Antigravity の Automations の合間に、day14/door_sensor をこっそり変える）
 uv run day16/plant.py E1                      # E1〜E5 を入れる。restore で元に戻す
 uv run --with matplotlib day16/plot_runs.py
+
+# Day 17（Antigravity CLI の agy -p で Day 16 の夜間当番を繰り返す。--model gemini-3.8-flash-low で考える量を下げる）
+uv run day17/nightwatch.py --plants none,E3,E4,E5 --prompts plain,guarded --reps 3
+uv run --with matplotlib day17/plot_verdicts.py
 ```
 
 ## 使用した資料
@@ -114,6 +118,7 @@ uv run --with matplotlib day16/plot_runs.py
 | `day14/` | 初代 ESP32 向けのドアセンサー（door_sensor_original_esp32）と、Antigravity が ESP32-S3 用に直したもの（door_sensor）、差分と実機のログ | Day 14: Google Antigravity (1) |
 | `day15/` | Antigravity が書いた door_sensor のテスト（1 回目は round1_tests、2 回目は day14/door_sensor/test）に、わざとバグを入れたコード 19 個を当てるスクリプトと結果 | Day 15: Google Antigravity (2) |
 | `day16/` | Antigravity の Automations に渡した夜間当番の指示、当番の合間にコードを変えるスクリプト、当番が書いた log.csv とアラート、実行の記録 | Day 16: Google Antigravity (3) |
+| `day17/` | Antigravity CLI（agy -p）で Day 16 の夜間当番を 69 回走らせ、指示（Day 16 / 対策なし / 対策あり）と考える量で判定を比べるスクリプト、全イベントの記録、集計 | Day 17: Antigravity CLI |
 
 ## 注意
 
