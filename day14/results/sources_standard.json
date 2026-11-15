@@ -1,0 +1,327 @@
+[
+  {
+    "n": 1,
+    "site": "infishark.com",
+    "url": "https://infishark.com/blogs/learn/comparing-esp32-variants-original-s2-s3-c3-and-h2"
+  },
+  {
+    "n": 2,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/v5.0-rc1/esp32/hw-reference/chip-series-comparison.html"
+  },
+  {
+    "n": 3,
+    "site": "wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/ESP32"
+  },
+  {
+    "n": 4,
+    "site": "jrattechworks.com",
+    "url": "https://jrattechworks.com/esp32-s3-guide/"
+  },
+  {
+    "n": 5,
+    "site": "pcbway.com",
+    "url": "https://www.pcbway.com/blog/14/ESP32_vs_ESP32_S3_Key_Differences_Performance_Comparison_and_PCB_Design_Consi_2c205f9a.html"
+  },
+  {
+    "n": 6,
+    "site": "circuitlabs.net",
+    "url": "https://circuitlabs.net/esp32-s3-architecture-and-differences/"
+  },
+  {
+    "n": 7,
+    "site": "sheen.bot",
+    "url": "https://www.sheen.bot/store/esp32-s3-round-touch-display-development-board-1-85-ai-voice-wireless-charging"
+  },
+  {
+    "n": 8,
+    "site": "nextpcb.com",
+    "url": "https://www.nextpcb.com/blog/esp32-s3-vs-c3-vs-c6-which-to-choose"
+  },
+  {
+    "n": 9,
+    "site": "ampheo.com",
+    "url": "https://www.ampheo.com/blog/esp32-module-comparison-wroom-wrover-c3-s3-c6-and-p4-explained"
+  },
+  {
+    "n": 10,
+    "site": "manuals.plus",
+    "url": "https://ja.manuals.plus/jczn/jc4827w543esp32-wifi-and-bluetooth-module-manual"
+  },
+  {
+    "n": 11,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/arduino/comments/1h48ax2/esp32s3_hc05_8bitdo_sn30_pro/?tl=ja"
+  },
+  {
+    "n": 12,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/1krlbug/is_ble5_on_the_esp32_s3_fast_enough_to_send_data/?tl=ja"
+  },
+  {
+    "n": 13,
+    "site": "manuals.plus",
+    "url": "https://manuals.plus/ja/asin/B0FDL4FJ13"
+  },
+  {
+    "n": 14,
+    "site": "sensbench.com",
+    "url": "https://sensbench.com/ja/esp32-specs-faq/"
+  },
+  {
+    "n": 15,
+    "site": "desertcart.com.au",
+    "url": "https://www.desertcart.com.au/products/798961741-esp32-s3-%E9%96%8B%E7%99%BA%E3%83%9C%E3%83%BC%E3%83%89-2-4ghz-wi-fi-bluetooth-le-%E3%83%87%E3%83%A5%E3%82%A2%E3%83%AB%E3%83%A2%E3%83%BC%E3%83%89%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88"
+  },
+  {
+    "n": 16,
+    "site": "mouser.ca",
+    "url": "https://www.mouser.ca/fr/new/dfrobot/dfrobot-dfr1221-esp32-s3-dev-board/"
+  },
+  {
+    "n": 17,
+    "site": "robotshop.com",
+    "url": "https://jp.robotshop.com/products/waveshare-esp32-s3-18-cnc-wi-fi-bluetooth"
+  },
+  {
+    "n": 18,
+    "site": "qiita.com",
+    "url": "https://qiita.com/fukufukusonreiz/items/39286a4610fdd64fee96"
+  },
+  {
+    "n": 19,
+    "site": "fabscene.com",
+    "url": "https://fabscene.com/new/special/esp32-complete-guide-history-specifications/"
+  },
+  {
+    "n": 20,
+    "site": "dlrow-design.net",
+    "url": "https://dlrow-design.net/esp32%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%E3%81%AB%E3%83%94%E3%83%B3%E4%BA%92%E6%8F%9B%E6%80%A7%E3%81%AF%E3%81%82%E3%82%8B%EF%BC%9Fesp32%E3%83%BBs3%E3%83%BBc3%E3%83%BBc5%E3%81%AE%E7%BD%AE%E3%81%8D/"
+  },
+  {
+    "n": 21,
+    "site": "jlcpcb.com",
+    "url": "https://jlcpcb.com/jp/blog/esp32-c3-vs-s3"
+  },
+  {
+    "n": 22,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/1tmtswg/esp32s31_is_out_yall/?tl=ja"
+  },
+  {
+    "n": 23,
+    "site": "esp32learning.com",
+    "url": "https://www.esp32learning.com/cheat-sheets/esp32-c3-vs-esp32-c6-vs-esp32-s3-comparison-cheat-sheet.php"
+  },
+  {
+    "n": 24,
+    "site": "viewedisplay.com",
+    "url": "https://viewedisplay.com/product/esp32-s3-1-5-inch-amoled-touch-screen-dev-board-uart-smart-display/"
+  },
+  {
+    "n": 25,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/v4.4.6/esp32s3/api-guides/ulp-risc-v.html"
+  },
+  {
+    "n": 26,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/system/ulp-risc-v.html"
+  },
+  {
+    "n": 27,
+    "site": "lang-ship.com",
+    "url": "https://lang-ship.com/blog/work/esp32-s3-risc-v/"
+  },
+  {
+    "n": 28,
+    "site": "dfrobot.com",
+    "url": "https://wiki.dfrobot.com/dfr1221/"
+  },
+  {
+    "n": 29,
+    "site": "mouser.com",
+    "url": "https://lv.mouser.com/lv/new/dfrobot/dfrobot-dfr1221-esp32-s3-dev-board/"
+  },
+  {
+    "n": 30,
+    "site": "github.com",
+    "url": "https://github.com/espressif/esp-idf/issues/10281"
+  },
+  {
+    "n": 31,
+    "site": "zenn.dev",
+    "url": "https://zenn.dev/iot101/articles/04822babf3acdb"
+  },
+  {
+    "n": 32,
+    "site": "electwork.net",
+    "url": "https://electwork.net/posts/esp32-series-comparison/"
+  },
+  {
+    "n": 33,
+    "site": "icbbuy.com",
+    "url": "https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-s3-leaf"
+  },
+  {
+    "n": 34,
+    "site": "note.com",
+    "url": "https://note.com/p_bunseki/n/n7f4c971dd5a7"
+  },
+  {
+    "n": 35,
+    "site": "mercadolibre.com.ar",
+    "url": "https://www.mercadolibre.com.ar/nodemcu-esp32-wifi-usb-c-bluetooth-42-iot-wroom-con-mother/p/MLA75622378"
+  },
+  {
+    "n": 36,
+    "site": "robotshop.com",
+    "url": "https://jp.robotshop.com/products/waveshare-esp32-s3-nano-dev-board-wi-fi-bluetooth-arduino-nano-compatible"
+  },
+  {
+    "n": 37,
+    "site": "banggood.com",
+    "url": "https://jp.banggood.com/ESP32-S3-CAM-Development-Board-WiFi+bluetooth-Module-ESP32-S3-N16R8-Collocated-with-OV2640-Camera-p-2014395.html"
+  },
+  {
+    "n": 38,
+    "site": "greatersandhillsfamilyhealthcare.com",
+    "url": "https://greatersandhillsfamilyhealthcare.com/?r=2766811327203"
+  },
+  {
+    "n": 39,
+    "site": "m5stack.com",
+    "url": "https://docs.m5stack.com/ja/quick_start/about_m5stack/all_about_m5stack"
+  },
+  {
+    "n": 40,
+    "site": "kakaku.com",
+    "url": "https://search.kakaku.com/ESP32%20%E3%82%AB%E3%83%A1%E3%83%A9/"
+  },
+  {
+    "n": 41,
+    "site": "codezine.jp",
+    "url": "https://codezine.jp/article/detail/18591"
+  },
+  {
+    "n": 42,
+    "site": "calamartajafre.com",
+    "url": "https://calamartajafre.com/?shop/userreview/write-3cb5e0031024833"
+  },
+  {
+    "n": 43,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/1ftxvpf/new_to_esp_bluetooth_controller_without_using_ble/"
+  },
+  {
+    "n": 44,
+    "site": "sunfounder.com",
+    "url": "https://www.sunfounder.com/blogs/news/esp32-bluetooth-guide-classic-bluetooth-vs-ble-with-arduino-examples"
+  },
+  {
+    "n": 45,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-guides/bt-architecture/overview.html"
+  },
+  {
+    "n": 46,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/v5.2/esp32/api-guides/bluetooth.html"
+  },
+  {
+    "n": 47,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/advanced-development/ble-application-note/overview.html"
+  },
+  {
+    "n": 48,
+    "site": "luisllamas.es",
+    "url": "https://www.luisllamas.es/en/esp32-bluetooth-classic/"
+  },
+  {
+    "n": 49,
+    "site": "home-assistant.io",
+    "url": "https://community.home-assistant.io/t/great-esp32-board-for-an-esphome-bluetooth-proxy/916767"
+  },
+  {
+    "n": 50,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/WLED/comments/1qw7y25/esp32_gpio_pins_and_i2c_port_expander_ie_mcp23017/?tl=ja"
+  },
+  {
+    "n": 51,
+    "site": "pc1.co.jp",
+    "url": "https://arduino.pc1.co.jp/2025/07/10/esp32%E3%81%AE%E3%83%9C%E3%83%BC%E3%83%89%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/"
+  },
+  {
+    "n": 52,
+    "site": "esphome.io",
+    "url": "https://esphome.io/components/esp32/"
+  },
+  {
+    "n": 53,
+    "site": "randomnerdtutorials.com",
+    "url": "https://randomnerdtutorials.com/esp32-s3-devkitc-pinout-guide/"
+  },
+  {
+    "n": 54,
+    "site": "luisllamas.es",
+    "url": "https://www.luisllamas.es/en/esp32-s3-hardware-details-pinout/"
+  },
+  {
+    "n": 55,
+    "site": "randomnerdtutorials.com",
+    "url": "https://randomnerdtutorials.com/esp32-pinout-reference-gpios/"
+  },
+  {
+    "n": 56,
+    "site": "core-electronics.com.au",
+    "url": "https://forum.core-electronics.com.au/t/esp32-s3-mini-development-board-ws-25081/20131"
+  },
+  {
+    "n": 57,
+    "site": "waveshare.com",
+    "url": "https://docs.waveshare.com/ESP32-S3-Touch-LCD-7/Arduino/Arduino-I2C-Demo/"
+  },
+  {
+    "n": 58,
+    "site": "github.com",
+    "url": "https://github.com/HaraldKiessling/tasmota-ESP32S3-Geek/blob/main/docs/GPIO_PINOUT.md"
+  },
+  {
+    "n": 59,
+    "site": "projectech.in",
+    "url": "https://projectech.in/guides/esp32-deep-sleep-battery-projects/"
+  },
+  {
+    "n": 60,
+    "site": "luisllamas.es",
+    "url": "https://www.luisllamas.es/en/esp32-power-consumption/"
+  },
+  {
+    "n": 61,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/AskElectronics/comments/1jh71bz/how_to_power_a_33v_microprocessor_at_10ua_deep/"
+  },
+  {
+    "n": 62,
+    "site": "randomnerdtutorials.com",
+    "url": "https://randomnerdtutorials.com/esp32-deep-sleep-arduino-ide-wake-up-sources/"
+  },
+  {
+    "n": 63,
+    "site": "esp32.com",
+    "url": "https://esp32.com/viewtopic.php?t=32177"
+  },
+  {
+    "n": 64,
+    "site": "pixelroot32.org",
+    "url": "https://docs.pixelroot32.org/guide/platform-compatibility"
+  },
+  {
+    "n": 65,
+    "site": "wordpress.com",
+    "url": "https://macsbug.wordpress.com/2026/11/"
+  }
+]

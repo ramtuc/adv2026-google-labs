@@ -1,0 +1,61 @@
+Task exception was never retrieved
+future: <Task finished name='Task-19' coro=<ask.<locals>.sender() done, defined at E:\prog\adv2026-google-labs\day21\live_rag.py:109> exception=ConnectionClosedError(Close(code=1007, reason='The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.'), Close(code=1007, reason='The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.'), True)>
+Traceback (most recent call last):
+  File "E:\prog\adv2026-google-labs\day21\live_rag.py", line 115, in sender
+    await session.send_realtime_input(audio=types.Blob(
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\google\genai\live.py", line 369, in send_realtime_input
+    await self._ws.send(json.dumps({'realtime_input': realtime_input_dict}))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 480, in send
+    async with self.send_context():
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Roaming\uv\python\cpython-3.12.12-windows-x86_64-none\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 962, in send_context
+    raise self.close_exc
+websockets.exceptions.ConnectionClosedError: received 1007 (invalid frame payload data) The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.; then sent 1007 (invalid frame payload data) The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.
+native    sram     ○ 最初の音 2.833 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。
+ESP32-S3の内蔵SRAMは512KBです。」
+native    cpu      ○ 最初の音 3.36 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。デュアルコアXtensa LX7で、最大240MHzだよ。」
+native    sleep    × 最初の音 2.246 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    gpio     ○ 最初の音 3.011 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。
+ESP32-S3では、最大45本のGPIOが利用可能です。」
+native    classic  × 最初の音 3.705 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    sram     ○ 最初の音 3.903 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。
+
+ESP32-S3の内部SRAMは512KBです。」
+native    cpu      × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. The audio content type (CONTENT_TYPE_AU」
+native    sleep    × 最初の音 2.574 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    gpio     ○ 最初の音 4.025 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。
+ESP32-S3のGPIOは、最大45本あります。」
+native    classic  × 最初の音 3.476 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。
+ESP32-S3 は、Bluetooth Low Energyに特化しており、 Bluetooth 」
+native    sram     ○ 最初の音 1.298 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。
+
+データシートによると、512KBだよ。」
+native    cpu      ○ 最初の音 1.207 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。
+ESP32-S3のCPUはスタックチャンも使っているけど、デュアルコアで、最大240MHzで動くよ。」
+native    sleep    × 最初の音 1.225 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。 データシートを確認してみるよ。」
+native    gpio     ○ 最初の音 1.223 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。 データシートによると、利用可能なGPIOは最大45本あるみたいだよ。」
+native    classic  ○ 最初の音 1.337 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。
+ESP32-S3は Bluetooth Low Energy には対応しているけど、Bluetoot」
+native    sram     ○ 最初の音 1.284 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。データシートによると、内蔵SRAMは512KBだよ。」
+native    cpu      ○ 最初の音 1.199 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。
+
+ESP32-S3のCPUは、LX7のデュアルコアで、最大240MHzで動くよ。」
+native    sleep    × 最初の音 1.263 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。 データシートによると、ディープスリープ中の消費電流は数マイクロアンペア程度だよ。 詳しい値は、設定に」
+native    gpio     × 最初の音 1.235 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。 
+
+データシートによると、ESP32-S3には最大55本のGPIOがあるよ。」
+native    classic  ○ 最初の音 1.305 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。
+ESP32-S3は Bluetooth LE に対応しているけど、Bluetooth Classic」
+native    sram     × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. Thinking level must be specified for th」
+native    cpu      × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. Thinking level must be specified for th」
+native    sleep    × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. Thinking level must be specified for th」
+native    gpio     × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. Thinking level must be specified for th」
+native    classic  × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. Thinking level must be specified for th」
+native    sram     × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. Thinking level must be specified for th」
+native    cpu      × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. Thinking level must be specified for th」
+native    sleep    × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. Thinking level must be specified for th」
+native    gpio     × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. Thinking level must be specified for th」
+native    classic  × 最初の音 None s 答え None s 呼出 0 根拠 0  「APIError: 1007 None. Thinking level must be specified for th」

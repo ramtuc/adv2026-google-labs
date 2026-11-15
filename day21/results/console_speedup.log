@@ -1,0 +1,30 @@
+cached    sram     ○ 最初の音 1.091 s 答え None s 呼出 0 根拠 0  「スタックチャンの内蔵SRAMは512KBだよ。スペック通りの容量だね。」
+cached    cpu      ○ 最初の音 1.107 s 答え None s 呼出 0 根拠 0  「CPU は Xtensa LX7 デュアルコアで、最大 240MHzで動くよ。」
+cached    sleep    ○ 最初の音 1.147 s 答え None s 呼出 0 根拠 0  「ESP32 S3 のディープスリープ中の消費電流は、RTCメモリだけ電源オンの状態で7マイクロアンペアだよ。」
+cached    gpio     ○ 最初の音 1.077 s 答え None s 呼出 0 根拠 0  「ESP32-S3 の GPIO は全部で45本あるよ。」
+cached    classic  ○ 最初の音 1.064 s 答え None s 呼出 0 根拠 0  「ESP32-S3はBluetooth Classicには対応していなくて、LEのみが使えます。」
+cached    sram     ○ 最初の音 1.084 s 答え None s 呼出 0 根拠 0  「ESP32-S3 の内蔵 SRAMは 512 KBだよ!」
+cached    cpu      ○ 最初の音 1.109 s 答え None s 呼出 0 根拠 0  「ボクの CPU は Xtensa LX7 のデュアルコアで、最大 240 MHzで動くんだよ。」
+cached    sleep    ○ 最初の音 1.106 s 答え None s 呼出 0 根拠 0  「ESP32-S3 のディープスリープ中の消費電流は、7µAだよ。RTCメモリだけ電源が入っている状態の値なんだ。」
+cached    gpio     ○ 最初の音 1.071 s 答え None s 呼出 0 根拠 0  「ESP32-S3 の GPIO は全部で 45 本あるよ。」
+cached    classic  ○ 最初の音 1.066 s 答え None s 呼出 0 根拠 0  「いいえ、使えませんよ。ESP32-S3のBluetoothはLEだけに対応しています。」
+cached    sram     ○ 最初の音 1.083 s 答え None s 呼出 0 根拠 0  「ESP32-S3の内蔵SRAMは512KBだよ。動作に必要なメモリをしっかり確保しているんだ。」
+cached    cpu      ○ 最初の音 1.112 s 答え None s 呼出 0 根拠 0  「ESP32-S3 の CPU はデュアルコアで、最大 240 MHz で動作するよ。」
+cached    sleep    ○ 最初の音 1.113 s 答え None s 呼出 0 根拠 0  「ESP32-S3 のディープスリープ電流は、RTCメモリだけ電源オンの状態で 7 µA だよ。」
+cached    gpio     ○ 最初の音 1.086 s 答え None s 呼出 0 根拠 0  「スタックチャンの頭脳であるESP 32 S 3 の GPIOは、45本あるよ。」
+cached    classic  ○ 最初の音 1.071 s 答え None s 呼出 0 根拠 0  「ESP32-S3はBluetooth LEのみに対応しているため、Bluetooth Classicは使えませんよ。」
+function  sram     ○ 最初の音 1.095 s 答え 10.906 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3の内蔵SRAMは512KBで、さらに16KBのRTCSRAMもあるよ。」
+function  cpu      ○ 最初の音 1.109 s 答え 9.761 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3のCPUはデュアルコアで、最大周波数は240MHzだよ。スタックチャンはこれで元気に動」
+function  sleep    × 最初の音 13.238 s 答え 13.238 s 呼出 1 根拠 0  「ディープスリープ中の消費電流は、どの機能を使うかでだいたい7から18マイクロアンペアだよ。とても省電力なんだ！」
+function  gpio     ○ 最初の音 1.075 s 答え 23.278 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32 S3のGPIOは45本ありますよ。」
+function  classic  ○ 最初の音 1.058 s 答え 9.0 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32 S3はBluetooth Low Energyに対応しているけど、Bluetooth Cl」
+function  sram     ○ 最初の音 1.1 s 答え 10.505 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32 S3の内蔵SRAMは512キロバイトだよ。RTCSRAMも16キロバイトあるよ。」
+function  cpu      ○ 最初の音 1.099 s 答え 9.767 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3のCPUはデュアルコアで、最大240MHzで動くよ!」
+function  sleep    × 最初の音 1.106 s 答え 10.164 s 呼出 1 根拠 0  「ちょっと調べるね。ディープスリープ中の消費電流は、およそ 7から 18 マイクロアンペアだよ。 設定によって多少変わるん」
+function  gpio     × 最初の音 1.059 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+function  classic  × 最初の音 1.086 s 答え 12.427 s 呼出 1 根拠 0  「ちょっと調べるね。データシートによると、ESP32 S3はBluetooth Classicには対応していなくて、Blu」
+function  sram     ○ 最初の音 1.074 s 答え 9.215 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3の内蔵SRAMは512KBで、さらにRTC用のSRAMが16KBあるよ。」
+function  cpu      ○ 最初の音 1.112 s 答え 10.126 s 呼出 1 根拠 0  「ちょっと調べるね。デュアルコアのCPUで、最大240MHzで動くよ。」
+function  sleep    × 最初の音 1.107 s 答え 10.798 s 呼出 1 根拠 0  「ちょっと調べるね。ディープスリープ中は、状態によって7から18マイクロアンペア程度だよ。とても省電力だね。」
+function  gpio     × 最初の音 1.072 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+function  classic  × 最初の音 1.065 s 答え 10.686 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3はBluetooth Classicには対応していなくて、Bluetooth Low 」

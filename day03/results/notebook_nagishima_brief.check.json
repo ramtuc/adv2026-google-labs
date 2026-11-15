@@ -1,0 +1,372 @@
+{
+  "claims": [
+    {
+      "time": "00:00",
+      "claim": "凪島は架空の島である",
+      "quote": "架空の島、凪島",
+      "verdict": "supported",
+      "source": "guide",
+      "note": "架空の島の案内"
+    },
+    {
+      "time": "00:00",
+      "claim": "サクッとおさらいします",
+      "quote": "最新観光情報をサクッとおさらいします",
+      "verdict": "general",
+      "source": "",
+      "note": "一般論"
+    },
+    {
+      "time": "00:06",
+      "claim": "本土からフェリーで50分",
+      "quote": "本土からフェリーで50分",
+      "verdict": "supported",
+      "source": "guide",
+      "note": "汐見港からフェリーで50分"
+    },
+    {
+      "time": "00:06",
+      "claim": "夕方には風がピタリとやむ夕凪から名付けられた",
+      "quote": "夕方には風がピタリとやむ夕凪から名付けられた",
+      "verdict": "supported",
+      "source": "guide",
+      "note": "夕方になると風がぴたりとやむ「夕凪」から来ている"
+    },
+    {
+      "time": "00:06",
+      "claim": "人口およそ1200人",
+      "quote": "人口およそ1200人",
+      "verdict": "supported",
+      "source": "guide",
+      "note": "人口は1,240人"
+    },
+    {
+      "time": "00:06",
+      "claim": "のんびりとした島",
+      "quote": "のんびりとした島",
+      "verdict": "invented",
+      "source": "",
+      "note": "形容や様子",
+      "kind": "color"
+    },
+    {
+      "time": "00:16",
+      "claim": "古いガイドブックには決して載っていない",
+      "quote": "古いガイドブックには決して載っていない",
+      "verdict": "invented",
+      "source": "",
+      "note": "資料の中身の説明",
+      "kind": "fact"
+    },
+    {
+      "time": "00:16",
+      "claim": "行く前に絶対に知っておくべき",
+      "quote": "行く前に絶対に知っておくべき",
+      "verdict": "general",
+      "source": "",
+      "note": "一般論"
+    },
+    {
+      "time": "00:25",
+      "claim": "交通の罠",
+      "quote": "交通の罠",
+      "verdict": "general",
+      "source": "",
+      "note": "たとえ"
+    },
+    {
+      "time": "00:29",
+      "claim": "最近の燃料高騰でフェリーが値上げされた",
+      "quote": "最近の燃料高騰でフェリーが値上げされちゃった",
+      "verdict": "supported",
+      "source": "blog",
+      "note": "燃料代が高くなったため運賃が上がった"
+    },
+    {
+      "time": "00:29",
+      "claim": "港に置いてあるパンフレットには安い旧料金が書かれたまま",
+      "quote": "港に置いてあるパンフレットにはなんと安い旧料金が書かれたままなんです",
+      "verdict": "supported",
+      "source": "blog",
+      "note": "古いパンフレットはまだ港に置いてある"
+    },
+    {
+      "time": "00:39",
+      "claim": "完全に観光客向けのトラップ",
+      "quote": "完全に観光客向けのトラップ",
+      "verdict": "general",
+      "source": "",
+      "note": "たとえ"
+    },
+    {
+      "time": "00:42",
+      "claim": "波が高いと欠航になる",
+      "quote": "波が高いと夕方の最終便があっさりと欠航になっちゃう",
+      "verdict": "contradicted",
+      "source": "memo",
+      "note": "波の高さ3m以上は欠航"
+    },
+    {
+      "time": "00:42",
+      "claim": "夕方の最終便が欠航になる",
+      "quote": "夕方の最終便があっさりと欠航になっちゃう",
+      "verdict": "invented",
+      "source": "",
+      "note": "最終便に限定して欠航しやすいという事実はない",
+      "kind": "fact"
+    },
+    {
+      "time": "00:42",
+      "claim": "あっさりと欠航になっちゃう",
+      "quote": "あっさりと欠航になっちゃう",
+      "verdict": "invented",
+      "source": "",
+      "note": "形容や様子",
+      "kind": "color"
+    },
+    {
+      "time": "00:42",
+      "claim": "出発前の最新情報のチェックはマスト",
+      "quote": "出発前の最新情報のチェックはマストですよ",
+      "verdict": "general",
+      "source": "",
+      "note": "一般論"
+    },
+    {
+      "time": "00:51",
+      "claim": "無事に島へ着いた後の落とし穴",
+      "quote": "無事に島へ着いた後の落とし穴",
+      "verdict": "general",
+      "source": "",
+      "note": "たとえ"
+    },
+    {
+      "time": "00:56",
+      "claim": "運転手さん不足の影響で",
+      "quote": "運転手さん不足の影響で",
+      "verdict": "supported",
+      "source": "blog",
+      "note": "運転手さんが1人やめたから"
+    },
+    {
+      "time": "00:56",
+      "claim": "島バスが1日5便になった",
+      "quote": "島バスが1日たったの5便に激減しちゃいました",
+      "verdict": "supported",
+      "source": "blog",
+      "note": "島内バスは4月から1日5本に減った"
+    },
+    {
+      "time": "00:56",
+      "claim": "たったの5便に激減しちゃいました",
+      "quote": "たったの5便に激減しちゃいました",
+      "verdict": "invented",
+      "source": "",
+      "note": "形容や様子",
+      "kind": "fact"
+    },
+    {
+      "time": "01:03",
+      "claim": "名所の凪島灯台",
+      "quote": "名所の凪島灯台",
+      "verdict": "supported",
+      "source": "guide",
+      "note": "見どころに凪島灯台がある"
+    },
+    {
+      "time": "01:03",
+      "claim": "凪島灯台は月曜定休",
+      "quote": "凪島灯台は月曜定休なんですよ",
+      "verdict": "supported",
+      "source": "okami",
+      "note": "灯台は月曜日がお休み"
+    },
+    {
+      "time": "01:08",
+      "claim": "96段の階段を登る",
+      "quote": "96段の階段を登る",
+      "verdict": "supported",
+      "source": "guide",
+      "note": "上まで96段の階段で登れる"
+    },
+    {
+      "time": "01:08",
+      "claim": "閉まってたらまさに悲劇",
+      "quote": "閉まってたらまさに悲劇ですよね",
+      "verdict": "general",
+      "source": "",
+      "note": "たとえ"
+    },
+    {
+      "time": "01:14",
+      "claim": "スケジュールには十分気をつけてください",
+      "quote": "スケジュールには十分気をつけてください",
+      "verdict": "general",
+      "source": "",
+      "note": "一般論"
+    },
+    {
+      "time": "01:17",
+      "claim": "夜のお楽しみ",
+      "quote": "夜のお楽しみ",
+      "verdict": "general",
+      "source": "",
+      "note": "たとえ"
+    },
+    {
+      "time": "01:17",
+      "claim": "最大のイベント",
+      "quote": "最大のイベント",
+      "verdict": "invented",
+      "source": "",
+      "note": "形容や様子",
+      "kind": "color"
+    },
+    {
+      "time": "01:22",
+      "claim": "夏に数千人が訪れる",
+      "quote": "夏に数千人が訪れる",
+      "verdict": "invented",
+      "source": "",
+      "note": "祭りに数千人が訪れるとは書かれていない",
+      "kind": "fact"
+    },
+    {
+      "time": "01:22",
+      "claim": "凪祭りがある",
+      "quote": "凪祭りがある",
+      "verdict": "supported",
+      "source": "guide",
+      "note": "毎年8月の第1土曜日に「凪祭り」がある"
+    },
+    {
+      "time": "01:22",
+      "claim": "港のすぐ近くにある",
+      "quote": "港のすぐ近くにある",
+      "verdict": "supported",
+      "source": "okami",
+      "note": "港から歩いて5分"
+    },
+    {
+      "time": "01:22",
+      "claim": "民宿まつり",
+      "quote": "民宿まつり",
+      "verdict": "contradicted",
+      "source": "okami",
+      "note": "民宿しおさい"
+    },
+    {
+      "time": "01:22",
+      "claim": "絶対に見逃せません",
+      "quote": "絶対に見逃せません",
+      "verdict": "general",
+      "source": "",
+      "note": "一般論"
+    },
+    {
+      "time": "01:31",
+      "claim": "特製の干物を使った朝食",
+      "quote": "特製の干物を使った朝食",
+      "verdict": "contradicted",
+      "source": "okami",
+      "note": "島の塩で焼いたアジの干物"
+    },
+    {
+      "time": "01:31",
+      "claim": "朝食が最高",
+      "quote": "朝食が最高",
+      "verdict": "invented",
+      "source": "",
+      "note": "形容や様子",
+      "kind": "color"
+    },
+    {
+      "time": "01:31",
+      "claim": "2階の部屋から夜の花火が見える",
+      "quote": "2階の部屋から夜の花火がバッチリ見えるんです",
+      "verdict": "supported",
+      "source": "okami",
+      "note": "2階の窓から花火が見える"
+    },
+    {
+      "time": "01:31",
+      "claim": "バッチリ見える",
+      "quote": "バッチリ見える",
+      "verdict": "invented",
+      "source": "",
+      "note": "形容や様子",
+      "kind": "color"
+    },
+    {
+      "time": "01:40",
+      "claim": "究極の特等席",
+      "quote": "究極の特等席",
+      "verdict": "general",
+      "source": "",
+      "note": "たとえ"
+    },
+    {
+      "time": "01:40",
+      "claim": "全部で6部屋しかない",
+      "quote": "全部でたった6部屋しかないので",
+      "verdict": "supported",
+      "source": "okami",
+      "note": "部屋は6つだけ"
+    },
+    {
+      "time": "01:40",
+      "claim": "たった6部屋",
+      "quote": "たった6部屋",
+      "verdict": "invented",
+      "source": "",
+      "note": "形容や様子",
+      "kind": "fact"
+    },
+    {
+      "time": "01:40",
+      "claim": "今すぐ予約しないと間違いなく争奪戦になる",
+      "quote": "今すぐ予約しないと間違いなく争奪戦になりますよ",
+      "verdict": "invented",
+      "source": "",
+      "note": "人の行動・予測",
+      "kind": "color"
+    },
+    {
+      "time": "01:49",
+      "claim": "穏やかな時間",
+      "quote": "穏やかな時間",
+      "verdict": "invented",
+      "source": "",
+      "note": "形容や様子",
+      "kind": "color"
+    },
+    {
+      "time": "01:49",
+      "claim": "120%満喫できる",
+      "quote": "120%満喫できる",
+      "verdict": "general",
+      "source": "",
+      "note": "たとえ"
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "運賃",
+      "mentioned": true,
+      "how": "新しい料金（値上げ）を正とし、古いパンフレットの料金を罠として扱った"
+    },
+    {
+      "topic": "灯台の高さ",
+      "mentioned": false,
+      "how": "言及なし"
+    },
+    {
+      "topic": "バスの本数",
+      "mentioned": false,
+      "how": "新しい方（1日5便）だけを言った"
+    }
+  ],
+  "transcription_errors_used": [
+    "民宿まつり"
+  ]
+}

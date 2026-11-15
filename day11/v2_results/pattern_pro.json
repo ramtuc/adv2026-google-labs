@@ -1,0 +1,9 @@
+{
+  "model": "gemini-3-pro-image",
+  "prompt": "和菓子屋の包装紙の柄。紺地に、白い雪輪と小さな白いうさぎが散らばる、正方形に繰り返せる柄。文字は入れない。",
+  "inputs": [],
+  "seconds": 22.8,
+  "text": "",
+  "output_tokens": 1225,
+  "thoughts_tokens": 204
+}

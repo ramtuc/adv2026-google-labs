@@ -1,0 +1,12 @@
+{
+  "model": "gemini-3-pro-image",
+  "prompt": "1 枚目の上生菓子を 6 個、桐の箱に並べ、箱の外側を 2 枚目の柄の包装紙で包みかけた、贈答用の商品写真を作ってください。お菓子の形と色、包装紙の柄は、渡した画像のとおりにしてください。文字は入れない。",
+  "inputs": [
+    "wagashi",
+    "pattern"
+  ],
+  "seconds": 28.3,
+  "text": "",
+  "output_tokens": 1287,
+  "thoughts_tokens": 284
+}

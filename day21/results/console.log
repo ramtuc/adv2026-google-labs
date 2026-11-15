@@ -1,0 +1,45 @@
+none      sram     ○ 最初の音 1.091 s 答え None s 呼出 0 根拠 0  「ESP32-S3の内造SRAMは512キロバイトだよ。僕の頭脳もしっかり動いてるよ!」
+none      cpu      ○ 最初の音 1.037 s 答え None s 呼出 0 根拠 0  「ESP32-S3はパワフルなデュアルコアで、最大240MHzで動作するんだよ。ぼくの頭脳もこれなんだ！」
+none      sleep    × 最初の音 1.093 s 答え None s 呼出 0 根拠 0  「ESP32S3のディープスリープ中の消費電流は、およそ8マイクロアンペア程度ですよ。状態によって少し変わります。」
+none      gpio     ○ 最初の音 1.08 s 答え None s 呼出 0 根拠 0  「ESP32-S3には、最大45本のGPIOピンがありますよ。」
+none      classic  ○ 最初の音 1.083 s 答え None s 呼出 0 根拠 0  「ESP32-S3はBluetooth Low Energyのみ対応していて、Classic Bluetoothは使えない」
+native    sram     × 最初の音 1.074 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    cpu      × 最初の音 1.139 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    sleep    × 最初の音 1.083 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    gpio     × 最初の音 1.083 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    classic  × 最初の音 1.304 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+function  sram     ○ 最初の音 1.088 s 答え 16.21 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3の内蔵SRAMは、512キロバイトだよ。」
+function  cpu      ○ 最初の音 1.049 s 答え 13.322 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3はデュアルコアで、最大240MHzで動くよ。」
+function  sleep    ○ 最初の音 1.084 s 答え 21.533 s 呼出 1 根拠 0  「ちょっと調べるね。ディープスリープ中の消費電流は、 RTCメモリのみがオンの場合で約7マイクロアンペアだよ。設定によって」
+function  gpio     ○ 最初の音 1.087 s 答え 37.442 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3 の GPIO は、全部で45本あるよ。いろんなパーツをたくさん繋げられるね!」
+function  classic  ○ 最初の音 1.08 s 答え 20.771 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3 は Bluetooth Low Energy のみに対応していて、Classicは使」
+none      sram     ○ 最初の音 1.095 s 答え None s 呼出 0 根拠 0  「ESP32-S3の内蔵 SRAMは512KBだよ。僕の頭脳もしっかり動いているよ！」
+none      cpu      ○ 最初の音 1.045 s 答え None s 呼出 0 根拠 0  「僕の頭脳であるESP32-S3は、デュアルコアで最大240MHzで動くんだよ。」
+none      sleep    × 最初の音 1.078 s 答え None s 呼出 0 根拠 0  「ESP32-S3のディープスリープ中の消費電流は、約8マイクロアンペアだよ。とても省電力で動くんだ。」
+none      gpio     ○ 最初の音 1.082 s 答え None s 呼出 0 根拠 0  「ESP32-S3のGPIOは、全部で45本あるんだよ。いろんなセンサーや機器をつなげられるよ!」
+none      classic  ○ 最初の音 1.096 s 答え None s 呼出 0 根拠 0  「ESP32-S3はBluetooth Low Energy専用で、Bluetooth Classicは使えないよ。」
+native    sram     × 最初の音 1.08 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    cpu      × 最初の音 1.058 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    sleep    × 最初の音 1.08 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    gpio     × 最初の音 1.078 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    classic  × 最初の音 1.091 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+function  sram     ○ 最初の音 1.08 s 答え 14.422 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3 の内蔵 SRAMは512KB、それにRTC用のメモリが16KBあるよ。」
+function  cpu      ○ 最初の音 1.051 s 答え 15.105 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3のCPUはデュアルコアで、最大240MHzで動作するよ。パワフルなんだ!」
+function  sleep    ○ 最初の音 1.086 s 答え 15.678 s 呼出 1 根拠 0  「ちょっと調べるね。ディープスリープ中の消費電流は、RTCメモリがオンの状態で標準7マイクロアンペアだよ。とても省電力なん」
+function  gpio     × 最初の音 1.087 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+function  classic  ○ 最初の音 1.089 s 答え 20.016 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32 S3はBluetoothClassicには対応していないよ。BluetoothLow En」
+none      sram     ○ 最初の音 1.089 s 答え None s 呼出 0 根拠 0  「ESP32S3の内蔵SRAMは512KBだよ。僕の頭脳もこれで動いているんだ。」
+none      cpu      ○ 最初の音 1.043 s 答え None s 呼出 0 根拠 0  「ESP32-S3はデュアルコアで、最大240MHzで動くよ。ボクの心臓部なんだ!」
+none      sleep    × 最初の音 1.088 s 答え None s 呼出 0 根拠 0  「ESP32-S3のディープスリープ中の消費電流は、数マイクロアンペア程度だよ。とても省電力で動いているんだ。」
+none      gpio     ○ 最初の音 1.081 s 答え None s 呼出 0 根拠 0  「ESP32-S3には、最大で45本のGPIOが使えるんだよ。」
+none      classic  ○ 最初の音 1.09 s 答え None s 呼出 0 根拠 0  「残念ながら、ESP32-S3はBluetoothClassicには対応していないんだ。BLEだけなんだよ。」
+native    sram     × 最初の音 1.094 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    cpu      × 最初の音 1.048 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    sleep    × 最初の音 1.095 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    gpio     × 最初の音 1.08 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+native    classic  × 最初の音 1.129 s 答え None s 呼出 0 根拠 0  「ちょっと調べるね。」
+function  sram     ○ 最初の音 1.107 s 答え 14.216 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3の内蔵SRAMは512KBだよ。さらに16KBのRTC SRAMもあるんだ。」
+function  cpu      ○ 最初の音 1.045 s 答え 14.093 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3のCPUは、デュアルコアで最大240MHzで動くよ。」
+function  sleep    ○ 最初の音 1.081 s 答え 20.054 s 呼出 1 根拠 0  「ちょっと調べるね。ディープスリープ中の消費電流は、標準で7マイクロアンペアだよ。設定によって少し変わるけどね。」
+function  gpio     ○ 最初の音 1.088 s 答え 26.562 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3 の GPIO は、全部で45本あるよ。たくさん使えるんだ。」
+function  classic  ○ 最初の音 1.08 s 答え 16.47 s 呼出 1 根拠 0  「ちょっと調べるね。ESP32-S3では Bluetooth Classicは使えません。 Bluetooth LEのみ対」

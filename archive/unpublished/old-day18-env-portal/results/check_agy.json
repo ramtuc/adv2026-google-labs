@@ -1,0 +1,119 @@
+{
+  "workspace": "agy",
+  "files": [
+    {
+      "file": "css/app.css",
+      "bytes": 19083,
+      "gzip": 4635,
+      "cmake": true,
+      "main_c": true,
+      "external": [],
+      "api": [],
+      "password_inputs": []
+    },
+    {
+      "file": "index.html",
+      "bytes": 40600,
+      "gzip": 7055,
+      "cmake": true,
+      "main_c": true,
+      "external": [],
+      "api": [
+        "status"
+      ],
+      "password_inputs": []
+    },
+    {
+      "file": "js/app.js",
+      "bytes": 35982,
+      "gzip": 9625,
+      "cmake": true,
+      "main_c": true,
+      "external": [],
+      "api": [
+        "scan",
+        "sleep",
+        "status",
+        "wifi"
+      ],
+      "password_inputs": []
+    },
+    {
+      "file": "sleep.html",
+      "bytes": 42438,
+      "gzip": 7954,
+      "cmake": true,
+      "main_c": true,
+      "external": [],
+      "api": [],
+      "password_inputs": []
+    },
+    {
+      "file": "wifi.html",
+      "bytes": 28407,
+      "gzip": 6420,
+      "cmake": true,
+      "main_c": true,
+      "external": [],
+      "api": [
+        "scan"
+      ],
+      "password_inputs": [
+        "<input class=\"w-full bg-transparent px-space-sm py-3 font-label-mono text-label-mono text-on-surface placeholder:text-outline focus:outline-none\" id=\"password-input\" placeholder=\"パスワードを入力 (OPENの場合は空欄可)\" type=\"password\" value=\"\"/>"
+      ]
+    }
+  ],
+  "gzip_total": 35689,
+  "pages": [
+    {
+      "page": "index.html",
+      "years": [],
+      "days": [],
+      "mock_values_shown": {
+        "温度": true,
+        "湿度": true,
+        "CO2": true
+      },
+      "screenshot": "agy_index.png",
+      "text": " ESP32 環境センサー管理画面 - ダッシュボード ESP32-S3 Node-01 AP: ESP32-ENV-PORTAL (192.168.4.1) ダッシュボード Wi-Fi 設定 省電力設定 稼働 23時間14分 84% (3.92V) ダッシュボード Wi-Fi 設定 省電力設定 SHT40 (I2C 0x44): [ 正常 ] SCD40 (I2C 0x62): [ 正常 ] 周期: 5.0s 最終計測: 1秒前 即時再計測 ENV / TEMP 温度 快適 (NOMINAL) 24.0 °C -0.5/h 24h 最小 22.0 °C 24h 最大 26.0 °C 目標範囲 20.0 - 26.0°C ENV / HUM 湿度 適正 (OPTIMAL) 54.0 %RH 安定 24h 最小 42.0 % 24h 最大 54.0 % 目標範囲 40 - 60 %RH ENV / CO2-NDIR 二酸化炭素濃度 良好・換気不要 650 ppm &lt; 1000ppm 24h 最小 650 ppm 24h 最大 899 ppm 換気推奨閾値 1,000 ppm 過去24時間の推移ログ (24H Telemetry History) サンプリング間隔: 30分周期 // 環状ログバッファ同期中 3指標一括 温度 (°C) 湿度 (%RH) CO2 (ppm) 温度 (22.0 ~ 26.0°C) 湿度 (42.0 ~ 54.0%) CO2 (650 ~ 899ppm) CO2 換気警告線: 1,000 ppm 1000 ppm 警戒基準 07:28 11:28 15:28 19:28 23:28 03:28 現在 現在測定値 (Now) LIVE 温度: 24.0 °C 湿度: 54.0 %RH CO2: 650 ppm ESP32-S3 ハードウェア監視ステータス Rev 0.1 / Dual-Core 240MHz SoC CPU温度 24.0 °C 正常 (熱負荷なし) 空きヒープ (SRAM) 218 / 320 KB Flash 内蔵容量 8.0 / 16.0 MB 記録ログ件数 49 件 履歴 49 件同期済 esp32-s3:~$ GET /api/status OK | telemetry history ring buffer synced AP: 192.168.4.1 データ操作 &amp; コントロール オンボードの不揮発性メモリ (NVS) およびLittleFS領域に格納されたセンサログデータの管理を実行します。 CSV エクスポート (過去24h) センサ手動キャリブレーション要求 内部ログメモリの初期化 (クリア) Node ID: 0x48E729 // SECURE REST API v1 通信完了 最新センサデータを取得しました ESP-IDF v5.1.2 // FreeRTOS SMP SRAM: 512KB Free: 312KB [ 正常稼働 ] © 2024 ESP32 Environmental Node "
+    },
+    {
+      "page": "sleep.html",
+      "years": [
+        "48.9",
+        "41.1",
+        "48.9",
+        "48.9"
+      ],
+      "days": [
+        "1",
+        "184",
+        "2",
+        "19",
+        "92",
+        "184",
+        "539",
+        "1047"
+      ],
+      "mock_values_shown": {
+        "温度": true,
+        "湿度": false,
+        "CO2": false
+      },
+      "screenshot": "agy_sleep.png",
+      "text": " ESP32 環境センサー管理画面 - 省電力・Deep-sleep 設定 ESP32-S3 Node-01 AP: ESP32-ENV-PORTAL (192.168.4.1) ダッシュボード Wi-Fi 設定 省電力設定 稼働 23時間14分 84% (3.92V) ダッシュボード Wi-Fi 設定 省電力設定 [ POWER BUS MGR // RTC-SLEEP-CTL ] 省電力 &amp; Deep-sleep 管理 ULP Coprocessor: ARMED RTCクロック源: 外部 32.768kHz 結晶 Wake stub: ENABLED (RTC_SLOW_MEM) CURRENT POWER SOURCE // 電源供給状態 LiPo バッテリー (3.7V / 3000mAh) [ 正常放電中 ] バッテリー残量容量 84 % 残容量: ~2520 mAh / 3000 mAh カットオフ: 3.20V CELL VOLTAGE 3.92 V ADC ピン: GPIO01 セル温度: 24.0°C (内部NTC) 充電コントローラ: TP4056 Standby DEEP-SLEEP CURRENT 7 μA ESP32-S3 データシート準拠 (RTC+ULP待機時) RTC Power Domain: 4.5 μA LDO リーク電流: 2.5 μA TX ACTIVE CURRENT 160 mA I2C 計測 ＋ Wi-Fi 802.11b/g/n 送信ピーク電流 PA 出力レベル: 19.5 dBm CPU 動作クロック: 160 MHz (DFS) DEEP-SLEEP 理論限界寿命 約 48.9 年 Deep-sleep のまま眠り続けた場合の電池寿命 (3000mAh / 7μA) 現在残量換算 (2520mAh): 約 41.1 年 満充電時 (3000mAh): 約 48.9 年 電池寿命シミュレーター &amp; 消費電力予測 設定スリープ周期に基づくバッテリー残存期間のリアルタイム算出 (3000mAh / Deep-sleep 7μA) 1日あたりの予測総消費: 16.3 mAh / 日 PROJECTED RUNTIME FORECAST 推定稼働日数: 約 184 日間 現在の残量換算で、残り 約 154.2 日間 安定稼働可能です（Deep-sleep のまま眠り続けた場合は 約 48.9 年 ）。 センサー起動・計測 (1.5s / 35mA) Wi-Fi送信 (2.2s / 160mA) Deep-sleep待機 ( 9分56秒 / 7μA) 0.2% 0.4% Deep-sleep 待機時間 99.4% I2C SHTC3/SCD40 0.015 mAh / 回 MQTT over TLS 0.098 mAh / 回 ULP スリープ維持 7 μA 常時 [ INTERVAL TIMING CONFIGURATION ] Deep-sleep 間隔設定スライダー ＆ プリセット 現在の選択値: 10 分間隔 ワンタッチプリセット (動作モード): 1 分 高頻度 テスト・監視 電池持: 約19日 5 分 標準 屋内テレメトリ 電池持: 約92日 おすすめ 10 分 バランス 環境ノード標準 電池持: 約184日 30 分 長寿命 農業・倉庫ログ 電池持: 約539日 60 分 超省電力 低頻度巡回観測 電池持: 約1047日 スリープ時間微調整 (1分 〜 60分) スリープAPI: `esp_sleep_enable_timer_wakeup(us)` 1分 (テスト) 15分 30分 (2回/時) 45分 60分 (省電力) [ EXTENDED POWER SAVINGS ] 追加の省電力オプション (ファームウェア制御) ハードウェア周辺回路と送信ポリシーの最適化スイッチ 夜間スリープモード 23:00 〜 06:00 は送信間隔を自動で30分に延長し、バッテリーを保護します。 オンボードLEDの常時消灯 GPIO21 ステータスLEDを常時消灯し、稼働中の電力（約 2mA）を継続削減します。 Wi-Fi 送信リトライ制限 AP接続失敗時の再試行を最大2回に制限。電波不達時の無駄な電力浪費を抑止。 低残量セーフティ自動移行 残量 20%（3.60V）未満で間隔を自動で60分へ拡大し、突然の停止を防止。 ESP32-S3 RTC ドメイン &amp; ウェイクアップ要因レジスタ 0x6000_8000 WAKEUP_CAUSE: ESP_SLEEP_WAKEUP_TIMER TIMER_PRESCALER: RTC_FAST_CLK (17.5MHz) BROWN_OUT_RESET: ARMED (2.80V) FLASH_POWER_DOWN: TRUE (Deep-sleep時) 設定を保存するとNVSに書き込まれ、直ちに次回のDeep-sleepサイクルが適用されます。 デフォルトに戻す 設定を保存してスリープへ移行 NVS 書き込み完了 間隔設定を保存しました。 ESP-IDF v5.1.2 // FreeRTOS SMP SRAM: 512KB Free: 312KB [ 正常稼働 ] © 2024 ESP32 Environmental Node "
+    },
+    {
+      "page": "wifi.html",
+      "years": [],
+      "days": [],
+      "mock_values_shown": {
+        "温度": false,
+        "湿度": false,
+        "CO2": false
+      },
+      "screenshot": "agy_wifi.png",
+      "text": " ESP32 環境センサー管理画面 - Wi-Fi 接続設定 ESP32-S3 Node-01 AP: ESP32-ENV-PORTAL (192.168.4.1) ダッシュボード Wi-Fi 設定 省電力設定 稼働 23時間14分 84% (3.92V) ダッシュボード Wi-Fi 設定 省電力設定 [ 動作モード ] SoftAP モード稼働中 ACTIVE ESP32-S3 内蔵無線APに接続中。ステーション(STA)親機ネットワークの接続設定を行ってください。 SSID (HOST) ESP32-ENV-PORTAL GATEWAY IP 192.168.4.1 CLIENT CONNS 1 台接続中 1 周囲の Wi-Fi を選択 再スキャン 検出数: 3 件 (2.4GHz) CH 1-13 スキャン済 Home_Network_2.4G 推奨 -48 dBm • WPA2-PSK Lab_IoT -63 dBm • WPA2-WPA3-PSK Office_Guest -79 dBm • 暗号化なし (OPEN) ステルスSSID / 手動入力 ESP32-S3 は 2.4 GHz 帯(802.11 b/g/n)に対応しています。5GHz帯ネットワークはデュアルバンド親機の同報SSIDでのみ連携可能です。 2 接続認証・IPパラメータ PROFILE: Home_Network_2.4G ターゲットSSID (SSID_NAME) スキャン取得済 WPA パスワード / セキュリティキー 最長64文字 IPアドレス設定方式 DHCP (自動取得) 静的 IP (固定設定) 固定 IP アドレス サブネットマスク デフォルトゲートウェイ DNS サーバー 詳細設定: MQTT クラウド連携 任意 MQTT ブローカー URL TCP / TLS (例: mqtt://, mqtts://) パブリッシュ トピック QoS 1 でセンサ値を送信 TLS 暗号化通信 (MQTTS) ESP-TLS ハードウェアアクセラレーション使用 設定反映と再起動に関する注意事項 設定を保存して再起動すると、ESP32-S3はNVSにSSIDとパスワードを保存し、指定の親機ルーターへステーション(STA)として接続を試みます。万が一Wi-Fi接続や認証に失敗した場合、安全保護のため 本AP設定ポータルから再設定が可能 です。 ルーターへの認証プローブをテスト中... RTT: -- 接続テスト 設定を保存して ESP32 を再起動 NVSフラッシュ書込完了 Wi-Fi設定が永続メモリに書き込まれました。 ESP32-S3 が新しいアクセスポイント ( -- ) への接続を開始します。 ESP32-S3 STA CONNECT 残り 15 秒 閉じる (ポータル終了) ESP-IDF v5.1.2 // FreeRTOS SMP SRAM: 512KB Free: 312KB [ 正常稼働 ] © 2024 ESP32 Environmental Node "
+    }
+  ]
+}

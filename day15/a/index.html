@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>和菓子処「ゆきみ堂」店番ゲーム</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- 暖簾（のれん）ヘッダー -->
+    <header class="shop-header">
+      <div class="brand-area">
+        <span class="kamonsymbol" aria-hidden="true">❄️🐇</span>
+        <div class="brand-titles">
+          <h1>和菓子処 ゆきみ堂</h1>
+          <p class="subtitle">〜 店番お勘定ゲーム 〜</p>
+        </div>
+      </div>
+
+      <div class="status-board" aria-label="本日の営業状況">
+        <div class="status-card timer-card">
+          <span class="status-label">残り時間</span>
+          <span class="status-value" id="timer-display">90<small>秒</small></span>
+        </div>
+        <div class="status-card sales-card">
+          <span class="status-label">本日の売上</span>
+          <span class="status-value" id="sales-display">0<small>円</small></span>
+        </div>
+        <div class="status-card customer-card">
+          <span class="status-label">正解 / 来店客数</span>
+          <span class="status-value" id="customers-display">0 / 0<small>人</small></span>
+        </div>
+        <div class="status-card tegiwa-card">
+          <span class="status-label">手ぎわ点</span>
+          <span class="status-value" id="tegiwa-display">0<small>点</small></span>
+        </div>
+        <div class="status-card highscore-card">
+          <span class="status-label">最高売上</span>
+          <span class="status-value" id="highscore-display">0<small>円</small></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- メインの店舗画面 -->
+    <main class="shop-main">
+      <!-- 左カラム：お客さん＆お店のお品書き・決まり -->
+      <aside class="left-column">
+        <!-- お客さんエリア -->
+        <section class="customer-panel" aria-live="polite">
+          <div class="customer-header">
+            <div class="customer-avatar" id="customer-avatar" aria-hidden="true">🧑</div>
+            <div class="customer-meta">
+              <span class="customer-number" id="customer-number-badge">開店前</span>
+              <span class="order-type-badge" id="order-type-badge" hidden>持ち帰り</span>
+            </div>
+          </div>
+          <div class="speech-bubble" id="customer-speech">
+            「開店（店番をはじめる）」を押すと、お客さまが来店します。
+          </div>
+        </section>
+
+        <!-- お品書き・お店の決まり早見表 -->
+        <section class="rules-panel">
+          <h2>📜 お品書き（税抜）とお店の決まり</h2>
+          <table class="menu-reference-table">
+            <thead>
+              <tr>
+                <th>品</th>
+                <th>値段（税抜）</th>
+                <th>備考</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>雪うさぎ（上生菓子）</td>
+                <td class="num">380 円</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>椿餅</td>
+                <td class="num">320 円</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>柚子大福</td>
+                <td class="num">280 円</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>栗きんとん</td>
+                <td class="num">450 円</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>羊羹「冬木立」一棹</td>
+                <td class="num">1,200 円</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>白玉ぜんざい</td>
+                <td class="num">650 円</td>
+                <td><span class="tag-dinein">店内のみ</span></td>
+              </tr>
+              <tr>
+                <td>黒糖わらび餅</td>
+                <td class="num">520 円</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>季節の上生菓子と抹茶</td>
+                <td class="num">900 円</td>
+                <td><span class="tag-dinein">店内のみ</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <ul class="rules-list">
+            <li><strong>税率：</strong>持ち帰り <strong>8 %</strong> ／ 店内 <strong>10 %</strong></li>
+            <li><strong>化粧箱代：</strong>雪うさぎを<strong>持ち帰りで 5 個以上</strong>買うときは、箱代 <strong>150 円（税抜）</strong>を足す（店内では足さない）。</li>
+            <li><strong>税込の合計：</strong>（品物の合計 ＋ 箱代）× 税率 の<strong>円未満を切り捨てた額</strong>。</li>
+            <li><strong>手ぎわ点：</strong>おつりの枚数がいちばん少ない渡し方なら <strong>＋1 点</strong>！</li>
+          </ul>
+        </section>
+      </aside>
+
+      <!-- 右カラム：操作エリア（棚フェーズ ／ お会計フェーズ ／ 結果表示フェーズ） -->
+      <section class="workspace-column">
+        <!-- 開店前スタート画面 -->
+        <div class="phase-panel" id="phase-start">
+          <div class="welcome-box">
+            <h2>本日の店番をはじめましょう</h2>
+            <p>
+              1 日の営業時間は <strong>90 秒</strong> です。<br />
+              お客さまの注文どおりに棚から和菓子をそろえて「お会計」を押し、<br />
+              頭の中で<strong>税込の合計</strong>と<strong>おつり</strong>を計算してお札・硬貨を渡してください。
+            </p>
+            <button type="button" class="btn btn-primary btn-large" id="start-game-btn">
+              🍵 開店（店番をはじめる）
+            </button>
+          </div>
+        </div>
+
+        <!-- フェーズ1：棚から品物を選ぶ -->
+        <div class="phase-panel" id="phase-shelf" hidden>
+          <div class="panel-header">
+            <h2>① 棚から品物をそろえる</h2>
+            <button type="button" class="btn btn-secondary btn-sm" id="reset-shelf-btn">
+              棚をすべて 0 に戻す
+            </button>
+          </div>
+
+          <div class="shelf-grid" id="shelf-grid">
+            <!-- app.js で 8 品のカードを生成 -->
+          </div>
+
+          <div class="tray-summary-bar">
+            <div class="tray-selected-list" id="tray-selected-list">
+              まだ品物が選ばれていません
+            </div>
+            <button type="button" class="btn btn-primary btn-checkout" id="go-checkout-btn">
+              お会計へ進む ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- フェーズ2：お会計・おつり渡し（税込合計やおつり額は出さない） -->
+        <div class="phase-panel" id="phase-checkout" hidden>
+          <div class="panel-header">
+            <h2>② お会計・おつりを渡す</h2>
+            <button type="button" class="btn btn-secondary btn-sm" id="back-to-shelf-btn">
+              ← 品物を選び直す
+            </button>
+          </div>
+
+          <div class="checkout-info-grid">
+            <div class="checkout-box">
+              <h3>盆にそろえた品物</h3>
+              <p class="checkout-subnote" id="checkout-order-type-text"></p>
+              <ul class="selected-items-list" id="checkout-items-list"></ul>
+            </div>
+
+            <div class="checkout-box payment-box">
+              <h3>お客さまが出したお金</h3>
+              <div class="paid-coins-text" id="paid-coins-description"></div>
+              <div class="paid-coins-visual" id="paid-coins-visual"></div>
+              <p class="calc-hint">
+                ※ 品物の合計・箱代・税率（8% / 10%）からおつりを計算して選んでください。
+              </p>
+            </div>
+          </div>
+
+          <div class="change-tray-section">
+            <div class="change-tray-header">
+              <h3>渡すおつりを選ぶ（お札・硬貨の枚数）</h3>
+              <button type="button" class="btn btn-secondary btn-sm" id="reset-change-btn">
+                おつりをすべて 0 枚に戻す
+              </button>
+            </div>
+
+            <div class="denominations-grid" id="denominations-grid">
+              <!-- app.js で 1万円札〜1円玉の9金種カードを生成（合計金額は表示しない） -->
+            </div>
+
+            <div class="checkout-actions">
+              <button type="button" class="btn btn-primary btn-large" id="submit-change-btn">
+                🤲 おつりを渡す
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- フェーズ3：おつりを渡したあとの結果表示（ここで正しい税込合計・おつり額を表示） -->
+        <div class="phase-panel" id="phase-feedback" hidden>
+          <div class="feedback-card" id="feedback-card">
+            <div class="feedback-header">
+              <span class="feedback-icon" id="feedback-icon">⭕</span>
+              <div>
+                <h2 id="feedback-title">ありがとうございました！</h2>
+                <p id="feedback-subtitle"></p>
+              </div>
+            </div>
+
+            <div class="receipt-comparison">
+              <div class="receipt-box">
+                <h3>正しいお勘定の内訳</h3>
+                <dl class="receipt-dl" id="feedback-receipt-dl">
+                  <!-- app.js で品物合計、箱代、税率、正しい税込合計、お預かり、正しいおつり額を表示 -->
+                </dl>
+              </div>
+
+              <div class="receipt-box">
+                <h3>あなたの対応</h3>
+                <dl class="receipt-dl" id="feedback-player-dl">
+                  <!-- app.js で注文一致、渡したおつり額、手ぎわ点などを表示 -->
+                </dl>
+              </div>
+            </div>
+
+            <div class="feedback-actions">
+              <button type="button" class="btn btn-primary btn-large" id="next-customer-btn">
+                次のお客さまへ ➔
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1日終了（90秒経過）結果画面 -->
+        <div class="phase-panel" id="phase-day-end" hidden>
+          <div class="day-end-card">
+            <h2>🏮 本日の営業終了 🏮</h2>
+            <p class="day-end-lead">90 秒の店番お疲れさまでした！本日の結果はこちらです。</p>
+
+            <div class="new-record-banner" id="new-record-banner" hidden>
+              🎉 最高売上を更新しました！ 🎉
+            </div>
+
+            <div class="summary-stats-grid">
+              <div class="summary-stat">
+                <span class="stat-label">本日の売上</span>
+                <span class="stat-val highlight" id="result-sales">0 円</span>
+              </div>
+              <div class="summary-stat">
+                <span class="stat-label">来たお客の数</span>
+                <span class="stat-val" id="result-total-customers">0 人</span>
+              </div>
+              <div class="summary-stat">
+                <span class="stat-label">正解の数</span>
+                <span class="stat-val" id="result-correct-customers">0 人</span>
+              </div>
+              <div class="summary-stat">
+                <span class="stat-label">手ぎわ点（最少枚数おつり）</span>
+                <span class="stat-val" id="result-tegiwa">0 点</span>
+              </div>
+              <div class="summary-stat full-width">
+                <span class="stat-label">これまでの最高売上（ブラウザ保存）</span>
+                <span class="stat-val" id="result-highscore">0 円</span>
+              </div>
+            </div>
+
+            <div class="day-end-actions">
+              <button type="button" class="btn btn-primary btn-large" id="play-again-btn">
+                🍵 もう 1 日店番をする
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

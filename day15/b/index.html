@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>和菓子処「ゆきみ堂」店番ゲーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shop-wrapper">
+    <!-- 暖簾（ヘッダー・ステータスバー） -->
+    <header class="noren-header">
+      <div class="brand-area">
+        <div class="kamon-crest" aria-hidden="true">雪</div>
+        <div>
+          <p class="shop-subtitle">季節の和菓子とお茶処</p>
+          <h1 class="shop-title">ゆきみ堂</h1>
+        </div>
+      </div>
+
+      <div class="scoreboard" aria-label="営業状況">
+        <div class="score-item timer-box">
+          <span class="score-label">残り時間</span>
+          <div class="timer-value-wrap">
+            <span id="time-left" class="score-value">90</span>
+            <span class="score-unit">秒</span>
+          </div>
+          <div class="timer-bar-bg">
+            <div id="timer-bar" class="timer-bar-fill"></div>
+          </div>
+        </div>
+
+        <div class="score-item sales-box">
+          <span class="score-label">本日の売上</span>
+          <div class="score-value-wrap">
+            <span id="current-sales" class="score-value">0</span>
+            <span class="score-unit">円</span>
+          </div>
+        </div>
+
+        <div class="score-item stats-box">
+          <span class="score-label">お客の数 / 正解</span>
+          <div class="score-value-wrap">
+            <span id="customer-count" class="score-value">0</span>
+            <span class="score-unit">人中</span>
+            <span id="correct-count" class="score-value highlight-ok">0</span>
+            <span class="score-unit">人正解</span>
+          </div>
+        </div>
+
+        <div class="score-item tegiwa-box">
+          <span class="score-label">手ぎわ点</span>
+          <div class="score-value-wrap">
+            <span id="tegiwa-score" class="score-value highlight-gold">0</span>
+            <span class="score-unit">点</span>
+          </div>
+        </div>
+
+        <div class="score-item high-sales-box">
+          <span class="score-label">最高売上</span>
+          <div class="score-value-wrap">
+            <span id="high-sales" class="score-value">0</span>
+            <span class="score-unit">円</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="rules-toggle-btn" type="button" class="btn btn-secondary" aria-expanded="false">
+          お品書き・決まり
+        </button>
+        <button id="header-start-btn" type="button" class="btn btn-primary">
+          開店する
+        </button>
+      </div>
+    </header>
+
+    <!-- 決まり・お品書き早見表（折りたたみパネル） -->
+    <section id="rules-drawer" class="rules-drawer" hidden>
+      <div class="rules-drawer-inner">
+        <div class="rules-col">
+          <h2>お店番の決まり</h2>
+          <ul class="rules-list">
+            <li><strong>注文区分と税率：</strong>「持ち帰り」は<strong>税率 8%</strong>、「店内」は<strong>税率 10%</strong>です（持ち帰りのお客は店内限定の品を頼みません）。</li>
+            <li><strong>化粧箱代：</strong>「雪うさぎ（上生菓子）」を<strong>持ち帰りで 5 個以上</strong>買うときは、<strong>化粧箱代 150 円（税抜）</strong>を足します（店内では足しません）。</li>
+            <li><strong>税込の合計：</strong><code>（品物の合計 ＋ 箱代）× 税率</code> の<strong>円未満を切り捨てた額</strong>です。</li>
+            <li><strong>おつりと「手ぎわ」点：</strong>おつりは金額が合っていれば正解。<strong>お札・硬貨の枚数がいちばん少ない渡し方</strong>なら、売上とは別に<strong>「手ぎわ」点が 1 点</strong>入ります。</li>
+            <li><strong>営業時間は 90 秒：</strong>注文とおつりが正しければ売上に加算。間違えるとお客は帰り、売上は増えません。</li>
+          </ul>
+        </div>
+        <div class="rules-col">
+          <h2>お品書き（税抜）</h2>
+          <table class="menu-ref-table">
+            <thead>
+              <tr>
+                <th>品</th>
+                <th>値段（税抜）</th>
+                <th>備考</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>雪うさぎ（上生菓子）</td><td>380 円</td><td>持ち帰り5個以上で箱代 +150円</td></tr>
+              <tr><td>椿餅</td><td>320 円</td><td></td></tr>
+              <tr><td>柚子大福</td><td>280 円</td><td></td></tr>
+              <tr><td>栗きんとん</td><td>450 円</td><td></td></tr>
+              <tr><td>羊羹「冬木立」一棹</td><td>1,200 円</td><td></td></tr>
+              <tr><td>白玉ぜんざい</td><td>650 円</td><td><span class="badge-dinein-sm">店内のみ</span></td></tr>
+              <tr><td>黒糖わらび餅</td><td>520 円</td><td></td></tr>
+              <tr><td>季節の上生菓子と抹茶</td><td>900 円</td><td><span class="badge-dinein-sm">店内のみ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 接客フィードバック通知バー -->
+    <div id="feedback-banner" class="feedback-banner" role="status" aria-live="polite" hidden></div>
+
+    <!-- メインの店番スペース -->
+    <main class="shop-main">
+      <!-- 開店前スタート画面 -->
+      <section id="title-screen" class="overlay-card">
+        <div class="overlay-badge">和菓子屋店番ゲーム（1日 90秒）</div>
+        <h2 class="overlay-heading">老舗和菓子処「ゆきみ堂」へようこそ</h2>
+        <p class="overlay-lead">
+          次々と訪れるお客さまのご注文に合わせて棚から和菓子をそろえ、お会計とおつりを正確に渡しましょう。
+        </p>
+        <div class="quick-rules-grid">
+          <div class="quick-rule-card">
+            <span class="quick-rule-step">一、品揃え</span>
+            <p>お客さまの注文（1〜3種類・各1〜6個）を聞き、棚から選んで「お会計」を押します。</p>
+          </div>
+          <div class="quick-rule-card">
+            <span class="quick-rule-step">二、税率と箱代</span>
+            <p>持ち帰り <strong>8%</strong>・店内 <strong>10%</strong>（円未満切り捨て）。雪うさぎ持ち帰り5個以上は<strong>箱代150円（税抜）</strong>加算。</p>
+          </div>
+          <div class="quick-rule-card">
+            <span class="quick-rule-step">三、おつりと手ぎわ</span>
+            <p>お預かり金額から正しいおつりを渡します。<strong>最少枚数</strong>で渡すと「手ぎわ」+1点！</p>
+          </div>
+        </div>
+        <div class="overlay-actions">
+          <button id="start-game-btn" type="button" class="btn btn-large btn-primary">
+            本日の営業を始める（90秒）
+          </button>
+        </div>
+      </section>
+
+      <!-- 営業終了リザルト画面 -->
+      <section id="result-screen" class="overlay-card" hidden>
+        <div class="overlay-badge">本日の営業終了</div>
+        <h2 class="overlay-heading">本日の帳場集計</h2>
+        <div id="new-record-banner" class="new-record-banner" hidden>
+          祝・最高売上を更新しました！
+        </div>
+
+        <div class="result-summary-grid">
+          <div class="result-stat-card primary-stat">
+            <span class="result-stat-label">本日の売上</span>
+            <div class="result-stat-value"><span id="result-sales">0</span><small>円</small></div>
+          </div>
+          <div class="result-stat-card">
+            <span class="result-stat-label">最高売上（記録）</span>
+            <div class="result-stat-value"><span id="result-high-sales">0</span><small>円</small></div>
+          </div>
+          <div class="result-stat-card">
+            <span class="result-stat-label">来たお客の数</span>
+            <div class="result-stat-value"><span id="result-customers">0</span><small>人</small></div>
+          </div>
+          <div class="result-stat-card">
+            <span class="result-stat-label">正解の数</span>
+            <div class="result-stat-value"><span id="result-correct">0</span><small>人</small></div>
+          </div>
+          <div class="result-stat-card">
+            <span class="result-stat-label">手ぎわ点（最少枚数おつり）</span>
+            <div class="result-stat-value"><span id="result-tegiwa">0</span><small>点</small></div>
+          </div>
+        </div>
+
+        <div class="history-section">
+          <h3>本日の接客記録</h3>
+          <div id="result-history-list" class="history-list"></div>
+        </div>
+
+        <div class="overlay-actions">
+          <button id="retry-game-btn" type="button" class="btn btn-large btn-primary">
+            もう 1 日営業する
+          </button>
+        </div>
+      </section>
+
+      <!-- プレイ中の2カラムレイアウト -->
+      <div id="play-area" class="play-area" hidden>
+        <!-- 左カラム：お客さま＆商品棚 -->
+        <div class="left-column">
+          <!-- お客さまカウンター -->
+          <section class="customer-panel" aria-label="お客さまのご注文">
+            <div class="customer-figure">
+              <div id="customer-avatar" class="customer-avatar" aria-hidden="true"></div>
+              <div id="customer-number-badge" class="customer-number-badge">1人目</div>
+            </div>
+            <div class="customer-speech-area">
+              <div class="speech-header">
+                <span id="order-type-badge" class="order-type-badge takeout">持ち帰り（税率 8%）</span>
+                <span id="phase-indicator" class="phase-indicator">手順1：棚から品物を選んでください</span>
+              </div>
+              <blockquote id="customer-speech" class="customer-speech">
+                「雪うさぎを 2 つと、柚子大福を 1 つ。持ち帰りで」
+              </blockquote>
+              <div id="customer-order-tags" class="customer-order-tags" aria-label="注文内容の要点"></div>
+            </div>
+          </section>
+
+          <!-- 和菓子の商品棚 -->
+          <section id="shelf-section" class="shelf-section" aria-label="和菓子の棚">
+            <div class="section-header">
+              <h2>商品棚（お品書き・税抜）</h2>
+              <button id="clear-tray-btn" type="button" class="btn btn-small btn-outline">
+                お盆を空にする
+              </button>
+            </div>
+            <div id="shelf-grid" class="shelf-grid">
+              <!-- app.js で8品目のカードを生成 -->
+            </div>
+          </section>
+        </div>
+
+        <!-- 右カラム：お盆・伝票・お会計＆おつりレジ -->
+        <div class="right-column">
+          <section class="register-panel" aria-label="お会計・レジ">
+            <div class="register-header">
+              <h2>お帳場（お会計・おつり）</h2>
+              <span id="register-mode-badge" class="register-mode-badge">品揃え中</span>
+            </div>
+
+            <!-- 選んだ品物（お盆の上） -->
+            <div class="tray-box">
+              <div class="tray-box-header">
+                <h3>お盆の上の品</h3>
+                <span id="tray-total-items" class="tray-count-label">0 個</span>
+              </div>
+              <ul id="tray-items-list" class="tray-items-list">
+                <li class="tray-empty-msg">棚から品物を選んでください</li>
+              </ul>
+            </div>
+
+            <!-- 会計伝票（自動計算内訳） -->
+            <div class="receipt-box">
+              <div class="receipt-row">
+                <span>品物の合計（税抜）</span>
+                <span><strong id="receipt-subtotal">0</strong> 円</span>
+              </div>
+              <div id="receipt-boxfee-row" class="receipt-row">
+                <span>化粧箱代（税抜・雪うさぎ持帰5個〜）</span>
+                <span><strong id="receipt-boxfee">0</strong> 円</span>
+              </div>
+              <div class="receipt-row">
+                <span>消費税（<span id="receipt-tax-rate">8</span>%・円未満切捨）</span>
+                <span><strong id="receipt-tax-amount">0</strong> 円</span>
+              </div>
+              <div class="receipt-row receipt-total-row">
+                <span>税込の合計</span>
+                <span class="receipt-total-price"><strong id="receipt-total">0</strong> 円</span>
+              </div>
+            </div>
+
+            <!-- 手順1のアクション：「お会計」ボタン -->
+            <div id="step1-actions" class="step1-actions">
+              <button id="checkout-btn" type="button" class="btn btn-large btn-primary btn-block">
+                お会計へ進む
+              </button>
+            </div>
+
+            <!-- 手順2：お預かり金額とおつり選択エリア -->
+            <div id="payment-section" class="payment-section" hidden>
+              <div class="customer-paid-box">
+                <div class="paid-row">
+                  <span class="paid-label">お客が払うお金</span>
+                  <span class="paid-amount"><strong id="paid-amount-value">1,000</strong> 円</span>
+                </div>
+                <div id="paid-breakdown-text" class="paid-breakdown-text">千円札 1 枚</div>
+              </div>
+
+              <div class="change-status-box">
+                <div class="change-status-row">
+                  <span>渡すおつり合計</span>
+                  <span class="change-current-amount">
+                    <strong id="given-change-amount">0</strong> 円
+                    <small>（計 <span id="given-change-coins">0</span> 枚）</small>
+                  </span>
+                </div>
+                <div class="change-hint-row">
+                  <span>お預かり − 税込合計 ＝ <strong><span id="required-change-display">0</span> 円</strong></span>
+                  <button id="clear-change-btn" type="button" class="btn btn-xs btn-outline">おつりリセット</button>
+                </div>
+              </div>
+
+              <!-- お札と硬貨の選択ボタン群 -->
+              <div id="money-tray-grid" class="money-tray-grid" aria-label="お札と硬貨の選択">
+                <!-- app.js で 10000, 5000, 1000, 500, 100, 50, 10, 5, 1 を生成 -->
+              </div>
+
+              <div class="step2-actions">
+                <button id="back-to-shelf-btn" type="button" class="btn btn-secondary">
+                  品物を直す
+                </button>
+                <button id="submit-change-btn" type="button" class="btn btn-large btn-primary">
+                  おつりを渡す
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-primary-container":"#582200","circuit-cyan":"#22D3EE","surface-container-highest":"#2d3449","on-tertiary-container":"#003b26","on-secondary-fixed":"#001f26","error-container":"#93000a","surface-bright":"#31394d","surface-dim":"#0b1326","tertiary":"#4edea3","secondary-container":"#03b5d3","primary":"#ffb690","secondary":"#4cd7f6","pcb-green":"#059669","secondary-fixed":"#acedff","inverse-on-surface":"#283044","on-surface-variant":"#e0c0b1","tertiary-fixed-dim":"#4edea3","inverse-primary":"#9d4300","error":"#ffb4ab","copper-glow":"#FF8C00","on-error":"#690005","circuit-trace":"#1E293B","on-tertiary":"#003824","tertiary-container":"#00b07a","on-secondary-container":"#00424e","outline-variant":"#584237","on-primary-fixed-variant":"#783200","surface":"#0b1326","surface-tint":"#ffb690","primary-container":"#f97316","surface-variant":"#2d3449","secondary-fixed-dim":"#4cd7f6","background":"#0b1326","tertiary-fixed":"#6ffbbe","inverse-surface":"#dae2fd","on-background":"#dae2fd","surface-container":"#171f33","status-warning":"#F59E0B","on-surface":"#dae2fd","primary-fixed":"#ffdbca","on-tertiary-fixed":"#002113","on-tertiary-fixed-variant":"#005236","on-primary-fixed":"#341100","surface-container-low":"#131b2e","on-secondary":"#003640","on-secondary-fixed-variant":"#004e5c","primary-fixed-dim":"#ffb690","outline":"#a78b7d","code-bg":"#0B0F17","on-primary":"#552100","on-error-container":"#ffdad6","status-error":"#EF4444","surface-container-lowest":"#060e20","surface-container-high":"#222a3d"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-sm":"0.5rem","space-xs":"0.25rem","margin-desktop":"3rem","space-xl":"2.5rem","space-lg":"1.5rem",margin:"1rem","margin-tablet":"2rem","gutter-desktop":"1.75rem","space-2xl":"4rem","space-md":"1rem",gutter:"1.25rem"},fontFamily:{"body-lg":["Inter"],"headline-xl-mobile":["Inter"],"headline-sm":["Inter"],"headline-lg":["Inter"],"headline-md":["Inter"],"display-hero":["Inter"],"display-hero-mobile":["Inter"],"label-meta":["JetBrains Mono"],"body-md":["Inter"],"headline-xl":["Inter"],"body-sm":["Inter"],"label-code":["JetBrains Mono"]},fontSize:{"body-lg":["18px",{lineHeight:"30px",letterSpacing:"-0.005em",fontWeight:"400"}],"headline-xl-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"700"}],"headline-sm":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["24px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.015em",fontWeight:"600"}],"display-hero":["48px",{lineHeight:"56px",letterSpacing:"-0.03em",fontWeight:"800"}],"display-hero-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"800"}],"label-meta":["11px",{lineHeight:"16px",letterSpacing:"0.05em",fontWeight:"500"}],"body-md":["15px",{lineHeight:"26px",fontWeight:"400"}],"headline-xl":["36px",{lineHeight:"44px",letterSpacing:"-0.025em",fontWeight:"700"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"label-code":["13px",{lineHeight:"18px",letterSpacing:"0.02em",fontWeight:"500"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/85 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-20 max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container"><span class="material-symbols-outlined text-[22px]">memory</span></div><div class="flex flex-col"><a class="flex items-center gap-space-xs" data-path="blog" href="#"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">電子工作でライフハック！</span><span class="font-label-meta text-label-meta px-space-xs py-[2px] rounded bg-surface-container-high text-primary">v2.6</span></a><span class="font-label-meta text-label-meta text-on-surface-variant hidden sm:inline-block">Arduino・ESP32・IoT 実践ガイド</span></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-semibold rounded-lg"><a aria-current="page" class="px-space-sm py-space-xs transition-colors bg-surface-container-high text-primary font-semibold rounded-lg" data-path="blog" href="#">ブログ</a><a class="px-space-sm py-space-xs text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg transition-colors font-body-sm text-body-sm" data-path="pc-setup" href="#">PC・作業環境</a><a class="px-space-sm py-space-xs text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg transition-colors font-body-sm text-body-sm" data-path="videos" href="#">動画</a><a class="px-space-sm py-space-xs text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg transition-colors font-body-sm text-body-sm" data-path="tools" href="#">ツール</a><a class="px-space-sm py-space-xs text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg transition-colors font-body-sm text-body-sm" data-path="shop" href="#">Shop</a><a class="px-space-sm py-space-xs text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg transition-colors font-body-sm text-body-sm" data-path="news" href="#">ニュース</a><a class="px-space-sm py-space-xs text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg transition-colors font-body-sm text-body-sm" data-path="updates" href="#">更新情報</a><a class="px-space-sm py-space-xs text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg transition-colors font-body-sm text-body-sm" data-path="bbs" href="#">掲示板</a><a class="px-space-sm py-space-xs text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg transition-colors font-body-sm text-body-sm" data-path="about" href="#">プロフィール</a></nav><div class="flex items-center gap-space-xs sm:gap-space-sm shrink-0"><button class="flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">search</span><span class="font-label-meta text-label-meta hidden md:inline-block">Quick Search</span><kbd class="hidden lg:inline-flex px-space-xs py-[1px] bg-surface-container-highest rounded text-on-surface-variant font-label-code text-[10px]">⌘K</kbd></button><a class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" data-path="rss" href="#" title="RSS Feed"><span class="material-symbols-outlined text-[18px]">rss_feed</span></a><div class="flex items-center bg-surface-container rounded-lg p-[2px]"><button class="px-space-xs py-[2px] rounded text-on-primary bg-primary font-label-meta text-label-meta font-bold" type="button">JA</button><button class="px-space-xs py-[2px] rounded text-on-surface-variant hover:text-on-surface font-label-meta text-label-meta" type="button">EN</button></div><button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" title="Toggle Theme" type="button"><span class="material-symbols-outlined text-[18px]">dark_mode</span></button><a class="hidden sm:inline-flex items-center px-space-sm py-space-xs bg-primary-container text-on-primary font-headline-sm text-body-sm font-semibold rounded-lg hover:bg-copper-glow transition-colors" data-path="contact" href="#">お問合せ</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Interactive & Visual Canvas Wrapper -->
+<div class="relative w-full overflow-hidden">
+<!-- Ambient Technical Glows & Vector Blueprint Lines -->
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-primary/10 rounded-full blur-[140px] pointer-events-none"></div>
+<div class="absolute top-[600px] -right-32 w-[600px] h-[400px] bg-circuit-cyan/5 rounded-full blur-[120px] pointer-events-none"></div>
+<!-- 1. HERO SECTION -->
+<section class="relative z-10 max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop pt-space-xl pb-space-2xl">
+<div class="relative rounded-2xl bg-surface-container-low shadow-2xl p-space-lg md:p-space-2xl overflow-hidden">
+<!-- Technical Accent Header Bar -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-container via-circuit-cyan to-tertiary"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<!-- Text Narrative -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-highest text-primary font-label-meta text-label-meta">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+                SYSTEM ACTIVE // v2.6.4
+              </span>
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-label-meta text-label-meta">
+                PHYSICAL COMPUTING PORTAL
+              </span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-headline-sm text-copper-glow uppercase tracking-wider">電子工作で日常をアップグレード！</span>
+<h1 class="font-display-hero text-headline-xl sm:text-display-hero text-on-surface tracking-tight font-extrabold">
+                電子工作で<span class="text-primary-container">ライフハック！</span>
+</h1>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+              Arduino・ESP32・STM32 を使った電子工作と IoT を、<strong class="text-on-surface font-semibold underline decoration-primary-container/40 underline-offset-4">実機ベース</strong> で解説する技術メディア。回路・基板設計からファームウェア、AI 活用まで、「作って動かす」を実践的に体系化します。
+            </p>
+<!-- Action Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm pt-space-xs">
+<a class="inline-flex items-center gap-2 px-space-md py-3 rounded-lg bg-primary-container text-on-primary font-headline-sm text-body-md font-bold shadow-lg shadow-primary-container/20 hover:bg-copper-glow hover:scale-[1.02] active:scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span>最新記事を見る</span>
+</a>
+<a class="inline-flex items-center gap-2 px-space-md py-3 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-highest hover:text-circuit-cyan transition-colors font-headline-sm text-body-md font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span>初めての方はこちら</span>
+</a>
+</div>
+<!-- Hardware Tag Array -->
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="px-2 py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-code text-label-meta">ESP32-S3</span>
+<span class="px-2 py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-code text-label-meta">STM32F4</span>
+<span class="px-2 py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-code text-label-meta">KiCad 10</span>
+<span class="px-2 py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-code text-label-meta">FreeRTOS</span>
+<span class="px-2 py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-code text-label-meta">Gemini API</span>
+<span class="px-2 py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-code text-label-meta">JLCPCB</span>
+</div>
+</div>
+<!-- Interactive Micro-Bench Visual (SVG Circuit Telemetry & Scope) -->
+<div class="lg:col-span-5 relative">
+<div class="relative w-full rounded-xl bg-surface-container-lowest p-space-md shadow-xl flex flex-col gap-space-sm">
+<!-- Top Terminal Bar -->
+<div class="flex items-center justify-between pb-space-xs bg-surface-container-lowest">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-status-error inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-status-warning inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary inline-block"></span>
+</div>
+<span class="font-label-code text-label-meta text-circuit-cyan">DSO_SCOPE_CH1 [RUN]</span>
+<span class="font-label-meta text-[10px] text-on-surface-variant">500kS/s 3.3V</span>
+</div>
+<!-- Scope Display Screen -->
+<div class="relative w-full h-44 rounded-lg bg-code-bg overflow-hidden flex items-center justify-center p-2">
+<!-- Oscilloscope Grid Lines -->
+<svg class="absolute inset-0 w-full h-full text-surface-container-highest/60" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="24" id="scope-grid" patternunits="userSpaceOnUse" width="24">
+<path d="M 24 0 L 0 0 0 24" fill="none" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<rect fill="url(#scope-grid)" height="100%" width="100%"></rect>
+</svg>
+<!-- Dynamic Waveform Trace -->
+<svg class="w-full h-full relative z-10" fill="none" preserveaspectratio="none" viewbox="0 0 360 140">
+<path class="opacity-95" d="M 0 70 Q 20 10, 45 70 T 90 70 T 135 125 T 180 70 T 225 15 T 270 70 T 315 115 T 360 70" fill="none" stroke="#22D3EE" stroke-linecap="round" stroke-width="2.5"></path>
+<path class="opacity-20 blur-sm" d="M 0 70 Q 20 10, 45 70 T 90 70 T 135 125 T 180 70 T 225 15 T 270 70 T 315 115 T 360 70" fill="none" stroke="#22D3EE" stroke-linecap="round" stroke-width="6"></path>
+<!-- Secondary Sinc Decimation Curve -->
+<path class="opacity-80" d="M 0 100 C 40 100, 60 40, 90 40 C 120 40, 140 90, 180 90 C 220 90, 240 50, 270 50 C 300 50, 320 85, 360 85" fill="none" stroke="#F97316" stroke-dasharray="4,4" stroke-width="1.5"></path>
+</svg>
+<div class="absolute bottom-2 left-3 z-10 font-label-code text-[11px] text-tertiary">
+                  Vpp: 3.28V | Freq: 12.00MHz
+                </div>
+<div class="absolute top-2 right-3 z-10 font-label-code text-[11px] text-primary">
+                  CIC_DECIMATION: ×64
+                </div>
+</div>
+<!-- Telemetry Readout Grid -->
+<div class="grid grid-cols-3 gap-2 pt-1">
+<div class="rounded bg-surface-container p-2 text-center">
+<span class="font-label-meta text-[10px] text-on-surface-variant block">CORE CLOCK</span>
+<span class="font-label-code text-body-sm text-on-surface font-semibold">240 MHz</span>
+</div>
+<div class="rounded bg-surface-container p-2 text-center">
+<span class="font-label-meta text-[10px] text-on-surface-variant block">FREE SRAM</span>
+<span class="font-label-code text-body-sm text-circuit-cyan font-semibold">384 KB</span>
+</div>
+<div class="rounded bg-surface-container p-2 text-center">
+<span class="font-label-meta text-[10px] text-on-surface-variant block">STATUS</span>
+<span class="font-label-code text-body-sm text-tertiary font-semibold">ONLINE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. 最新の記事 (LATEST ARTICLES GRID) -->
+<section class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-sm mb-space-lg">
+<div>
+<div class="flex items-center gap-space-xs text-primary-container font-label-meta text-label-meta font-bold uppercase tracking-wider mb-1">
+<span class="material-symbols-outlined text-[18px]">new_releases</span>
+            FEED RELEASES
+          </div>
+<h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-on-surface font-bold">最新の記事</h2>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap font-label-meta text-label-meta">
+<span class="text-on-surface-variant">FEED:</span>
+<a class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-primary transition-colors" href="#">すべて</a>
+<a class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors" href="#">電子工作</a>
+<a class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors" href="#">ニュース</a>
+<a class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-copper-glow flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[13px]">rss_feed</span>RSS
+          </a>
+</div>
+</div>
+<!-- 8-Card Article Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Post 1 -->
+<article class="group rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-md flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary-container font-label-meta text-label-meta font-semibold">電子工作</span>
+<time class="font-label-meta text-label-meta text-on-surface-variant">2026.11.12</time>
+</div>
+<a class="group-hover:text-primary transition-colors" href="#">
+<h3 class="font-headline-sm text-body-md text-on-surface font-bold leading-snug line-clamp-3">
+                デジタルフィルタ入門 #11｜レート変換のフィルタの設計：CIC・コム・オールパスで間引きと補間、ΔΣ ADC の sinc フィルタと分数遅延
+              </h3>
+</a>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant font-label-meta text-label-meta">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">tune</span>DSP/FPGA</span>
+<span class="group-hover:translate-x-1 transition-transform text-primary font-semibold">読む →</span>
+</div>
+</article>
+<!-- Post 2 -->
+<article class="group rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-md flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary-container font-label-meta text-label-meta font-semibold">電子工作</span>
+<time class="font-label-meta text-label-meta text-on-surface-variant">2026.11.11</time>
+</div>
+<a class="group-hover:text-primary transition-colors" href="#">
+<h3 class="font-headline-sm text-body-md text-on-surface font-bold leading-snug line-clamp-3">
+                デジタルフィルタ入門 #10｜検出のフィルタの設計：Goertzel・整合フィルタ・ヒルベルト変換で周波数・波形・包絡線を取り出す
+              </h3>
+</a>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant font-label-meta text-label-meta">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">graphic_eq</span>波形解析</span>
+<span class="group-hover:translate-x-1 transition-transform text-primary font-semibold">読む →</span>
+</div>
+</article>
+<!-- Post 3 -->
+<article class="group rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-md flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary-container font-label-meta text-label-meta font-semibold">電子工作</span>
+<time class="font-label-meta text-label-meta text-on-surface-variant">2026.11.10</time>
+</div>
+<a class="group-hover:text-primary transition-colors" href="#">
+<h3 class="font-headline-sm text-body-md text-on-surface font-bold leading-snug line-clamp-3">
+                デジタルフィルタ入門 #9｜平滑化フィルタの設計：メディアン・Hampel・Savitzky–Golay で外れ値を落とし、形を保つ
+              </h3>
+</a>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant font-label-meta text-label-meta">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">linear_scale</span>センサー処理</span>
+<span class="group-hover:translate-x-1 transition-transform text-primary font-semibold">読む →</span>
+</div>
+</article>
+<!-- Post 4 -->
+<article class="group rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-md flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-secondary/20 text-secondary font-label-meta text-label-meta font-semibold">ニュース</span>
+<time class="font-label-meta text-label-meta text-on-surface-variant">2026.11.10</time>
+</div>
+<a class="group-hover:text-circuit-cyan transition-colors" href="#">
+<h3 class="font-headline-sm text-body-md text-on-surface font-bold leading-snug line-clamp-3">
+                Claude Fable 5.2 公開｜30%高速化と2割値下げ、Opus 5.5超えの使い分け
+              </h3>
+</a>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant font-label-meta text-label-meta">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">psychology</span>LLMベンチ</span>
+<span class="group-hover:translate-x-1 transition-transform text-secondary font-semibold">読む →</span>
+</div>
+</article>
+<!-- Post 5 -->
+<article class="group rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-md flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary-container font-label-meta text-label-meta font-semibold">電子工作</span>
+<time class="font-label-meta text-label-meta text-on-surface-variant">2026.11.07</time>
+</div>
+<a class="group-hover:text-primary transition-colors" href="#">
+<h3 class="font-headline-sm text-body-md text-on-surface font-bold leading-snug line-clamp-3">
+                デジタルフィルタ入門 #8｜適応フィルタの設計：LMS・NLMS・RLS でモデルなしに係数を学習する
+              </h3>
+</a>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant font-label-meta text-label-meta">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">auto_graph</span>自律最適化</span>
+<span class="group-hover:translate-x-1 transition-transform text-primary font-semibold">読む →</span>
+</div>
+</article>
+<!-- Post 6 -->
+<article class="group rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-md flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-secondary/20 text-secondary font-label-meta text-label-meta font-semibold">ニュース</span>
+<time class="font-label-meta text-label-meta text-on-surface-variant">2026.10.31</time>
+</div>
+<a class="group-hover:text-circuit-cyan transition-colors" href="#">
+<h3 class="font-headline-sm text-body-md text-on-surface font-bold leading-snug line-clamp-3">
+                LiteLLM 1.107.0 に情報窃取コード｜AI ゲートウェイの公式版が汚染された経緯と二層の対応
+              </h3>
+</a>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant font-label-meta text-label-meta">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">security</span>セキュリティ</span>
+<span class="group-hover:translate-x-1 transition-transform text-secondary font-semibold">読む →</span>
+</div>
+</article>
+<!-- Post 7 -->
+<article class="group rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-md flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-secondary/20 text-secondary font-label-meta text-label-meta font-semibold">ニュース</span>
+<time class="font-label-meta text-label-meta text-on-surface-variant">2026.10.31</time>
+</div>
+<a class="group-hover:text-circuit-cyan transition-colors" href="#">
+<h3 class="font-headline-sm text-body-md text-on-surface font-bold leading-snug line-clamp-3">
+                GMOが能動的サイバー防御の初適用を要請｜10月施行の法律で国ができること
+              </h3>
+</a>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant font-label-meta text-label-meta">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">policy</span>法制度と防御</span>
+<span class="group-hover:translate-x-1 transition-transform text-secondary font-semibold">読む →</span>
+</div>
+</article>
+<!-- Post 8 -->
+<article class="group rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-md flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-secondary/20 text-secondary font-label-meta text-label-meta font-semibold">ニュース</span>
+<time class="font-label-meta text-label-meta text-on-surface-variant">2026.10.31</time>
+</div>
+<a class="group-hover:text-circuit-cyan transition-colors" href="#">
+<h3 class="font-headline-sm text-body-md text-on-surface font-bold leading-snug line-clamp-3">
+                Anthropic の S-1 を一次資料で読む｜損失の正体と計算資源の調達構造
+              </h3>
+</a>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant font-label-meta text-label-meta">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">finance</span>市場分析</span>
+<span class="group-hover:translate-x-1 transition-transform text-secondary font-semibold">読む →</span>
+</div>
+</article>
+</div>
+<!-- Feed Footer Action Bar -->
+<div class="mt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md p-space-md rounded-xl bg-surface-container">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">全カテゴリーの記事アーカイブを網羅的に閲覧できます</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<a class="inline-flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-surface-container-highest hover:bg-primary-container hover:text-on-primary text-on-surface transition-colors font-headline-sm text-body-sm font-semibold" href="#">
+<span>すべての記事を見る</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 3. TWO-COLUMN MIDDLE SECTION (更新情報 & よく読まれている記事) -->
+<section class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Left Column: 🗓️ 更新情報 (Changelog Feed) -->
+<div class="lg:col-span-6 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="p-2 rounded bg-surface-container text-circuit-cyan">
+<span class="material-symbols-outlined text-[20px]">update</span>
+</span>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">更新情報</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">公開済みの記事を続報で更新した履歴</p>
+</div>
+</div>
+<a class="font-label-meta text-label-meta text-circuit-cyan hover:underline flex items-center gap-1" href="#">
+              全履歴 <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</a>
+</div>
+<!-- Timeline Container -->
+<div class="flex flex-col gap-space-sm">
+<!-- Changelog Item 1 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2 mb-1.5">
+<span class="font-label-meta text-label-meta text-circuit-cyan font-mono">2026.10.31</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-tertiary font-label-meta text-[10px]">KiCad</span>
+</div>
+<a class="font-headline-sm text-body-md text-on-surface font-semibold hover:text-primary transition-colors block mb-1" href="#">
+                KiCad 10.0.5 正式リリース｜200件超のバグ修正とKiCon Europe 2026
+              </a>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                10.0.8 が正式リリース（10月30日）。ビアのパッドスタックを含む基板のクラッシュ、サブシートのラベルの接続、ODB++ の銅厚の出力などを修正。
+              </p>
+</div>
+<!-- Changelog Item 2 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2 mb-1.5">
+<span class="font-label-meta text-label-meta text-circuit-cyan font-mono">2026.10.31</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-primary font-label-meta text-[10px]">EDAツール</span>
+</div>
+<a class="font-headline-sm text-body-md text-on-surface font-semibold hover:text-primary transition-colors block mb-1" href="#">
+                KiCad 10.0 新機能まとめ｜Allegroインポーター・バリアント設計・DRCエディタ
+              </a>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                10.0.8 が正式リリース（10月30日）。最新版の callout・アップデート履歴の表・FAQ を 10.0.8 に更新。
+              </p>
+</div>
+<!-- Changelog Item 3 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2 mb-1.5">
+<span class="font-label-meta text-label-meta text-circuit-cyan font-mono">2026.10.31</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-secondary font-label-meta text-[10px]">Sec分析</span>
+</div>
+<a class="font-headline-sm text-body-md text-on-surface font-semibold hover:text-primary transition-colors block mb-1" href="#">
+                日本企業はどこから破られたのか｜2025〜2026年の侵入口とAI時代の守り方
+              </a>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                お名前.com デスクトップクラウドの続報。見舞金・損失補償・代替サービス、能動的サイバー防御の要請、懸賞金の受付（10/30までに428件）を反映。
+              </p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<a class="font-label-code text-body-sm text-primary hover:underline flex items-center gap-1 font-medium" href="#">
+<span>すべての更新情報を見る</span>
+<span class="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+</a>
+<a class="font-label-meta text-label-meta text-on-surface-variant hover:text-copper-glow flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">rss_feed</span>RSSで購読
+            </a>
+</div>
+</div>
+<!-- Right Column: 🔥 よく読まれている記事 (Trending Posts) -->
+<div class="lg:col-span-6 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="p-2 rounded bg-surface-container text-primary-container">
+<span class="material-symbols-outlined text-[20px]">local_fire_department</span>
+</span>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">よく読まれている記事</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">2026年8月時点のアクセス上位（毎月見直し）</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded bg-surface-container font-label-meta text-label-meta text-on-surface-variant">RANKING</span>
+</div>
+<!-- Ranked Cards -->
+<div class="flex flex-col gap-space-sm">
+<!-- Rank 01 -->
+<a class="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-start gap-space-md shadow-sm hover:shadow-md" href="#">
+<span class="font-display-hero text-headline-lg font-black text-primary-container/70 group-hover:text-primary-container transition-colors shrink-0">01</span>
+<div class="flex flex-col gap-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-primary font-label-meta text-[10px]">Arduino</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant">配線・サンプルコード</span>
+</div>
+<h4 class="font-headline-sm text-body-md text-on-surface font-semibold group-hover:text-primary transition-colors leading-snug">
+                  Arduino 74HC595 使い方完全ガイド【2026年版】｜ピン配線とArduinoサンプルコード
+                </h4>
+</div>
+</a>
+<!-- Rank 02 -->
+<a class="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-start gap-space-md shadow-sm hover:shadow-md" href="#">
+<span class="font-display-hero text-headline-lg font-black text-circuit-cyan/70 group-hover:text-circuit-cyan transition-colors shrink-0">02</span>
+<div class="flex flex-col gap-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-circuit-cyan font-label-meta text-[10px]">電子工作</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant">基板CAD</span>
+</div>
+<h4 class="font-headline-sm text-body-md text-on-surface font-semibold group-hover:text-circuit-cyan transition-colors leading-snug">
+                  KiCad 10.0 新機能まとめ｜Allegroインポーター・バリアント設計・DRCエディタ
+                </h4>
+</div>
+</a>
+<!-- Rank 03 -->
+<a class="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-start gap-space-md shadow-sm hover:shadow-md" href="#">
+<span class="font-display-hero text-headline-lg font-black text-tertiary/70 group-hover:text-tertiary transition-colors shrink-0">03</span>
+<div class="flex flex-col gap-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-tertiary font-label-meta text-[10px]">PC・ハードウェア</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant">AIアクセラレータ</span>
+</div>
+<h4 class="font-headline-sm text-body-md text-on-surface font-semibold group-hover:text-tertiary transition-colors leading-snug">
+                  RTX PRO 4000 Blackwell 実測ベンチマーク｜A4000比でAI推論最大5.47倍
+                </h4>
+</div>
+</a>
+<!-- Rank 04 -->
+<a class="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-start gap-space-md shadow-sm hover:shadow-md" href="#">
+<span class="font-display-hero text-headline-lg font-black text-on-surface-variant/40 group-hover:text-on-surface-variant transition-colors shrink-0">04</span>
+<div class="flex flex-col gap-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-meta text-[10px]">Linux</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant">OS環境構築</span>
+</div>
+<h4 class="font-headline-sm text-body-md text-on-surface font-semibold group-hover:text-primary transition-colors leading-snug">
+                  Ubuntu 26.04 LTS アップグレード手順｜24.04からの移行を実機記録で解説
+                </h4>
+</div>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. 🗂️ テーマから探す (TOPIC EXPLORER) -->
+<section class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl">
+<div class="mb-space-lg">
+<div class="flex items-center gap-space-xs text-circuit-cyan font-label-meta text-label-meta font-bold uppercase tracking-wider mb-1">
+<span class="material-symbols-outlined text-[18px]">category</span>
+          KNOWLEDGE TAXONOMY
+        </div>
+<h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-on-surface font-bold">テーマから探す</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- Topic 1 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group flex items-start gap-space-sm shadow-sm hover:shadow-md" href="#">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary-container shrink-0 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">developer_board</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-primary transition-colors">Arduino入門</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">まず動かす。電子工作の入り口</span>
+</div>
+</a>
+<!-- Topic 2 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group flex items-start gap-space-sm shadow-sm hover:shadow-md" href="#">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-circuit-cyan shrink-0 group-hover:bg-circuit-cyan group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[24px]">wifi</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-circuit-cyan transition-colors">ESP32</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Wi-Fi/BLE で広がる IoT 開発</span>
+</div>
+</a>
+<!-- Topic 3 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group flex items-start gap-space-sm shadow-sm hover:shadow-md" href="#">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-status-warning shrink-0 group-hover:bg-status-warning group-hover:text-surface transition-colors">
+<span class="material-symbols-outlined text-[24px]">bolt</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-status-warning transition-colors">STM32連載</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">メモリと時間を学ぶ全13回</span>
+</div>
+</a>
+<!-- Topic 4 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group flex items-start gap-space-sm shadow-sm hover:shadow-md" href="#">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-tertiary shrink-0 group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
+<span class="material-symbols-outlined text-[24px]">architecture</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-tertiary transition-colors">基板設計・KiCad</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">回路図から基板製作まで</span>
+</div>
+</a>
+<!-- Topic 5 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group flex items-start gap-space-sm shadow-sm hover:shadow-md" href="#">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary shrink-0 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[24px]">smart_toy</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-secondary transition-colors">AI×開発</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Claude Code を開発に活かす</span>
+</div>
+</a>
+<!-- Topic 6 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group flex items-start gap-space-sm shadow-sm hover:shadow-md" href="#">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">newspaper</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-primary transition-colors">ニュース</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">技術ニュースをエンジニア目線で</span>
+</div>
+</a>
+<!-- Topic 7 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group flex items-start gap-space-sm shadow-sm hover:shadow-md" href="#">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-circuit-cyan shrink-0 group-hover:bg-circuit-cyan group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[24px]">science</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-circuit-cyan transition-colors">Google AI 実験室</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Gemini・Gemma を実機で確かめる連載</span>
+</div>
+</a>
+<!-- Topic 8 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group flex items-start gap-space-sm shadow-sm hover:shadow-md" href="#">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-copper-glow shrink-0 group-hover:bg-copper-glow group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">hardware</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-copper-glow transition-colors">作業環境・工具レビュー</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">はんだごて・オシロ・消耗品の実機レビュー</span>
+</div>
+</a>
+<!-- Topic 9 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group flex items-start gap-space-sm shadow-sm hover:shadow-md" href="#">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-tertiary shrink-0 group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
+<span class="material-symbols-outlined text-[24px]">calculate</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-tertiary transition-colors">自作ツール</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">ブラウザで使える計算ツールとシリアルモニタ</span>
+</div>
+</a>
+</div>
+</section>
+<!-- 5. 📚 注目の連載シリーズ (FEATURED SERIES BREAKOUT) -->
+<section class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl">
+<div class="flex flex-col gap-space-md mb-space-lg">
+<div class="flex items-center gap-space-xs text-primary-container font-label-meta text-label-meta font-bold uppercase tracking-wider mb-1">
+<span class="material-symbols-outlined text-[18px]">auto_stories</span>
+          LONG-FORM INVESTIGATIONS
+        </div>
+<h2 class="font-headline-xl text-headline-lg md:text-headline-xl text-on-surface font-bold">連載プロジェクト</h2>
+</div>
+<!-- Ongoing Series -->
+<div class="flex flex-col gap-space-lg mb-space-xl">
+<div class="flex items-center gap-2 text-on-surface font-headline-sm text-headline-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></span>
+<span>進行中の連載</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
+<!-- Series 1: IC実験室 -->
+<div class="rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg relative overflow-hidden group">
+<div class="absolute top-0 left-0 bottom-0 w-1.5 bg-pcb-green"></div>
+<div class="flex flex-col gap-space-sm pl-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-meta text-label-meta px-2 py-0.5 rounded bg-surface-container-highest text-tertiary">#1〜#5 収録｜随時更新</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">4g_mobiledata</span>実測レビュー
+                </span>
+</div>
+<h3 class="font-headline-lg text-headline-md text-on-surface font-bold flex items-center gap-2">
+<span>🔬</span> IC実験室
+              </h3>
+<p class="font-headline-sm text-body-md text-tertiary font-semibold">
+                部品を一個ずつ、データシートから実測まで味わい尽くす
+              </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                引き出しに転がっている部品を1種類ずつ取り出し、データシートを最初から最後まで読んで、回路を組んで、波形を見る。「データシートの数字が、目の前の回路でどう現れるか」を毎回1つの部品で確かめる連載です。
+              </p>
+</div>
+<div class="pt-space-md pl-space-xs flex flex-wrap items-center gap-space-xs">
+<a class="px-space-md py-2 rounded-lg bg-surface-container-highest hover:bg-pcb-green hover:text-on-surface text-on-surface font-headline-sm text-body-sm transition-colors" href="#">
+                連載ページを見る
+              </a>
+<a class="px-space-md py-2 rounded-lg bg-pcb-green/20 text-tertiary hover:bg-pcb-green hover:text-on-surface font-headline-sm text-body-sm transition-colors flex items-center gap-1" href="#">
+<span>最新 #5 を読む（2SC1815）</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Series 2: Google AI 実験室 -->
+<div class="rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg relative overflow-hidden group">
+<div class="absolute top-0 left-0 bottom-0 w-1.5 bg-circuit-cyan"></div>
+<div class="flex flex-col gap-space-sm pl-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-meta text-label-meta px-2 py-0.5 rounded bg-surface-container-highest text-circuit-cyan">#1〜#4 収録｜実機ベンチ</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">memory</span>Edge AI
+                </span>
+</div>
+<h3 class="font-headline-lg text-headline-md text-on-surface font-bold flex items-center gap-2">
+<span>🧪</span> Google AI 実験室
+              </h3>
+<p class="font-headline-sm text-body-md text-circuit-cyan font-semibold">
+                Gemini・Gemma・Google Labs を一つずつ、手を動かして確かめる
+              </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                一次ドキュメントを読んで手を動かし、実際の出力と費用だけを書く連載です。#4 は EmbeddingGemma 2 を Raspberry Pi 5 の CPU だけで動かし、写真 99 枚を言葉で検索しました。
+              </p>
+</div>
+<div class="pt-space-md pl-space-xs flex flex-wrap items-center gap-space-xs">
+<a class="px-space-md py-2 rounded-lg bg-surface-container-highest hover:bg-circuit-cyan hover:text-on-secondary text-on-surface font-headline-sm text-body-sm transition-colors" href="#">
+                連載ページを見る
+              </a>
+<a class="px-space-md py-2 rounded-lg bg-circuit-cyan/20 text-circuit-cyan hover:bg-circuit-cyan hover:text-on-secondary font-headline-sm text-body-sm transition-colors flex items-center gap-1" href="#">
+<span>最新 #4（EmbeddingGemma 2 × Pi 5）</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Completed Series -->
+<div class="flex flex-col gap-space-lg">
+<div class="flex items-center gap-2 text-on-surface font-headline-sm text-headline-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span>完結した連載</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Featured Completed Series (Main Block) -->
+<div class="lg:col-span-8 rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg relative overflow-hidden">
+<div class="absolute top-0 left-0 bottom-0 w-1.5 bg-primary-container"></div>
+<div class="flex flex-col gap-space-sm pl-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-meta text-label-meta px-2 py-0.5 rounded bg-surface-container-highest text-primary">全13回・完結（第0回〜第12回 全話公開中）</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant">NUCLEO-F401 + STM32CubeIDE</span>
+</div>
+<h3 class="font-headline-lg text-headline-md text-on-surface font-bold flex items-center gap-2">
+<span>⚡</span> ポインタの先にある組み込みの世界
+              </h3>
+<p class="font-headline-sm text-body-md text-primary font-semibold">
+                STM32マイコンで学ぶメモリと時間の設計
+              </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                部品の外側が「IC実験室」なら、こちらはチップの内側。アドレス・レジスタ・割り込みを掘る連載です。「アドレスだけが現実」という組み込みの本質を、空間（メモリ）・時間（割り込み）・システム支配（DMA/最適化）の順に、段階的に理解していきます。
+              </p>
+</div>
+<div class="pt-space-md pl-space-xs flex flex-wrap items-center gap-space-xs">
+<a class="px-space-md py-2 rounded-lg bg-surface-container-highest hover:bg-surface-bright text-on-surface font-headline-sm text-body-sm transition-colors" href="#">
+                連載ページを見る
+              </a>
+<a class="px-space-md py-2 rounded-lg bg-primary-container text-on-primary hover:bg-copper-glow font-headline-sm text-body-sm transition-colors flex items-center gap-1 font-semibold" href="#">
+<span>第0回から読む</span>
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+</a>
+</div>
+</div>
+<!-- Side Completed Projects (Stacked) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Small Completed 1 -->
+<a class="p-space-md rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors flex flex-col gap-1 shadow-md group" href="#">
+<div class="flex items-center justify-between">
+<span class="font-label-meta text-[10px] text-circuit-cyan font-mono">全3回・完結</span>
+<span class="font-label-meta text-[10px] text-on-surface-variant">JLCPCB PCBA</span>
+</div>
+<h4 class="font-headline-sm text-body-md text-on-surface font-semibold group-hover:text-primary transition-colors flex items-center gap-1">
+<span>🔬</span> RP2040 自作ロジックアナライザ
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed line-clamp-2">
+                RP2040 の 16ch ロジアナを KiCad で設計し、JLCPCB の PCBA で作って実戦投入まで。
+              </p>
+</a>
+<!-- Small Completed 2 -->
+<a class="p-space-md rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors flex flex-col gap-1 shadow-md group" href="#">
+<div class="flex items-center justify-between">
+<span class="font-label-meta text-[10px] text-tertiary font-mono">全4回・完結</span>
+<span class="font-label-meta text-[10px] text-on-surface-variant">ESP32-S3 / MQTT</span>
+</div>
+<h4 class="font-headline-sm text-body-md text-on-surface font-semibold group-hover:text-tertiary transition-colors flex items-center gap-1">
+<span>🏠</span> 自宅センサー基盤
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed line-clamp-2">
+                自作の ESP32-S3 センサー基板から MQTT で集め、Grafana で見える化するまで。
+              </p>
+</a>
+</div>
+</div>
+<!-- Audience Recommendation Matrix -->
+<div class="mt-space-md p-space-lg rounded-xl bg-surface-container-low shadow-md">
+<div class="flex items-center gap-2 mb-space-sm text-copper-glow font-headline-sm text-body-md font-bold">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>こんな方におすすめ：</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-sm font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span>部品の「使い方」だけでなく「なぜそうなるか」を知りたい</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span>データシートを最初から最後まで読めるようになりたい</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span>計算した設計値と実測波形を突き合わせるのが好き</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span>手持ちのテスター・オシロスコープをもっと現場で活かしたい</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span>Gemini / Gemma を自分の基板・生データに繋いで実機検証したい</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span>組み込みLinuxとベアメタルMCUの隙間を埋めたい</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. 🚪 コンテンツ一覧 (QUICK DIRECTORY GRID) -->
+<section class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop pt-space-md pb-space-2xl">
+<div class="mb-space-md">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-meta text-label-meta font-bold uppercase tracking-wider mb-1">
+<span class="material-symbols-outlined text-[18px]">dns</span>
+          NAVIGATION MATRIX
+        </div>
+<h2 class="font-headline-lg text-headline-md md:text-headline-lg text-on-surface font-bold">コンテンツ一覧</h2>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-space-sm">
+<!-- Card 1 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all text-center flex flex-col items-center gap-2 group shadow-sm hover:shadow-md" href="#">
+<span class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">article</span>
+</span>
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-primary transition-colors">ブログ</span>
+<span class="font-label-meta text-[11px] text-on-surface-variant">電子工作・マイコン技術記事</span>
+</a>
+<!-- Card 2 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all text-center flex flex-col items-center gap-2 group shadow-sm hover:shadow-md" href="#">
+<span class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-circuit-cyan group-hover:bg-circuit-cyan group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[22px]">feed</span>
+</span>
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-circuit-cyan transition-colors">ニュース</span>
+<span class="font-label-meta text-[11px] text-on-surface-variant">技術ニュースを技術者視点で</span>
+</a>
+<!-- Card 3 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all text-center flex flex-col items-center gap-2 group shadow-sm hover:shadow-md" href="#">
+<span class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-copper-glow group-hover:bg-copper-glow group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">home_repair_service</span>
+</span>
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-copper-glow transition-colors">PC・作業環境</span>
+<span class="font-label-meta text-[11px] text-on-surface-variant">工具・測定器・開発ベンチ</span>
+</a>
+<!-- Card 4 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all text-center flex flex-col items-center gap-2 group shadow-sm hover:shadow-md" href="#">
+<span class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-tertiary group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
+<span class="material-symbols-outlined text-[22px]">storefront</span>
+</span>
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-tertiary transition-colors">Shop</span>
+<span class="font-label-meta text-[11px] text-on-surface-variant">制作物・頒布基板</span>
+</a>
+<!-- Card 5 -->
+<a class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all text-center flex flex-col items-center gap-2 group shadow-sm hover:shadow-md col-span-2 sm:col-span-1" href="#">
+<span class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-status-error group-hover:bg-status-error group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">smart_display</span>
+</span>
+<span class="font-headline-sm text-body-md font-bold text-on-surface group-hover:text-status-error transition-colors">動画</span>
+<span class="font-label-meta text-[11px] text-on-surface-variant">YouTube 実機実験配信</span>
+</a>
+</div>
+</section>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest text-on-surface-variant shadow-[0_-1px_12px_rgba(0,0,0,0.5)]"><div class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop py-space-2xl"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-xl pb-space-2xl"><div class="lg:col-span-2 flex flex-col gap-space-md"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container"><span class="material-symbols-outlined text-[20px]">memory</span></div><span class="font-headline-sm text-headline-sm text-on-surface font-bold">電子工作でライフハック！</span></div><p class="font-body-sm text-body-sm text-on-surface-variant pr-space-lg leading-relaxed">マイクロコントローラ、組み込みファームウェア、IoTシステム、高速デジタル回路設計の実践的知見を集約したエンジニアのための技術メディアポータル。</p><div class="flex items-center gap-space-xs pt-space-xs"><span class="font-label-meta text-label-meta px-space-xs py-[2px] rounded bg-surface-container-high text-circuit-cyan font-mono">ESP32-S3</span><span class="font-label-meta text-label-meta px-space-xs py-[2px] rounded bg-surface-container-high text-tertiary font-mono">FreeRTOS</span><span class="font-label-meta text-label-meta px-space-xs py-[2px] rounded bg-surface-container-high text-primary font-mono">KiCad v8</span></div></div><div class="flex flex-col gap-space-sm"><span class="font-headline-sm text-body-md text-on-surface font-semibold">ハードウェア分類</span><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm"><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-circuit-cyan">developer_board</span><a class="hover:text-primary transition-colors" data-path="category-arduino" href="#">Arduino & ATmega</a></li><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-primary-container">wifi</span><a class="hover:text-primary transition-colors" data-path="category-esp32" href="#">ESP32 / ESP-IDF</a></li><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary">precision_manufacturing</span><a class="hover:text-primary transition-colors" data-path="category-stm32" href="#">STM32 ARM Cortex</a></li><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-tertiary">schema</span><a class="hover:text-primary transition-colors" data-path="category-kicad" href="#">KiCad 基板設計</a></li><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-status-warning">smart_toy</span><a class="hover:text-primary transition-colors" data-path="category-ai" href="#">AI × 組み込み開発</a></li></ul></div><div class="flex flex-col gap-space-sm"><span class="font-headline-sm text-body-md text-on-surface font-semibold">注目の連載シリーズ</span><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm"><li><a class="hover:text-primary transition-colors flex items-center gap-space-xs" data-path="series-ic-lab" href="#"><span class="material-symbols-outlined text-[14px] text-primary">bookmark</span><span>IC実験室</span></a></li><li><a class="hover:text-primary transition-colors flex items-center gap-space-xs" data-path="series-google-ai" href="#"><span class="material-symbols-outlined text-[14px] text-primary">bookmark</span><span>Google AI実験室</span></a></li><li><a class="hover:text-primary transition-colors flex items-center gap-space-xs" data-path="series-pointer-embedded" href="#"><span class="material-symbols-outlined text-[14px] text-primary">bookmark</span><span>ポインタの先にある組み込み</span></a></li><li><a class="hover:text-primary transition-colors flex items-center gap-space-xs" data-path="series-pcb-mfg" href="#"><span class="material-symbols-outlined text-[14px] text-primary">bookmark</span><span>JLCPCB基板製造記</span></a></li><li><a class="hover:text-primary transition-colors flex items-center gap-space-xs" data-path="series-ble-mesh" href="#"><span class="material-symbols-outlined text-[14px] text-primary">bookmark</span><span>BLEメッシュネットワーク実践</span></a></li></ul></div><div class="flex flex-col gap-space-sm"><span class="font-headline-sm text-body-md text-on-surface font-semibold">フィード & サイト情報</span><ul class="flex flex-col gap-space-xs font-body-sm text-body-sm"><li><a class="hover:text-primary transition-colors flex items-center gap-space-xs" data-path="rss" href="#"><span class="material-symbols-outlined text-[16px] text-copper-glow">rss_feed</span><span>RSS 2.0 Feed</span></a></li><li><a class="hover:text-primary transition-colors" data-path="updates" href="#">更新情報 / リリースノート</a></li><li><a class="hover:text-primary transition-colors" data-path="contact" href="#">お問い合わせ窓口</a></li><li><a class="hover:text-primary transition-colors" data-path="privacy-policy" href="#">プライバシーポリシー</a></li><li><a class="hover:text-primary transition-colors" data-path="disclaimer" href="#">免責事項</a></li></ul></div></div><div class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md bg-surface-container-lowest"><span class="font-label-meta text-label-meta text-on-surface-variant font-mono">electwork.net // Physical Computing & Embedded Systems</span><span class="font-body-sm text-body-sm text-on-surface-variant">© 2026 電子工作でライフハック！ All rights reserved.</span></div></div></footer></body></html>

@@ -1,0 +1,118 @@
+{
+  "gemini-3.8-live": {
+    "runs": 15,
+    "median_s": 1.1,
+    "min_s": 1.039,
+    "max_s": 1.295,
+    "correct": {
+      "sram": [
+        true,
+        true,
+        true
+      ],
+      "wifi5g": [
+        true,
+        true,
+        true
+      ],
+      "cpu": [
+        true,
+        true,
+        true
+      ],
+      "sleep": [
+        true,
+        false,
+        true
+      ]
+    },
+    "multi_turn": 0
+  },
+  "gemini-3.8-live-extended-thinking": {
+    "runs": 15,
+    "median_s": 1.2,
+    "min_s": 1.043,
+    "max_s": 3.425,
+    "correct": {
+      "sram": [
+        true,
+        true,
+        true
+      ],
+      "wifi5g": [
+        true,
+        true,
+        true
+      ],
+      "cpu": [
+        true,
+        true,
+        true
+      ],
+      "sleep": [
+        true,
+        true,
+        false
+      ]
+    },
+    "multi_turn": 0
+  },
+  "gemini-3.1-flash-live-preview": {
+    "runs": 15,
+    "median_s": 1.24,
+    "min_s": 1.185,
+    "max_s": 1.417,
+    "correct": {
+      "sram": [
+        true,
+        true,
+        true
+      ],
+      "wifi5g": [
+        true,
+        true,
+        true
+      ],
+      "cpu": [
+        true,
+        true,
+        true
+      ],
+      "sleep": [
+        false,
+        false,
+        false
+      ]
+    },
+    "multi_turn": 0
+  },
+  "gemini-2.5-flash-native-audio-latest": {
+    "runs": 15,
+    "median_s": 4.08,
+    "min_s": 2.375,
+    "max_s": 8.471,
+    "correct": {
+      "sram": [
+        true,
+        true,
+        true
+      ],
+      "wifi5g": [
+        false,
+        true,
+        true
+      ],
+      "cpu": [
+        true,
+        true,
+        true
+      ],
+      "sleep": [
+        false,
+        false,
+        false
+      ]
+    },
+    "multi_turn": 0
+  }
+}

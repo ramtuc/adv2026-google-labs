@@ -1,0 +1,152 @@
+[
+  {
+    "n": 1,
+    "site": "dronebotworkshop.com",
+    "url": "https://dronebotworkshop.com/esp32-2026/"
+  },
+  {
+    "n": 2,
+    "site": "nextpcb.com",
+    "url": "https://www.nextpcb.com/blog/esp32-s3-vs-c3-vs-c6-which-to-choose"
+  },
+  {
+    "n": 3,
+    "site": "File Search",
+    "url": "esp32_datasheet_en.pdf"
+  },
+  {
+    "n": 4,
+    "site": "pcbway.com",
+    "url": "https://www.pcbway.com/blog/14/ESP32_vs_ESP32_S3_Key_Differences_Performance_Comparison_and_PCB_Design_Consi_2c205f9a.html"
+  },
+  {
+    "n": 5,
+    "site": "pcbpit.com",
+    "url": "https://pcbpit.com/esp32-vs-esp32-s3"
+  },
+  {
+    "n": 6,
+    "site": "sheen.bot",
+    "url": "https://www.sheen.bot/store/esp32-s3-round-touch-display-development-board-1-85-ai-voice-wireless-charging"
+  },
+  {
+    "n": 7,
+    "site": "dfrobot.com",
+    "url": "https://wiki.dfrobot.com/dfr1221/"
+  },
+  {
+    "n": 8,
+    "site": "viewedisplay.com",
+    "url": "https://viewedisplay.com/product/esp32-s3-1-5-inch-amoled-touch-screen-dev-board-uart-smart-display/"
+  },
+  {
+    "n": 9,
+    "site": "newegg.com",
+    "url": "https://www.newegg.com/p/3D0-0053-000P0"
+  },
+  {
+    "n": 10,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/1ba0boa/esp32s3_with_extra_bluetooth_53_module/"
+  },
+  {
+    "n": 11,
+    "site": "circuitpython.org",
+    "url": "https://circuitpython.org/board/waveshare_esp32_s3_zero/"
+  },
+  {
+    "n": 12,
+    "site": "geeky-gadgets.com",
+    "url": "https://www.geeky-gadgets.com/esp32-s3-super-mini-guide/"
+  },
+  {
+    "n": 13,
+    "site": "espboards.dev",
+    "url": "https://www.espboards.dev/esp32/redpill-esp32s3/"
+  },
+  {
+    "n": 14,
+    "site": "pcbway.com",
+    "url": "https://www.pcbway.com/blog/PCB_Design_Layout/ESP32_vs_ESP32_S3_Key_Differences_Performance_Comparison_and_PCB_Design_Consi_2c205f9a.html"
+  },
+  {
+    "n": 15,
+    "site": "pakellab.com",
+    "url": "https://pakellab.com/blogs/esp32-vs-stm32-vs-rp2040"
+  },
+  {
+    "n": 16,
+    "site": "projectech.in",
+    "url": "https://projectech.in/guides/esp32-deep-sleep-battery-projects/"
+  },
+  {
+    "n": 17,
+    "site": "codesprintconsulting.com",
+    "url": "https://www.codesprintconsulting.com/blog/esp32-deep-sleep-power-consumption"
+  },
+  {
+    "n": 18,
+    "site": "advanced-monolithic.com",
+    "url": "http://www.advanced-monolithic.com/pdf/ds1117.pdf"
+  },
+  {
+    "n": 19,
+    "site": "ultralibrarian.com",
+    "url": "https://www.ultralibrarian.com/2026/07/10/ams1117-datasheet-explained-pinout-features-and-voltage-regulator-basics-ulc"
+  },
+  {
+    "n": 20,
+    "site": "zbotic.in",
+    "url": "https://zbotic.in/esp32-s3-complete-guide-features-pinout-and-projects/"
+  },
+  {
+    "n": 21,
+    "site": "esp32engine.com",
+    "url": "https://esp32engine.com/guides/esp32-vs-esp32-s3.html"
+  },
+  {
+    "n": 22,
+    "site": "github.com",
+    "url": "https://github.com/pytorch/executorch/discussions/8331"
+  },
+  {
+    "n": 23,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/v4.4.6/esp32s3/api-guides/ulp-risc-v.html"
+  },
+  {
+    "n": 24,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/system/ulp-risc-v.html"
+  },
+  {
+    "n": 25,
+    "site": "teachmemicro.com",
+    "url": "https://www.teachmemicro.com/esp32-s31-explained-specs-risc-v-wi-fi-6-and-esp32-s3-comparison/"
+  },
+  {
+    "n": 26,
+    "site": "infishark.com",
+    "url": "https://infishark.com/blogs/learn/comparing-esp32-variants-original-s2-s3-c3-and-h2"
+  },
+  {
+    "n": 27,
+    "site": "espressif.com",
+    "url": "https://www.espressif.com/en/news/1_Billion_Chip_Sales"
+  },
+  {
+    "n": 28,
+    "site": "wikipedia.org",
+    "url": "https://en.wikipedia.org/wiki/Espressif_Systems"
+  },
+  {
+    "n": 29,
+    "site": "electwork.net",
+    "url": "https://electwork.net/posts/esp32-series-comparison/"
+  },
+  {
+    "n": 30,
+    "site": "espressif.com",
+    "url": "https://www.espressif.com/en/company/about-espressif"
+  }
+]

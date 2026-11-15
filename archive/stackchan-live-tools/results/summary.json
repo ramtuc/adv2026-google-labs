@@ -1,0 +1,30 @@
+{
+  "gemini-3.8-live": {
+    "runs": 18,
+    "pass": 18,
+    "voice_median_s": 1.75,
+    "call_median_s": 1.15,
+    "call_before_voice": 18
+  },
+  "gemini-3.8-live-extended-thinking": {
+    "runs": 18,
+    "pass": 17,
+    "voice_median_s": 1.14,
+    "call_median_s": 5.7,
+    "call_before_voice": 0
+  },
+  "gemini-3.1-flash-live-preview": {
+    "runs": 18,
+    "pass": 17,
+    "voice_median_s": 1.39,
+    "call_median_s": 2.27,
+    "call_before_voice": 1
+  },
+  "gemini-2.5-flash-native-audio-latest": {
+    "runs": 18,
+    "pass": 17,
+    "voice_median_s": 3.78,
+    "call_median_s": 3.92,
+    "call_before_voice": 3
+  }
+}

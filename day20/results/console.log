@@ -1,0 +1,135 @@
+none  Q1  gemma-4-31b-it         ×  21.9 s  'ESP32-S3R8（ESP32-S3シリーズの8MB Octal SPI PSRAM内蔵モデル）の'
+none  Q1  gemma-4-26b-a4b-it     ×  24.2 s  'ESP32-S3R8（8MBのPSRAMを内蔵したESP32-S3）の推奨動作温度範囲は以下の通りで'
+none  Q1  gemini-3.8-flash       △   7.9 s  'Espressif Systemsのデータシートによると、**ESP32-S3R8** の推奨周囲温'
+none  Q2  gemma-4-31b-it         ×  25.0 s  'ご質問の前提に誤りがあります。\n\n**「Deep-sleep で RTC メモリのみをオンにしたとき'
+none  Q2  gemma-4-26b-a4b-it     ×  36.7 s  '結論から申し上げますと、**「標準的な消費電流」という単一の数値は存在しません。**\n\n質問の前提と'
+none  Q2  gemini-3.8-flash       ×   9.0 s  'ご質問では**対象となるマイコン（チップ）の型番が指定されていません**が、「Deep-sleep」'
+none  Q3  gemma-4-31b-it         ×  19.3 s  'ご質問ありがとうございます。\n\n結論から申し上げますと、**対象となるデバイス（チップやボード）の名'
+none  Q3  gemma-4-26b-a4b-it     ×  23.0 s  'ご質問ありがとうございます。\n\n結論から申し上げますと、**「GPIO3」という名称だけでは、どの半'
+none  Q3  gemini-3.8-flash       ×（誤り）   9.2 s  '対象となるマイコンやSoC（チップの型番）が指定されていません。ストラップピンの役割やデフォルト設定'
+none  Q4  gemma-4-31b-it         ×  39.4 s  '結論から申し上げますと、**「そのCPUのデータシートを確認しない限り、問題ないとは言えない（リスク'
+none  Q4  gemma-4-26b-a4b-it     ×  35.6 s  '結論から申し上げますと、**そのCPUのデータシートを確認しない限り、問題があるかないかを断定するこ'
+none  Q4  gemini-3.8-flash       △  14.0 s  '「VDD3P3_CPU」という電源ピン名は、一般的にEspressif社の **ESP32 シリーズ'
+none  Q5  gemma-4-31b-it         ○（期待どおり）  19.7 s  'ご質問の前提に誤りがあります。\n\n**ESP32-S3 は Wi-Fi 6 (802.11ax) に'
+none  Q5  gemma-4-26b-a4b-it     ○（期待どおり）  25.9 s  '質問の前提が誤っています。\n\n**ESP32-S3 は Wi-Fi 6 (802.11ax) に対応'
+none  Q5  gemini-3.8-flash       ○（期待どおり）   8.7 s  '質問の前提に誤りがあります。\n\n**ESP32-S3 は Wi-Fi 6（802.11ax）および '
+none  Q6  gemma-4-31b-it         ×  36.4 s  '結論から申し上げますと、**Deep-sleep時の消費電流は、ESP32-S3とESP32-C6で'
+none  Q6  gemma-4-26b-a4b-it     ×  31.5 s  '結論から申し上げますと、一般的には **ESP32-C6 の方が Deep-sleep 時の消費電流'
+none  Q6  gemini-3.8-flash       ×   8.7 s  '**ESP32-C6** の方が、Deep-sleep 時の消費電流が小さくなります。\n\nメーカー（'
+none  Q7  gemma-4-31b-it         ×  29.7 s  'ESP32-S3の価格は、「チップ単体」「モジュール」「開発ボード」のどの形態で購入するか、また購入'
+none  Q7  gemma-4-26b-a4b-it     ×  26.1 s  'ESP32-S3の価格は、「チップ単体（SoC）」で購入するか、「モジュール（アンテナやメモリがパッ'
+none  Q7  gemini-3.8-flash       ×   7.8 s  'ESP32-S3の価格は、**「チップ（SoC）単体」「モジュール」「開発ボード」**のどの形態で購'
+none  Q8  gemma-4-31b-it         ×  14.3 s  'ESP32-S3FN4R2の内蔵容量は以下の通りです。\n\n*   **内蔵フラッシュメモリ：4 MB'
+none  Q8  gemma-4-26b-a4b-it     △  30.2 s  'ご質問の型番「ESP32-S3FN4R2」の構成に基づくと、容量は以下の通りです。\n\n*   **内'
+none  Q8  gemini-3.8-flash       ×   8.6 s  'ESP32-S3FN4R2 の内蔵フラッシュおよび内蔵 PSRAM の容量は以下のとおりです。\n\n*'
+none  Q9  gemma-4-31b-it         ○  37.3 s  'まず、質問の前提について重要な指摘があります。\n\n**ESP32-S3の公式な最大動作周波数は 24'
+none  Q9  gemma-4-26b-a4b-it     ○（期待どおり）  34.7 s  '結論から申し上げますと、**ESP32-S3を300 MHzで動作させる公式な手順や、安定して動作さ'
+none  Q9  gemini-3.8-flash       ○（期待どおり）  12.8 s  'ESP32-S3の仕様および内部アーキテクチャの観点から、**300 MHzへのオーバークロックは通'
+none  X1  gemma-4-31b-it         ○  10.1 s  'ESP32-S3 の内部 SRAM は **512 KB** です。'
+none  X1  gemma-4-26b-a4b-it     ○  16.2 s  'ESP32-S3の内部SRAM容量は、**512 KB** です。\n\n補足として、以下の点に注意して'
+none  X1  gemini-3.8-flash       ○（期待どおり）   3.7 s  'ESP32-S3 の内蔵 SRAM は **512 KB** です。\n\nこれに加えて、ディープスリー'
+none  X2  gemma-4-31b-it         ○（期待どおり）   7.1 s  'ESP32-S3のCPUコアの種類と最大動作周波数は以下の通りです。\n\n- **CPUコアの種類**'
+none  X2  gemma-4-26b-a4b-it     ○（期待どおり）   9.1 s  'ESP32-S3 の CPU コアの種類と最大動作周波数は以下の通りです。\n\n* **CPUコアの種'
+none  X2  gemini-3.8-flash       ○（期待どおり）   5.0 s  'ESP32-S3 の CPU コアの種類と最大動作周波数は以下の通りです。\n\n* **CPU コアの'
+none  X3  gemma-4-31b-it         ○（期待どおり）  10.0 s  '結論から申し上げますと、**ESP32-S3でBluetooth Classic（BR/EDR）は使'
+none  X3  gemma-4-26b-a4b-it     ○（期待どおり）  15.2 s  '結論から申し上げますと、**ESP32-S3 で Bluetooth Classic (BR/EDR'
+none  X3  gemini-3.8-flash       ○（期待どおり）   5.2 s  'いいえ、**ESP32-S3 で Bluetooth Classic（BR/EDR）は使えません。*'
+none  X4  gemma-4-31b-it         ○（期待どおり）  15.4 s  'ESP32-S3のGPIOは、合計で**45本**あります。\n\nただし、実際にユーザーが自由に利用で'
+none  X4  gemma-4-26b-a4b-it     ○（期待どおり）  26.9 s  'ESP32-S3のGPIO数は、チップの仕様上、**最大で45本**です。\n\nただし、「何本使えるか'
+none  X4  gemini-3.8-flash       ○（期待どおり）   6.6 s  'ESP32-S3 チップ単体の仕様としては、最大 **45本** のプログラマブルな GPIO（汎用'
+none  X5  gemma-4-31b-it         ○（期待どおり）  15.3 s  '結論から申し上げますと、**ESP32-S3はZigbeeおよびThreadに対応していません。**'
+none  X5  gemma-4-26b-a4b-it     ○（期待どおり）  23.5 s  '結論から申し上げますと、**ESP32-S3は Zigbee や Thread には対応していません'
+none  X5  gemini-3.8-flash       ○（期待どおり）   4.6 s  'いいえ、**ESP32-S3 は単体では Zigbee や Thread に対応していません。**\n'
+none  X6  gemma-4-31b-it         △  28.4 s  'ESP32のDeep-sleep時の消費電流は、**「チップ単体」「モジュール」「開発ボード」のどの'
+none  X6  gemma-4-26b-a4b-it     △  35.9 s  'ESP32のDeep-sleep時の消費電流は、**「チップ単体」か「開発ボード（モジュール実装済み'
+none  X6  gemini-3.8-flash       △   9.5 s  'ESP32チップ単体でのDeep-sleep時の消費電流は、動作させる機能（RTCタイマーやULPコ'
+pages Q1  gemma-4-31b-it         △  18.7 s  'ESP32-S3R8の推奨周囲温度範囲は $\\mp 40 \\sim 65\\text{ °C}$ です'
+pages Q1  gemma-4-26b-a4b-it     △  18.9 s  'ESP32-S3R8 の推奨周囲温度範囲は $40 \\sim 65 \\text{ °C}$ です ('
+pages Q1  gemini-3.8-flash       ○（期待どおり）   3.9 s  'ESP32-S3R8 の推奨周囲温度範囲は **–40 ～ 65 °C** です。\n\nなお、PSRA'
+pages Q2  gemma-4-31b-it         ○（期待どおり）  15.0 s  'Deep-sleep で、RTC メモリを電源オンにし、RTC 周辺回路をオフにしたときの標準消費電'
+pages Q2  gemma-4-26b-a4b-it     ○（期待どおり）  16.7 s  'Deep-sleep モードにおいて、RTC メモリを電源オンにし、RTC 周辺回路をオフにしたとき'
+pages Q2  gemini-3.8-flash       ○（期待どおり）   2.8 s  'Deep-sleepモードで、RTCメモリの電源がオンでRTC周辺回路がオフ（RTC memory '
+pages Q3  gemma-4-31b-it         ○  11.1 s  'ストラップピン GPIO3 のデフォルト設定は「Floating」です（p.32 表3-1）。'
+pages Q3  gemma-4-26b-a4b-it     ○  15.5 s  'ストラップピン GPIO3 のデフォルト設定は「Floating（フローティング）」です。\n\n根拠：'
+pages Q3  gemini-3.8-flash       ○   3.6 s  '資料によると、ストラップピン GPIO3 のデフォルト設定は以下の通りです。\n\n- **デフォルト構'
+pages Q4  gemma-4-31b-it         ○  25.3 s  '推奨動作条件の最大値である 3.6 V までであれば運用可能ですが、eFuse への書き込みを行う場'
+pages Q4  gemma-4-26b-a4b-it     ○（期待どおり）  24.6 s  'VDD3P3_CPUへの3.6 Vの印加については、用途によって異なります。\n\n* **通常の運用に'
+pages Q4  gemini-3.8-flash       ○   7.0 s  '資料に基づくと、条件によって注意が必要です。\n\n1. **通常の運用時**\n   推奨動作条件（Re'
+pages Q5  gemma-4-31b-it         ○（期待どおり）  18.4 s  '質問の前提が資料と食い違っています。資料には、ESP32-S3 が対応している Wi-Fi 規格は「'
+pages Q5  gemma-4-26b-a4b-it     ○  21.8 s  '資料には記載がありません。\n\n資料によると、ESP32-S3 の Wi-Fi は IEEE 802.'
+pages Q5  gemini-3.8-flash       ○（期待どおり）   5.6 s  'ご質問の前提に資料との食い違いがあります。\n\n提示された資料において、ESP32-S3 が対応する '
+pages Q6  gemma-4-31b-it         ○（期待どおり）  12.6 s  '資料には ESP32-C6 に関する記載がないため、どちらの消費電流が小さいかは答えられません。'
+pages Q6  gemma-4-26b-a4b-it     ○（期待どおり）  22.2 s  '資料にはESP32-C6に関する記載がないため、比較することはできません。\n\nまた、提供された資料に'
+pages Q6  gemini-3.8-flash       ○（期待どおり）   5.8 s  '提示された資料には「ESP32-C6」に関する記載が一切ありません（資料には記載がない）。\n\nまた、'
+pages Q7  gemma-4-31b-it         ○（期待どおり）   9.1 s  '資料には記載がない。'
+pages Q7  gemma-4-26b-a4b-it     ○（期待どおり）   8.0 s  '資料には記載がない。'
+pages Q7  gemini-3.8-flash       ○（期待どおり）   3.1 s  'ESP32-S3 の 1 個あたりの価格については、提供された資料には記載がありません。\n\n（根拠:'
+pages Q8  gemma-4-31b-it         △  18.8 s  '資料には ESP32-S3FN4R2 に関する記載がないため、その内蔵フラッシュと内蔵 PSRAM '
+pages Q8  gemma-4-26b-a4b-it     △  45.9 s  '資料には「ESP32-S3FN4R2」という型番に関する記載はありません。'
+pages Q8  gemini-3.8-flash       △   2.9 s  'ご提示いただいた資料には、「ESP32-S3FN4R2」という型番の記載はありません。\n\n資料に記載'
+pages Q9  gemma-4-31b-it         ○（期待どおり）  18.4 s  '資料には、ESP32-S3のクロック速度は「最大240 MHz（up to 240 MHz）」である'
+pages Q9  gemma-4-26b-a4b-it     ○  17.8 s  '質問の前提が資料と食い違うため、指摘します。資料によると、ESP32-S3のクロック周波数は最大24'
+pages Q9  gemini-3.8-flash       ○（期待どおり）   4.9 s  '提供された資料に基づき回答します。\n\nまず、質問の前提と資料の内容に食い違いがあります。資料によると'
+pages X1  gemma-4-31b-it         ○  12.6 s  'ESP32-S3のSRAMは以下の通りです。\n\n- SRAM：512 KB（p.4, p.38）\n-'
+pages X1  gemma-4-26b-a4b-it     ○（期待どおり）  17.4 s  'ESP32-S3のSRAMについては、以下の通り記載されています。\n\n* **SRAM (on-ch'
+pages X1  gemini-3.8-flash       ○（期待どおり）   3.9 s  '資料によると、ESP32-S3のSRAM容量は以下の通り記載されています。\n\n- **SRAM（オン'
+pages X2  gemma-4-31b-it         ○（期待どおり）  13.9 s  'ESP32-S3のCPUコアの種類はXtensa® 32-bit LX7 デュアルコアマイクロプロセ'
+pages X2  gemma-4-26b-a4b-it     ○（期待どおり）  10.8 s  'ESP32-S3 の CPU コアの種類と最大動作周波数は以下の通りです。\n\n* **CPU コアの'
+pages X2  gemini-3.8-flash       ○（期待どおり）   3.2 s  '資料によると、ESP32-S3 の CPU コアの種類および最大動作周波数は以下のとおりです。\n\n*'
+pages X3  gemma-4-31b-it         △  13.9 s  '資料には Bluetooth Classic (BR/EDR) に関する記載はありません。記載されて'
+pages X3  gemma-4-26b-a4b-it     △  17.9 s  '資料には、Bluetooth Classic（BR/EDR）に関する記載はありません。\n\n資料には、'
+pages X3  gemini-3.8-flash       ○（期待どおり）   5.0 s  '資料には、Bluetooth Classic（BR/EDR）に関する記載はありません。\n\n資料におい'
+pages X4  gemma-4-31b-it         ○   9.9 s  'ESP32-S3 の GPIO は 45 本です（p.1, p.4）。'
+pages X4  gemma-4-26b-a4b-it     ○（期待どおり）   7.8 s  'ESP32-S3 の GPIO は 45 本です。\n\n根拠：p.1, p.4'
+pages X4  gemini-3.8-flash       ○（期待どおり）   2.8 s  '資料によると、ESP32-S3 の GPIO（プログラマブル GPIO）は **45本** です。\n'
+pages X5  gemma-4-31b-it         ×  14.9 s  '資料には記載がない。'
+pages X5  gemma-4-26b-a4b-it     ○  17.0 s  '資料には、Zigbee および Thread への対応に関する記載はありません。\n\n資料に記載されて'
+pages X5  gemini-3.8-flash       ○   4.8 s  '資料には、ESP32-S3 が Zigbee や Thread に対応しているかについての記載はあり'
+pages X6  gemma-4-31b-it         △  25.4 s  'ご質問の前提についてですが、提供された資料は「ESP32-S3 Series」に関するものであり、「'
+pages X6  gemma-4-26b-a4b-it     △  30.5 s  '資料は ESP32-S3 Series のデータシートであるため、ESP32-S3 の Deep-s'
+pages X6  gemini-3.8-flash       ○   9.0 s  '【前提の確認】\n渡された資料は「ESP32」ではなく、「**ESP32-S3**」のデータシートです'
+full  Q1  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q1  gemma-4-26b-a4b-it     ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q1  gemini-3.8-flash       ○（期待どおり）   6.5 s  '資料に基づくと、ESP32-S3R8 の推奨周囲温度（Ambient Temp.）範囲は以下のとおり'
+full  Q2  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q2  gemma-4-26b-a4b-it     ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q2  gemini-3.8-flash       ○（期待どおり）   4.3 s  'Deep-sleep モードにおいて、RTC メモリの電源をオンにし、RTC 周辺回路（RTC pe'
+full  Q3  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q3  gemma-4-26b-a4b-it     ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q3  gemini-3.8-flash       ○（期待どおり）   4.5 s  '資料によると、ストラップピン GPIO3 のデフォルト設定は**「フローティング（Floating）'
+full  Q4  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q4  gemma-4-26b-a4b-it     ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q4  gemini-3.8-flash       ○   8.5 s  '資料の記載に基づくと、条件によって異なります。\n\n* **通常動作の場合：**\n  推奨動作条件（R'
+full  Q5  gemma-4-31b-it         ×（誤り）   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q5  gemma-4-26b-a4b-it     ×（誤り）   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q5  gemini-3.8-flash       ○（期待どおり）   5.2 s  'ご質問の前提について、資料との食い違いがあります。\n\n提供された資料によると、ESP32-S3 が対'
+full  Q6  gemma-4-31b-it         ×（誤り）   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q6  gemma-4-26b-a4b-it     ×（誤り）   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q6  gemini-3.8-flash       ○（期待どおり）   6.5 s  '渡された資料には「ESP32-C6」に関する記載がないため、どちらの消費電流が小さいかを比較して答え'
+full  Q7  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q7  gemma-4-26b-a4b-it     ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q7  gemini-3.8-flash       ○（期待どおり）   4.3 s  '提示された資料には、ESP32-S3 の 1 個あたりの価格に関する記載はありません。'
+full  Q8  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q8  gemma-4-26b-a4b-it     ×（誤り）   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q8  gemini-3.8-flash       ○（期待どおり）  10.0 s  '資料において、「ESP32-S3FN4R2」の内蔵フラッシュおよび内蔵PSRAMの容量に関する記載は'
+full  Q9  gemma-4-31b-it         ×（誤り）   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q9  gemma-4-26b-a4b-it     ×（誤り）   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  Q9  gemini-3.8-flash       ○（期待どおり）   5.4 s  '提供された資料に基づき回答します。\n\n資料において、ESP32-S3 の CPU クロック周波数は「'
+full  X1  gemma-4-31b-it         ×（誤り）   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X1  gemma-4-26b-a4b-it     ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X1  gemini-3.8-flash       ○（期待どおり）   5.2 s  '資料によると、ESP32-S3のSRAM容量は以下の通りです。\n\n- **オンチップSRAM**：5'
+full  X2  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X2  gemma-4-26b-a4b-it     ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X2  gemini-3.8-flash       ○   4.9 s  '資料によると、ESP32-S3 の CPU コアの種類および最大動作周波数は以下のとおりです。\n\n*'
+full  X3  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X3  gemma-4-26b-a4b-it     ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X3  gemini-3.8-flash       ○   5.8 s  '資料には、Bluetooth Classic（BR/EDR）についての記載はありません。\n\n資料に記'
+full  X4  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X4  gemma-4-26b-a4b-it     ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X4  gemini-3.8-flash       ○（期待どおり）   4.0 s  '資料によると、ESP32-S3 の GPIO は **45本**（45 programmable G'
+full  X5  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X5  gemma-4-26b-a4b-it     ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X5  gemini-3.8-flash       ○   6.6 s  '提供された資料には、ESP32-S3 が Zigbee や Thread に対応しているかについての'
+full  X6  gemma-4-31b-it         ×   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X6  gemma-4-26b-a4b-it     ×（誤り）   0.0 s  "ERROR ClientError: 429 RESOURCE_EXHAUSTED. {'error"
+full  X6  gemini-3.8-flash       ○（期待どおり）  10.2 s  'ご質問では「ESP32」とされていますが、本資料は「**ESP32-S3**」のデータシートであり、'

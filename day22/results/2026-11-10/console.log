@@ -1,0 +1,8 @@
+facts_2.1_1     37.7 s  SRAM:○○ CPU:○○ GPIO:○○ Deep-sleep:○○ Bluetooth:○○
+facts_pro_1     25.1 s  SRAM:○○ CPU:○○ GPIO:○○ Deep-sleep:○○ Bluetooth:○○
+report_2.1_1    23.2 s  SRAM:○○ CPU:○○ GPIO:○○ Deep-sleep:○○ Bluetooth:○○
+report_pro_1    38.3 s  SRAM:○○ CPU:○○ GPIO:○○ Deep-sleep:○○ Bluetooth:○○
+facts_2.1_2     23.3 s  SRAM:○○ CPU:○○ GPIO:○○ Deep-sleep:○○ Bluetooth:○○
+facts_pro_2     26.5 s  SRAM:○○ CPU:○○ GPIO:○○ Deep-sleep:○○ Bluetooth:○○
+report_2.1_2    32.2 s  SRAM:○○ CPU:○× GPIO:○○ Deep-sleep:○○ Bluetooth:○○
+report_pro_2    31.3 s  SRAM:○○ CPU:○○ GPIO:○○ Deep-sleep:○○ Bluetooth:○○

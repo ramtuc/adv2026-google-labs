@@ -1,0 +1,221 @@
+  in_progress 1 s
+  in_progress 32 s
+  in_progress 63 s
+  in_progress 94 s
+  in_progress 126 s
+  in_progress 157 s
+  in_progress 188 s
+  in_progress 220 s
+  in_progress 252 s
+  in_progress 284 s
+  in_progress 316 s
+  in_progress 347 s
+  in_progress 379 s
+  in_progress 411 s
+  in_progress 442 s
+  in_progress 474 s
+  in_progress 506 s
+  in_progress 538 s
+plan: completed 572 s id=v1_Chdsa2I0YXNiTkU4TDAxZThQdU43czhRURIXbGtiNGFzYk5FOEwwMWU4UHVON3M4UVE
+# ESP32-S3の主な仕様に関するWeb情報の調査と公式データシートとの照合
+
+## Executive Summary
+
+本レポートは、ESP32-S3の仕様に関するWeb上の記述と公式データシートの照合結果をまとめた、開発者および購買担当者向けの決定版リファレンスである。調査の結果、Web上の多くの情報源において、ESP32-S3の仕様が初代ESP32や後継のESP32-C6と混同されている事実が明らかになった。具体的には、SRAM容量を「520 KB」、GPIO本数を「34本」、Bluetoothを「4.2 Classic対応」、Deep-sleep消費電流を「10 μA」とする初代ESP32との取り違えや、CPUアーキテクチャを「RISC-V 160MHz」とする他モデル（Cシリーズ）との重大な誤記が非常に多く見受けられる。本稿中段の「Web記事の値と公式データシートの照合表」にて、これら誤情報の具体例と出典URL、それらがどのモデルの仕様と一致しているかの証拠を網羅的に提示している。
+
+このような誤報が蔓延する根本的な原因は、「ESP32」という単語がシリーズ全体の総称として一般名詞化し、販売業者や執筆者が検索エンジン最適化（SEO）の目的で過去のスペックシートをそのままコピー＆ペーストしていること、ならびにチップ単体（SoC）と開発ボード（周辺回路を含む）の仕様を混同していることにあると結論付けられる。
+
+ESP32-S3の仕様に関するWeb上の情報を詳細に調査した結果、以下のような重要な事実が明らかになった。
+
+*   **蔓延する仕様の取り違え**: Web上の多くのショップページやブログ記事において、ESP32-S3の仕様が初代ESP32やESP32-C6の仕様と混同されて記載されている。
+*   **初代ESP32との混同**: SRAM容量を「520 KB」、GPIO本数を「34本」、Bluetoothを「4.2 Classic対応」、Deep-sleep消費電流を「10 μA」とする誤りが非常に多く、これらはすべて初代ESP32の公式値と一致している。
+*   **別アーキテクチャとの混同**: ESP32-S3のCPUを「RISC-V 160MHz」と記載する重大な誤りも見受けられ、これはESP32-C6などの後継または並行モデルとの取り違えである可能性が高い。
+*   **構造的な誤報の背景**: 「ESP32」という単語がシリーズ全体の総称として使われることが多く、販売業者や執筆者が過去の製品（初代ESP32）のスペックシートをそのままコピー＆ペーストしていることが、誤情報拡散の最大の原因であると推測される。
+
+IoT（Internet of Things：モノのインターネット）デバイス向けに広く普及しているEspressif Systems（エスプレシフ・システムズ）のマイクロコントローラ「ESP32」シリーズは、2023年9月にはESP8266チップの発売以来の累計出荷数が10億個を突破し、直近では年間約2億個を出荷するほどの圧倒的な市場シェアと人気を集めている [cite: 1, 2, 3]。現在、同社は初代ESP32に加え、Sシリーズ、Cシリーズ、Hシリーズ、Pシリーズ、Eシリーズなど多岐にわたる派生モデルを展開しており（公式に発表されている14チップのうち、11チップが量産中）、モジュール単体で約2ドル〜4.8ドル（約300〜700円）という低価格でありながら強力な性能を提供している [cite: 4, 5]。その中でも「ESP32-S3」は、AI（人工知能）処理や画像処理に特化した強力なモデルとして開発者から高い人気を集めている。
+
+しかし、ブログ、解説サイト、電子部品ショップの商品ページといったWeb上の記事では、ESP32-S3の主要な仕様（SRAM容量、CPUアーキテクチャ、GPIO本数、Deep-sleep時の消費電流、Bluetoothのバージョン）について、不正確な記述が散見される。本レポートでは、Espressif社の公式データシートを絶対的な「正解」として設定し、Web上でどのような誤った値が流通しているのかを抽出する。さらに、その誤りの値が初代ESP32やESP32-C6の仕様とどのように一致しているか（取り違えの構造）を分析し、出典URLを付与した照合表と共に、なぜ特定の項目に誤りが集中するのかについて詳細に考察する。
+
+## 公式データシートが示す各モデルの正確な仕様
+
+Web上の誤った情報を分析するためには、まず基準となる「正解」を明確にする必要がある。ここでは、Espressif Systemsの公式データシートに基づき、ESP32-S3、初代ESP32、およびESP32-C6の主要スペックを整理する。直感的な比較のため、まず以下の比較表を示す。
+
+### ESP32シリーズ主要3モデルの公式スペック比較表
+
+| 項目 | ESP32-S3 (本稿の正解値) | 初代ESP32 (誤情報元1) | ESP32-C6 (誤情報元2) |
+| :--- | :--- | :--- | :--- |
+| **CPUアーキテクチャ** | Xtensa LX7 (デュアルコア) | Xtensa LX6 (シングル/デュアル) | RISC-V (シングルコア + LPコア) |
+| **最大動作クロック** | 240 MHz | 240 MHz | 160 MHz |
+| **SRAM容量** | 512 KB | 520 KB | 528 KB (HP 512KB + LP 16KB) |
+| **GPIO本数 (最大)** | 45本 | 34本 | 30本 または 22本 (パッケージによる) |
+| **Deep-sleep消費電流** | 7 μA | 10 μA | 7 μA |
+| **Bluetooth対応** | Bluetooth 5 (LE) | Bluetooth v4.2 BR/EDR & BLE | Bluetooth 5.3 (LE) |
+
+### ESP32-S3の公式仕様（正解値）
+ESP32-S3は、AI処理や機械学習のエッジコンピューティング（端末側でのデータ処理）をターゲットにした高性能モデルである。
+公式データシートによれば、ESP32-S3のCPUには最大240 MHzで駆動する「Xtensa（Cadence Tensilicaプロセッサアーキテクチャ） dual-core 32-bit LX7」マイクロプロセッサが採用されている [cite: 6]。SRAM（Static Random Access Memory：マイコンが処理を行う際の一時記憶領域）の容量は「512 KB」である [cite: 6]。また、外部機器と通信・制御を行うためのGPIO（General-Purpose Input/Output：汎用入出力ピン）は「45本」用意されている [cite: 6]。
+消費電力の面では、省電力待機状態であるDeep-sleep（ディープスリープ）モードでの消費電流は「7 μA」と定義されている [cite: 6]。通信機能については、Wi-Fiに加えて「Bluetooth 5 (LE) 」およびBluetooth Meshをサポートしているが、古い規格であるBluetooth Classicには対応していない [cite: 6]。
+
+### 比較対象1：初代ESP32の公式仕様
+ESP32シリーズの原点であり、現在でも広く使われているのが初代ESP32である。このモデルの仕様が、ESP32-S3の誤情報の最大の「供給源」となっている。
+初代ESP32は、最大240 MHzで動作する「Xtensa single-/dual-core 32-bit LX6」を搭載している [cite: 6]。SRAM容量はESP32-S3よりもわずかに大きい「520 KB」である [cite: 6]。GPIOの本数は「34本」と少なめである [cite: 6]。Deep-sleepモードの消費電流は「10 μA」である [cite: 6]。Bluetoothに関しては、省電力なBLE（Bluetooth Low Energy）だけでなく、音声伝送などに使われる古い規格「Bluetooth v4.2 BR/EDR（Basic Rate/Enhanced Data Rate：Classic Bluetooth）」の両方をサポートしているのが大きな特徴である [cite: 6]。
+
+### 比較対象2：ESP32-C6の公式仕様
+ESP32-C6は、Wi-Fi 6やThread/Zigbee（IEEE 802.15.4ベースの低消費電力メッシュネットワークプロトコル）などの最新通信規格に対応した省電力志向のモデルである [cite: 6]。
+CPUにはXtensaではなく、オープンソースの命令セットアーキテクチャである「RISC-V（リスクファイブ）」を採用しており、最大160 MHzで動作する高性能コア（HP）と最大20 MHzで動作する低消費電力コア（LP）を搭載している [cite: 6]。SRAMは合計「528 KB」（HP 512 KB + LP 16 KB）であり [cite: 6]、GPIOはパッケージによって異なり「30本または22本」である [cite: 6]。Deep-sleep時の消費電流は「7 μA」であり [cite: 6]、Bluetoothは「Bluetooth 5.3 (LE)」に対応している [cite: 6]。
+
+これらの公式仕様を比較することで、ESP32-S3の仕様として「520 KB」や「34本」という数値が出てきた場合、それが初代ESP32のデータからの流用であると断定できる。
+
+```json
+{
+  "concept": "A grouped bar chart comparing the official SRAM capacity and GPIO count of ESP32, ESP32-S3, and ESP32-C6, visually demonstrating how the S3's specs are often confused with the original ESP32.",
+  "reasoning_for_value": "The core of the user's query is the numerical mix-up between models. A visual comparison of the true numbers makes the precise nature of the error (e.g., 512KB vs 520KB, 45 vs 34 pins) immediately obvious, reinforcing the text's conclusion without requiring the user to cross-reference the text heavily.",
+  "title": "ESP32シリーズの公式スペック比較：SRAM容量とGPIO本数の差異",
+  "visual_type": "Vertically stacked bar charts (Compound Visual). Top chart: SRAM Capacity (KB). Bottom chart: GPIO Pin Count.",
+  "generation_method": "CODE",
+  "justification_of_choice": "A bar chart is the optimal choice for comparing discrete numerical values (SRAM size, GPIO count) across distinct categories (chip models). Alternatives like a pie chart are completely invalid for this data, and a simple table, while required and present in the text, lacks the immediate visual impact of seeing the subtle 512 vs 520 difference. Stacking them vertically prevents the forbidden dual-axis issue.",
+  "caption": "ESP32-S3のSRAM（<b>512 KB</b>）およびGPIO（<b>45本</b>）は、Web上でしばしば初代ESP32の数値（520 KB、34本）と混同されている。",
+  "data_specification": {
+    "source_snippets_ids": [
+      146,
+      151,
+      156
+    ],
+    "data_structure": "Array of objects: [{model: 'ESP32 (初代)', sram: 520, gpio: 34}, {model: 'ESP32-S3', sram: 512, gpio: 45}, {model: 'ESP32-C6', sram: 528, gpio: 30}]",
+    "mapping": "Two separate charts stacked vertically. Chart 1 (Top): X-axis = model, Y-axis = sram. Chart 2 (Bottom): X-axis = model, Y-axis = gpio. Use a Focal Palette color for ESP32-S3 to highlight it against the others."
+  },
+  "design_and_interaction": {
+    "layout": "Vertical stack of two bar charts. Top chart labeled 'SRAM容量 (KB)', bottom chart labeled 'GPIO本数'. Shared X-axis categories.",
+    "aesthetics": {
+      "style": "Professional & Corporate",
+      "color_palette": "Background: #FFFFFF. ESP32-S3 bars: #1A73E8 (Google Blue). Other models: #AAAAAA (Medium Gray). Primary Text: #111111.",
+      "additional_details": "Include data labels on top of each bar for precise reading."
+    },
+    "interactivity": "Tooltip on hover showing exact values.",
+    "animation": "No animation."
+  }
+}
+```
+
+## Web記事に見られる誤情報の分類と分析
+
+調査の結果、ブログやオンラインショップの製品説明には、他モデルの仕様をESP32-S3のものとして誤って記載しているケースが多数確認された。ここでは、項目ごとに具体的な誤りの内容とその背景を分析する。
+
+### 1. SRAM容量の誤り（520 KBへの取り違え）
+SRAM容量は、最も誤用が目立つ項目である。ESP32-S3のSRAMは正しくは512 KBであるが、非常に多くのサイトで「520 KB」と記載されている。
+例えば、LVGLのフォーラムに投稿されたESP32-S3搭載ディスプレイモジュールの製品スペックには「Built-in 520KB SRAM」と記載されている [cite: 7]。同様に、VieweDisplayなどのECサイトや解説記事でも「520KB SRAM」という表現が頻出している [cite: 8]。
+この「520 KB」という数値は、初代ESP32の公式SRAM容量と完全に一致している [cite: 6]。執筆者や販売業者が、ESP32-S3の仕様を調査せずに、よく知られている初代ESP32のスペック表をそのままコピーしてしまった結果であると推測できる。
+
+### 2. GPIO本数の誤り（34本への取り違え）
+GPIOは、マイコンが外部のセンサーやLEDなどを制御するための「手足」となる重要なピンである。ESP32-S3は45本のGPIOを備えているが [cite: 6]、Web上ではこれを「34本」とする誤記が見られる。
+AliExpress等の商品マニュアル [cite: 9] や、技術解説ブログ「Ariat-Tech」の記事において、「ESP32-S3開発ボードは34個のGPIOピンを備えている」といった記述が確認できる [cite: 10]。これも初代ESP32のGPIO数（34本）と完全に一致しており [cite: 6]、初代モデルの仕様をS3のものとして混同している明白な証拠である。ボード（基板）上で物理的に引き出されているピンの数が34本であったとしても、チップ自体の仕様として「GPIOが34本」と記述するのはチップスペックとしての誤りである。
+
+### 3. CPUアーキテクチャとクロック周波数の誤り（RISC-V 160MHzへの取り違え）
+極めて深刻な技術的誤りとして、ESP32-S3のCPUを「RISC-V 160MHz」と記載しているケースが存在する。
+電子部品ショップ「Waveshare」の「ESP32-C6-LCD-1.69」という製品のページでは、見出しや機能説明に「ESP32-S3 suitable for AIoT... Equipped with a high-performance 32-bit RISC-V processor... main frequency is up to 160 MHz」と記載されている [cite: 11]。また、別ショップのESP32-S3 SuperMiniボードのページでも「CPU RISC-V 160MHz」と書かれている [cite: 12]。
+ESP32-S3のCPUは正しくは「Xtensa 32-bit LX7 (240 MHz)」である [cite: 6]。RISC-Vアーキテクチャを採用し、最大160 MHzで動作するのは「ESP32-C6」や「ESP32-C3」といったCシリーズのチップである [cite: 6]。これは、ショップ側が複数のESP32派生モデル（SシリーズとCシリーズ）の製品ページを作成する過程で、C6の製品説明文を誤ってS3のページに流用してしまった（またはその逆）ことによる取り違えである。
+
+### 4. Bluetoothバージョンの誤り（Bluetooth 4.2 Classicへの取り違え）
+Bluetooth対応に関しても、ESP32-S3に「Bluetooth 4.2 BR/EDR（Classic）」が搭載されているという誤情報が見られる。
+前述のLVGLフォーラムで引用された製品説明には、SRAMの誤りと共に「Bluetooth 4.2BR/EDR and BLE」という記載がある [cite: 7]。
+ESP32-S3はBluetooth 5 (LE) にのみ対応しており、Bluetooth Classicには非対応である [cite: 6]。Bluetooth ClassicとBLEの双方をサポートしているのは初代ESP32のみである [cite: 6]。クラシック通信が必須な古いオーディオ機器やシリアル通信プロトコル（SPP）を使用するプロジェクトにおいて、この誤情報を信じてESP32-S3を購入すると、通信が確立できないという致命的な問題に直面することになる。
+
+### 5. Deep-sleep消費電流の誤り（10 μAへの取り違え）
+バッテリー駆動のIoTデバイスにとって重要なDeep-sleepモードの消費電流についても誤りが見られる。
+ESP32-S3-Leafという開発ボードの解説Wikiにおいて、「power consumption is only 10uA in deep sleep mode」と紹介されている [cite: 13]。
+ESP32-S3チップ単体の公式なDeep-sleep時消費電流は「7 μA」である [cite: 6]。「10 μA」という値は初代ESP32の公式スペックである [cite: 6]。開発ボード上のレギュレータ（電源回路）の漏れ電流等を含めたボード全体の消費電流として10 μAと記載した可能性も否定できないが、チップの仕様説明として初代ESP32の値を混同している可能性が高い。
+
+## Web記事の値と公式データシートの照合表
+
+上記で分析したWeb上の誤情報を、Espressifの公式データシート（正解）および取り違え元となった他モデルの仕様と照らし合わせて以下の表にまとめる。
+
+| 出典URL | 項目 | Web記事に記載されている誤った値 | 公式データシートの正解値 (ESP32-S3) | 取り違えが推測される他モデルとその仕様 |
+| :--- | :--- | :--- | :--- | :--- |
+| https://forum.lvgl.io/t/user-set-up-for-apklvsr-esp32-display-esp32-s3-bluetooth-wifi-development-board-4-3-esp32-s3-resistive-touch-display-esp32-tn-module-tft-touchscreen-compatible-with-arduino-lvgl/17412 [cite: 7] | SRAM<br>Bluetooth | SRAM: 520KB<br>BT: 4.2 BR/EDR (Classic) | SRAM: 512 KB [cite: 6]<br>BT: Bluetooth 5 (LE) [cite: 6] | 初代ESP32<br>(SRAM 520KB, BT 4.2) [cite: 6] |
+| https://viewedisplay.com/product/esp32-s3-1-5-inch-amoled-touch-screen-dev-board-uart-smart-display/ [cite: 8] | SRAM | SRAM: 520KB | SRAM: 512 KB [cite: 6] | 初代ESP32<br>(SRAM 520KB) [cite: 6] |
+| https://www.waveshare.com/esp32-c6-lcd-1.69.htm [cite: 11] | CPU | RISC-V プロセッサ<br>最大 160 MHz | Xtensa LX7 デュアルコア<br>最大 240 MHz [cite: 6] | ESP32-C6 / C3<br>(RISC-V 160 MHz) [cite: 6] |
+| https://ja.manuals.plus/asin/B0D47HBFDY [cite: 14] | CPU<br>SRAM | 160 MHz<br>520KB | 240 MHz [cite: 6]<br>512 KB [cite: 6] | ESP32-C6 (160 MHz) [cite: 6]<br>初代ESP32 (520KB) [cite: 6] |
+| https://ae-pic-a1.aliexpress-media.com/kf/Sc81942db1dd24199b1a11233e78c0a02w.pdf [cite: 9] | GPIO | 34本 | 45本 [cite: 6] | 初代ESP32<br>(34本) [cite: 6] |
+| https://www.ariat-tech.com/blog/understanding-the-differences-esp32-and-esp32-s3-technical-and-performance-analysis.html [cite: 10] | GPIO | 34本 | 45本 [cite: 6] | 初代ESP32<br>(34本) [cite: 6] |
+| https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-s3-leaf [cite: 13] | Deep-sleep | 10 μA | 7 μA [cite: 6] | 初代ESP32<br>(10 μA) [cite: 6] |
+| https://www.joicyjaison.com/?o=38927274592500 [cite: 15] | GPIO | 34ピン | 45ピン [cite: 6] | 初代ESP32<br>(34本) [cite: 6] |
+| https://www.sheen.bot/store/esp32-s3-round-touch-display-development-board-1-85-ai-voice-wireless-charging [cite: 16] | SRAM | 520KB | 512 KB [cite: 6] | 初代ESP32<br>(520KB) [cite: 6] |
+| https://pastechl.me/Placa-De-Desarrollo-Con-WiFi-BLE-5-0-CPU-RISC-V-160MHz-4MB-533128 [cite: 12] | CPU | RISC-V 160MHz | Xtensa LX7 240MHz [cite: 6] | ESP32-C6 / C3<br>(RISC-V 160 MHz) [cite: 6] |
+
+*注意: 開発ボード（モジュール）の販売ページにおいて、ボードから物理的に引き出されているピンの数を「GPIO数」として記載しているケースもあるが、チップ自身の仕様を説明する文脈で「34 GPIO」と記述している場合は、明確なチップスペックの誤記（初代との混同）であると見なしている。*
+
+## 誤りが多い項目とその理由の推測
+
+これまでの分析から、ESP32-S3のWeb上の記述においては、特定の項目（特にSRAM、GPIO、Bluetooth）に極端に誤りが集中していることがわかる。なぜこのような事態が生じているのか、その背景にある理由を以下に推測・考察する。
+
+### 1. 「ESP32」という単語の一般名詞化とSEO（検索エンジン最適化）の影響
+2016年に登場した初代「ESP32」は、低価格でありながらWi-FiとBluetoothを搭載していることでIoT界隈で爆発的な人気を博した。その結果、「ESP32」という単語自体が、Espressif社のマイコン全体を指す代名詞（総称）として定着してしまった。
+オンラインショップや技術ブログがESP32-S3の製品ページを作成する際、検索ヒット率（SEO）を高めるために、過去に作成した「ESP32」のテンプレートや製品説明をそのままコピー＆ペーストしているケースが非常に多いと考えられる。その結果、初代ESP32のスペックである「SRAM 520KB」「34 GPIO」「Bluetooth 4.2」という数値が、ESP32-S3の説明文にそのまま残存してしまうのである。
+
+### 2. チップ（SoC）と開発ボード（モジュール）の仕様の混同
+Web上の記事では、Espressif社が製造する「SoC（System on a Chip：チップ本体）」の仕様と、サードパーティが製造する「開発ボード（DevKit等）」の仕様が明確に区別されずに記述されることが多い。
+例えば、GPIOの数について、チップ本体のS3は45本のGPIOを備えているが [cite: 6]、実装面積の限られた小型の開発ボードではすべてのピンを引き出せないため、ボード上の端子がたまたま34ピン前後になることがある。これを執筆者が「ESP32-S3のGPIOは34本である」と曲解して記事にしてしまうケースがある。Deep-sleepの消費電流に関しても、チップ単体では7 μAであるが [cite: 6]、開発ボード上にはUSBシリアル変換ICや電源レギュレータなどの周辺部品が搭載されており、それらの漏れ電流（リーク電流）が加算されるため、実際に測定すると10 μA〜数百 μAに達することがある。チップの理論値とボードの実際の測定値が混在して記述されることで、情報の混乱に拍車がかかっている。
+
+### 3. 多岐にわたる派生モデルの急速な展開とアーキテクチャ転換による混乱
+Espressif社は、初代ESP32の成功以降、2020年から2023年頃にかけての短期間に13種類もの新たなSoCを市場へ一挙に投入した [cite: 5]。
+特にESP32-S3（Xtensa LX7）とESP32-C6（RISC-V）は、ターゲットとする用途や内部構造が根本的に異なる。特筆すべき時代背景として、2022年4月にEspressif社のCEOであるTeo Swee Ann氏が、「特別な理由がない限り、今後の新規チップ開発をオープンソースアーキテクチャであるRISC-Vへ完全に移行する」という方針を公表したことが挙げられる [cite: 17, 18, 19]。この方針転換により、ESP32-S3は従来のXtensaアーキテクチャを採用した事実上最後のハイエンド・メインストリーム機の一つとなった。
+一方で、後継の主力省電力モデルであるCシリーズ（ESP32-C3やESP32-C6）はすべてRISC-Vを採用している [cite: 5, 20]。ショップの販売担当者やライトなブログ執筆者はこのアーキテクチャの根本的な転換期を十分に認識しておらず、これらの型番の差異を単なる「マイナーチェンジ」として捉えがちである。そのため、別製品であるESP32-C6の「RISC-V 160MHz」という特徴を、そのままESP32-S3の特徴として誤記してしまう事態（前述のWaveshare等の例）が頻発していると考えられる [cite: 11, 18]。
+
+## 正確なESP32-S3を入手するための調達・検証ガイド
+
+Web上にESP32-S3の誤ったスペック情報が溢れている現状において、読者が直面する最も切実な課題は、「商品ページが誤っている中で、どうすれば本物のESP32-S3を確実に入手できるのか」ということである。製品を安全に調達し、到着後に仕様を検証するためには、以下の物理的および流通上のステップを踏むことが強く推奨される。
+
+### 1. 信頼できる正規代理店からの調達
+AliExpressやAmazonに出店しているサードパーティの販売業者は、製品説明に他モデルのテンプレートを無断流用することが多く、記載情報と実際の商品が一致しないリスクが高い。確実な入手のためには、Mouser ElectronicsやDigiKeyといったEspressif製品の正規グローバルディストリビューター（販売代理店）を利用することが鉄則である [cite: 21, 22]。これらの販売網では、メーカーの公式な型番（例：ESP32-S3-WROOM-1）に基づいた厳密な在庫管理が行われているため、説明文の誤記による別製品の混入リスクを排除できる。
+
+### 2. チップおよびモジュール印字の物理的検証
+製品が手元に届いた後は、ソフトウェアで書き込みを行う前に、物理的な刻印（レーザーエッチング）を確認することで確実な検証が可能である。
+
+*   **EMIシールドの印字確認**: 開発ボード上に搭載されている銀色の金属カバー（EMIシールド）の表面には、Espressifのロゴと共にモジュール名（例：「ESP32-S3-WROOM-1」や「ESP32-S3-MINI-1」など）が明記されている。ここに「ESP32-WROOM-32」や「ESP32-C6」と書かれている場合は、商品ページの記載に関わらず別モデルである。
+*   **SoC単体の印字確認**: 金属シールドがない製品（PICOモジュールなど）や、チップ単体が実装されているボードの場合、黒いICチップ（SoC）の表面自体にレーザー刻印が施されている。1行目または2行目に「ESP32-S3」という文字が確認できれば、Xtensa LX7コアと512 KB SRAMを備えた本来のS3モデルであると断定できる。
+
+総じて、ESP32-S3の正しい仕様を把握し確実に運用するためには、ブログやショップの情報を鵜呑みにせず、Espressif Systemsが提供する公式のデータシートやテクニカルリファレンスマニュアルに直接当たるリテラシーと、物理的な現物確認の徹底が、開発者には強く求められていると言える。
+
+**Sources:**
+1. [espressif.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFpzm0Cx8CV4w5gmoOolB1TaVvLbi9n5oWsaxliLqX92xuJjRMeEKcvbykXYX3TB0B77tA64z_0_t31z8SjN9grJy0Tk9-hIfXR_c56fnXviLkb8vy2Ry8A6RTtWbXhHobGjS8r6peiFxOCNEk=)
+2. [schoolbag.edu.sg](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHDV5E_zbn4WcmPrgD8ORNMdq3heuqWKrLT9tZ7W-A3UDmy8B4egTiAtmsc5wMzJk12nLyV8e_OES30EqDiAiIzABKo_tpGqAxrcq_pC7S5qBSIAtW90y1-xD8ajfNjD219rYBy-ajN2qXmGYXoeVGdAem5RWw_aditi5T5hQtgYLWlAeDswV70qXHVMv1UeJuFFHDi-pYbalSr55bUF1mnbauhf_IaeSMCWdkjsYByl1BKm96mAF0g6X0=)
+3. [nozominetworks.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG4uIYy8JHqfdifFkcqzkUr5To5tgjCrD3aP8717mqWAwB-aqnNvc0Y8tbmX1c2I2qtN-GT3hkvtJnIqPqi0StLxKxhzWDrQ0VPf8XK3U2i98k7BV3e24Hv8qHXqqG7QZlmMxLYkcyvuufRv-YYO2iWLvVEFZm2lt5YcaX_-0VE_c6kTEquuoQz_kuvZEu9O9YKMGQlHsaOTqs1B51S)
+4. [espressif.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH2JLzDdQ1XhjqiZNs91kaJo-GS-vo20q_0P2i9bZJFh0-lwxrVtDoF0asuP1TU6uJb_VlsB3X1Q64l3LtNYlkwM5XQ-uHWvz77ulrA-D2m1n8kSSAXDZ6bWpr4E-UTUPQ=)
+5. [espboards.dev](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEzAnr2ByF7I-xgtNnS13FzdDWqGjBmR6Iq2yMV5YDiaEdo1bs0Z1qFMTQOrEzQ1ageoVPuBWaqaN1WeNWIZctffNZjKk47fgK_PMgIBjb2S7CdOAo6UkCPtBSTad3QaRKc2j7I89Su)
+6. esp32-s3_datasheet_en.pdf (fileSearchStores/adv2026day12esp32sisters-ju6vzp26vplv)
+7. [lvgl.io](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuLVtnxzoyGEPxce01y6DNEzhhrDqpeupZfCL1dd46I7JWp58CwcjUgb1Lc9B0RI2MRck2W77_sbBpy8ae4iGQKogN7jDzP1UclpzrsXcmPLp3DwfwKTmua0iMmk33s6UAbbtD9LgL2uOsNtvZbKKtP4iT6zIT5R-pJLzyduj3J7FwSGdA2-rcJJdV9UsPO75OI1TYwPA4aB2KEB8PK7RAYveS2o7UIYthr8vFogZaK1VfRYsntt2eBzrx3kS5L_4C3f7oC3TwtrhkzGbggPBRDbcIx0O_9dA8IfSXJrqNLdDuZPjpYAw-QXbUgNqBbzcc99opQ8hk5PEXguSZYpXQhW41EWR7)
+8. [viewedisplay.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFDZaq9iWTKBUUvtVhJSeXuYu5nOtO3eL1sW318LWahPSvUjhQAoZrezFA972hM5pjwHo3-3iAqnYqqpc2nGbubss8jp5bFm91CcIS-e5YR7ZuQ-IA3ZfP5U0g-fGWPqvWyMBfqSFmoN0KTs3C477k6HvZiKFnl8Sk-W_h4Dz32mq1FI0UBQKMxdd4Q2lt7mDwfE06Z3BVQ1Pt1)
+9. [aliexpress-media.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEqRG7BDw39Fo1hO2f2i8NGyAQHf97AMBDZAeqpoT8ux88nu7so42OzB1Jy5TrCmiYREueX86oqNzsxOvH9XXDArnsoka0menxPLo0NlpTV7A29GZaeJu73ofRWR0du-VR3xSG8mjOF5s8eNpTGPZ3l9nRQnNUc-VUzB2yyAmOPmed8p2SmNw==)
+10. [ariat-tech.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHO88UDcxwKBOyovjohSTKIslesha_nsuTIMf9Y7l86k_E6T2-hAZujjYn6wMMUCCDTN909f_orbSZ14TTXSe4bf3iIn_C8NJ9ZAdTe15g0M0H7R6_8gBDMXHPcdG7ueXuWW0POw-Ur1owNTe5hX4Q1xpoQsZwMP070-YHma1t6nNfQMczk9zBRCE2ZhT2GVimuxHIVpPmSgcaRmiZjbS27iXZZR71LYgPXLy0hNSo=)
+11. [waveshare.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFAHy30P5ZTwbi3Ew9i8IRCp79FKgUOWd_-HTc2fQ0-oqXZsd9qErs9lPJSN_SG-o3jjAwKkC2NZV4bw3-mlCk7uMy0zDJKrFgihk2cD39KMq3waZI77afvR1osdgjQVHle1lX_Bg==)
+12. [pastechl.me](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHyqHxT5veAdsmnlIWpbgR3GZhZPzzMeGJ6PbgWMiwKiTc4SOJkHSXIlTD-_bU5dPtOuluoopSGnmDweDDteg_c3IMiAT0vgMBF6qYfEdFRv6xlH76eKlQpxWG2unT2XhxBAc_lmrWogfRDUJ9KUAA9yTavZ358Ybc0h_ddarfCdOw-s6gsJuQ3zkEf)
+13. [icbbuy.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGkL55eW6B4YSVYzZ9_HPg2OLFnLQrLOx2TVP1PYcKPLtR7dooZT7Kok-rcGGn2K59KL5Kj4b-X5ujcE0XR-PEqbWRFln83CMTay1ll_XvolbA1YA0_u86AqtprNfxs4EuaNXcekaTEfCekf5bepj6eWYRvOfslQsk=)
+14. [manuals.plus](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFEvJYUNUfdjETqMe6JtH56O9vdxOrZgXbi-I_ueVg8rtkTbiyP24debe6R4NDdIxxvAB22L5vPzY_voTfauVYta1dLML3cH98lCjD5-1VUqvGn5Z_UDoV_RusonbE=)
+15. [joicyjaison.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHmxEtCW1sFaUK0h_jEs2v17BIwuTFsZsQ6OdGeMtZAaOQCGlWvYXySO9DOO1OwS-U2YCTNTBqSwnK3lNPwzsqUn4dnvoaV5Q1NYnth4E6B0i5xmj0QUh_A_CDirk7G15ZCECk=)
+16. [sheen.bot](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH7f4rD68JaMRUVsQcFO06QL1L2X5aqQUAHCmF4K-on_9LtIlcZglwhvi58yqKngqrv4GiHX4DgrJZcUphGrynlSQbRng_BwoqYp4AhKW3MQdCTnTQRYMolEaHdGhFwanVHGOfjGyaijffvSQ44a1aekbfmCabe4cTfszLkxQ66Xbap6Ce0yJXKHyWClAG8W8HVMrEWYPFR7M6ITJZknBdk)
+17. [wikipedia.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFpCBWHG03ID-E_wP59t0Ysklrxj0qUkGjT8k_n9NJu0YRYmEKq8fbMXIy4yq2RIRVHI3OEKOs77NzsVrSGzPL85XuAM1clPK-ktE6NNDiWMVUHHmlCgCK8f8N8k1qvlTMni_O2Yg==)
+18. [hackster.io](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF2eCdyLF5AuTNLeF_gGfLLyZGdAEVxWRePC5vZkGhsvkv4PrxIWWQrwwSp9yx_zTi0dBceBDlrEjGYS1F9DoT0xGU-AEHUDc_49R0k31c0IC5V1CrhLdjKH5Ni93gK8EPhunijQLv_FzKgXb7MT0hkF8Epn7LpVW-MKWdWATbBAAZ2Y7jfq3i8qIUMkebg519ozkW2U6DKNj0uvuyiaNztbMRHXHr9MkwDtT535ntTgxbGeiwnuCXYwEjgdj2heFMq)
+19. [reddit.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFgCTR1LG0if1YbVjD0RWvRxKhKA72IRHLZ0pbVFIF7kzvb7eCWSqazgtRk2XgYaJmrq4FuQ_ItNNh8abzC90k6Env0d_-zg9rYaLpAwLpT5rctheVfJXYSx8yL8yYPYyu2AmuYhAyDpfg9L_EUAGFlGo5msZiOK3irkVlwJMVVBf2sw_qeQYRHfRdKTKGXqyXlLlcloJ60)
+20. [riscv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHKbivDsUAAMwCp9ub2QzZoPbOkKE2amYC3gxc0VgEGgrpxGYPExs-4wD4NCs8DfxJECB41apljTs6PN_MuL3fHmrJ44cx04njyym3Vo4yS1DDO7NAE16dGPXwH4Rw1hZ5DeZG8bl98pSn2NhmSYmHbF-NCNVugNbDVS6_V2TJkwCRYmf5kB9kxtm0OxDXzuQ==)
+21. [mouser.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPb7kCJ2wMfTZS6liWrN0TpUVAkbTeAhl7gquyoEzcXsFTW81rmWTRtaPFm6exJ6S36UA0cbi_SJExCEdj0U1jXQZIazLdpWPDlM8aj8nqjQu2U0UkU2CSAxblGOYsvQfjpbTalUxP9d7p6TfyrnxdF2fE_AjUYYLnZIM=)
+22. [digikey.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF7Yj8xltoCYpAJxwrtRfhFg9U2biowZ4sf6LLmoS1UFN1qJ4Pf85AVUNJy7L_eg9wsY19hOd0UDVsqPdIljVNbheDtRUuTIxA8YHbycaUPMQzEgqoyugi9TE-yaDnpwJanPt9VUyY5mnn49PR4JBXkS5YY3NeIz4525Qnc2rsxzWr87FN4Z0dVK0-cWfIO-gQIY0E=)
+
+  in_progress 1 s
+  in_progress 32 s
+  in_progress 63 s
+  in_progress 94 s
+  in_progress 125 s
+  in_progress 157 s
+  in_progress 188 s
+  in_progress 220 s
+  in_progress 252 s
+  in_progress 283 s
+  in_progress 315 s
+  in_progress 347 s
+  in_progress 379 s
+  in_progress 410 s
+  in_progress 442 s
+  in_progress 474 s
+  in_progress 505 s
+run: completed 539 s
+{"cached_tokens_by_modality": [{"modality": "text", "tokens": 40450}], "grounding_tool_count": [{"count": 122, "type": "google_search"}], "initial_input_tokens": 2044510, "input_tokens_by_modality": [{"modality": "text", "tokens": 2044510}], "output_tokens_by_modality": [{"modality": "text", "tokens": 31816}], "total_cached_tokens": 40450, "total_input_tokens": 2044510, "total_output_tokens": 31816, "total_thought_tokens": 86019, "total_tokens": 2560008, "total_tool_use_tokens": 397663}

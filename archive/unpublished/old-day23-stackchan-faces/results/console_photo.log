@@ -1,0 +1,14 @@
+E:\prog\adv2026-google-labs\day23\faces.py:85: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  for r, g, b in img.getdata():
+2.1_Neutral   19.0 s  台詞「こんにちは」→「こんにちは」○  他 []
+2.1_Happy     26.0 s  台詞「やったね！」→「やったね！」○  他 []
+2.1_Angry     13.9 s  台詞「ぷんぷん！」→「ぷんぷん！」○  他 []
+2.1_Sad       15.6 s  台詞「しょんぼり…」→「しょんぼり…」○  他 []
+2.1_Doubt     15.9 s  台詞「えっ、ほんと？」→「えっ、ほんと？」○  他 []
+2.1_Sleepy    24.8 s  台詞「おやすみ…」→「おやすみ…」○  他 ['Zzz...Zzz']
+pro_Neutral   13.3 s  台詞「こんにちは」→「こんにちは」○  他 []
+pro_Happy     14.8 s  台詞「やったね！」→「やったね！」○  他 []
+pro_Angry     13.9 s  台詞「ぷんぷん！」→「ぷんぷん！」○  他 []
+pro_Sad       14.2 s  台詞「しょんぼり…」→「しょんぼり…」○  他 []
+pro_Doubt     15.1 s  台詞「えっ、ほんと？」→「えっ、ほんと？」○  他 []
+pro_Sleepy    14.6 s  台詞「おやすみ…」→「おやすみ…」○  他 ['zzz']

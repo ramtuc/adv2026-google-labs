@@ -1,0 +1,194 @@
+{
+  "base": true,
+  "results": [
+    {
+      "name": "M1",
+      "desc": "持ち帰りと店内の税率を入れ替える",
+      "caught": true,
+      "failedTests": 12,
+      "ruleViolation": true
+    },
+    {
+      "name": "M2",
+      "desc": "箱代の条件を「5 個以上」から「5 個より多い」にする",
+      "caught": true,
+      "failedTests": 3,
+      "ruleViolation": true
+    },
+    {
+      "name": "M3",
+      "desc": "店内でも箱代を足す",
+      "caught": true,
+      "failedTests": 3,
+      "ruleViolation": true
+    },
+    {
+      "name": "M4",
+      "desc": "円未満を切り捨てでなく四捨五入する",
+      "caught": true,
+      "failedTests": 5,
+      "ruleViolation": true
+    },
+    {
+      "name": "M5",
+      "desc": "箱代に税をかけない",
+      "caught": true,
+      "failedTests": 3,
+      "ruleViolation": true
+    },
+    {
+      "name": "M6",
+      "desc": "個数を掛け忘れる",
+      "caught": true,
+      "failedTests": 8,
+      "ruleViolation": true
+    },
+    {
+      "name": "M7",
+      "desc": "柚子大福の値段を 280 円から 290 円にする（データの誤り）",
+      "caught": true,
+      "failedTests": 4,
+      "ruleViolation": true
+    },
+    {
+      "name": "M8",
+      "desc": "箱代を 150 円から 100 円にする",
+      "caught": true,
+      "failedTests": 5,
+      "ruleViolation": true
+    },
+    {
+      "name": "M9",
+      "desc": "おつりの最少枚数で 5 円玉を使わない",
+      "caught": true,
+      "failedTests": 6,
+      "ruleViolation": true
+    },
+    {
+      "name": "M10",
+      "desc": "おつりを多く渡しても正解にする",
+      "caught": true,
+      "failedTests": 1,
+      "ruleViolation": false
+    },
+    {
+      "name": "M11",
+      "desc": "間違えたときも手ぎわ点を付けうる",
+      "caught": true,
+      "failedTests": 2,
+      "ruleViolation": false
+    },
+    {
+      "name": "M12",
+      "desc": "注文にない品を余計に載せても正解にする",
+      "caught": true,
+      "failedTests": 1,
+      "ruleViolation": false
+    },
+    {
+      "name": "M13",
+      "desc": "持ち帰りのお客も店内のみの品を頼む",
+      "caught": true,
+      "failedTests": 2,
+      "ruleViolation": true
+    },
+    {
+      "name": "M14",
+      "desc": "お客が頼む品を 1〜4 種類にする",
+      "caught": true,
+      "failedTests": 2,
+      "ruleViolation": true
+    },
+    {
+      "name": "M15",
+      "desc": "個数が 0〜5 個になる",
+      "caught": true,
+      "failedTests": 2,
+      "ruleViolation": true
+    },
+    {
+      "name": "M16",
+      "desc": "払うお金を、合計より 100 円少ない額から決める（足りないことがある）",
+      "caught": true,
+      "failedTests": 2,
+      "ruleViolation": true
+    },
+    {
+      "name": "M17",
+      "desc": "おつりの枚数を、金種の数で数える",
+      "caught": true,
+      "failedTests": 3,
+      "ruleViolation": false
+    },
+    {
+      "name": "M18",
+      "desc": "お客が千円単位でしか払わない（決まりの範囲内）",
+      "caught": false,
+      "failedTests": 0,
+      "ruleViolation": false
+    },
+    {
+      "name": "M19",
+      "desc": "整数でなく小数で税をかける（この範囲では同じ答え）",
+      "caught": false,
+      "failedTests": 0,
+      "ruleViolation": false
+    },
+    {
+      "name": "N1",
+      "desc": "箱代の 5 個を、雪うさぎ以外も合わせて数える",
+      "caught": true,
+      "failedTests": 3,
+      "ruleViolation": true
+    },
+    {
+      "name": "N2",
+      "desc": "店内のお客が来ない（決まりの範囲内だが偏る）",
+      "caught": true,
+      "failedTests": 3,
+      "ruleViolation": false
+    },
+    {
+      "name": "N3",
+      "desc": "持ち帰りのお客が来ない（決まりの範囲内だが偏る）",
+      "caught": true,
+      "failedTests": 3,
+      "ruleViolation": false
+    },
+    {
+      "name": "N4",
+      "desc": "6 個の注文が出ない（決まりの範囲内だが偏る）",
+      "caught": true,
+      "failedTests": 2,
+      "ruleViolation": false
+    },
+    {
+      "name": "N5",
+      "desc": "いつも 1 種類しか頼まない（決まりの範囲内だが偏る）",
+      "caught": true,
+      "failedTests": 2,
+      "ruleViolation": false
+    },
+    {
+      "name": "N6",
+      "desc": "5 千円を千円札で払うとき、4 枚しか出さない（内訳と額が合わない）",
+      "caught": true,
+      "failedTests": 2,
+      "ruleViolation": false
+    },
+    {
+      "name": "N7",
+      "desc": "渡したおつりの額に、1 円玉を数えない",
+      "caught": true,
+      "failedTests": 6,
+      "ruleViolation": false
+    },
+    {
+      "name": "N8",
+      "desc": "おつりが 1 円ずれても正解にする",
+      "caught": false,
+      "failedTests": 0,
+      "ruleViolation": false
+    }
+  ]
+}

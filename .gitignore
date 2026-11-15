@@ -24,8 +24,28 @@ day*/results/*.wav
 
 # Gemini Notebook outputs (downloaded audio and its transcript)
 day*/*.m4a
+day*/**/*.m4a
 day*/results/notebook_*
 day*/results/video/
+# 架空の島「凪島」の資料から作ったもの（データシート由来ではないので公開する）
+!day03/nagishima/*.m4a
+!day02/results/notebook_nagishima_*
+!day03/results/notebook_nagishima_*
 
 # npm packages (day07 の Tailwind ビルドなど)
 node_modules/
+
+# Text extracted from datasheets and its embeddings (redistribution not allowed)
+day20/results/pages.json
+day20/results/page_vectors.json
+
+# Live API reply audio (large)
+day*/results/replies/
+
+# Day 9: BGM 付きの動画は YouTube に置く（43 MB）
+day09/v2_results/*.mp4
+# Day 10: 動画は YouTube に置く（各 4 MB、MV 12 MB）
+day10/v2_results/*.mp4
+# Day 11: 元の PNG（50 MB）は手元だけ。repo には JPEG を置く
+day11/v2_results/*.png
+day24/skill_upload/datasheet.md

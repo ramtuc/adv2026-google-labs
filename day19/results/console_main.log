@@ -1,0 +1,196 @@
+gemini-3.8-live                        tools   simple      ○ 音 1.755 s [calc_total] 「雪うさぎを二つですね。持ち帰りで、合計八百二十円になります。」
+gemini-3.8-live                        tools   box         ○ 音 2.479 s [calc_total] 「雪うさぎを 五つと、柚子大福一つで、お持ち帰りの合計は二千五百十六円です。」
+gemini-3.8-live                        tools   dinein_only ○ 音 1.044 s [] 「申し訳ございません。白玉ぜんざいは店内のみのご提供となっております。他のお品物になさいますか?」
+gemini-3.8-live                        tools   correction  ○ 音 1.718 s [calc_total] 「椿餅を二つですね。店内でのお召し上がりで、税込七百四円でございます。」
+gemini-3.8-live                        tools   change      ○ 音 2.272 s [calc_total,calc_change] 「合計で 486 円でございます。1万円のお預かりですので、9514円のおつりは千円札4枚、5千円札1枚、500円玉1枚、」
+gemini-3.8-live                        tools   dinein_mix  ○ 音 1.804 s [calc_total] 「店内でのお召し上がりですね。合計で四千二百六十八円でございます。」
+gemini-3.8-live                        tools   not_menu    ○ 音 1.133 s [] 「申し訳ございません。当店ではどら焼きは販売しておりません。雪うさぎや椿餅などをご用意しております。」
+gemini-3.8-live                        notools simple      ○ 音 1.144 s [] 「雪うさぎを二つですね。お持ち帰りで、税込合計八百二十円でございます。」
+gemini-3.8-live                        notools box         ○ 音 1.164 s [] 「かしこまりました。お持ち帰りで、雪うさぎ五つと、柚子大福一つですね。箱代を含めて、税込で二千五百十六円になります。」
+gemini-3.8-live                        notools dinein_only ○ 音 1.049 s [] 「申し訳ございません。白玉ぜんざいは店内のみのメニューとなっております。他のお持ち帰りできる商品はいかがでしょうか?」
+gemini-3.8-live                        notools correction  ○ 音 1.077 s [] 「かしこまりました。椿餅二つですね。店内でのお召し上がりですので、税込で七百四円でございます。」
+gemini-3.8-live                        notools change      ○ 音 1.091 s [] 「栗きんとん、お持ち帰りで四百八十六円でございます。一万円お預かりします。九千五百十四円のお返しでございます。」
+gemini-3.8-live                        notools dinein_mix  ○ 音 1.261 s [] 「店内でのお召し上がりですね。ご注文を承りました。税込の合計金額は4,268円です。」
+gemini-3.8-live                        notools not_menu    ○ 音 1.104 s [] 「申し訳ございません。当店ではどら焼きは扱っておりません。」
+gemini-2.5-flash-native-audio-latest   tools   simple      △ 音 2.15 s [] 「雪うさぎを2つですね。持ち帰りでよろしいですか、それとも店内で?」
+gemini-2.5-flash-native-audio-latest   tools   box         エラー 音 None s [] 「APIError: 1011 None. Internal error occurred.」
+Task exception was never retrieved
+future: <Task finished name='Task-54' coro=<run_scene.<locals>.sender() done, defined at E:\prog\adv2026-google-labs\day20\live_tools.py:134> exception=ConnectionClosedError(Close(code=1011, reason='Internal error occurred.'), Close(code=1011, reason='Internal error occurred.'), True)>
+Traceback (most recent call last):
+  File "E:\prog\adv2026-google-labs\day20\live_tools.py", line 141, in sender
+    await session.send_realtime_input(audio=types.Blob(data=data, mime_type="audio/pcm;rate=16000"))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\google\genai\live.py", line 369, in send_realtime_input
+    await self._ws.send(json.dumps({'realtime_input': realtime_input_dict}))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 480, in send
+    async with self.send_context():
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Roaming\uv\python\cpython-3.12.12-windows-x86_64-none\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 962, in send_context
+    raise self.close_exc
+websockets.exceptions.ConnectionClosedError: received 1011 (internal error) Internal error occurred.; then sent 1011 (internal error) Internal error occurred.
+gemini-2.5-flash-native-audio-latest   tools   dinein_only ○ 音 2.941 s [] 「申し訳ございません。「 白玉ぜんざいは店内のみのご提供となっております。 いかがいたしましょうか?」
+gemini-2.5-flash-native-audio-latest   tools   correction  △ 音 -1.632 s [] 「ありがとうございます。 椿畏まりました。 店内では、椿餅を2つ、店内でご用意いたします。合計金額は tools:calc」
+gemini-2.5-flash-native-audio-latest   tools   change      エラー 音 None s [] 「APIError: 1011 None. Internal error occurred.」
+Task exception was never retrieved
+future: <Task finished name='Task-65' coro=<run_scene.<locals>.sender() done, defined at E:\prog\adv2026-google-labs\day20\live_tools.py:134> exception=ConnectionClosedError(Close(code=1011, reason='Internal error occurred.'), Close(code=1011, reason='Internal error occurred.'), True)>
+Traceback (most recent call last):
+  File "E:\prog\adv2026-google-labs\day20\live_tools.py", line 141, in sender
+    await session.send_realtime_input(audio=types.Blob(data=data, mime_type="audio/pcm;rate=16000"))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\google\genai\live.py", line 369, in send_realtime_input
+    await self._ws.send(json.dumps({'realtime_input': realtime_input_dict}))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 480, in send
+    async with self.send_context():
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Roaming\uv\python\cpython-3.12.12-windows-x86_64-none\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 962, in send_context
+    raise self.close_exc
+websockets.exceptions.ConnectionClosedError: received 1011 (internal error) Internal error occurred.; then sent 1011 (internal error) Internal error occurred.
+gemini-2.5-flash-native-audio-latest   tools   dinein_mix  △ 音 8.933 s [calc_total,calc_total] 「店内で承ります。少々お待ちください。申し訳ございません。ご注文の「季節の上生菓子と抹茶」がシステムで読み込めませんでした」
+gemini-2.5-flash-native-audio-latest   tools   not_menu    ○ 音 2.719 s [] 「申し訳ございません、 ドラ焼きは扱っておりません。他に何かご入用はございますか?」
+gemini-2.5-flash-native-audio-latest   notools simple      ○ 音 2.51 s [] 「雪うさぎを2つでございますね。お持ち帰りでよろしいですか?税込820円でございます。」
+gemini-2.5-flash-native-audio-latest   notools box         ○ 音 5.173 s [] 「雪うさぎを5つと柚子大福を1つですね。お持ち帰りで承知いたしました。化粧箱代を含めまして、合計で2516円でございます。」
+gemini-2.5-flash-native-audio-latest   notools dinein_only ○ 音 3.131 s [] 「恐れ入ります。 白玉ぜんざいは店内のみのご提供となります。 申し訳ございません。」
+gemini-2.5-flash-native-audio-latest   notools correction  ○ 音 3.568 s [] 「ありがとうございます。かしこまりました。 椿餅を2つ、店内で召し上がります。合計は704円でございます。」
+gemini-2.5-flash-native-audio-latest   notools change      ○ 音 3.259 s [] 「かしこまりました。「栗きんとん」を 1つ、お持ち帰りでございますね。お会計は486円でございます。1万円お預かりします。」
+gemini-2.5-flash-native-audio-latest   notools dinein_mix  △ 音 9.344 s [] 「黒糖わらび餅を4つと、季節の上生菓子と抹茶を2つですね。季節の上生菓子と抹茶は店内でのお召し上がりとなりますが、黒糖わら」
+gemini-2.5-flash-native-audio-latest   notools not_menu    ○ 音 2.708 s [] 「申し訳ございません、 ドラ焼きは扱っておりません。他にご注文はございますか?」
+gemini-3.8-live                        tools   simple      ○ 音 1.678 s [calc_total] 「雪うさぎ 2 つでお持ち帰りでございますね。税込合計820 円になります。」
+gemini-3.8-live                        tools   box         ○ 音 1.697 s [calc_total] 「かしこまりました。お持ち帰りで雪うさぎを 五つと柚子大福を 一つ、合計で 二千五百十六円でございます。」
+gemini-3.8-live                        tools   dinein_only ○ 音 1.04 s [] 「申し訳ございません。白玉ぜんざいは店内のみのご提供となっており、お持ち帰りはできません。」
+gemini-3.8-live                        tools   correction  ○ 音 1.639 s [calc_total] 「椿餅を 2 つですね。店内でのお召し上がり、税込で704円でございます。」
+gemini-3.8-live                        tools   change      ○ 音 2.217 s [calc_total,calc_change] 「ありがとうございます。栗きんとんお持ち帰りで、税込四百八十六円でございます。一万円お預かりいたします。お釣りは九千五百十」
+gemini-3.8-live                        tools   dinein_mix  ○ 音 1.9 s [calc_total] 「店内でのお会計、税込合計で四千二百六十八円です。」
+gemini-3.8-live                        tools   not_menu    ○ 音 1.111 s [] 「申し訳ございません。当店ではどら焼きは取り扱っておりません。」
+gemini-3.8-live                        notools simple      ○ 音 1.16 s [] 「雪うさぎを二つですね。持ち帰りで、税込八百二十円になります。」
+gemini-3.8-live                        notools box         ○ 音 1.194 s [] 「雪うさぎ五つと柚子大福一つですね。お持ち帰りで、税込合計二千五百十六円になります。」
+gemini-3.8-live                        notools dinein_only ○ 音 1.041 s [] 「申し訳ございません。白玉ぜんざいは店内のみのご提供となっており、お持ち帰りはできません。」
+gemini-3.8-live                        notools correction  ○ 音 1.088 s [] 「椿餅ですね。店内でお召し上がりで、合計で七百四円になります。」
+gemini-3.8-live                        notools change      × 音 1.134 s [] 「栗きんとんのお持ち帰りで、税込 486 円です。お預かりした 1 万円から、おつり 9,512 円をお返しします。」
+gemini-3.8-live                        notools dinein_mix  ○ 音 1.11 s [] 「店内でお召し上がりですね。黒糖わらび餅四つと、季節の上生菓子と抹茶二つで、合計、税込み四千二百六十八円です。」
+gemini-3.8-live                        notools not_menu    ○ 音 1.102 s [] 「あいにく、どら焼きは置いておりません。当店のお品書きはこちらになりますが、何か他に気になるものはございますか?」
+gemini-2.5-flash-native-audio-latest   tools   simple      △ 音 1.023 s [] 「ありがとうございます。 持ち帰りでよろしいですか。」
+gemini-2.5-flash-native-audio-latest   tools   box         エラー 音 None s [] 「APIError: 1011 None. Internal error occurred.」
+Task exception was never retrieved
+future: <Task finished name='Task-148' coro=<run_scene.<locals>.sender() done, defined at E:\prog\adv2026-google-labs\day20\live_tools.py:134> exception=ConnectionClosedError(Close(code=1011, reason='Internal error occurred.'), Close(code=1011, reason='Internal error occurred.'), True)>
+Traceback (most recent call last):
+  File "E:\prog\adv2026-google-labs\day20\live_tools.py", line 141, in sender
+    await session.send_realtime_input(audio=types.Blob(data=data, mime_type="audio/pcm;rate=16000"))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\google\genai\live.py", line 369, in send_realtime_input
+    await self._ws.send(json.dumps({'realtime_input': realtime_input_dict}))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 480, in send
+    async with self.send_context():
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Roaming\uv\python\cpython-3.12.12-windows-x86_64-none\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 962, in send_context
+    raise self.close_exc
+websockets.exceptions.ConnectionClosedError: received 1011 (internal error) Internal error occurred.; then sent 1011 (internal error) Internal error occurred.
+gemini-2.5-flash-native-audio-latest   tools   dinein_only ○ 音 4.447 s [] 「申し訳ございません。「 白玉ぜんざい」は店内のみのご提供となっております。」
+gemini-2.5-flash-native-audio-latest   tools   correction  △ 音 4.187 s [] 「かしこまりました。 椿餅を2つ、店内で承りました。<ctrl95>では、合計は calc_total」
+gemini-2.5-flash-native-audio-latest   tools   change      エラー 音 None s [] 「APIError: 1007 None. The audio content type (CONTENT_TYPE_AU」
+Task exception was never retrieved
+future: <Task finished name='Task-159' coro=<run_scene.<locals>.sender() done, defined at E:\prog\adv2026-google-labs\day20\live_tools.py:134> exception=ConnectionClosedError(Close(code=1007, reason='The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.'), Close(code=1007, reason='The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.'), True)>
+Traceback (most recent call last):
+  File "E:\prog\adv2026-google-labs\day20\live_tools.py", line 141, in sender
+    await session.send_realtime_input(audio=types.Blob(data=data, mime_type="audio/pcm;rate=16000"))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\google\genai\live.py", line 369, in send_realtime_input
+    await self._ws.send(json.dumps({'realtime_input': realtime_input_dict}))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 480, in send
+    async with self.send_context():
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Roaming\uv\python\cpython-3.12.12-windows-x86_64-none\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 962, in send_context
+    raise self.close_exc
+websockets.exceptions.ConnectionClosedError: received 1007 (invalid frame payload data) The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.; then sent 1007 (invalid frame payload data) The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.
+gemini-2.5-flash-native-audio-latest   tools   dinein_mix  △ 音 2.568 s [] 「店内でのお召し上がりでよろしいですか?」
+gemini-2.5-flash-native-audio-latest   tools   not_menu    ○ 音 2.993 s [] 「申し訳ございません、 ドラ焼きは扱っておりません。他に何かご希望はございますか?」
+gemini-2.5-flash-native-audio-latest   notools simple      △ 音 3.944 s [] 「ありがとうございます。「 雪うさぎ」を2つですね。お持ち帰りでよろしいですか?」
+gemini-2.5-flash-native-audio-latest   notools box         ○ 音 4.411 s [] 「承知いたしました。 雪うさぎを5個、柚子大福を1つ、お持ち帰りでご注文ですね。お包み代を含めて、合計2516円になります」
+gemini-2.5-flash-native-audio-latest   notools dinein_only ○ 音 2.61 s [] 「恐れ入ります。「白玉 ぜんざい」は店内のみのご提供となっております。」
+gemini-2.5-flash-native-audio-latest   notools correction  ○ 音 4.188 s [] 「かしこまりました。「椿餅」を2つですね。店内でのお召し上がりでございますと、税込みで704円でございます。 店内でのお召」
+gemini-2.5-flash-native-audio-latest   notools change      ○ 音 3.575 s [] 「かしこまりました。「栗きんとん」を1つ、お持ち帰りでございますね。税込みで486円でございます。 1万円お預かりいたしま」
+gemini-2.5-flash-native-audio-latest   notools dinein_mix  △ 音 4.272 s [] 「黒糖わらび餅を4つと、季節の上生菓子と抹茶を2つですね。季節の上生菓子と抹茶は店内のみですが、黒糖わらび餅はお持ち帰りで」
+gemini-2.5-flash-native-audio-latest   notools not_menu    ○ 音 3.728 s [] 「申し訳ございません。 当店ではドラ焼きの扱いはございませんが、他にも季節の和菓子をご用意しております。いかがでしょうか。」
+gemini-3.8-live                        tools   simple      ○ 音 1.685 s [calc_total] 「雪うさぎ二つでお持ち帰りで、税込八百二十円です。」
+gemini-3.8-live                        tools   box         ○ 音 1.627 s [calc_total] 「かしこまりました。お持ち帰りで、税込 2,516円でございます。」
+gemini-3.8-live                        tools   dinein_only ○ 音 1.047 s [] 「恐れ入りますが、白玉ぜんざいは店内限定となっております。」
+gemini-3.8-live                        tools   correction  ○ 音 1.681 s [calc_total] 「店内での椿餅二つで、合計七百四円です。」
+gemini-3.8-live                        tools   change      ○ 音 2.374 s [calc_total,calc_change] 「栗きんとんお持ち帰りで合計四百八十六円です。一万円からのお返しで、おつりは五千円札一枚、千円札四枚、五百円玉一枚、十円玉」
+gemini-3.8-live                        tools   dinein_mix  ○ 音 1.761 s [calc_total] 「店内でのご利用で、合計四千二百六十八円でございます。」
+gemini-3.8-live                        tools   not_menu    ○ 音 1.109 s [] 「あいにく、どら焼きはございません。当店のお品書きはこちらでございます。」
+gemini-3.8-live                        notools simple      ○ 音 1.139 s [] 「持ち帰りで雪うさぎ 2 つですね。合計で 820円になります。」
+gemini-3.8-live                        notools box         ○ 音 1.108 s [] 「かしこまりました。雪うさぎ 5つと柚子大福 1つ、お持ち帰りで、税込合計 2,516円でございます。」
+gemini-3.8-live                        notools dinein_only ○ 音 1.048 s [] 「申し訳ございません。白玉ぜんざいは店内でのみのご提供となっており、お持ち帰りはできかねます。いかがいたしましょうか?」
+gemini-3.8-live                        notools correction  ○ 音 1.083 s [] 「かしこまりました。椿餅を 2 つですね。店内でのお召し上がりで、税込 704 円になります。」
+gemini-3.8-live                        notools change      ○ 音 1.167 s [] 「栗きんとんおひとつ、持ち帰りでございますね。税込で486円です。1万円からのお返しで、9,514円になります。」
+gemini-3.8-live                        notools dinein_mix  ○ 音 1.232 s [] 「店内でお召し上がりですね。黒糖わらび餅四つと、季節の生菓子と抹茶二つで、税込合計四千二百六十八円です。」
+gemini-3.8-live                        notools not_menu    ○ 音 1.109 s [] 「あいにく、どら焼きはご用意しておりません。当店のお品書きはこちらになります。」
+gemini-2.5-flash-native-audio-latest   tools   simple      △ 音 1.085 s [] 「ありがとうございます。 持ち帰りでしょうか?」
+gemini-2.5-flash-native-audio-latest   tools   box         エラー 音 None s [] 「APIError: 1011 None. Internal error occurred.」
+Task exception was never retrieved
+future: <Task finished name='Task-242' coro=<run_scene.<locals>.sender() done, defined at E:\prog\adv2026-google-labs\day20\live_tools.py:134> exception=ConnectionClosedError(Close(code=1011, reason='Internal error occurred.'), Close(code=1011, reason='Internal error occurred.'), True)>
+Traceback (most recent call last):
+  File "E:\prog\adv2026-google-labs\day20\live_tools.py", line 141, in sender
+    await session.send_realtime_input(audio=types.Blob(data=data, mime_type="audio/pcm;rate=16000"))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\google\genai\live.py", line 369, in send_realtime_input
+    await self._ws.send(json.dumps({'realtime_input': realtime_input_dict}))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 480, in send
+    async with self.send_context():
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Roaming\uv\python\cpython-3.12.12-windows-x86_64-none\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 962, in send_context
+    raise self.close_exc
+websockets.exceptions.ConnectionClosedError: received 1011 (internal error) Internal error occurred.; then sent 1011 (internal error) Internal error occurred.
+gemini-2.5-flash-native-audio-latest   tools   dinein_only ○ 音 3.305 s [] 「申し訳ございません。 白玉 ぜんざいは 店内のみのご注文となります。」
+gemini-2.5-flash-native-audio-latest   tools   correction  エラー 音 None s [] 「APIError: 1011 None. Internal error occurred.」
+Task exception was never retrieved
+future: <Task finished name='Task-249' coro=<run_scene.<locals>.sender() done, defined at E:\prog\adv2026-google-labs\day20\live_tools.py:134> exception=ConnectionClosedError(Close(code=1011, reason='Internal error occurred.'), Close(code=1011, reason='Internal error occurred.'), True)>
+Traceback (most recent call last):
+  File "E:\prog\adv2026-google-labs\day20\live_tools.py", line 141, in sender
+    await session.send_realtime_input(audio=types.Blob(data=data, mime_type="audio/pcm;rate=16000"))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\google\genai\live.py", line 369, in send_realtime_input
+    await self._ws.send(json.dumps({'realtime_input': realtime_input_dict}))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 480, in send
+    async with self.send_context():
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Roaming\uv\python\cpython-3.12.12-windows-x86_64-none\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 962, in send_context
+    raise self.close_exc
+websockets.exceptions.ConnectionClosedError: received 1011 (internal error) Internal error occurred.; then sent 1011 (internal error) Internal error occurred.
+gemini-2.5-flash-native-audio-latest   tools   change      エラー 音 None s [] 「APIError: 1007 None. The audio content type (CONTENT_TYPE_AU」
+Task exception was never retrieved
+future: <Task finished name='Task-253' coro=<run_scene.<locals>.sender() done, defined at E:\prog\adv2026-google-labs\day20\live_tools.py:134> exception=ConnectionClosedError(Close(code=1007, reason='The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.'), Close(code=1007, reason='The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.'), True)>
+Traceback (most recent call last):
+  File "E:\prog\adv2026-google-labs\day20\live_tools.py", line 141, in sender
+    await session.send_realtime_input(audio=types.Blob(data=data, mime_type="audio/pcm;rate=16000"))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\google\genai\live.py", line 369, in send_realtime_input
+    await self._ws.send(json.dumps({'realtime_input': realtime_input_dict}))
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 480, in send
+    async with self.send_context():
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Roaming\uv\python\cpython-3.12.12-windows-x86_64-none\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\uv\cache\archive-v0\GBi0gokGHxc08vQL\Lib\site-packages\websockets\asyncio\connection.py", line 962, in send_context
+    raise self.close_exc
+websockets.exceptions.ConnectionClosedError: received 1007 (invalid frame payload data) The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.; then sent 1007 (invalid frame payload data) The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.
+gemini-2.5-flash-native-audio-latest   tools   dinein_mix  △ 音 1.911 s [] 「ありがとうございます。黒糖わらび餅を4つと、季節の上生菓子と抹茶を2つですね。店内でお召上がりですか?」
+gemini-2.5-flash-native-audio-latest   tools   not_menu    ○ 音 2.749 s [] 「申し訳ございません、 ドラ焼きは扱っておりません。」
+gemini-2.5-flash-native-audio-latest   notools simple      ○ 音 2.266 s [] 「かしこまりました。「雪 うさぎ」を2つでございますね。お持ち帰りでよろしいですか。税込の合計は820円になります。」
+gemini-2.5-flash-native-audio-latest   notools box         ○ 音 4.757 s [] 「かしこまりました。 雪うさぎを5つと、柚子大福を1つ、お持ち帰りですね。 化粧箱代を含めまして、合計2516円でございま」
+gemini-2.5-flash-native-audio-latest   notools dinein_only ○ 音 2.696 s [] 「白玉ぜんざいは、 店内のみのご利用となっております。申し訳ございません。」
+gemini-2.5-flash-native-audio-latest   notools correction  ○ 音 4.054 s [] 「かしこまりました。 椿餅を2つ、店内で承りました。 お会計は704円でございます。」
+gemini-2.5-flash-native-audio-latest   notools change      ○ 音 3.074 s [] 「かしこまりました。 栗きんとんをお一つ、お持ち帰りでございますね。お会計は486円でございます。1万円からお預かりします」
+gemini-2.5-flash-native-audio-latest   notools dinein_mix  △ 音 5.57 s [] 「黒糖わらび餅を4つと、季節の上生菓子と抹茶を2つですね。季節の上生菓子と抹茶は店内で承っておりますが、黒糖わらび餅はお持」
+gemini-2.5-flash-native-audio-latest   notools not_menu    ○ 音 2.701 s [] 「申し訳ございません、 ドラ焼きは扱っておりません。他に、雪うさぎや椿餅など季節の和菓子がございますよ。」

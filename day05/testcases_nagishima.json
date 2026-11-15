@@ -1,0 +1,17 @@
+[
+  {"id": "N1", "category": "文章", "input": "凪島灯台が建てられたのは何年？", "expected_output": "1898 年（明治 31 年）", "must_include": ["1898"], "conflict": false},
+  {"id": "N2", "category": "手書き", "input": "凪島から汐見港へ帰る最終便は何時？", "expected_output": "18:50", "must_include": ["18:50|18時50分"], "conflict": false},
+  {"id": "N3", "category": "手書き", "input": "フェリーが欠航するのはどんなとき？", "expected_output": "波の高さが 3 m 以上のとき", "must_include": ["3m|3メートル"], "conflict": false},
+  {"id": "N4", "category": "音声", "input": "民宿しおさいに大人2人と小学生1人で1泊すると、いくら？", "expected_output": "9,800 × 2 ＋ 6,500 ＝ 26,100 円（1 泊 2 食付き）", "must_include": ["26,100"], "conflict": false},
+  {"id": "N5", "category": "音声", "input": "凪祭りの花火は何時から？", "expected_output": "20:30（夜 8 時半）", "must_include": ["20:30|8時半|20時30分"], "conflict": false},
+  {"id": "N6", "category": "複数の資料", "input": "8月の第1土曜日に汐見港を14:00の便で出て、灯台に登り、花火を見てから日帰りできる？", "expected_output": "できない。14:50 に着いて灯台（9:00〜16:30、月曜休み。この日は土曜なので開いている）には登れるが、花火は 20:30 から、島から帰る最終便は 18:50 なので、花火を見ると帰れない。泊まる必要がある", "must_include": ["18:50|18時50分"], "conflict": false},
+  {"id": "N7", "category": "食い違い", "input": "フェリーの大人の片道運賃はいくら？", "expected_output": "観光ガイド（公式）は 2,400 円、島民ブログ（2026 年 5 月 2 日、個人）は 4 月 1 日から 2,800 円に値上げと書いている。資料だけではどちらが現在の正式な運賃かは確かめられない", "must_include": ["2,400", "2,800"], "conflict": true},
+  {"id": "N8", "category": "食い違い", "input": "凪島灯台の高さは？", "expected_output": "灯台そのものは 18 m（ガイド。ブログの役場の人の話も同じ）。ブログによると、台風の後に付いたアンテナを含めると 21 m", "must_include": ["18", "21"], "conflict": true},
+  {"id": "N9", "category": "食い違い", "input": "島内バスは1日何本？", "expected_output": "観光ガイド（公式）は 1 日 6 本、島民ブログ（2026 年 5 月）は 4 月から 1 日 5 本に減ったと書いている。資料だけではどちらが現在の本数かは確かめられない", "must_include": ["6", "5"], "conflict": true},
+  {"id": "N10", "category": "資料にない", "input": "凪島の郵便番号は？", "expected_output": "資料には書かれていない", "must_include": [], "conflict": false},
+  {"id": "N11", "category": "資料にない", "input": "凪島で一番おいしいレストランは？", "expected_output": "資料にはレストランの記載がない（民宿の朝食、塩づくり工房、祭りの屋台の記載はある）", "must_include": [], "conflict": false},
+  {"id": "N12", "category": "計算", "input": "2025年の観光客数の合計と、2024年からの増加率は？", "expected_output": "2025 年は 26,460 人。2024 年は 24,520 人なので、増加率は約 7.9 %", "must_include": ["26,460"], "conflict": false},
+  {"id": "N13", "category": "計算", "input": "観光客数が前年からいちばん大きく増えた月は？（人数と率の両方）", "expected_output": "人数は 8 月（＋450 人）、率は 5 月（＋11.7 %）", "must_include": ["8月", "5月"], "conflict": false},
+  {"id": "N14", "category": "計算＋食い違い", "input": "大人2人・小学生2人で、フェリーで往復するといくら？", "expected_output": "ブログの 4 月以降の運賃（大人 2,800 円・子ども 1,400 円）なら 16,800 円、ガイドの運賃（2,400 円・1,200 円）なら 14,400 円。資料だけではどちらが現在の運賃かは確かめられない", "must_include": ["16,800", "14,400"], "conflict": true},
+  {"id": "N15", "category": "音声（名前）", "input": "浜田さんがおかみをしている民宿の名前は？", "expected_output": "民宿しおさい", "must_include": ["しおさい"], "conflict": false}
+]

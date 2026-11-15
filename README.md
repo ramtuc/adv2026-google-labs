@@ -54,32 +54,49 @@ uv run day10/make_video.py text             # Gemini Omni 1.2 Flash で動画（
 uv run day11/make_manga.py character         # Nano Banana 2.1 で設定画（ep1〜ep3 で4コマ、showa で昭和の広告、--model pro で Pro）
 uv run --with pillow --with numpy --with scipy day11/spot_the_difference.py make   # 間違い探しを作る（diff で差分、solve で Gemini が解く）
 
-# Day 12
-uv run day12/make_store.py                  # File Search のストアを作り、3姉妹のデータシートを入れる（data/ に PDF を置く）
-uv run day12/file_search_qa.py all          # 15 問に答える（s3 で ESP32-S3 に絞る、none で資料なし）
-uv run --with matplotlib day12/plot_results.py   # 判定とトークン数のグラフ
+# Day 12（Pomelli。スクリプトはなく、作られたものと記録を day12/v2_results に置く）
 
 # Day 13
-uv run day13/deep_research.py plan           # Deep Research に計画を出させる（run で承認して実行、--max で Max、--strict で厳しい依頼）
-uv run day13/check_sources.py                 # 出典のリダイレクト先を読む（出典のサイトには直接アクセスしない）
-uv run --with matplotlib day13/plot_runs.py   # 3 回の実行を比べるグラフ
+uv run day13/make_store.py                  # File Search のストアを作り、3姉妹のデータシートを入れる（data/ に PDF を置く）
+uv run day13/file_search_qa.py all          # 15 問に答える（s3 で ESP32-S3 に絞る、none で資料なし）
+uv run --with matplotlib day13/plot_results.py   # 判定とトークン数のグラフ
 
-# Day 14（ESP-IDF v5.5.3。Antigravity が S3 用に直したもの）
-idf.py -C day14/door_sensor set-target esp32s3
-idf.py -C day14/door_sensor -p <ポート> flash monitor
+# Day 14
+uv run day14/deep_research.py plan           # Deep Research に計画を出させる（run で承認して実行、--max で Max、--strict で厳しい依頼）
+uv run day14/check_sources.py                 # 出典のリダイレクト先を読む（出典のサイトには直接アクセスしない）
+uv run --with matplotlib day14/plot_runs.py   # 3 回の実行を比べるグラフ
 
-# Day 15（day14/door_sensor のテストに、わざとバグを入れたコードを当てる）
-powershell -File day14/door_sensor/test/run_host_tests.ps1   # パソコン上のテスト（MSVC）
-uv run day15/mutate.py host --all             # ミューテーション（device --port <ポート> で実機、--new で N1〜N6）
-uv run --with matplotlib day15/plot_mutants.py
+# Day 15（Antigravity が作ったゲームの計算を、決まりどおりの答えと照合する）
+node day15/check_logic.mjs a day15/a/logic.js
 
-# Day 16（Antigravity の Automations の合間に、day14/door_sensor をこっそり変える）
-uv run day16/plant.py E1                      # E1〜E5 を入れる。restore で元に戻す
-uv run --with matplotlib day16/plot_runs.py
+# Day 16（Antigravity が書いたテストに、わざとバグを入れたコードを当てる）
+node day16/mutate.mjs <作業フォルダ> round1
 
-# Day 17（Antigravity CLI の agy -p で Day 16 の夜間当番を繰り返す。--model gemini-3.8-flash-low で考える量を下げる）
-uv run day17/nightwatch.py --plants none,E3,E4,E5 --prompts plain,guarded --reps 3
-uv run --with matplotlib day17/plot_verdicts.py
+# Day 17（Antigravity の Automations の夜間当番の合間に、ゲームのコードを変える）
+NIGHT_W=<作業フォルダ> node day17/inject.mjs E1   # E1〜E6 を入れる
+
+# Day 18（Antigravity CLI の agy -p で Day 17 の夜間当番を繰り返す）
+uv run day18/nightwatch_cli.py --events E1,E2,E3,E4,E5,E6 --models gemini-4-argon-medium --prompts plain,guarded --reps 3
+
+# Day 19（Live API の店番。会計は関数呼び出しで Day 15 の計算に任せる）
+uv run day19/live_shop.py --models gemini-3.8-live --conds tools,notools --reps 3
+
+# Day 20（Gemma 4 とデータシート。gemma_local.py は LM Studio で手元で動かす）
+uv run day20/gemma_datasheet.py --models gemma-4-31b-it,gemma-4-26b-a4b-it,gemini-3.8-flash --conds none,pages,full
+uv run day20/gemma_local.py --model google/gemma-4-e4b --conds none,pages,full
+
+# Day 21（Live API から Day 13 の File Search を使う）
+uv run day21/live_rag.py --conds none,native,function,cached --reps 3
+uv run --with matplotlib day21/plot_rag.py
+
+# Day 22〜24
+uv run day22/infographic.py --sources facts,max,standard --models 2.1,pro --reps 2   # Day 14 の調査を図解に
+uv run day23/keyframes.py --models 2.1,pro    # 宣伝動画の絵コンテ（動画は Flow、BGM は Flow Music）
+uv run day23/narration.py                     # ナレーション（Gemini TTS）
+sh day23/compose.sh                           # 1 本の動画にまとめる（ffmpeg）
+node day24/orders.mjs                         # Gemini アプリのスキルに出す注文と正解
+
+# 以前の版（スタックチャン・ドアセンサーなど）は archive/ に残しています
 ```
 
 ## 使用した資料
@@ -113,12 +130,20 @@ uv run --with matplotlib day17/plot_verdicts.py
 | `day09/` | Lyria 3.5（Gemini API）と Google Flow Music で作った ESP32-S3 の歌と、字幕入りの動画を作るスクリプト（[説明](day09/README.md)） | Day 9: Google Flow Music × Lyria 3.5 API |
 | `day10/` | Gemini Omni 1.2 Flash（Gemini API）で ESP32-S3 の紹介動画を作るスクリプトと、Google Flow で作った動画 | Day 10: Google Flow × Gemini Omni API |
 | `day11/` | Nano Banana 2.1 と Pro で ESP32-S3 を擬人化した設定画・4コマ漫画・昭和の広告と、間違い探しを作って解かせるスクリプト | Day 11: Nano Banana で ESP32-S3 を擬人化 |
-| `day12/` | File Search（Gemini API の RAG）に ESP32・ESP32-S3・ESP32-C6 のデータシートを入れ、Day 2 の質問と取り違えを誘う質問に答えさせるスクリプト | Day 12: File Search API |
-| `day13/` | Deep Research（通常・Max）に Web の ESP32-S3 の仕様の誤りを調べさせ、出典を確かめるスクリプト | Day 13: Deep Research API |
-| `day14/` | 初代 ESP32 向けのドアセンサー（door_sensor_original_esp32）と、Antigravity が ESP32-S3 用に直したもの（door_sensor）、差分と実機のログ | Day 14: Google Antigravity (1) |
-| `day15/` | Antigravity が書いた door_sensor のテスト（1 回目は round1_tests、2 回目は day14/door_sensor/test）に、わざとバグを入れたコード 19 個を当てるスクリプトと結果 | Day 15: Google Antigravity (2) |
-| `day16/` | Antigravity の Automations に渡した夜間当番の指示、当番の合間にコードを変えるスクリプト、当番が書いた log.csv とアラート、実行の記録 | Day 16: Google Antigravity (3) |
-| `day17/` | Antigravity CLI（agy -p）で Day 16 の夜間当番を 69 回走らせ、指示（Day 16 / 対策なし / 対策あり）と考える量で判定を比べるスクリプト、全イベントの記録、集計 | Day 17: Antigravity CLI |
+| `day12/v2_results/` | Pomelli に電子工作のサイトを読ませて作った、ブランドの説明と宣伝の画像。画像は AI が作ったもの | Day 12: Pomelli |
+| `day13/` | File Search（Gemini API の RAG）に ESP32・ESP32-S3・ESP32-C6 のデータシートを入れ、Day 2 の質問と取り違えを誘う質問に答えさせるスクリプト | Day 13: File Search API |
+| `day14/` | Deep Research（API の通常・Max と、Gemini アプリ）に Web の ESP32-S3 の仕様の誤りを調べさせ、出典を確かめるスクリプトと結果 | Day 14: Deep Research |
+| `day15/` | Antigravity に /plan あり（a）・なし（b）で作らせたブラウザゲーム「ゆきみ堂の店番」、指示、計画、照合のプログラム | Day 15: Google Antigravity (1) |
+| `day16/` | Antigravity が書いたテストに、わざとバグを入れたコード 27 個を当てるスクリプトと、3 回分のテストと結果 | Day 16: Google Antigravity (2) |
+| `day17/` | Automations に渡した夜間当番の指示と、当番の合間にコードを変えるスクリプト（E1〜E6） | Day 17: Antigravity Automations |
+| `day18/` | Antigravity CLI（agy -p）で夜間当番を繰り返し、指示とモデルで判定を比べるスクリプトと記録 | Day 18: Antigravity CLI |
+| `day19/` | Live API の声の店番。会計を関数呼び出しにした場合としない場合を、モデルごとに比べる | Day 19: Live API |
+| `day20/` | Gemma 4（API と LM Studio）に ESP32-S3 のデータシート（なし・6 ページ・全文）を渡して、Day 13 の 15 問を Gemini と比べる | Day 20: Gemma 4 |
+| `day21/` | Live API から Day 13 の File Search を使う（直接・関数経由・先に引いておく・道具なし） | Day 21: File Search × Live API |
+| `day22/` | Day 14 の Deep Research のレポートを Nano Banana で図解にし、図の中の値を読み取って確かめる。図は AI が描いたもの | Day 22: Deep Research × Nano Banana |
+| `day23/` | Flow・Flow Music・Nano Banana・Gemini TTS で作った 27 秒の宣伝動画と、途中の素材。すべて AI が作ったもの | Day 23: Labs のツールで宣伝動画 |
+| `day24/` | Gemini アプリのスキル（会計のスキルとデータシートのスキル）に渡した指示と、答えの照合 | Day 24: Gemini アプリのスキル |
+| `archive/` | 以前の版のコード（ドアセンサー、スタックチャンの Live API など）。Day 19・21 は Live API の接続に archive/stackchan-live-latency を使う | |
 
 ## 注意
 

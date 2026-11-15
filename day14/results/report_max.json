@@ -1,0 +1,443 @@
+{
+  "status": "completed",
+  "agent": "deep-research-max-preview-04-2026",
+  "agent_config": {
+    "collaborative_planning": false,
+    "thinking_summaries": "auto",
+    "type": "deep-research"
+  },
+  "created": "2026-11-14T11:41:14Z",
+  "id": "v1_Chdsa2I0YXNiTkU4TDAxZThQdU43czhRURIWMkVqNGF2RkxsLTZ0OXdfT3k3VDRBUQ",
+  "output_text": "# ESP32-S3の仕様に関するWeb上の記載と公式データシートの比較検証レポート\n\n*免責事項：本レポートは情報提供のみを目的としており、専門的な設計アドバイスを構成するものではありません。マイクロコントローラのデータシートや仕様はメーカー（Espressif Systems）によって予告なく改訂される可能性があるため、実際のハードウェア設計やPCBルーティングを最終決定する際には、必ずEspressif Systemsが発行する最新の公式ドキュメントを参照してください。*\n\n## Executive Summary\n\n本レポートは、Espressif Systemsの「ESP32-S3」に関するWeb上の仕様記載（SRAM容量、CPU、GPIO本数、Deep-sleep消費電流、Bluetooth対応の5項目）を公式データシートと照合し、その誤りの実態と原因を包括的に分析したものである。調査の結果、以下の真の仕様（ベースライン）に対する深刻な混同がWeb上で蔓延していることが確認された。\n\n1.  **SRAM容量**：正解は「512KB」だが、初代ESP32の「520KB」と誤記される事例が多数存在する。\n2.  **CPUアーキテクチャ**：正解は「Xtensa 32-bit LX7 (Dual)」だが、初代の「Xtensa LX6」や、ESP32-C6等で採用されている「RISC-V」と誤認されるケースが頻発している。\n3.  **GPIO本数**：正解は「最大45本」だが、開発ボードの引き出しピン数や、初代（34本）およびESP32-C6（22本）の仕様と混同した記載が散見される。\n4.  **Deep-sleep消費電流**：正解は「7µA」だが、初代仕様である「10µA」の固定観念に引きずられた記載が横行している。\n5.  **Bluetooth対応**：正解は「Bluetooth 5 (LE) 専用」だが、初代の「v4.2 (Classic対応)」と取り違えられたり、ESP32-C6の「v5.3」と混同されたりしている。\n\nこれらの誤りが生じる主要な原因は、2016年に登場して以来10億個以上を出荷した初代「ESP32」の圧倒的な市場シェアに起因する「仕様表のコピー＆ペースト文化」、SoC（チップ単体）と開発ボードの仕様の境界線の喪失、そしてEspressif社の急速なアーキテクチャ多様化による技術者の学習コスト増大にあると結論付けられる。\n\n---\n\n本レポートは、Espressif Systems社が開発したマイクロコントローラ「ESP32-S3」の主な仕様（SRAM容量、CPU、GPIO本数、Deep-sleep消費電流、Bluetooth対応）に関して、Web上の記事やショップの商品ページでどのように記載されているかを調査し、公式データシートと比較・検証した結果を包括的にまとめたものである。\n\n調査の結果、Web上の多くの記事において、初代「ESP32」や別アーキテクチャを採用した「ESP32-C6」などの仕様が、ESP32-S3のものとして誤って記載されている実態が判明した。特に、初代ESP32の圧倒的な知名度と市場シェアに引きずられ、SRAM容量を520KB、Deep-sleep時の消費電流を10µA、Bluetoothをv4.2とする「初代仕様のコピー＆ペースト」と推測される誤りが多数確認されている。本稿では、公式データシートを正解のベースラインとして設定した上で、実際のWeb記事における誤記の事例を抽出し、その背景にある技術的な混同やマーケティング上の理由を深く考察する。\n\n## 1. 公式データシートが定める真の仕様（ベースライン）\n\nWeb上の情報の真偽を判定するためには、まず製造元であるEspressif Systemsが発行する公式データシートに基づく正確な仕様（System on a Chip: SoC単体のスペック）を定義する必要がある。ESP32シリーズは、世代やターゲットとする用途によって内部アーキテクチャが大きく異なるため、各モデルの主要スペックを正確に比較することが検証の第一歩となる。\n\n以下の表は、公式データシートから抽出した初代ESP32、本調査の対象であるESP32-S3、および最新のRISC-Vコア（オープン標準の命令セットアーキテクチャ）を採用したESP32-C6の主要仕様である [cite: 1, 2]。\n\n| 項目 | 初代 ESP32 | ESP32-S3 | ESP32-C6 |\n| :--- | :--- | :--- | :--- |\n| **CPUアーキテクチャ** | Xtensa 32-bit LX6 (Single/Dual) | Xtensa 32-bit LX7 (Dual) | RISC-V 32-bit (HP + LP) |\n| **最大クロック周波数** | 240 MHz | 240 MHz | 160 MHz (HP) / 20 MHz (LP) |\n| **SRAM（メイン）** | 520 KB | 512 KB | 512 KB HP SRAM |\n| **GPIO（最大数）** | 34本 | 45本 | 30本 (QFN40) / 22本 (QFN32) |\n| **Bluetooth対応** | v4.2 BR/EDR (Classic) + LE | Bluetooth 5 (LE) | Bluetooth 5.3 (LE) |\n| **Deep-sleep消費電流** | 10 µA | 7 µA | 7 µA |\n\nこのデータから、ESP32-S3は初代ESP32の正統な後継としてXtensaアーキテクチャ（LX7）を踏襲しつつも、いくつかの重要な仕様変更が行われていることが読み取れる [cite: 1, 3, 4]。まず、メインSRAM（Static Random Access Memory）の容量は初代の520KBから512KBへと微減している [cite: 1, 3, 5]。これはチップ内部のメモリマップやキャッシュ構成の最適化によるものと考えられる。また、GPIO（General-Purpose Input/Output: 汎用入出力）の最大本数は34本から45本へと大幅に拡張され、より多くの周辺機器を直接制御できるようになっている [cite: 2, 3, 5]。なお、ESP32-C6の仕様にある「QFN40」や「QFN32」とは、Quad Flat No-leadsと呼ばれる物理的なチップパッケージの種類を指す。\n\n通信機能においては、初代ESP32が旧来のオーディオ機器などで使われるBluetooth Classic（BR/EDR：Basic Rate / Enhanced Data Rate）とLow Energy（LE）の両方をサポートしていたのに対し、ESP32-S3はBluetooth 5のLE専用へと切り替えられている [cite: 3, 5]。消費電力の観点では、Deep-sleep（チップの大部分の電源を落とし、リアルタイムクロックのみを稼働させる超低消費電力モード）時の電流が、初代の10µAからESP32-S3およびESP32-C6では7µAへと改善されている [cite: 3]。これらの「公式な差異」を念頭に置くことで、Web上の記事がどのモデルの情報を混同しているかを正確に見抜くことが可能となる。\n\n## 2. Web記事における誤記の事例と分析（取り違えの検証）\n\nインターネット上の技術ブログ、電子部品ショップの商品ページ、動画の解説欄などを調査した結果、ユーザーが指定した5つの仕様項目（SRAM、Bluetooth、GPIO、Deep-sleep、CPU）のすべてにおいて、ESP32-S3の仕様として誤った数値を掲載している事例が見つかった。ここでは、主要な仕様項目ごとに誤りの内容を分類し、それがどのモデルの仕様と取り違えられたものかを分析する。\n\n### 2.1 SRAM容量の誤り：520KBの呪縛\n\nESP32-S3のSoCが内蔵するメインSRAMの容量は、公式データシートにおいて明確に512KBと定義されている [cite: 2, 3, 5]。しかし、複数の販売サイトや解説記事において、この値が「520KB」と誤記されているケースが確認された。\n\n例えば、ある電子部品メーカー（DFRobot）のESP32-S3を搭載した円形タッチディスプレイ開発ボードの製品ページやWikiでは、搭載MCUを「ESP32-S3R8」と正しく明記しているにもかかわらず、スペック欄に「520KB SRAM」と記載している [cite: 6, 7]。また、別のスマートディスプレイ製品のページでも、「ESP32-S3-N16R8」を採用しているとしながら「520KB SRAM」と併記されている [cite: 8]。\n\nこの「520KB」という中途半端な数値は、明らかに初代ESP32の内蔵SRAM容量（520KB）と完全に一致している [cite: 1, 3, 5]。初代ESP32が長年にわたりIoT（モノのインターネット）開発のデファクトスタンダードとして君臨してきたため、販売業者や記事の執筆者が仕様表のテンプレートとして初代ESP32のものをコピー＆ペーストし、MCUの型番だけを「ESP32-S3」に書き換えた結果生じた誤りである可能性が極めて高い。\n\n### 2.2 Bluetooth仕様の誤り：Classic対応とバージョンの混乱\n\nBluetoothの対応規格に関する誤りも非常に多い。ESP32-S3はBluetooth 5規格のLow Energy（LE）にのみ対応しており、オーディオ伝送等で用いられるBluetooth Classic（BR/EDR）には対応していない [cite: 3, 5]。\n\nしかし、あるオンラインショップ（Newegg）のESP32-S3開発ボードの商品説明には「Supports Bluetooth 4.2, traditional Bluetooth, and BLE」と記載されている [cite: 9]。この「Bluetooth 4.2および従来のBluetooth（Classic）」という記述は、まさに初代ESP32の通信仕様そのものである [cite: 1, 3]。\n\nまた、ESP32-S3が「Bluetooth 5.3」に対応していると誤解させるような記載も見受けられる。ESP32-C6がBluetooth 5.3に対応しているため [cite: 1, 3]、最新世代のチップ間で仕様が混同されているケースや、一部の開発者がESP32-S3ボードに外部のBluetooth 5.3モジュールを後付けして使用している事例 [cite: 10] が、検索エンジン上でESP32-S3自体の仕様として誤認されているケースがあると考えられる。\n\n### 2.3 GPIO本数の誤り：チップ仕様とボード仕様の混同\n\nESP32-S3のSoC単体が持つプログラム可能なGPIOピンの最大数は45本である [cite: 2, 3]。しかし、Web上の記事や商品ページでは、「ESP32-S3は34本のGPIOを持つ」「22本のGPIOを提供する」といった記載が散見される。\n\nこれには2つの背景が推測される。1つ目は、開発ボード（ブレークアウトボード）として引き出されているピン数を、SoCの仕様として記述しているケースである。例えば、「Waveshare ESP32-S3-Zero」や「ESP32-S3 Super Mini」といった小型開発ボードの紹介記事では、物理的にアクセス可能なピンとして「34 GPIO」と記載されている [cite: 11, 12]。また、別のボード「RedPill(+) ESP32-S3」の解説では「22 GPIO pins」と記載されている [cite: 13]。これらは開発ボードの仕様としては正しいが、SoC単体のスペックとして語られると読者に誤解を与える。\n\n2つ目の背景は、ここでも他モデルとの混同である。初代ESP32のSoCが持つGPIOの最大数は偶然にも「34本」である [cite: 2, 3]。また、ESP32-C3やESP32-C6（QFN32パッケージ）のGPIO数は「22本」である [cite: 2, 3]。つまり、開発ボードのピン数がたまたま他モデルのSoC最大ピン数と一致してしまっているため、情報の切り分けが曖昧になり、「ESP32-S3のGPIOは34本（または22本）」という誤った認識が拡散していると推測される。\n\n### 2.4 Deep-sleep消費電流の誤り：10µAという固定観念\n\nバッテリー駆動のIoTデバイスにおいて重要となるDeep-sleep時の消費電流について、ESP32-S3の公式仕様は「7µA」である [cite: 3]。しかし、多くのブログや解説サイトでは、この値が「10µA」として紹介されている。\n\n例えば、基板製造メーカー（PCBWay）の技術ブログにおけるESP32とESP32-S3の比較記事では、「どちらのチップも消費電力は同等に低く、約10µAである」と記載されている [cite: 14, 15]。また、バッテリー駆動に関する技術指南記事でも「ESP32-S3をDeep-sleep（約10µA）に入れる」といった表現が用いられている [cite: 16]。\n\nこれも、初代ESP32の公式仕様である「10µA」[cite: 3] との明らかな取り違えである。さらに、開発ボード上に実装されているLDO（低ドロップアウト・レギュレータ）やUSB-UART変換チップ（UART：Universal Asynchronous Receiver-Transmitter、汎用非同期送受信回路）の暗電流（漏れ電流）が加わると、実際のボード全体の消費電流は数十µAから数mAに跳ね上がる [cite: 17]。例えば、開発ボードの電源回路で頻繁に採用される降圧用LDOレギュレータ「AMS1117」の場合、データシート上の静止電流（Quiescent Current）は単体で5mA〜11mAにも達する [cite: 18, 19]。このような周辺部品による電力ロスを実測した際の大まかな「10µA〜数mA台」という数値感覚と、初代ESP32の公式スペックが合わさり、「ESP32系のDeep-sleep＝10µA」という固定観念が形成されていると結論付けられる。\n\n### 2.5 CPU仕様の誤り：Xtensa LX6との混同とRISC-Vの誤認\n\nESP32-S3はAIワークロードを加速するベクトル命令を備えた「デュアルコア Xtensa 32-bit LX7（最大240MHz）」を搭載している [cite: 1, 4, 20]。しかし、Web上ではこのCPUアーキテクチャについても、過去のモデルや別シリーズとの深刻な混同が見られる。\n\n第一の誤記は、SRAM等と同様に初代ESP32の仕様である「Xtensa LX6」をそのまま記載してしまうケースである。ESP32シリーズのバリエーションを解説する記事においてさえ、ESP32-S3の処理能力を初代と同列のLX6ベースであると誤認している事例が存在する [cite: 5, 21]。\n\n第二の、より複雑な誤認は「ESP32-S3のメインCPUはRISC-Vである」という勘違いである。事実、開発者向けコミュニティであるGitHubのディスカッションボード等では、「ESP32-S3はRISC-Vプロセッサに基づいているはずだ」と前提を誤って質問を行うユーザーの姿が確認されている [cite: 22]。この誤認には明確な技術的背景がある。まず、ESP32-S3のSoC内部には、メインのXtensa LX7コアとは別に、ディープスリープ中に少数のセンサー監視等を行うための「ULP（Ultra-Low Power）コプロセッサ」が内蔵されており、このコプロセッサが**RISC-Vアーキテクチャ**を採用しているのである [cite: 23, 24]。さらに、ESP32-C3やESP32-C6といった同時期に展開されている「Cシリーズ」がメインCPUとしてRISC-Vを採用していること [cite: 2]、そして将来的なチップ（ESP32-S31など）でRISC-Vへの移行が発表されていること [cite: 25] が、情報の混乱に拍車をかけている。「ESP32-S3にはRISC-Vが内蔵されている」という断片的な事実が一人歩きし、メインCPUのアーキテクチャとして誤って語られている好例である。\n\n## 3. Web記事の記載値と出典一覧表\n\n前セクションで分析したWeb上の誤記事例について、具体的な出典URLとともに一覧表として整理する。この表は、公式仕様（SRAM: 512KB, CPU: Xtensa LX7, GPIO: 45本, BT: 5 LE, Deep-sleep: 7µA）との乖離を視覚的に示すものである。\n\n| No. | 出典URL | 記事が主張するESP32-S3の仕様（該当箇所） | 誤りの種類と推測される取り違え元 |\n| :--- | :--- | :--- | :--- |\n| 1 | https://www.sheen.bot/store/esp32-s3-round-touch-display-development-board-1-85-ai-voice-wireless-charging | SRAM: 520KB | **SRAMの誤記**<br>初代ESP32の520KBと完全に一致。データシートの確認不足によるコピペと推測される。 |\n| 2 | https://wiki.dfrobot.com/dfr1221/ | SRAM: 520KB | **SRAMの誤記**<br>メーカー公式Wikiにも関わらず初代ESP32の値が流用されている。 |\n| 3 | https://viewedisplay.com/product/esp32-s3-1-5-inch-amoled-touch-screen-dev-board-uart-smart-display/ | SRAM: 520KB | **SRAMの誤記**<br>上記同様、初代ESP32の値との混同。 |\n| 4 | https://github.com/pytorch/executorch/discussions/8331 | CPU: ESP32-S3 is based on RISC-V processor | **CPUの誤認**<br>S3内蔵のULPコプロセッサや、Cシリーズ（C6等）の仕様と混同し、メインCPUがRISC-Vであると誤解。 |\n| 5 | https://www.newegg.com/p/3D0-0053-000P0 | Bluetooth: 4.2, traditional Bluetooth | **Bluetoothの誤記**<br>初代ESP32のClassic (BR/EDR) 対応仕様と取り違えている。 |\n| 6 | https://circuitpython.org/board/waveshare_esp32_s3_zero/ | GPIO: 34 contacts | **GPIOの混同**<br>SoC（45本）ではなくボードのピン数だが、初代ESP32の34本と誤認されやすい。 |\n| 7 | https://www.geeky-gadgets.com/esp32-s3-super-mini-guide/ | GPIO: 34 GPIO pins | **GPIOの混同**<br>小型ボードの仕様をチップの仕様として解説している。 |\n| 8 | https://www.espboards.dev/esp32/redpill-esp32s3/ | GPIO: 22 GPIO pins | **GPIOの混同**<br>ボードのピン数だが、ESP32-C6の22本と数値が一致し混乱を招く。 |\n| 9 | https://www.pcbway.com/blog/PCB_Design_Layout/ESP32_vs_ESP32_S3_Key_Differences_Performance_Comparison_and_PCB_Design_Consi_2c205f9a.html | Deep-sleep: around 10 µA | **Deep-sleepの誤記**<br>初代ESP32の10µAをS3の仕様として一括りにしている。 |\n| 10 | https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-s3-leaf | Deep-sleep: 10uA | **Deep-sleepの誤記**<br>S3搭載ボードの解説だが、初代の公式値（10µA）が流用されている。 |\n\n※ 注記：本表に記載されたWeb記事の数値や開発者の質問は調査時点のものであり、意図的な虚偽というよりは、技術的背景の複雑さやドキュメント作成時の不注意に起因するものと推測される。\n\n## 4. 誤りが多い項目とその理由の推測（総合考察）\n\n本調査を通じて、ESP32-S3の仕様に関してWeb上で誤った情報が広範に拡散していることが確認された。ここでは、なぜこれほどまでに特定の項目（SRAM、CPU、GPIO、Bluetooth、消費電流）において誤記が集中しているのか、その理由を3つの複合的な要因から推測・総括する。\n\n### 4.1 「ESP32」の一般名詞化とコピペ文化の弊害\n最も支配的な要因は、初代「ESP32」の市場における歴史的な成功である。2016年に登場した初代ESP32は、安価でありながらWi-FiとBluetoothを統合した画期的なマイコンとして爆発的に普及し、Espressif社はIoTチップの累計出荷数が10億個を突破するに至った [cite: 1, 3, 26, 27, 28]。その結果、「ESP32」という単語が特定のチップ型番を指す固有名詞から、Espressif社の提供するWi-Fiマイコンシリーズ全体を指す「一般名詞」のように扱われるようになった。\n\nこの影響により、オンラインショップの担当者や技術ブログの執筆者が、新型である「ESP32-S3」の紹介文を作成する際、ゼロからEspressifの公式データシートを確認するのではなく、既存の「ESP32」の仕様表をコピー＆ペーストして流用する事態が常態化している。これが、SRAMの「520KB」や、CPUの「Xtensa LX6」、Bluetoothの「v4.2（Classic対応）」、Deep-sleepの「10µA」という初代特有の数値が、S3の記事に亡霊のように現れ続ける最大の理由であると考えられる。\n\n### 4.2 SoC仕様と開発ボード仕様の境界線の喪失\nGPIO本数や消費電流に関する誤解の多くは、チップ（SoC）単体の仕様と、それを利用した開発ボード（DevKitやブレークアウトボード）の仕様が混同されていることに起因する。\n\nエンドユーザーの多くは、ESP32-S3の表面実装チップをそのまま購入して自作基板に半田付けするのではなく、あらかじめピンヘッダやUSBコネクタ、電源回路（前述のAMS1117レギュレータなど）が実装された開発ボードを購入して利用する。そのため、「このボードには何本のピンが引き出されているか（例：34本や22本）」「このボードの消費電流はどれくらいか（例：レギュレータの漏れ電流を含めて数µA〜数mA）」といった「ボードレベルの制約」が、いつの間にか「ESP32-S3というMCU単体の仕様」として語られるようになっている。\n\n特にGPIOに関しては、初代ESP32のSoC最大ピン数が34本 [cite: 2, 3]、ESP32-S3の特定の小型ボードの引き出しピン数も34本 [cite: 12] と数値が偶然一致していることが、情報を受け取る側の混乱に拍車をかけている。\n\n### 4.3 アーキテクチャの多様化による学習コストの増大\nEspressif社は近年、製品ポートフォリオを急激に拡大しており、従来のXtensaアーキテクチャ（ESP32, ESP32-S2, ESP32-S3）に加え、オープンソース命令セットであるRISC-Vアーキテクチャを採用したモデル（ESP32-C3, ESP32-C6など）を並行して展開している [cite: 1, 3, 29, 30]。\n\nこれにより、「Sシリーズは高性能なXtensaマルチコア（LX7）でBluetooth 5とAI命令をサポート」、「Cシリーズは低コスト・省電力なRISC-VでBluetooth 5.3やZigbee/Threadをサポート」といった具合に、機能の取捨選択が世代とシリーズ間で複雑に交差している [cite: 1, 2, 3]。さらにESP32-S3には「ULPコプロセッサ側のみRISC-V」という複合的な要素も含まれている [cite: 23]。この急速なラインナップの拡充に対して、サードパーティのハードウェアベンダーや解説記事のライターの知識のアップデートが追いついていないことが、仕様の取り違え（例：S3のメインCPUをRISC-Vと誤認する、S3にC6のBluetooth 5.3仕様を紐づけてしまう等）を恒常的に発生させる土壌となっている。\n\n## 5. 物理的なハードウェア検証：Webの誤情報を回避する現実的なアプローチ\n\nこれまでの分析から明らかなように、Web上の販売ページや技術ブログの記載を鵜呑みにすることはハードウェア選定において極めてリスクが高い。ESP32-S3搭載ボードを購入した開発者が、自身の手にしているチップの真の仕様を把握するための最も確実な方法は、Web情報をバイパスし、**物理的なチップの刻印（レーザーマーキング）を直接確認すること**である。\n\nESP32-S3の開発ボードには通常、FCC/CEなどの認証マークとともに、「ESP32-S3-WROOM-1-N8R2」といった具体的なモジュール型番がレーザー刻印された金属シールド（RFシールド）が搭載されている。この文字列の法則（例：「N8」は8MBのQuad SPI Flash、「R2」は2MBのQuad SPI PSRAMを内蔵していることを示す）をEspressif社の公式モジュールデータシートと照らし合わせることで、内蔵メモリ容量やコアアーキテクチャ、利用可能なGPIOピンの制約を確定させることができる。IoTデバイスの開発者や研究者がESP32ファミリーを選定・利用する際には、検索エンジン上位の二次情報に依存せず、実物のハードウェア刻印と公式のPDFデータシートを唯一の正解とするリテラシーが強く求められる。\n\n**Sources:**\n1. [dronebotworkshop.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4)\n2. [nextpcb.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA==)\n3. esp32_datasheet_en.pdf (fileSearchStores/adv2026day12esp32sisters-ju6vzp26vplv)\n4. [pcbway.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHqRnjlLvsFh6RSI4MtLqQ4bgj8_KtUx8rGwIqUo2GfDfOhaW7S3Imfcg5qpvkwsUv0bj9ykHa69zgBCv4G_Xnd_WuI-t6Mb65woxup3z_YQTS5NHmvA7pNt4h0xs0QPpIgrSTxsO92hUJARRQ60t_RAeinTXugW7TSc_1RhRKTh6RQVgxmtmyyLmOpvfZQeuxGw1vuDjsbpGgqt7r8ccL3PJnDsyfNBLaqD8PP1ou9ng==)\n5. [pcbpit.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcFm2c9MebsajKITal8WCK-egDaSqd6Btv3W8oPRt-aNYCxABtKNQYo2Cwsrc3oWOC4c_22HjI2nuE3E544ZNDwxCSREgDmS3KiqSY3kQOACE5JXAnJrvhhPs=)\n6. [sheen.bot](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFdq-8nBMDuJzDOTMVx2-1W_Ejp_M9cOO9zmrLEOr4XOtPqiTqjaksNr41tECAbpPedc7NXfzchh0UKn9Qo6mdbr7CjzcNeKfJqc0MRDs2LBOigwSzLi4J38jabV6xZMIRhbTW4guQS1MORpnoX_c15zPXW1lopmOwFZSX2aCLvEplrN5zGfnApP8U-jUvph73jZU3BiYnW9dzy1pFicMc8)\n7. [dfrobot.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEqdd39SfwBU3bSYN_p8M0vu5RpJLGdGGdhtWpbxP6jH4DuEjL29HzjCdCX2Px8-M97YgkS8Js99uTSt8x4dgL7qjF21stovXug3PH0S0mn-TEXu7uxO1Q=)\n8. [viewedisplay.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGC3KKjnf_FtTDOsNHk3trORW6ramCaUAmtv14q_orCpY4Mrz6qRXx7WjpJ51MchnvEtwVUxAnmf9qt7e4bAZlCYvqaUx7fj1ymp4CCwMU3t7ASfm6iJN6Yai-k-Bq9n_Pw6UXNRWMBdOup8NB7OvpucTjHPx1MpeeuNdIKaD9MU8qYIGpbQV1AEeYnH2cjHcAtORFbxIjMZn7X)\n9. [newegg.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF7DAfxhW4Lt91ezXupL5TcEa1yk1Q80337sBbdnVem9XBiJ1kex86CKh2o2ciDYfSISum8LBk0dTwr0R0XQdg4D8-KI8eHpKX9JUrH0zBsW_Yq6thsmZdDz8k0BsM=)\n10. [reddit.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFW8KqdQrcSz3W4GXIVEyOFmyvEiCYhGNcl_F4S6YqDfJtxA_7d8XjUtCiegWL-dMNnGT1Wd1NFgXGT07bc8LKo86aLBfAh5YFxdmm6AcGsoUo5lxuc1wHRWM7HTBBK4iLHE9H7NwL8Ai7OvKWtiDQAtV50LYn7pQGKjjn1-Ps5BxixH1b4fLfVh7by5o8=)\n11. [circuitpython.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEDtVUalhQrxWVbXrq9cCNEhqQip5kGEDx-mPhVoBHDjnAEr0F3KdM8VXI28QJ4mSNl9bECzrt0rUn4DL3RtRmtWfe9tVk_PbRP3vSFBPCININhtxSrgRuY01Vto78Eiv3nEvopvbpbN0hEv72IRg==)\n12. [geeky-gadgets.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQENig_D90owMK_Mh1qSVNPMEkeKRmAMc9ckXoOz0z8OBVq5rDfM2GZdf70NqXNFWprXfXUXfPGQ93NParxYvu_Sq4Q_CUgZJXUUD_LligOlK70m3u13qxuwkpVORpXqLgVGEmTG2GCDwTmlYW_7Gw==)\n13. [espboards.dev](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGaWzaQxEOAArcTYrnvmxbMQ5L0yo2rJ4gFOv0r-rqvv8zioYvKPSJ5USL8Oze3iOaQZpOi20utRHzikQmpNRVgCONxFWy89vOke0IkpyVhmVblO4GRFkeoTb_6qpsRz9NqvErkM_Y=)\n14. [pcbway.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH8eqVKiP74Y1zMSqqhNDWqqTnj1VThULAzAqP2-86j5kMbh6kORlx3SXV3Y3SXKmnc0bDVW-NJrTcDCqyS4q2JbSD7T6nem9f6Mlse_uyn27ww_UMyDLnFooT1O44YheS0Br2hE45mYbw0JAXAecX8UR0Cu4kGl9-4CJl8f_9j1iz9gAqCfbjNTnuCYrI2PFEb4z2v_AjYmSn1zjgl00hiibcMEFI3G2CRFDaQlzj5LkHnxzFoKPUanL-jCuaUzS4=)\n15. [pakellab.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEadTEfjzgCBGHnM58G9UnQeRvsfr16hYy4fudYMYxMfIFm5wbecrlf0RoVh2lTdTa5JdqLwvXqkTl8fYEnK3gQRkxEjsBv9RZ7AJ6BonTPX0cPv-oXSLTn9Ob2LCNadgwb8MpfreJWmW8=)\n16. [projectech.in](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE2F5rwpajTyTm8V2gzsI7ZpepXrnFhReXnhDhYsUpgtpSTUH1U-0n1LG-QCUgFljO3o55g56amYESk8sfdSrEZGAXLZUqsnL7DduHgOx74H2M5vL5D1Fg9gkxbt6SW7KiSDt7pjschI8WnsZ4FvPAw2OdPdBc=)\n17. [codesprintconsulting.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwfqS8CGSVo_ZMEnFQGTTrdrdv-YcJeQEqp_XS_U1BB_QmIeozybmOLDt5b5tWZWeWtruNhZ9jFD2wFCDrgcUW7pJwluMbc_PRLvf7hx_d0t4ejXDMQb0yV0K-NFiP-Mzn5m7BT2Hhb0zVQUZmeKOyg-7vaqVWd7_9PCCh9yc0_XeC)\n18. [advanced-monolithic.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFIU1PDn48fNYbSAS35Wdxo1QZlhIUc50aEmiGgd5ABTBwZ-3tHjOtv80ToxG72a3nSz58JTWpq2qoSHToyq4Jq8ROgwTS2s0nXXr-9X4fUF0g04Kir4yevzK6zqsFuTu5Jm57-Iqdp)\n19. [ultralibrarian.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEvb49SULSvHnBAkP5ChFeYZtsolr9EXA5VPA-2wgdPlpgVP-9gy1xgkzSYiKJOud3T2fx91_0dauhP6hIK602CS3ZqCUW6i9WO9L5guTb5m8aIro7r443EDFedStFguY7MgheTeKh5tVlfegrrm_HMRTwMFV-NDG53PpL3NAvv_x9FB0QdjuLkC_i4B1l3x3BI_12wfXBRj99a5cRm6NyGVZzy5l1Yu1CjCuPu)\n20. [zbotic.in](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFNyzteLX4t4xk742QGUBOc9x5130tejns-rhrUN-qdeml81TZCbaZqNhmjhO_9BpqC4ueQZjX0xMvccr4YPnHggGgywQy0SDzDqXhCrMNH6OjlxmdntplFcL0KgQ0HODR7FEbfRuZhVfsosaT_qyBUFwM2HMbX4H9QQ2Qp7A==)\n21. [esp32engine.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHvjX3Z11rdKulBISNdWdEnGLdUfIwMQh2J6dZJGrbzOVJt9XgFIWcuNQjHydBTfWbF-0AAmQ8J7kwbykYIWlL-Bjar8vnAPgGsMVeutNFilQwqqeZcNFXAYIL-lmvhdMibgWttv3C2RuyVLQ==)\n22. [github.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHDQ9mLUMwY9Hm3oOP7RezKt8Qs-6pd8PyPOgy8yUpiFPvi4DOQDkKkJAf_8B1yMtMCcvLfshfnrdN7aQGOO-NTy7YJXVCYLOWnpBiC_Uyd6pYDh5TuzZ6idl5-hBoF_VsIA1urgwjhkMQDdZk=)\n23. [espressif.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHt3P7hIabqrJfewcY0Hi6YJTvOfKfHfTAn3mtsh8aVAQpW0gVrf13h7kLaCsNt5BpWrty8He7aC8WcTm-QbKKm0wmNWZ_dofWuNde6LUc97686vD0aTS35gp3TptgTu1SeLRgiaLCcrwm8d_E8YOAIRtPVzIyCxjREKiBrBuSulioHRPqm6l9mn-PWuDOU)\n24. [espressif.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFTKPeKxOMuCamWCj8CP8FTQ6hS4kQD3sAba0qzOW25ownrVyEDnftw0khbBMMtENTWOtN0sM8na-3k-xDPbJMkbmTo7rZRzGtGZYKW6UiBfTp7oE8gH7ALODdDOr8JPk26d3jQiLCtn1JHD8jdeZBJGgc_UA2XcXc3guOq8Om4DtiFs6lTbe-CDmXeqOd0aWdq4ztpIiNDNA==)\n25. [teachmemicro.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEbyEiGLpvwz9xQqQtrroJCj22NkhQr3EYeNFykrotOV6rlQ0CRIa2hdyM_BNAL08j8AQCoQvSd8xBfqUWfW4zj9dQToTTRcP6axkYDPAMAomsken7KfGcXNMoQJR1VHsL_Qe6SLET5_CQ0o_PTbkIc0msPdufa6KW7DglP7CKtxbB73Xbyz01i61BLmYaTS3lCrroS)\n26. [infishark.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHMncLe7m07c4zXj6xwfAmpml4IYMpa2a9eP2eWLZysyzPK-4qaxvy8BKwnsM1mRqCOKml8UHO2DTp0JT1nkI8_USTS5FIYCYGZeA8d0DLN88Lrqrjs7qgZEzNL4lalMaz7mQjs64Yk0n9X5eQv3y2JfBAzsJT-e8cw4dShcKwrKjrlfrtnJNKSUg==)\n27. [espressif.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGlH0sJhfnnOi0xm8d-n_ilzbtIIiDllQdURrOyMmbcYL090vpKz52JVVfUrj6FeCLs5eNkybsgEaLKy-1DtWSLAL2VeybnFuEDcVrNfaXnY4b6ily8_Hu9uk5vvgcaVbrtXWlenkR0Ydjz_aE=)\n28. [wikipedia.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGHbWS9g7Xp9mzQudswKtv3jetQ4xFZ0Lw7MpPDaF8Hi-RxBkoQTQYRSn48Uf0TCQDSLInKXQa6mHGzm5apDutbc6xqv2WtpLzAOWCxwQDEf2Zho0_cuvPKjZzyDyppk_c8wZ3c1g==)\n29. [electwork.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHLMWl_yAYBu7RqhHD87Mrdt-fbATOO8Rizd4Df9Eec13v01Q-3LJEyHg7fK0cSfmPoJAUEeonJ_hb4V3ssh_Z7_QEx_IDPtTS-_l2ZaKsalQOLreMSVkw0qcpjAocN6fs52mYAiwS_M4aj)\n30. [espressif.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHKouqA7SqKJe_ojSsqUvhCq6Xfir8AnrFjesuL-us4u9ER5O6PqLD0-n0XMBlIhEwUmpEInDiEObFbtP9uQgapvnb-9PZ0Cc6ajUYT-aVKNd3_WLWz0XYHRs2ANGNr0o3kJYtMTJIlGWuk)\n",
+  "previous_interaction_id": "v1_Chdsa2I0YXNiTkU4TDAxZThQdU43czhRURIXbGtiNGFzYk5FOEwwMWU4UHVON3M4UVE",
+  "steps": [
+    {
+      "content": [
+        {
+          "text": "この計画で進めてください。",
+          "type": "text"
+        }
+      ],
+      "type": "user_input"
+    },
+    {
+      "summary": [
+        {
+          "text": "\n\n**Exploring Multiple Dimensions**\n\nI'm diving into this from several perspectives at once — examining the evidence, exploring different viewpoints, and looking for patterns across a broad set of sources. This approach helps me catch nuances that a narrower search wouldn't reveal.",
+          "type": "text"
+        },
+        {
+          "text": "\n\n**Synthesizing the Analysis**\n\nI'm synthesizing all the verified findings into a unified analysis. This is where I organize the key takeaways, resolve any remaining tensions in the data, and prepare to write.",
+          "type": "text"
+        },
+        {
+          "text": "\n\n**Writing the Analysis**\n\nI'm drafting the report, working through the key findings section by section. I'm focused on making sure the analysis is rigorous, the writing is clear, and nothing important gets left out.",
+          "type": "text"
+        },
+        {
+          "text": "\n\n**Refining the Analysis**\n\nI'm reviewing the report one more time, refining the language and making sure the argument is as compelling and well-supported as it can be. Just a few finishing touches left.",
+          "type": "text"
+        },
+        {
+          "text": "\n\n**Assessing Data Visualization**\n\nSometimes the best way to communicate complex data is visually. I'm reviewing the key findings to see if there are opportunities where a well-placed chart or diagram would strengthen the overall analysis.",
+          "type": "text"
+        }
+      ],
+      "type": "thought"
+    },
+    {
+      "content": [
+        {
+          "text": "# ESP32-S3の仕様に関するWeb上の記載と公式データシートの比較検証レポート\n\n*免責事項：本レポートは情報提供のみを目的としており、専門的な設計アドバイスを構成するものではありません。マイクロコントローラのデータシートや仕様はメーカー（Espressif Systems）によって予告なく改訂される可能性があるため、実際のハードウェア設計やPCBルーティングを最終決定する際には、必ずEspressif Systemsが発行する最新の公式ドキュメントを参照してください。*\n\n## Executive Summary\n\n本レポートは、Espressif Systemsの「ESP32-S3」に関するWeb上の仕様記載（SRAM容量、CPU、GPIO本数、Deep-sleep消費電流、Bluetooth対応の5項目）を公式データシートと照合し、その誤りの実態と原因を包括的に分析したものである。調査の結果、以下の真の仕様（ベースライン）に対する深刻な混同がWeb上で蔓延していることが確認された。\n\n1.  **SRAM容量**：正解は「512KB」だが、初代ESP32の「520KB」と誤記される事例が多数存在する。\n2.  **CPUアーキテクチャ**：正解は「Xtensa 32-bit LX7 (Dual)」だが、初代の「Xtensa LX6」や、ESP32-C6等で採用されている「RISC-V」と誤認されるケースが頻発している。\n3.  **GPIO本数**：正解は「最大45本」だが、開発ボードの引き出しピン数や、初代（34本）およびESP32-C6（22本）の仕様と混同した記載が散見される。\n4.  **Deep-sleep消費電流**：正解は「7µA」だが、初代仕様である「10µA」の固定観念に引きずられた記載が横行している。\n5.  **Bluetooth対応**：正解は「Bluetooth 5 (LE) 専用」だが、初代の「v4.2 (Classic対応)」と取り違えられたり、ESP32-C6の「v5.3」と混同されたりしている。\n\nこれらの誤りが生じる主要な原因は、2016年に登場して以来10億個以上を出荷した初代「ESP32」の圧倒的な市場シェアに起因する「仕様表のコピー＆ペースト文化」、SoC（チップ単体）と開発ボードの仕様の境界線の喪失、そしてEspressif社の急速なアーキテクチャ多様化による技術者の学習コスト増大にあると結論付けられる。\n\n---\n\n本レポートは、Espressif Systems社が開発したマイクロコントローラ「ESP32-S3」の主な仕様（SRAM容量、CPU、GPIO本数、Deep-sleep消費電流、Bluetooth対応）に関して、Web上の記事やショップの商品ページでどのように記載されているかを調査し、公式データシートと比較・検証した結果を包括的にまとめたものである。\n\n調査の結果、Web上の多くの記事において、初代「ESP32」や別アーキテクチャを採用した「ESP32-C6」などの仕様が、ESP32-S3のものとして誤って記載されている実態が判明した。特に、初代ESP32の圧倒的な知名度と市場シェアに引きずられ、SRAM容量を520KB、Deep-sleep時の消費電流を10µA、Bluetoothをv4.2とする「初代仕様のコピー＆ペースト」と推測される誤りが多数確認されている。本稿では、公式データシートを正解のベースラインとして設定した上で、実際のWeb記事における誤記の事例を抽出し、その背景にある技術的な混同やマーケティング上の理由を深く考察する。\n\n## 1. 公式データシートが定める真の仕様（ベースライン）\n\nWeb上の情報の真偽を判定するためには、まず製造元であるEspressif Systemsが発行する公式データシートに基づく正確な仕様（System on a Chip: SoC単体のスペック）を定義する必要がある。ESP32シリーズは、世代やターゲットとする用途によって内部アーキテクチャが大きく異なるため、各モデルの主要スペックを正確に比較することが検証の第一歩となる。\n\n以下の表は、公式データシートから抽出した初代ESP32、本調査の対象であるESP32-S3、および最新のRISC-Vコア（オープン標準の命令セットアーキテクチャ）を採用したESP32-C6の主要仕様である [cite: 1, 2]。\n\n| 項目 | 初代 ESP32 | ESP32-S3 | ESP32-C6 |\n| :--- | :--- | :--- | :--- |\n| **CPUアーキテクチャ** | Xtensa 32-bit LX6 (Single/Dual) | Xtensa 32-bit LX7 (Dual) | RISC-V 32-bit (HP + LP) |\n| **最大クロック周波数** | 240 MHz | 240 MHz | 160 MHz (HP) / 20 MHz (LP) |\n| **SRAM（メイン）** | 520 KB | 512 KB | 512 KB HP SRAM |\n| **GPIO（最大数）** | 34本 | 45本 | 30本 (QFN40) / 22本 (QFN32) |\n| **Bluetooth対応** | v4.2 BR/EDR (Classic) + LE | Bluetooth 5 (LE) | Bluetooth 5.3 (LE) |\n| **Deep-sleep消費電流** | 10 µA | 7 µA | 7 µA |\n\nこのデータから、ESP32-S3は初代ESP32の正統な後継としてXtensaアーキテクチャ（LX7）を踏襲しつつも、いくつかの重要な仕様変更が行われていることが読み取れる [cite: 1, 3, 4]。まず、メインSRAM（Static Random Access Memory）の容量は初代の520KBから512KBへと微減している [cite: 1, 3, 5]。これはチップ内部のメモリマップやキャッシュ構成の最適化によるものと考えられる。また、GPIO（General-Purpose Input/Output: 汎用入出力）の最大本数は34本から45本へと大幅に拡張され、より多くの周辺機器を直接制御できるようになっている [cite: 2, 3, 5]。なお、ESP32-C6の仕様にある「QFN40」や「QFN32」とは、Quad Flat No-leadsと呼ばれる物理的なチップパッケージの種類を指す。\n\n通信機能においては、初代ESP32が旧来のオーディオ機器などで使われるBluetooth Classic（BR/EDR：Basic Rate / Enhanced Data Rate）とLow Energy（LE）の両方をサポートしていたのに対し、ESP32-S3はBluetooth 5のLE専用へと切り替えられている [cite: 3, 5]。消費電力の観点では、Deep-sleep（チップの大部分の電源を落とし、リアルタイムクロックのみを稼働させる超低消費電力モード）時の電流が、初代の10µAからESP32-S3およびESP32-C6では7µAへと改善されている [cite: 3]。これらの「公式な差異」を念頭に置くことで、Web上の記事がどのモデルの情報を混同しているかを正確に見抜くことが可能となる。\n\n## 2. Web記事における誤記の事例と分析（取り違えの検証）\n\nインターネット上の技術ブログ、電子部品ショップの商品ページ、動画の解説欄などを調査した結果、ユーザーが指定した5つの仕様項目（SRAM、Bluetooth、GPIO、Deep-sleep、CPU）のすべてにおいて、ESP32-S3の仕様として誤った数値を掲載している事例が見つかった。ここでは、主要な仕様項目ごとに誤りの内容を分類し、それがどのモデルの仕様と取り違えられたものかを分析する。\n\n### 2.1 SRAM容量の誤り：520KBの呪縛\n\nESP32-S3のSoCが内蔵するメインSRAMの容量は、公式データシートにおいて明確に512KBと定義されている [cite: 2, 3, 5]。しかし、複数の販売サイトや解説記事において、この値が「520KB」と誤記されているケースが確認された。\n\n例えば、ある電子部品メーカー（DFRobot）のESP32-S3を搭載した円形タッチディスプレイ開発ボードの製品ページやWikiでは、搭載MCUを「ESP32-S3R8」と正しく明記しているにもかかわらず、スペック欄に「520KB SRAM」と記載している [cite: 6, 7]。また、別のスマートディスプレイ製品のページでも、「ESP32-S3-N16R8」を採用しているとしながら「520KB SRAM」と併記されている [cite: 8]。\n\nこの「520KB」という中途半端な数値は、明らかに初代ESP32の内蔵SRAM容量（520KB）と完全に一致している [cite: 1, 3, 5]。初代ESP32が長年にわたりIoT（モノのインターネット）開発のデファクトスタンダードとして君臨してきたため、販売業者や記事の執筆者が仕様表のテンプレートとして初代ESP32のものをコピー＆ペーストし、MCUの型番だけを「ESP32-S3」に書き換えた結果生じた誤りである可能性が極めて高い。\n\n### 2.2 Bluetooth仕様の誤り：Classic対応とバージョンの混乱\n\nBluetoothの対応規格に関する誤りも非常に多い。ESP32-S3はBluetooth 5規格のLow Energy（LE）にのみ対応しており、オーディオ伝送等で用いられるBluetooth Classic（BR/EDR）には対応していない [cite: 3, 5]。\n\nしかし、あるオンラインショップ（Newegg）のESP32-S3開発ボードの商品説明には「Supports Bluetooth 4.2, traditional Bluetooth, and BLE」と記載されている [cite: 9]。この「Bluetooth 4.2および従来のBluetooth（Classic）」という記述は、まさに初代ESP32の通信仕様そのものである [cite: 1, 3]。\n\nまた、ESP32-S3が「Bluetooth 5.3」に対応していると誤解させるような記載も見受けられる。ESP32-C6がBluetooth 5.3に対応しているため [cite: 1, 3]、最新世代のチップ間で仕様が混同されているケースや、一部の開発者がESP32-S3ボードに外部のBluetooth 5.3モジュールを後付けして使用している事例 [cite: 10] が、検索エンジン上でESP32-S3自体の仕様として誤認されているケースがあると考えられる。\n\n### 2.3 GPIO本数の誤り：チップ仕様とボード仕様の混同\n\nESP32-S3のSoC単体が持つプログラム可能なGPIOピンの最大数は45本である [cite: 2, 3]。しかし、Web上の記事や商品ページでは、「ESP32-S3は34本のGPIOを持つ」「22本のGPIOを提供する」といった記載が散見される。\n\nこれには2つの背景が推測される。1つ目は、開発ボード（ブレークアウトボード）として引き出されているピン数を、SoCの仕様として記述しているケースである。例えば、「Waveshare ESP32-S3-Zero」や「ESP32-S3 Super Mini」といった小型開発ボードの紹介記事では、物理的にアクセス可能なピンとして「34 GPIO」と記載されている [cite: 11, 12]。また、別のボード「RedPill(+) ESP32-S3」の解説では「22 GPIO pins」と記載されている [cite: 13]。これらは開発ボードの仕様としては正しいが、SoC単体のスペックとして語られると読者に誤解を与える。\n\n2つ目の背景は、ここでも他モデルとの混同である。初代ESP32のSoCが持つGPIOの最大数は偶然にも「34本」である [cite: 2, 3]。また、ESP32-C3やESP32-C6（QFN32パッケージ）のGPIO数は「22本」である [cite: 2, 3]。つまり、開発ボードのピン数がたまたま他モデルのSoC最大ピン数と一致してしまっているため、情報の切り分けが曖昧になり、「ESP32-S3のGPIOは34本（または22本）」という誤った認識が拡散していると推測される。\n\n### 2.4 Deep-sleep消費電流の誤り：10µAという固定観念\n\nバッテリー駆動のIoTデバイスにおいて重要となるDeep-sleep時の消費電流について、ESP32-S3の公式仕様は「7µA」である [cite: 3]。しかし、多くのブログや解説サイトでは、この値が「10µA」として紹介されている。\n\n例えば、基板製造メーカー（PCBWay）の技術ブログにおけるESP32とESP32-S3の比較記事では、「どちらのチップも消費電力は同等に低く、約10µAである」と記載されている [cite: 14, 15]。また、バッテリー駆動に関する技術指南記事でも「ESP32-S3をDeep-sleep（約10µA）に入れる」といった表現が用いられている [cite: 16]。\n\nこれも、初代ESP32の公式仕様である「10µA」[cite: 3] との明らかな取り違えである。さらに、開発ボード上に実装されているLDO（低ドロップアウト・レギュレータ）やUSB-UART変換チップ（UART：Universal Asynchronous Receiver-Transmitter、汎用非同期送受信回路）の暗電流（漏れ電流）が加わると、実際のボード全体の消費電流は数十µAから数mAに跳ね上がる [cite: 17]。例えば、開発ボードの電源回路で頻繁に採用される降圧用LDOレギュレータ「AMS1117」の場合、データシート上の静止電流（Quiescent Current）は単体で5mA〜11mAにも達する [cite: 18, 19]。このような周辺部品による電力ロスを実測した際の大まかな「10µA〜数mA台」という数値感覚と、初代ESP32の公式スペックが合わさり、「ESP32系のDeep-sleep＝10µA」という固定観念が形成されていると結論付けられる。\n\n### 2.5 CPU仕様の誤り：Xtensa LX6との混同とRISC-Vの誤認\n\nESP32-S3はAIワークロードを加速するベクトル命令を備えた「デュアルコア Xtensa 32-bit LX7（最大240MHz）」を搭載している [cite: 1, 4, 20]。しかし、Web上ではこのCPUアーキテクチャについても、過去のモデルや別シリーズとの深刻な混同が見られる。\n\n第一の誤記は、SRAM等と同様に初代ESP32の仕様である「Xtensa LX6」をそのまま記載してしまうケースである。ESP32シリーズのバリエーションを解説する記事においてさえ、ESP32-S3の処理能力を初代と同列のLX6ベースであると誤認している事例が存在する [cite: 5, 21]。\n\n第二の、より複雑な誤認は「ESP32-S3のメインCPUはRISC-Vである」という勘違いである。事実、開発者向けコミュニティであるGitHubのディスカッションボード等では、「ESP32-S3はRISC-Vプロセッサに基づいているはずだ」と前提を誤って質問を行うユーザーの姿が確認されている [cite: 22]。この誤認には明確な技術的背景がある。まず、ESP32-S3のSoC内部には、メインのXtensa LX7コアとは別に、ディープスリープ中に少数のセンサー監視等を行うための「ULP（Ultra-Low Power）コプロセッサ」が内蔵されており、このコプロセッサが**RISC-Vアーキテクチャ**を採用しているのである [cite: 23, 24]。さらに、ESP32-C3やESP32-C6といった同時期に展開されている「Cシリーズ」がメインCPUとしてRISC-Vを採用していること [cite: 2]、そして将来的なチップ（ESP32-S31など）でRISC-Vへの移行が発表されていること [cite: 25] が、情報の混乱に拍車をかけている。「ESP32-S3にはRISC-Vが内蔵されている」という断片的な事実が一人歩きし、メインCPUのアーキテクチャとして誤って語られている好例である。\n\n## 3. Web記事の記載値と出典一覧表\n\n前セクションで分析したWeb上の誤記事例について、具体的な出典URLとともに一覧表として整理する。この表は、公式仕様（SRAM: 512KB, CPU: Xtensa LX7, GPIO: 45本, BT: 5 LE, Deep-sleep: 7µA）との乖離を視覚的に示すものである。\n\n| No. | 出典URL | 記事が主張するESP32-S3の仕様（該当箇所） | 誤りの種類と推測される取り違え元 |\n| :--- | :--- | :--- | :--- |\n| 1 | https://www.sheen.bot/store/esp32-s3-round-touch-display-development-board-1-85-ai-voice-wireless-charging | SRAM: 520KB | **SRAMの誤記**<br>初代ESP32の520KBと完全に一致。データシートの確認不足によるコピペと推測される。 |\n| 2 | https://wiki.dfrobot.com/dfr1221/ | SRAM: 520KB | **SRAMの誤記**<br>メーカー公式Wikiにも関わらず初代ESP32の値が流用されている。 |\n| 3 | https://viewedisplay.com/product/esp32-s3-1-5-inch-amoled-touch-screen-dev-board-uart-smart-display/ | SRAM: 520KB | **SRAMの誤記**<br>上記同様、初代ESP32の値との混同。 |\n| 4 | https://github.com/pytorch/executorch/discussions/8331 | CPU: ESP32-S3 is based on RISC-V processor | **CPUの誤認**<br>S3内蔵のULPコプロセッサや、Cシリーズ（C6等）の仕様と混同し、メインCPUがRISC-Vであると誤解。 |\n| 5 | https://www.newegg.com/p/3D0-0053-000P0 | Bluetooth: 4.2, traditional Bluetooth | **Bluetoothの誤記**<br>初代ESP32のClassic (BR/EDR) 対応仕様と取り違えている。 |\n| 6 | https://circuitpython.org/board/waveshare_esp32_s3_zero/ | GPIO: 34 contacts | **GPIOの混同**<br>SoC（45本）ではなくボードのピン数だが、初代ESP32の34本と誤認されやすい。 |\n| 7 | https://www.geeky-gadgets.com/esp32-s3-super-mini-guide/ | GPIO: 34 GPIO pins | **GPIOの混同**<br>小型ボードの仕様をチップの仕様として解説している。 |\n| 8 | https://www.espboards.dev/esp32/redpill-esp32s3/ | GPIO: 22 GPIO pins | **GPIOの混同**<br>ボードのピン数だが、ESP32-C6の22本と数値が一致し混乱を招く。 |\n| 9 | https://www.pcbway.com/blog/PCB_Design_Layout/ESP32_vs_ESP32_S3_Key_Differences_Performance_Comparison_and_PCB_Design_Consi_2c205f9a.html | Deep-sleep: around 10 µA | **Deep-sleepの誤記**<br>初代ESP32の10µAをS3の仕様として一括りにしている。 |\n| 10 | https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-s3-leaf | Deep-sleep: 10uA | **Deep-sleepの誤記**<br>S3搭載ボードの解説だが、初代の公式値（10µA）が流用されている。 |\n\n※ 注記：本表に記載されたWeb記事の数値や開発者の質問は調査時点のものであり、意図的な虚偽というよりは、技術的背景の複雑さやドキュメント作成時の不注意に起因するものと推測される。\n\n## 4. 誤りが多い項目とその理由の推測（総合考察）\n\n本調査を通じて、ESP32-S3の仕様に関してWeb上で誤った情報が広範に拡散していることが確認された。ここでは、なぜこれほどまでに特定の項目（SRAM、CPU、GPIO、Bluetooth、消費電流）において誤記が集中しているのか、その理由を3つの複合的な要因から推測・総括する。\n\n### 4.1 「ESP32」の一般名詞化とコピペ文化の弊害\n最も支配的な要因は、初代「ESP32」の市場における歴史的な成功である。2016年に登場した初代ESP32は、安価でありながらWi-FiとBluetoothを統合した画期的なマイコンとして爆発的に普及し、Espressif社はIoTチップの累計出荷数が10億個を突破するに至った [cite: 1, 3, 26, 27, 28]。その結果、「ESP32」という単語が特定のチップ型番を指す固有名詞から、Espressif社の提供するWi-Fiマイコンシリーズ全体を指す「一般名詞」のように扱われるようになった。\n\nこの影響により、オンラインショップの担当者や技術ブログの執筆者が、新型である「ESP32-S3」の紹介文を作成する際、ゼロからEspressifの公式データシートを確認するのではなく、既存の「ESP32」の仕様表をコピー＆ペーストして流用する事態が常態化している。これが、SRAMの「520KB」や、CPUの「Xtensa LX6」、Bluetoothの「v4.2（Classic対応）」、Deep-sleepの「10µA」という初代特有の数値が、S3の記事に亡霊のように現れ続ける最大の理由であると考えられる。\n\n### 4.2 SoC仕様と開発ボード仕様の境界線の喪失\nGPIO本数や消費電流に関する誤解の多くは、チップ（SoC）単体の仕様と、それを利用した開発ボード（DevKitやブレークアウトボード）の仕様が混同されていることに起因する。\n\nエンドユーザーの多くは、ESP32-S3の表面実装チップをそのまま購入して自作基板に半田付けするのではなく、あらかじめピンヘッダやUSBコネクタ、電源回路（前述のAMS1117レギュレータなど）が実装された開発ボードを購入して利用する。そのため、「このボードには何本のピンが引き出されているか（例：34本や22本）」「このボードの消費電流はどれくらいか（例：レギュレータの漏れ電流を含めて数µA〜数mA）」といった「ボードレベルの制約」が、いつの間にか「ESP32-S3というMCU単体の仕様」として語られるようになっている。\n\n特にGPIOに関しては、初代ESP32のSoC最大ピン数が34本 [cite: 2, 3]、ESP32-S3の特定の小型ボードの引き出しピン数も34本 [cite: 12] と数値が偶然一致していることが、情報を受け取る側の混乱に拍車をかけている。\n\n### 4.3 アーキテクチャの多様化による学習コストの増大\nEspressif社は近年、製品ポートフォリオを急激に拡大しており、従来のXtensaアーキテクチャ（ESP32, ESP32-S2, ESP32-S3）に加え、オープンソース命令セットであるRISC-Vアーキテクチャを採用したモデル（ESP32-C3, ESP32-C6など）を並行して展開している [cite: 1, 3, 29, 30]。\n\nこれにより、「Sシリーズは高性能なXtensaマルチコア（LX7）でBluetooth 5とAI命令をサポート」、「Cシリーズは低コスト・省電力なRISC-VでBluetooth 5.3やZigbee/Threadをサポート」といった具合に、機能の取捨選択が世代とシリーズ間で複雑に交差している [cite: 1, 2, 3]。さらにESP32-S3には「ULPコプロセッサ側のみRISC-V」という複合的な要素も含まれている [cite: 23]。この急速なラインナップの拡充に対して、サードパーティのハードウェアベンダーや解説記事のライターの知識のアップデートが追いついていないことが、仕様の取り違え（例：S3のメインCPUをRISC-Vと誤認する、S3にC6のBluetooth 5.3仕様を紐づけてしまう等）を恒常的に発生させる土壌となっている。\n\n## 5. 物理的なハードウェア検証：Webの誤情報を回避する現実的なアプローチ\n\nこれまでの分析から明らかなように、Web上の販売ページや技術ブログの記載を鵜呑みにすることはハードウェア選定において極めてリスクが高い。ESP32-S3搭載ボードを購入した開発者が、自身の手にしているチップの真の仕様を把握するための最も確実な方法は、Web情報をバイパスし、**物理的なチップの刻印（レーザーマーキング）を直接確認すること**である。\n\nESP32-S3の開発ボードには通常、FCC/CEなどの認証マークとともに、「ESP32-S3-WROOM-1-N8R2」といった具体的なモジュール型番がレーザー刻印された金属シールド（RFシールド）が搭載されている。この文字列の法則（例：「N8」は8MBのQuad SPI Flash、「R2」は2MBのQuad SPI PSRAMを内蔵していることを示す）をEspressif社の公式モジュールデータシートと照らし合わせることで、内蔵メモリ容量やコアアーキテクチャ、利用可能なGPIOピンの制約を確定させることができる。IoTデバイスの開発者や研究者がESP32ファミリーを選定・利用する際には、検索エンジン上位の二次情報に依存せず、実物のハードウェア刻印と公式のPDFデータシートを唯一の正解とするリテラシーが強く求められる。\n\n**Sources:**\n1. [dronebotworkshop.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4)\n2. [nextpcb.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA==)\n3. esp32_datasheet_en.pdf (fileSearchStores/adv2026day12esp32sisters-ju6vzp26vplv)\n4. [pcbway.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHqRnjlLvsFh6RSI4MtLqQ4bgj8_KtUx8rGwIqUo2GfDfOhaW7S3Imfcg5qpvkwsUv0bj9ykHa69zgBCv4G_Xnd_WuI-t6Mb65woxup3z_YQTS5NHmvA7pNt4h0xs0QPpIgrSTxsO92hUJARRQ60t_RAeinTXugW7TSc_1RhRKTh6RQVgxmtmyyLmOpvfZQeuxGw1vuDjsbpGgqt7r8ccL3PJnDsyfNBLaqD8PP1ou9ng==)\n5. [pcbpit.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcFm2c9MebsajKITal8WCK-egDaSqd6Btv3W8oPRt-aNYCxABtKNQYo2Cwsrc3oWOC4c_22HjI2nuE3E544ZNDwxCSREgDmS3KiqSY3kQOACE5JXAnJrvhhPs=)\n6. [sheen.bot](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFdq-8nBMDuJzDOTMVx2-1W_Ejp_M9cOO9zmrLEOr4XOtPqiTqjaksNr41tECAbpPedc7NXfzchh0UKn9Qo6mdbr7CjzcNeKfJqc0MRDs2LBOigwSzLi4J38jabV6xZMIRhbTW4guQS1MORpnoX_c15zPXW1lopmOwFZSX2aCLvEplrN5zGfnApP8U-jUvph73jZU3BiYnW9dzy1pFicMc8)\n7. [dfrobot.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEqdd39SfwBU3bSYN_p8M0vu5RpJLGdGGdhtWpbxP6jH4DuEjL29HzjCdCX2Px8-M97YgkS8Js99uTSt8x4dgL7qjF21stovXug3PH0S0mn-TEXu7uxO1Q=)\n8. [viewedisplay.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGC3KKjnf_FtTDOsNHk3trORW6ramCaUAmtv14q_orCpY4Mrz6qRXx7WjpJ51MchnvEtwVUxAnmf9qt7e4bAZlCYvqaUx7fj1ymp4CCwMU3t7ASfm6iJN6Yai-k-Bq9n_Pw6UXNRWMBdOup8NB7OvpucTjHPx1MpeeuNdIKaD9MU8qYIGpbQV1AEeYnH2cjHcAtORFbxIjMZn7X)\n9. [newegg.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF7DAfxhW4Lt91ezXupL5TcEa1yk1Q80337sBbdnVem9XBiJ1kex86CKh2o2ciDYfSISum8LBk0dTwr0R0XQdg4D8-KI8eHpKX9JUrH0zBsW_Yq6thsmZdDz8k0BsM=)\n10. [reddit.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFW8KqdQrcSz3W4GXIVEyOFmyvEiCYhGNcl_F4S6YqDfJtxA_7d8XjUtCiegWL-dMNnGT1Wd1NFgXGT07bc8LKo86aLBfAh5YFxdmm6AcGsoUo5lxuc1wHRWM7HTBBK4iLHE9H7NwL8Ai7OvKWtiDQAtV50LYn7pQGKjjn1-Ps5BxixH1b4fLfVh7by5o8=)\n11. [circuitpython.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEDtVUalhQrxWVbXrq9cCNEhqQip5kGEDx-mPhVoBHDjnAEr0F3KdM8VXI28QJ4mSNl9bECzrt0rUn4DL3RtRmtWfe9tVk_PbRP3vSFBPCININhtxSrgRuY01Vto78Eiv3nEvopvbpbN0hEv72IRg==)\n12. [geeky-gadgets.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQENig_D90owMK_Mh1qSVNPMEkeKRmAMc9ckXoOz0z8OBVq5rDfM2GZdf70NqXNFWprXfXUXfPGQ93NParxYvu_Sq4Q_CUgZJXUUD_LligOlK70m3u13qxuwkpVORpXqLgVGEmTG2GCDwTmlYW_7Gw==)\n13. [espboards.dev](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGaWzaQxEOAArcTYrnvmxbMQ5L0yo2rJ4gFOv0r-rqvv8zioYvKPSJ5USL8Oze3iOaQZpOi20utRHzikQmpNRVgCONxFWy89vOke0IkpyVhmVblO4GRFkeoTb_6qpsRz9NqvErkM_Y=)\n14. [pcbway.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH8eqVKiP74Y1zMSqqhNDWqqTnj1VThULAzAqP2-86j5kMbh6kORlx3SXV3Y3SXKmnc0bDVW-NJrTcDCqyS4q2JbSD7T6nem9f6Mlse_uyn27ww_UMyDLnFooT1O44YheS0Br2hE45mYbw0JAXAecX8UR0Cu4kGl9-4CJl8f_9j1iz9gAqCfbjNTnuCYrI2PFEb4z2v_AjYmSn1zjgl00hiibcMEFI3G2CRFDaQlzj5LkHnxzFoKPUanL-jCuaUzS4=)\n15. [pakellab.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEadTEfjzgCBGHnM58G9UnQeRvsfr16hYy4fudYMYxMfIFm5wbecrlf0RoVh2lTdTa5JdqLwvXqkTl8fYEnK3gQRkxEjsBv9RZ7AJ6BonTPX0cPv-oXSLTn9Ob2LCNadgwb8MpfreJWmW8=)\n16. [projectech.in](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE2F5rwpajTyTm8V2gzsI7ZpepXrnFhReXnhDhYsUpgtpSTUH1U-0n1LG-QCUgFljO3o55g56amYESk8sfdSrEZGAXLZUqsnL7DduHgOx74H2M5vL5D1Fg9gkxbt6SW7KiSDt7pjschI8WnsZ4FvPAw2OdPdBc=)\n17. [codesprintconsulting.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwfqS8CGSVo_ZMEnFQGTTrdrdv-YcJeQEqp_XS_U1BB_QmIeozybmOLDt5b5tWZWeWtruNhZ9jFD2wFCDrgcUW7pJwluMbc_PRLvf7hx_d0t4ejXDMQb0yV0K-NFiP-Mzn5m7BT2Hhb0zVQUZmeKOyg-7vaqVWd7_9PCCh9yc0_XeC)\n18. [advanced-monolithic.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFIU1PDn48fNYbSAS35Wdxo1QZlhIUc50aEmiGgd5ABTBwZ-3tHjOtv80ToxG72a3nSz58JTWpq2qoSHToyq4Jq8ROgwTS2s0nXXr-9X4fUF0g04Kir4yevzK6zqsFuTu5Jm57-Iqdp)\n19. [ultralibrarian.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEvb49SULSvHnBAkP5ChFeYZtsolr9EXA5VPA-2wgdPlpgVP-9gy1xgkzSYiKJOud3T2fx91_0dauhP6hIK602CS3ZqCUW6i9WO9L5guTb5m8aIro7r443EDFedStFguY7MgheTeKh5tVlfegrrm_HMRTwMFV-NDG53PpL3NAvv_x9FB0QdjuLkC_i4B1l3x3BI_12wfXBRj99a5cRm6NyGVZzy5l1Yu1CjCuPu)\n20. [zbotic.in](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFNyzteLX4t4xk742QGUBOc9x5130tejns-rhrUN-qdeml81TZCbaZqNhmjhO_9BpqC4ueQZjX0xMvccr4YPnHggGgywQy0SDzDqXhCrMNH6OjlxmdntplFcL0KgQ0HODR7FEbfRuZhVfsosaT_qyBUFwM2HMbX4H9QQ2Qp7A==)\n21. [esp32engine.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHvjX3Z11rdKulBISNdWdEnGLdUfIwMQh2J6dZJGrbzOVJt9XgFIWcuNQjHydBTfWbF-0AAmQ8J7kwbykYIWlL-Bjar8vnAPgGsMVeutNFilQwqqeZcNFXAYIL-lmvhdMibgWttv3C2RuyVLQ==)\n22. [github.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHDQ9mLUMwY9Hm3oOP7RezKt8Qs-6pd8PyPOgy8yUpiFPvi4DOQDkKkJAf_8B1yMtMCcvLfshfnrdN7aQGOO-NTy7YJXVCYLOWnpBiC_Uyd6pYDh5TuzZ6idl5-hBoF_VsIA1urgwjhkMQDdZk=)\n23. [espressif.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHt3P7hIabqrJfewcY0Hi6YJTvOfKfHfTAn3mtsh8aVAQpW0gVrf13h7kLaCsNt5BpWrty8He7aC8WcTm-QbKKm0wmNWZ_dofWuNde6LUc97686vD0aTS35gp3TptgTu1SeLRgiaLCcrwm8d_E8YOAIRtPVzIyCxjREKiBrBuSulioHRPqm6l9mn-PWuDOU)\n24. [espressif.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFTKPeKxOMuCamWCj8CP8FTQ6hS4kQD3sAba0qzOW25ownrVyEDnftw0khbBMMtENTWOtN0sM8na-3k-xDPbJMkbmTo7rZRzGtGZYKW6UiBfTp7oE8gH7ALODdDOr8JPk26d3jQiLCtn1JHD8jdeZBJGgc_UA2XcXc3guOq8Om4DtiFs6lTbe-CDmXeqOd0aWdq4ztpIiNDNA==)\n25. [teachmemicro.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEbyEiGLpvwz9xQqQtrroJCj22NkhQr3EYeNFykrotOV6rlQ0CRIa2hdyM_BNAL08j8AQCoQvSd8xBfqUWfW4zj9dQToTTRcP6axkYDPAMAomsken7KfGcXNMoQJR1VHsL_Qe6SLET5_CQ0o_PTbkIc0msPdufa6KW7DglP7CKtxbB73Xbyz01i61BLmYaTS3lCrroS)\n26. [infishark.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHMncLe7m07c4zXj6xwfAmpml4IYMpa2a9eP2eWLZysyzPK-4qaxvy8BKwnsM1mRqCOKml8UHO2DTp0JT1nkI8_USTS5FIYCYGZeA8d0DLN88Lrqrjs7qgZEzNL4lalMaz7mQjs64Yk0n9X5eQv3y2JfBAzsJT-e8cw4dShcKwrKjrlfrtnJNKSUg==)\n27. [espressif.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGlH0sJhfnnOi0xm8d-n_ilzbtIIiDllQdURrOyMmbcYL090vpKz52JVVfUrj6FeCLs5eNkybsgEaLKy-1DtWSLAL2VeybnFuEDcVrNfaXnY4b6ily8_Hu9uk5vvgcaVbrtXWlenkR0Ydjz_aE=)\n28. [wikipedia.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGHbWS9g7Xp9mzQudswKtv3jetQ4xFZ0Lw7MpPDaF8Hi-RxBkoQTQYRSn48Uf0TCQDSLInKXQa6mHGzm5apDutbc6xqv2WtpLzAOWCxwQDEf2Zho0_cuvPKjZzyDyppk_c8wZ3c1g==)\n29. [electwork.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHLMWl_yAYBu7RqhHD87Mrdt-fbATOO8Rizd4Df9Eec13v01Q-3LJEyHg7fK0cSfmPoJAUEeonJ_hb4V3ssh_Z7_QEx_IDPtTS-_l2ZaKsalQOLreMSVkw0qcpjAocN6fs52mYAiwS_M4aj)\n30. [espressif.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHKouqA7SqKJe_ojSsqUvhCq6Xfir8AnrFjesuL-us4u9ER5O6PqLD0-n0XMBlIhEwUmpEInDiEObFbtP9uQgapvnb-9PZ0Cc6ajUYT-aVKNd3_WLWz0XYHRs2ANGNr0o3kJYtMTJIlGWuk)\n",
+          "annotations": [
+            {
+              "end_index": 4408,
+              "start_index": 4396,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA=="
+            },
+            {
+              "end_index": 4408,
+              "start_index": 4396,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4"
+            },
+            {
+              "end_index": 5215,
+              "start_index": 5200,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHqRnjlLvsFh6RSI4MtLqQ4bgj8_KtUx8rGwIqUo2GfDfOhaW7S3Imfcg5qpvkwsUv0bj9ykHa69zgBCv4G_Xnd_WuI-t6Mb65woxup3z_YQTS5NHmvA7pNt4h0xs0QPpIgrSTxsO92hUJARRQ60t_RAeinTXugW7TSc_1RhRKTh6RQVgxmtmyyLmOpvfZQeuxGw1vuDjsbpGgqt7r8ccL3PJnDsyfNBLaqD8PP1ou9ng=="
+            },
+            {
+              "end_index": 5215,
+              "start_index": 5200,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4"
+            },
+            {
+              "end_index": 5350,
+              "start_index": 5335,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcFm2c9MebsajKITal8WCK-egDaSqd6Btv3W8oPRt-aNYCxABtKNQYo2Cwsrc3oWOC4c_22HjI2nuE3E544ZNDwxCSREgDmS3KiqSY3kQOACE5JXAnJrvhhPs="
+            },
+            {
+              "end_index": 5350,
+              "start_index": 5335,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4"
+            },
+            {
+              "end_index": 5689,
+              "start_index": 5674,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA=="
+            },
+            {
+              "end_index": 5689,
+              "start_index": 5674,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcFm2c9MebsajKITal8WCK-egDaSqd6Btv3W8oPRt-aNYCxABtKNQYo2Cwsrc3oWOC4c_22HjI2nuE3E544ZNDwxCSREgDmS3KiqSY3kQOACE5JXAnJrvhhPs="
+            },
+            {
+              "end_index": 6162,
+              "start_index": 6150,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcFm2c9MebsajKITal8WCK-egDaSqd6Btv3W8oPRt-aNYCxABtKNQYo2Cwsrc3oWOC4c_22HjI2nuE3E544ZNDwxCSREgDmS3KiqSY3kQOACE5JXAnJrvhhPs="
+            },
+            {
+              "end_index": 7411,
+              "start_index": 7396,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA=="
+            },
+            {
+              "end_index": 7411,
+              "start_index": 7396,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcFm2c9MebsajKITal8WCK-egDaSqd6Btv3W8oPRt-aNYCxABtKNQYo2Cwsrc3oWOC4c_22HjI2nuE3E544ZNDwxCSREgDmS3KiqSY3kQOACE5JXAnJrvhhPs="
+            },
+            {
+              "end_index": 7872,
+              "start_index": 7860,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEqdd39SfwBU3bSYN_p8M0vu5RpJLGdGGdhtWpbxP6jH4DuEjL29HzjCdCX2Px8-M97YgkS8Js99uTSt8x4dgL7qjF21stovXug3PH0S0mn-TEXu7uxO1Q="
+            },
+            {
+              "end_index": 7872,
+              "start_index": 7860,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFdq-8nBMDuJzDOTMVx2-1W_Ejp_M9cOO9zmrLEOr4XOtPqiTqjaksNr41tECAbpPedc7NXfzchh0UKn9Qo6mdbr7CjzcNeKfJqc0MRDs2LBOigwSzLi4J38jabV6xZMIRhbTW4guQS1MORpnoX_c15zPXW1lopmOwFZSX2aCLvEplrN5zGfnApP8U-jUvph73jZU3BiYnW9dzy1pFicMc8"
+            },
+            {
+              "end_index": 8053,
+              "start_index": 8044,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGC3KKjnf_FtTDOsNHk3trORW6ramCaUAmtv14q_orCpY4Mrz6qRXx7WjpJ51MchnvEtwVUxAnmf9qt7e4bAZlCYvqaUx7fj1ymp4CCwMU3t7ASfm6iJN6Yai-k-Bq9n_Pw6UXNRWMBdOup8NB7OvpucTjHPx1MpeeuNdIKaD9MU8qYIGpbQV1AEeYnH2cjHcAtORFbxIjMZn7X"
+            },
+            {
+              "end_index": 8210,
+              "start_index": 8195,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcFm2c9MebsajKITal8WCK-egDaSqd6Btv3W8oPRt-aNYCxABtKNQYo2Cwsrc3oWOC4c_22HjI2nuE3E544ZNDwxCSREgDmS3KiqSY3kQOACE5JXAnJrvhhPs="
+            },
+            {
+              "end_index": 8210,
+              "start_index": 8195,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4"
+            },
+            {
+              "end_index": 8935,
+              "start_index": 8923,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcFm2c9MebsajKITal8WCK-egDaSqd6Btv3W8oPRt-aNYCxABtKNQYo2Cwsrc3oWOC4c_22HjI2nuE3E544ZNDwxCSREgDmS3KiqSY3kQOACE5JXAnJrvhhPs="
+            },
+            {
+              "end_index": 9138,
+              "start_index": 9129,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF7DAfxhW4Lt91ezXupL5TcEa1yk1Q80337sBbdnVem9XBiJ1kex86CKh2o2ciDYfSISum8LBk0dTwr0R0XQdg4D8-KI8eHpKX9JUrH0zBsW_Yq6thsmZdDz8k0BsM="
+            },
+            {
+              "end_index": 9296,
+              "start_index": 9284,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4"
+            },
+            {
+              "end_index": 9482,
+              "start_index": 9470,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4"
+            },
+            {
+              "end_index": 9691,
+              "start_index": 9681,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFW8KqdQrcSz3W4GXIVEyOFmyvEiCYhGNcl_F4S6YqDfJtxA_7d8XjUtCiegWL-dMNnGT1Wd1NFgXGT07bc8LKo86aLBfAh5YFxdmm6AcGsoUo5lxuc1wHRWM7HTBBK4iLHE9H7NwL8Ai7OvKWtiDQAtV50LYn7pQGKjjn1-Ps5BxixH1b4fLfVh7by5o8="
+            },
+            {
+              "end_index": 9995,
+              "start_index": 9983,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA=="
+            },
+            {
+              "end_index": 10608,
+              "start_index": 10594,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEDtVUalhQrxWVbXrq9cCNEhqQip5kGEDx-mPhVoBHDjnAEr0F3KdM8VXI28QJ4mSNl9bECzrt0rUn4DL3RtRmtWfe9tVk_PbRP3vSFBPCININhtxSrgRuY01Vto78Eiv3nEvopvbpbN0hEv72IRg=="
+            },
+            {
+              "end_index": 10608,
+              "start_index": 10594,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQENig_D90owMK_Mh1qSVNPMEkeKRmAMc9ckXoOz0z8OBVq5rDfM2GZdf70NqXNFWprXfXUXfPGQ93NParxYvu_Sq4Q_CUgZJXUUD_LligOlK70m3u13qxuwkpVORpXqLgVGEmTG2GCDwTmlYW_7Gw=="
+            },
+            {
+              "end_index": 10728,
+              "start_index": 10718,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGaWzaQxEOAArcTYrnvmxbMQ5L0yo2rJ4gFOv0r-rqvv8zioYvKPSJ5USL8Oze3iOaQZpOi20utRHzikQmpNRVgCONxFWy89vOke0IkpyVhmVblO4GRFkeoTb_6qpsRz9NqvErkM_Y="
+            },
+            {
+              "end_index": 11034,
+              "start_index": 11022,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA=="
+            },
+            {
+              "end_index": 11137,
+              "start_index": 11125,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA=="
+            },
+            {
+              "end_index": 12017,
+              "start_index": 12003,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEadTEfjzgCBGHnM58G9UnQeRvsfr16hYy4fudYMYxMfIFm5wbecrlf0RoVh2lTdTa5JdqLwvXqkTl8fYEnK3gQRkxEjsBv9RZ7AJ6BonTPX0cPv-oXSLTn9Ob2LCNadgwb8MpfreJWmW8="
+            },
+            {
+              "end_index": 12017,
+              "start_index": 12003,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH8eqVKiP74Y1zMSqqhNDWqqTnj1VThULAzAqP2-86j5kMbh6kORlx3SXV3Y3SXKmnc0bDVW-NJrTcDCqyS4q2JbSD7T6nem9f6Mlse_uyn27ww_UMyDLnFooT1O44YheS0Br2hE45mYbw0JAXAecX8UR0Cu4kGl9-4CJl8f_9j1iz9gAqCfbjNTnuCYrI2PFEb4z2v_AjYmSn1zjgl00hiibcMEFI3G2CRFDaQlzj5LkHnxzFoKPUanL-jCuaUzS4="
+            },
+            {
+              "end_index": 12192,
+              "start_index": 12182,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE2F5rwpajTyTm8V2gzsI7ZpepXrnFhReXnhDhYsUpgtpSTUH1U-0n1LG-QCUgFljO3o55g56amYESk8sfdSrEZGAXLZUqsnL7DduHgOx74H2M5vL5D1Fg9gkxbt6SW7KiSDt7pjschI8WnsZ4FvPAw2OdPdBc="
+            },
+            {
+              "end_index": 12669,
+              "start_index": 12659,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwfqS8CGSVo_ZMEnFQGTTrdrdv-YcJeQEqp_XS_U1BB_QmIeozybmOLDt5b5tWZWeWtruNhZ9jFD2wFCDrgcUW7pJwluMbc_PRLvf7hx_d0t4ejXDMQb0yV0K-NFiP-Mzn5m7BT2Hhb0zVQUZmeKOyg-7vaqVWd7_9PCCh9yc0_XeC"
+            },
+            {
+              "end_index": 12907,
+              "start_index": 12893,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEvb49SULSvHnBAkP5ChFeYZtsolr9EXA5VPA-2wgdPlpgVP-9gy1xgkzSYiKJOud3T2fx91_0dauhP6hIK602CS3ZqCUW6i9WO9L5guTb5m8aIro7r443EDFedStFguY7MgheTeKh5tVlfegrrm_HMRTwMFV-NDG53PpL3NAvv_x9FB0QdjuLkC_i4B1l3x3BI_12wfXBRj99a5cRm6NyGVZzy5l1Yu1CjCuPu"
+            },
+            {
+              "end_index": 12907,
+              "start_index": 12893,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFIU1PDn48fNYbSAS35Wdxo1QZlhIUc50aEmiGgd5ABTBwZ-3tHjOtv80ToxG72a3nSz58JTWpq2qoSHToyq4Jq8ROgwTS2s0nXXr-9X4fUF0g04Kir4yevzK6zqsFuTu5Jm57-Iqdp"
+            },
+            {
+              "end_index": 13444,
+              "start_index": 13428,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFNyzteLX4t4xk742QGUBOc9x5130tejns-rhrUN-qdeml81TZCbaZqNhmjhO_9BpqC4ueQZjX0xMvccr4YPnHggGgywQy0SDzDqXhCrMNH6OjlxmdntplFcL0KgQ0HODR7FEbfRuZhVfsosaT_qyBUFwM2HMbX4H9QQ2Qp7A=="
+            },
+            {
+              "end_index": 13444,
+              "start_index": 13428,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHqRnjlLvsFh6RSI4MtLqQ4bgj8_KtUx8rGwIqUo2GfDfOhaW7S3Imfcg5qpvkwsUv0bj9ykHa69zgBCv4G_Xnd_WuI-t6Mb65woxup3z_YQTS5NHmvA7pNt4h0xs0QPpIgrSTxsO92hUJARRQ60t_RAeinTXugW7TSc_1RhRKTh6RQVgxmtmyyLmOpvfZQeuxGw1vuDjsbpGgqt7r8ccL3PJnDsyfNBLaqD8PP1ou9ng=="
+            },
+            {
+              "end_index": 13444,
+              "start_index": 13428,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4"
+            },
+            {
+              "end_index": 13942,
+              "start_index": 13929,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcFm2c9MebsajKITal8WCK-egDaSqd6Btv3W8oPRt-aNYCxABtKNQYo2Cwsrc3oWOC4c_22HjI2nuE3E544ZNDwxCSREgDmS3KiqSY3kQOACE5JXAnJrvhhPs="
+            },
+            {
+              "end_index": 13942,
+              "start_index": 13929,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHvjX3Z11rdKulBISNdWdEnGLdUfIwMQh2J6dZJGrbzOVJt9XgFIWcuNQjHydBTfWbF-0AAmQ8J7kwbykYIWlL-Bjar8vnAPgGsMVeutNFilQwqqeZcNFXAYIL-lmvhdMibgWttv3C2RuyVLQ=="
+            },
+            {
+              "end_index": 14322,
+              "start_index": 14312,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHDQ9mLUMwY9Hm3oOP7RezKt8Qs-6pd8PyPOgy8yUpiFPvi4DOQDkKkJAf_8B1yMtMCcvLfshfnrdN7aQGOO-NTy7YJXVCYLOWnpBiC_Uyd6pYDh5TuzZ6idl5-hBoF_VsIA1urgwjhkMQDdZk="
+            },
+            {
+              "end_index": 14719,
+              "start_index": 14705,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFTKPeKxOMuCamWCj8CP8FTQ6hS4kQD3sAba0qzOW25ownrVyEDnftw0khbBMMtENTWOtN0sM8na-3k-xDPbJMkbmTo7rZRzGtGZYKW6UiBfTp7oE8gH7ALODdDOr8JPk26d3jQiLCtn1JHD8jdeZBJGgc_UA2XcXc3guOq8Om4DtiFs6lTbe-CDmXeqOd0aWdq4ztpIiNDNA=="
+            },
+            {
+              "end_index": 14719,
+              "start_index": 14705,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHt3P7hIabqrJfewcY0Hi6YJTvOfKfHfTAn3mtsh8aVAQpW0gVrf13h7kLaCsNt5BpWrty8He7aC8WcTm-QbKKm0wmNWZ_dofWuNde6LUc97686vD0aTS35gp3TptgTu1SeLRgiaLCcrwm8d_E8YOAIRtPVzIyCxjREKiBrBuSulioHRPqm6l9mn-PWuDOU"
+            },
+            {
+              "end_index": 14884,
+              "start_index": 14875,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA=="
+            },
+            {
+              "end_index": 15000,
+              "start_index": 14990,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEbyEiGLpvwz9xQqQtrroJCj22NkhQr3EYeNFykrotOV6rlQ0CRIa2hdyM_BNAL08j8AQCoQvSd8xBfqUWfW4zj9dQToTTRcP6axkYDPAMAomsken7KfGcXNMoQJR1VHsL_Qe6SLET5_CQ0o_PTbkIc0msPdufa6KW7DglP7CKtxbB73Xbyz01i61BLmYaTS3lCrroS"
+            },
+            {
+              "end_index": 19000,
+              "start_index": 18976,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGHbWS9g7Xp9mzQudswKtv3jetQ4xFZ0Lw7MpPDaF8Hi-RxBkoQTQYRSn48Uf0TCQDSLInKXQa6mHGzm5apDutbc6xqv2WtpLzAOWCxwQDEf2Zho0_cuvPKjZzyDyppk_c8wZ3c1g=="
+            },
+            {
+              "end_index": 19000,
+              "start_index": 18976,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGlH0sJhfnnOi0xm8d-n_ilzbtIIiDllQdURrOyMmbcYL090vpKz52JVVfUrj6FeCLs5eNkybsgEaLKy-1DtWSLAL2VeybnFuEDcVrNfaXnY4b6ily8_Hu9uk5vvgcaVbrtXWlenkR0Ydjz_aE="
+            },
+            {
+              "end_index": 19000,
+              "start_index": 18976,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHMncLe7m07c4zXj6xwfAmpml4IYMpa2a9eP2eWLZysyzPK-4qaxvy8BKwnsM1mRqCOKml8UHO2DTp0JT1nkI8_USTS5FIYCYGZeA8d0DLN88Lrqrjs7qgZEzNL4lalMaz7mQjs64Yk0n9X5eQv3y2JfBAzsJT-e8cw4dShcKwrKjrlfrtnJNKSUg=="
+            },
+            {
+              "end_index": 19000,
+              "start_index": 18976,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4"
+            },
+            {
+              "end_index": 20947,
+              "start_index": 20935,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA=="
+            },
+            {
+              "end_index": 21028,
+              "start_index": 21018,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQENig_D90owMK_Mh1qSVNPMEkeKRmAMc9ckXoOz0z8OBVq5rDfM2GZdf70NqXNFWprXfXUXfPGQ93NParxYvu_Sq4Q_CUgZJXUUD_LligOlK70m3u13qxuwkpVORpXqLgVGEmTG2GCDwTmlYW_7Gw=="
+            },
+            {
+              "end_index": 21560,
+              "start_index": 21540,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHKouqA7SqKJe_ojSsqUvhCq6Xfir8AnrFjesuL-us4u9ER5O6PqLD0-n0XMBlIhEwUmpEInDiEObFbtP9uQgapvnb-9PZ0Cc6ajUYT-aVKNd3_WLWz0XYHRs2ANGNr0o3kJYtMTJIlGWuk"
+            },
+            {
+              "end_index": 21560,
+              "start_index": 21540,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHLMWl_yAYBu7RqhHD87Mrdt-fbATOO8Rizd4Df9Eec13v01Q-3LJEyHg7fK0cSfmPoJAUEeonJ_hb4V3ssh_Z7_QEx_IDPtTS-_l2ZaKsalQOLreMSVkw0qcpjAocN6fs52mYAiwS_M4aj"
+            },
+            {
+              "end_index": 21560,
+              "start_index": 21540,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4"
+            },
+            {
+              "end_index": 21910,
+              "start_index": 21895,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELSd_f4798eGl9hj-A4IKFJ8lo4U_falTfZVBLB6wES1gUXQo7OWqNiIJyantgmSc4d6WoaoW-8yq7dCzhYykf8YyLWtkBuvQSn3OUgOKQdSiiojntiFk_RZcKoWPpcIIdCEbGf9XOHxkBX3KIAASXewh0vHUlqA=="
+            },
+            {
+              "end_index": 21910,
+              "start_index": 21895,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwJtOCv98jMg_IcATYGuOcumxtmx1O5-D4rfv7z8KxpiLiL-TZrpgj92oIiPjfXBJkHURjWcou275XdVat7_vnLaln1kYQ1yt9l18nR0hNIwy-ctMvsI-jOu2kXuk4"
+            },
+            {
+              "end_index": 22037,
+              "start_index": 22027,
+              "type": "url_citation",
+              "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHt3P7hIabqrJfewcY0Hi6YJTvOfKfHfTAn3mtsh8aVAQpW0gVrf13h7kLaCsNt5BpWrty8He7aC8WcTm-QbKKm0wmNWZ_dofWuNde6LUc97686vD0aTS35gp3TptgTu1SeLRgiaLCcrwm8d_E8YOAIRtPVzIyCxjREKiBrBuSulioHRPqm6l9mn-PWuDOU"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "type": "model_output"
+    }
+  ],
+  "tools": [
+    {
+      "type": "google_search"
+    },
+    {
+      "type": "url_context"
+    },
+    {
+      "type": "code_execution"
+    },
+    {
+      "file_search_store_names": [
+        "fileSearchStores/adv2026day12esp32sisters-ju6vzp26vplv"
+      ],
+      "type": "file_search"
+    }
+  ],
+  "updated": "2026-11-14T11:41:14Z",
+  "usage": {
+    "cached_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 40450
+      }
+    ],
+    "grounding_tool_count": [
+      {
+        "count": 122,
+        "type": "google_search"
+      }
+    ],
+    "initial_input_tokens": 2044510,
+    "input_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 2044510
+      }
+    ],
+    "output_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 31816
+      }
+    ],
+    "total_cached_tokens": 40450,
+    "total_input_tokens": 2044510,
+    "total_output_tokens": 31816,
+    "total_thought_tokens": 86019,
+    "total_tokens": 2560008,
+    "total_tool_use_tokens": 397663
+  },
+  "object": "interaction",
+  "seconds": 539
+}

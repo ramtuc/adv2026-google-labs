@@ -1,0 +1,6 @@
+{
+  "name": "ことのは絵本工房",
+  "description": "一言のテーマから、挿絵・読み上げ音声・BGM付きの4ページの子ども向け絵本をつくるアプリ",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

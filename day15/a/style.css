@@ -1,0 +1,827 @@
+:root {
+  --bg-washi: #f9f5eb;
+  --bg-panel: #fffdf8;
+  --bg-wood: #efe6d5;
+  --noren-indigo: #2c3e50;
+  --noren-azuki: #6d2e3b;
+  --matcha: #3f6a4e;
+  --matcha-hover: #2f523b;
+  --matcha-light: #e8f1eb;
+  --azuki: #7c3238;
+  --azuki-light: #f8eaec;
+  --gold-accent: #c59b27;
+  --text-main: #2c2520;
+  --text-muted: #685d54;
+  --border-warm: #dcd0be;
+  --shadow-soft: 0 3px 10px rgba(44, 37, 32, 0.08);
+  --radius-md: 10px;
+  --radius-sm: 6px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", "Meiryo", serif;
+  background-color: var(--bg-washi);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+button {
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  cursor: pointer;
+}
+
+.app-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 12px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 暖簾（のれん）風ヘッダー */
+.shop-header {
+  background: linear-gradient(135deg, var(--noren-azuki) 0%, #52202b 100%);
+  color: #fffaf0;
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-soft);
+  border-bottom: 4px solid var(--gold-accent);
+}
+
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kamonsymbol {
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.14);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(255, 250, 240, 0.4);
+}
+
+.brand-titles h1 {
+  font-size: 1.45rem;
+  letter-spacing: 0.08em;
+}
+
+.brand-titles .subtitle {
+  font-size: 0.82rem;
+  opacity: 0.88;
+}
+
+.status-board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.status-card {
+  background: rgba(255, 253, 248, 0.12);
+  border: 1px solid rgba(255, 253, 248, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  min-width: 112px;
+  text-align: center;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.status-card.timer-card.urgent {
+  background: #b71c1c;
+  border-color: #ffcdd2;
+  animation: pulse 0.9s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.03); }
+}
+
+.status-label {
+  display: block;
+  font-size: 0.72rem;
+  opacity: 0.9;
+}
+
+.status-value {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.status-value small {
+  font-size: 0.75rem;
+  margin-left: 2px;
+  font-weight: 400;
+}
+
+/* メイン2カラムレイアウト */
+.shop-main {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 940px) {
+  .shop-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* お客さんパネル */
+.customer-panel {
+  background: var(--bg-panel);
+  border: 2px solid var(--border-warm);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+}
+
+.customer-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.customer-avatar {
+  font-size: 2.3rem;
+  width: 54px;
+  height: 54px;
+  background: var(--bg-wood);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--border-warm);
+}
+
+.customer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.customer-number {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.order-type-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.order-type-badge.takeout {
+  background: #e3f2fd;
+  color: #0d47a1;
+  border: 1px solid #90caf9;
+}
+
+.order-type-badge.dine_in {
+  background: var(--matcha-light);
+  color: var(--matcha);
+  border: 1px solid #a5d6a7;
+}
+
+.speech-bubble {
+  position: relative;
+  background: #fff9eb;
+  border: 2px solid #d4b982;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2b2118;
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+}
+
+/* お品書き・決まり早見表 */
+.rules-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.rules-panel h2 {
+  font-size: 0.98rem;
+  margin-bottom: 8px;
+  color: var(--azuki);
+  border-bottom: 1px solid var(--border-warm);
+  padding-bottom: 4px;
+}
+
+.menu-reference-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+  margin-bottom: 10px;
+}
+
+.menu-reference-table th,
+.menu-reference-table td {
+  padding: 4px 6px;
+  border-bottom: 1px dashed var(--border-warm);
+  text-align: left;
+}
+
+.menu-reference-table th {
+  font-weight: 700;
+  color: var(--text-muted);
+  background: #f5efe2;
+}
+
+.menu-reference-table td.num {
+  text-align: right;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tag-dinein {
+  background: var(--matcha-light);
+  color: var(--matcha);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid #b5d6be;
+}
+
+.rules-list {
+  list-style: disc;
+  padding-left: 18px;
+  font-size: 0.8rem;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 右側ワークスペース */
+.workspace-column {
+  min-width: 0;
+}
+
+.phase-panel {
+  background: var(--bg-panel);
+  border: 2px solid var(--border-warm);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-soft);
+}
+
+.phase-panel[hidden] {
+  display: none !important;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--bg-wood);
+}
+
+.panel-header h2 {
+  font-size: 1.2rem;
+  color: var(--azuki);
+}
+
+/* スタート画面 */
+.welcome-box {
+  text-align: center;
+  padding: 36px 20px;
+}
+
+.welcome-box h2 {
+  font-size: 1.5rem;
+  color: var(--azuki);
+  margin-bottom: 12px;
+}
+
+.welcome-box p {
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  font-size: 0.98rem;
+  color: var(--text-main);
+  margin-bottom: 24px;
+  line-height: 1.8;
+}
+
+/* 棚グリッド */
+.shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.shelf-item-card {
+  background: #fffcf5;
+  border: 1.5px solid var(--border-warm);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  transition: border-color 0.15s, background-color 0.15s;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.shelf-item-card.selected {
+  border-color: var(--matcha);
+  background: #f2f8f4;
+  box-shadow: 0 0 0 1px var(--matcha);
+}
+
+.shelf-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.shelf-item-icon {
+  font-size: 1.5rem;
+}
+
+.shelf-item-title {
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  color: var(--text-main);
+}
+
+.shelf-item-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.shelf-item-price {
+  font-weight: 700;
+  color: var(--azuki);
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+}
+
+.qty-btn {
+  width: 34px;
+  height: 32px;
+  border: none;
+  background: var(--bg-wood);
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 4px;
+  transition: background-color 0.12s;
+}
+
+.qty-btn:hover:not(:disabled) {
+  background: #dfcfa6;
+}
+
+.qty-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.qty-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  min-width: 40px;
+  text-align: center;
+}
+
+/* 盆（トレイ）バー */
+.tray-summary-bar {
+  background: var(--bg-wood);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.tray-selected-list {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+  flex: 1;
+}
+
+/* お会計画面 */
+.checkout-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+@media (max-width: 680px) {
+  .checkout-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkout-box {
+  background: #faf6ed;
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+
+.checkout-box h3 {
+  font-size: 0.95rem;
+  color: var(--azuki);
+  margin-bottom: 6px;
+  border-bottom: 1px dashed var(--border-warm);
+  padding-bottom: 4px;
+}
+
+.checkout-subnote {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--matcha);
+}
+
+.selected-items-list {
+  list-style: none;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.selected-items-list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.paid-coins-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.paid-coins-visual {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.money-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid #bfa77a;
+  background: #fff8e7;
+}
+
+.money-chip.bill {
+  background: #f3ead8;
+  border-color: #9e845c;
+}
+
+.money-chip.coin {
+  border-radius: 999px;
+  background: #fffdf6;
+}
+
+.calc-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* おつりトレイ */
+.change-tray-section {
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.change-tray-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.change-tray-header h3 {
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.denominations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 640px) {
+  .denominations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.denom-card {
+  background: #fffcf6;
+  border: 1.5px solid var(--border-warm);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.denom-card.active {
+  border-color: var(--matcha);
+  background: #f2f8f4;
+}
+
+.denom-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.denom-name {
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.denom-badge {
+  font-size: 0.74rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--bg-wood);
+  color: var(--text-muted);
+}
+
+.checkout-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 結果フィードバック画面 */
+.feedback-card {
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.feedback-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+}
+
+.feedback-header.success {
+  background: var(--matcha-light);
+  border: 1.5px solid #81c784;
+  color: #1b5e20;
+}
+
+.feedback-header.failure {
+  background: var(--azuki-light);
+  border: 1.5px solid #e57373;
+  color: #b71c1c;
+}
+
+.feedback-icon {
+  font-size: 2.2rem;
+}
+
+.feedback-header h2 {
+  font-size: 1.25rem;
+  margin-bottom: 2px;
+}
+
+.receipt-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 680px) {
+  .receipt-comparison {
+    grid-template-columns: 1fr;
+  }
+}
+
+.receipt-box {
+  background: #faf6ed;
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+
+.receipt-box h3 {
+  font-size: 0.95rem;
+  color: var(--azuki);
+  border-bottom: 1px dashed var(--border-warm);
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.receipt-dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
+  font-size: 0.9rem;
+}
+
+.receipt-dl dt {
+  color: var(--text-muted);
+}
+
+.receipt-dl dd {
+  text-align: right;
+  font-weight: 700;
+}
+
+.receipt-dl dd.emphasis {
+  font-size: 1.05rem;
+  color: var(--azuki);
+}
+
+.feedback-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 1日終了画面 */
+.day-end-card {
+  text-align: center;
+  padding: 16px 10px;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.day-end-card h2 {
+  font-size: 1.6rem;
+  color: var(--azuki);
+  margin-bottom: 6px;
+}
+
+.day-end-lead {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.new-record-banner {
+  background: #fff8e1;
+  border: 2px solid var(--gold-accent);
+  color: #8d6e00;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.summary-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 560px;
+  margin: 0 auto 22px;
+}
+
+.summary-stat {
+  background: #faf6ed;
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.summary-stat.full-width {
+  grid-column: 1 / -1;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.stat-val {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.stat-val.highlight {
+  font-size: 1.65rem;
+  color: var(--azuki);
+}
+
+/* ボタン共通 */
+.btn {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: background-color 0.15s, transform 0.08s;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--matcha);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--matcha-hover);
+}
+
+.btn-secondary {
+  background: #e5dac3;
+  color: var(--text-main);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #d7c8ab;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 0.82rem;
+}
+
+.btn-large {
+  padding: 12px 26px;
+  font-size: 1.05rem;
+}
+
+.btn-checkout {
+  padding: 10px 22px;
+  font-size: 1rem;
+}

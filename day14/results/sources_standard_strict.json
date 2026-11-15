@@ -1,0 +1,217 @@
+[
+  {
+    "n": 1,
+    "site": "espressif.com",
+    "url": "https://www.espressif.com/ja-jp/products/socs/esp32-s3"
+  },
+  {
+    "n": 2,
+    "site": "panoxdisplay.com",
+    "url": "https://www.panoxdisplay.com/ja/knowledge/why-esp32-s3-is-popular-in-ai-toys-and-smart-display-devices.html"
+  },
+  {
+    "n": 3,
+    "site": "heltec.cn",
+    "url": "https://resource.heltec.cn/download/TurMass/HT-NC3200/esp32-s3_datasheet_cn.pdf"
+  },
+  {
+    "n": 4,
+    "site": "codesprintconsulting.com",
+    "url": "https://www.codesprintconsulting.com/blog/esp32-deep-sleep-power-consumption"
+  },
+  {
+    "n": 5,
+    "site": "note.com",
+    "url": "https://note.com/ya_ikegami/n/n4e7ae49c5e46"
+  },
+  {
+    "n": 6,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/13gy8i6/a2dp_for_bluetooth_audio_streaming_on_esp32s3/?tl=ja"
+  },
+  {
+    "n": 7,
+    "site": "cat-one.net",
+    "url": "https://www.cat-one.net/2022/01/28/deep-sleep-current-consumption-of-esp32-development-board/3968/"
+  },
+  {
+    "n": 8,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/1qxd4yp/ordered_an_esp32_c3_got_an_s3_instead_my_project/?tl=ja"
+  },
+  {
+    "n": 9,
+    "site": "yamadori.app",
+    "url": "https://www.yamadori.app/blog/esp32-comparison"
+  },
+  {
+    "n": 10,
+    "site": "electwork.net",
+    "url": "https://electwork.net/posts/esp32-series-comparison/"
+  },
+  {
+    "n": 11,
+    "site": "pc1.co.jp",
+    "url": "https://arduino.pc1.co.jp/2025/06/24/esp32%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%E3%81%AE%E4%B8%96%E4%BB%A3%E5%88%A5%E6%83%85%E5%A0%B1/"
+  },
+  {
+    "n": 12,
+    "site": "sensbench.com",
+    "url": "https://sensbench.com/ja/esp32-s3-c3-faq/"
+  },
+  {
+    "n": 13,
+    "site": "macnica.com",
+    "url": "https://www.macnica.com/eu/atd-europe/en/products/semiconductors/espressif/"
+  },
+  {
+    "n": 14,
+    "site": "hatenablog.com",
+    "url": "https://jijiken0417.hatenablog.com/entry/2025/01/03/135835"
+  },
+  {
+    "n": 15,
+    "site": "espressif.com",
+    "url": "https://documentation.espressif.com/esp32-s3_datasheet_en.pdf"
+  },
+  {
+    "n": 16,
+    "site": "qiita.com",
+    "url": "https://qiita.com/fukufukusonreiz/items/39286a4610fdd64fee96"
+  },
+  {
+    "n": 17,
+    "site": "File Search",
+    "url": "esp32-s3_datasheet_en.pdf"
+  },
+  {
+    "n": 18,
+    "site": "tamanegi-digick.com",
+    "url": "https://tamanegi-digick.com/it/devkits3/"
+  },
+  {
+    "n": 19,
+    "site": "ariat-tech.com",
+    "url": "https://jp.ariat-tech.com/blog/understanding-the-differences-esp32-and-esp32-s3-technical-and-performance-analysis.html"
+  },
+  {
+    "n": 20,
+    "site": "espressif.com",
+    "url": "https://documentation.espressif.com/esp32-s3-wroom-2_datasheet_en.pdf"
+  },
+  {
+    "n": 21,
+    "site": "switch-science.com",
+    "url": "https://www.switch-science.com/blogs/magazine/core2-vs-cores3-sram-comparison"
+  },
+  {
+    "n": 22,
+    "site": "hatakekara.com",
+    "url": "https://hatakekara.com/post-10137/"
+  },
+  {
+    "n": 23,
+    "site": "marutsu.co.jp",
+    "url": "https://www.marutsu.co.jp/pc/i/2720299/"
+  },
+  {
+    "n": 24,
+    "site": "csdn.net",
+    "url": "https://blog.csdn.net/weixin_42525328/article/details/160048219"
+  },
+  {
+    "n": 25,
+    "site": "github.com",
+    "url": "https://github.com/espressif/arduino-esp32/issues/8023"
+  },
+  {
+    "n": 26,
+    "site": "github.com",
+    "url": "https://github.com/pschatzmann/ESP32-A2DP/issues/420"
+  },
+  {
+    "n": 27,
+    "site": "eeworld.com.cn",
+    "url": "https://edm.eeworld.com.cn/dk_esp32_s3_datasheet_cn.pdf"
+  },
+  {
+    "n": 28,
+    "site": "sengoku.co.jp",
+    "url": "https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-6L6R"
+  },
+  {
+    "n": 29,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-reference/peripherals/gpio.html"
+  },
+  {
+    "n": 30,
+    "site": "akizukidenshi.com",
+    "url": "https://akizukidenshi.com/catalog/g/g131148/"
+  },
+  {
+    "n": 31,
+    "site": "makerspet.com",
+    "url": "https://makerspet.com/blog/esp32-s3-gpio-limitations/"
+  },
+  {
+    "n": 32,
+    "site": "note.com",
+    "url": "https://note.com/rcat999/n/n8d6cf1134b57"
+  },
+  {
+    "n": 33,
+    "site": "alulu.com",
+    "url": "https://alulu.com/item/emsqjn2tb/KC139/"
+  },
+  {
+    "n": 34,
+    "site": "switch-science.com",
+    "url": "https://www.switch-science.com/products/10606"
+  },
+  {
+    "n": 35,
+    "site": "kohacraft.com",
+    "url": "https://kohacraft.com/archives/202402251038.html"
+  },
+  {
+    "n": 36,
+    "site": "seeedstudio.com",
+    "url": "https://wiki.seeedstudio.com/cn/XIAO_ESP32S3_Consumption/"
+  },
+  {
+    "n": 37,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/se6t1m/my_new_esp32s3_boards_have_amazing_low_power_in/?tl=zh-hant"
+  },
+  {
+    "n": 38,
+    "site": "esp32.com",
+    "url": "https://esp32.com/viewtopic.php?t=44294"
+  },
+  {
+    "n": 39,
+    "site": "qoitech.com",
+    "url": "https://www.qoitech.com/blog/esp32-s3-c3-c6-sleep-power-consumption/"
+  },
+  {
+    "n": 40,
+    "site": "reddit.com",
+    "url": "https://www.reddit.com/r/esp32/comments/1nnrdcb/different_looking_esp32s3_modules_are_misbehaving/?tl=ja"
+  },
+  {
+    "n": 41,
+    "site": "espressif.com",
+    "url": "https://espressif.com/sites/default/files/documentation/esp32-s3_errata_en.pdf"
+  },
+  {
+    "n": 42,
+    "site": "espressif.com",
+    "url": "https://docs.espressif.com/projects/esp-chip-errata/zh_CN/latest/esp32s3/index.html"
+  },
+  {
+    "n": 43,
+    "site": "kohacraft.com",
+    "url": "https://shop.kohacraft.com/c-item-detail?ic=KC139"
+  }
+]

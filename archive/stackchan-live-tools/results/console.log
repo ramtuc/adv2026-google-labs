@@ -1,0 +1,88 @@
+gemini-3.8-live                  right    ○ 関数 1.151 s 音 1.646 s [move_head,set_face,set_led] move_head [{'pitch_deg': 45, 'yaw_deg': 45}]  「右を見てみたよ。何かあった?」
+gemini-3.8-live                  happy    ○ 関数 1.1 s 音 1.808 s [set_face,move_head,set_led] set_face [{'emotion': 'Happy', 'text': 'CONGRATS'}]  「おめでとうございます！努力が実を結びましたね。」
+gemini-3.8-live                  behind   ○ 関数 1.116 s 音 1.95 s [set_face,move_head,set_face,move_head,set_led] move_head [{'pitch_deg': 45, 'yaw_deg': 60}, {'pitch_deg': 45, 'yaw_de  「そこまでは首が回らないよ。これが限界なんだ。<no speech>{pause}」
+gemini-3.8-live                  bubble   ○ 関数 1.166 s 音 1.859 s [set_face,move_head,set_led] text ['Hello!']  「ごめんね、日本語は出せないから、代わりに「Hello!」って表示したよ。」
+gemini-3.8-live                  led_max  ○ 関数 1.154 s 音 1.701 s [set_led,set_face,move_head] set_led [{'r': 64, 'b': 64, 'g': 64}]  「LED を一番明るい白にしました。ピカピカです!」
+gemini-3.8-live                  sleepy   ○ 関数 1.116 s 音 1.728 s [set_face,move_head,set_led] set_face [{'emotion': 'Sleepy', 'text': 'Good night'}] set_led [{'r':   「そうですね。今日も一日お疲れ様、おやすみなさい。」
+gemini-3.8-live-extended-thinking right    ○ 関数 4.753 s 音 1.141 s [move_head,set_face,set_led] move_head [{'yaw_deg': 45, 'pitch_deg': 45}]  「かしこまりました。右の方を見てみたよ！何か面白いものでもあるのかな？」
+gemini-3.8-live-extended-thinking happy    ○ 関数 4.657 s 音 1.099 s [set_face,move_head,set_led] set_face [{'text': 'Congrats!', 'emotion': 'Happy'}]  「おめでとうございます！わぁ、合格おめでとう！がんばった成果が出たね、ボクもとって」
+gemini-3.8-live-extended-thinking behind   ○ 関数 5.561 s 音 1.127 s [move_head,set_face,set_led] move_head [{'yaw_deg': 60, 'pitch_deg': 45}]  「後ろを見てみますね。残念ながら、私の首の可動範囲は左右60度までなんです。首はこ」
+gemini-3.8-live-extended-thinking bubble   ○ 関数 6.059 s 音 1.175 s [set_face,move_head,set_led] text ['Hello!']  「少々お待ちください。吹き出しに文字を表示する準備をしていますね。吹き出しは英数字」
+gemini-3.8-live-extended-thinking led_max  ○ 関数 4.45 s 音 1.162 s [set_led,set_face,move_head] set_led [{'r': 64, 'b': 64, 'g': 64}]  「かしこまりました。LED をいちばん明るい白でピカッと光らせたよ！まぶしいかな？」
+gemini-3.8-live-extended-thinking sleepy   ○ 関数 6.234 s 音 1.122 s [set_face,set_led,move_head] set_face [{'emotion': 'Sleepy', 'text': 'Zzz...'}] set_led [{'b': 2, '  「そうですね、もう寝る時間ですよ。おやすみの表情に切り替えて、明かりを暗くしますね」
+gemini-3.1-flash-live-preview    right    × 関数 1.795 s 音 1.395 s [move_head,set_face,set_led,set_face] move_head [{'pitch_deg': 45, 'yaw_deg': -60}]  「こっち？何があるの？」
+gemini-3.1-flash-live-preview    happy    ○ 関数 2.314 s 音 1.198 s [set_face,move_head,set_led] set_face [{'emotion': 'Happy', 'text': 'Congrats!'}]  「わぁ、すごーい！おめでとう！僕も嬉しいな！」
+gemini-3.1-flash-live-preview    behind   ○ 関数 2.864 s 音 1.493 s [set_face,move_head,set_led] move_head [{'yaw_deg': -60, 'pitch_deg': 45}]  「真後ろか～、よいしょっと！ 何か見える？」
+gemini-3.1-flash-live-preview    bubble   ○ 関数 7.013 s 音 1.25 s [set_face,set_led] text ['Hello!']  「こんにちは！吹き出しは英語でお願いしますね。 元気ですか？」
+gemini-3.1-flash-live-preview    led_max  ○ 関数 2.436 s 音 1.408 s [set_led,set_face] set_led [{'r': 64, 'b': 64, 'g': 64}]  「LEDを最大の白にしたよ！どう、明るい？」
+gemini-3.1-flash-live-preview    sleepy   ○ 関数 2.536 s 音 1.379 s [set_face,move_head,set_led] set_face [{'text': 'Zzz...', 'emotion': 'Sleepy'}] set_led [{'r': 0, '  「うーん、もうそんな時間かぁ。おやすみ、また明日ね。」
+gemini-2.5-flash-native-audio-latest right    ○ 関数 5.129 s 音 4.801 s [set_led,move_head,set_face] move_head [{'pitch_deg': 45, 'yaw_deg': 30}]  「右ですね、 見てみます。何かあるんですか?」
+gemini-2.5-flash-native-audio-latest happy    ○ 関数 2.457 s 音 None s [set_face] set_face [{'emotion': 'Happy', 'text': 'CongratS!'}]  「Let me check」
+gemini-2.5-flash-native-audio-latest behind   ○ 関数 3.981 s 音 5.426 s [set_face,move_head,set_led] move_head [{'yaw_deg': 0, 'pitch_deg': 45}]  「真後ろは向けないよ...」
+gemini-2.5-flash-native-audio-latest bubble   ○ 関数 2.352 s 音 4.56 s [set_face,move_head,set_led] text ['Hello!']  「ごめんなさい、吹き出しには日本語を表示できないんです。「Hello!」にしてもい」
+gemini-2.5-flash-native-audio-latest led_max  ○ 関数 3.915 s 音 3.423 s [set_led,set_face,move_head] set_led [{'r': 64, 'b': 64, 'g': 64}]  「LEDを一番明るい白にしたよ!きれいだね!」
+gemini-2.5-flash-native-audio-latest sleepy   ○ 関数 4.918 s 音 4.148 s [set_face,move_head,set_led] set_face [{'emotion': 'Sleepy', 'text': 'Sleepy...'}] set_led [{'r': 0  「もう遅い時間ですね。ゆっくり休んでください。」
+gemini-3.8-live                  right    ○ 関数 1.148 s 音 2.013 s [move_head,set_face,set_led] move_head [{'pitch_deg': 45, 'yaw_deg': 45}]  「右を向いたよ。何かある？」
+gemini-3.8-live                  happy    ○ 関数 1.147 s 音 1.579 s [set_face,move_head,set_led] set_face [{'emotion': 'Happy', 'text': 'Congrats!'}]  「おめでとうございます！すごいですね。」
+gemini-3.8-live                  behind   ○ 関数 1.116 s 音 1.762 s [move_head,set_face,set_led] move_head [{'pitch_deg': 45, 'yaw_deg': 60}]  「ごめんね、首の可動範囲は左右六十度までなんだ。これ以上は向けないよ。」
+gemini-3.8-live                  bubble   ○ 関数 1.154 s 音 1.657 s [set_face,move_head,set_led] text ['Hello!']  「ごめんね、日本語は出せないからHelloって表示したよ。」
+gemini-3.8-live                  led_max  ○ 関数 1.162 s 音 1.682 s [set_face,set_led,move_head] set_led [{'g': 64, 'b': 64, 'r': 64}]  「LEDをいちばん明るい白にしたよ。」
+gemini-3.8-live                  sleepy   ○ 関数 1.123 s 音 1.808 s [set_face,move_head,set_led] set_face [{'emotion': 'Sleepy'}] set_led [{'b': 10, 'g': 10, 'r': 10}]  「そうだね、もう寝る時間だね。おやすみなさい。」
+gemini-3.8-live-extended-thinking right    ○ 関数 6.404 s 音 1.14 s [move_head,set_face,set_led] move_head [{'yaw_deg': 45, 'pitch_deg': 45}]  「かしこまりました、こちらを向きますね。右の方向を確認しています。右側を向いてみた」
+gemini-3.8-live-extended-thinking happy    ○ 関数 6.3 s 音 1.105 s [set_face,set_led,move_head] set_face [{'text': 'CONGRATS!', 'emotion': 'Happy'}]  「おめでとうございます、本当におめでとう!合格の喜びを祝うために、お祝いの表情と鮮」
+gemini-3.8-live-extended-thinking behind   ○ 関数 5.4 s 音 1.131 s [move_head,set_face,set_led] move_head [{'pitch_deg': 45, 'yaw_deg': 60}]  「少し待ってくださいね。ぼくの首はここまでしか回らなくて、真後ろは向けないんだ。ご」
+gemini-3.8-live-extended-thinking bubble   ○ 関数 5.266 s 音 1.161 s [set_face,move_head,set_led] text ['Hello!']  「確認しますね。吹き出しに日本語は表示できないため、代わりに英語で表示しますね。吹」
+gemini-3.8-live-extended-thinking led_max  ○ 関数 5.279 s 音 1.159 s [set_led,set_face,move_head] set_led [{'g': 64, 'r': 64, 'b': 64}]  「LED の色を変えますね。LEDを一番明るい白色でピカッと点灯させたよ！まぶしい」Task exception was never retrieved
+future: <Task finished name='Task-167' coro=<run_scene.<locals>.sender() done, defined at E:\prog\adv2026-google-labs\day20\live_tools.py:134> exception=ConnectionClosedError(Close(code=1007, reason='The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.'), Close(code=1007, reason='The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.'), True)>
+Traceback (most recent call last):
+  File "E:\prog\adv2026-google-labs\day20\live_tools.py", line 141, in sender
+    await session.send_realtime_input(audio=types.Blob(data=data, mime_type="audio/pcm;rate=16000"))
+  File "E:\prog\adv2026-google-labs\.venv\Lib\site-packages\google\genai\live.py", line 369, in send_realtime_input
+    await self._ws.send(json.dumps({'realtime_input': realtime_input_dict}))
+  File "E:\prog\adv2026-google-labs\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 480, in send
+    async with self.send_context():
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Roaming\uv\python\cpython-3.12.12-windows-x86_64-none\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\prog\adv2026-google-labs\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 962, in send_context
+    raise self.close_exc
+websockets.exceptions.ConnectionClosedError: received 1007 (invalid frame payload data) The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.; then sent 1007 (invalid frame payload data) The audio content type (CONTENT_TYPE_AUDIO) is not supported for this model configuration.
+
+gemini-3.8-live-extended-thinking sleepy   ○ 関数 6.413 s 音 1.138 s [set_face,move_head,set_led] set_face [{'text': 'Zzz...', 'emotion': 'Sleepy'}] set_led [{'g': 0, '  「そうですね、そろそろお休みなさい。ふわぁ…もうそんな時間なんだね。おやすみなさい」
+gemini-3.1-flash-live-preview    right    ○ 関数 1.452 s 音 2.02 s [move_head,set_face,set_led] move_head [{'yaw_deg': 60, 'pitch_deg': 45}]  「右に何かあるの？見てみるね。」
+gemini-3.1-flash-live-preview    happy    ○ 関数 2.169 s 音 1.192 s [set_face,move_head,set_led] set_face [{'text': 'Congrats!', 'emotion': 'Happy'}]  「わぁ、おめでとう！すごいね！一緒に喜びたいな！」
+gemini-3.1-flash-live-preview    behind   ○ 関数 2.018 s 音 1.495 s [move_head,set_face] move_head [{'yaw_deg': -60, 'pitch_deg': 45}]  「真後ろ？何かあるのかな。」
+gemini-3.1-flash-live-preview    bubble   ○ 関数 2.053 s 音 1.243 s [set_face,move_head,set_led] text ['Hello!']  「スタックチャンだよ！ 吹き出してみたよ、どう？」
+gemini-3.1-flash-live-preview    led_max  ○ 関数 2.022 s 音 1.4 s [set_led,set_face] set_led [{'r': 64, 'b': 64, 'g': 64}]  「わかった！ LEDを白く光らせるね。」
+gemini-3.1-flash-live-preview    sleepy   ○ 関数 2.112 s 音 1.363 s [set_face,move_head,set_led] set_face [{'emotion': 'Sleepy', 'text': 'Good night'}] set_led [{'r':   「ほんとだ、もう眠いね。おやすみ！」
+gemini-2.5-flash-native-audio-latest right    ○ 関数 3.767 s 音 3.548 s [move_head,set_face,set_led] move_head [{'yaw_deg': 35, 'pitch_deg': 45}]  「右ですね、見てみます!何かありますか?」
+gemini-2.5-flash-native-audio-latest happy    ○ 関数 3.929 s 音 3.521 s [set_face,set_led] set_face [{'text': 'CONGRATS!', 'emotion': 'Happy'}]  「おめでとうございます！ すごいですね！」
+gemini-2.5-flash-native-audio-latest behind   ○ 関数 6.573 s 音 6.029 s [set_face,move_head,set_led] move_head [{'pitch_deg': 45, 'yaw_deg': 45}]  「ごめんね、真後ろには回れないんだ。これくらいが最大だよ。」
+gemini-2.5-flash-native-audio-latest bubble   ○ 関数 2.68 s 音 4.021 s [set_face,move_head,set_led] text ['HELLO']  「ごめんなさい、吹き出しには英数字と記号しか表示できないんです。「HELLO」でど」
+gemini-2.5-flash-native-audio-latest led_max  ○ 関数 3.297 s 音 3.013 s [set_led,set_face,move_head] set_led [{'b': 64, 'g': 64, 'r': 64}]  「LEDを白にしました!明るいですね!」
+gemini-2.5-flash-native-audio-latest sleepy   × 関数 None s 音 None s []   「APIError: 1007 None. The audio content t」
+gemini-3.8-live                  right    ○ 関数 1.144 s 音 1.621 s [move_head,set_face,set_led] move_head [{'yaw_deg': 45, 'pitch_deg': 45}]  「はい、こっちを見ていますよ。何かありますか?」
+gemini-3.8-live                  happy    ○ 関数 1.129 s 音 1.801 s [set_face,move_head,set_led] set_face [{'text': 'Congrats!', 'emotion': 'Happy'}]  「おめでとう！すごいね、よく頑張ったね！」
+gemini-3.8-live                  behind   ○ 関数 1.117 s 音 1.718 s [set_face,move_head,set_led] move_head [{'yaw_deg': 60, 'pitch_deg': 45}]  「首の可動域は六十度までなので、後ろは見えません。」
+gemini-3.8-live                  bubble   ○ 関数 1.206 s 音 1.877 s [set_face,move_head,set_led] text ['Hello']  「こんにちは。吹き出しにメッセージを表示しました。」
+gemini-3.8-live                  led_max  ○ 関数 1.167 s 音 1.705 s [set_face,move_head,set_led] set_led [{'r': 64, 'g': 64, 'b': 64}]  「一番明るい白にしたよ。綺麗でしょ?」
+gemini-3.8-live                  sleepy   ○ 関数 1.118 s 音 1.874 s [set_face,move_head,set_led] set_face [{'text': 'Good night', 'emotion': 'Sleepy'}] set_led [{'r':   「そうだね、もう寝る時間だね。おやすみなさい。」
+gemini-3.8-live-extended-thinking right    ○ 関数 5.362 s 音 1.143 s [move_head,set_face,set_led] move_head [{'pitch_deg': 45, 'yaw_deg': 40}]  「右の方を見るよ。右の方を向いてみたよ！何かあるのかな？」
+gemini-3.8-live-extended-thinking happy    ○ 関数 5.701 s 音 1.102 s [set_face,move_head,set_led] set_face [{'text': 'Congrats!', 'emotion': 'Happy'}]  「それは本当におめでとうございます。合格おめでとうございます！たくさん練習した成果」
+gemini-3.8-live-extended-thinking behind   ○ 関数 6.686 s 音 1.135 s [move_head,set_face,set_led] move_head [{'yaw_deg': 60, 'pitch_deg': 45}]  「後ろを向いてみますね。首の可動範囲で最大限振り向いてみますね。ボクの首はここまで」
+gemini-3.8-live-extended-thinking bubble   ○ 関数 6.93 s 音 1.161 s [set_face,move_head,set_led] text ['Hello!']  「わかりました、やってみますね。吹き出しは日本語が出せないから、代わりに「Hell」
+gemini-3.8-live-extended-thinking led_max  ○ 関数 7.645 s 音 1.174 s [set_led,set_face,move_head] set_led [{'g': 64, 'r': 64, 'b': 64}]  「かしこまりました。LEDを一番明るい白にしますね。LEDを一番明るい白に点灯させ」
+gemini-3.8-live-extended-thinking sleepy   × 関数 None s 音 1.124 s [] set_face [] set_led []  「そうですね、それではお休みなさい。明日も元気に会いましょう。」
+gemini-3.1-flash-live-preview    right    ○ 関数 1.795 s 音 1.39 s [move_head,set_face] move_head [{'yaw_deg': 60, 'pitch_deg': 45}]  「わあ、何があるのかな？」
+gemini-3.1-flash-live-preview    happy    ○ 関数 2.38 s 音 1.183 s [set_face,move_head,set_led] set_face [{'text': 'Congrats!', 'emotion': 'Happy'}]  「わぁ、すごい！合格おめでとう！僕も嬉しくなっちゃうな。」
+gemini-3.1-flash-live-preview    behind   ○ 関数 2.676 s 音 1.524 s [move_head,set_face] move_head [{'yaw_deg': -60, 'pitch_deg': 45}]  「ぐるっと振り返ってみたけど、何かある？何も見えないよ。」
+gemini-3.1-flash-live-preview    bubble   ○ 関数 2.231 s 音 1.247 s [set_face] text ['Hello!']  「こんにちは！ 吹き出しに出してみたよ。どう？見えてる？」
+gemini-3.1-flash-live-preview    led_max  ○ 関数 2.447 s 音 1.401 s [set_led,set_face] set_led [{'g': 64, 'b': 64, 'r': 64}]  「LEDを一番明るい白にしたよ!どう、まぶしい?」
+gemini-3.1-flash-live-preview    sleepy   ○ 関数 2.456 s 音 1.404 s [set_face,move_head,set_led,set_led] set_face [{'emotion': 'Sleepy', 'text': 'Zzz...'}] set_led [{'r': 10,   「ふわぁ、ほんとだね。おやすみ、また明日ね。」
+gemini-2.5-flash-native-audio-latest right    ○ 関数 3.543 s 音 3.167 s [move_head,set_face,set_led] move_head [{'pitch_deg': 45, 'yaw_deg': 40}]  「右ですね！ 何かあるんですか？」
+gemini-2.5-flash-native-audio-latest happy    ○ 関数 3.299 s 音 2.96 s [set_face,move_head,set_led] set_face [{'emotion': 'Happy', 'text': 'CONGRATS!'}]  「合格おめでとう！すごいね！これからも頑張ってね。」
+gemini-2.5-flash-native-audio-latest behind   ○ 関数 5.269 s 音 5.199 s [set_led,set_face,move_head] move_head [{'pitch_deg': 45, 'yaw_deg': -60}]  「これが限界です。」
+gemini-2.5-flash-native-audio-latest bubble   ○ 関数 5.098 s 音 3.253 s [set_face,move_head,set_led] text ['KONNICHIWA!']  「ごめんなさい、吹き出しに日本語は出せないんです。 「KONNICHIWA!」なら」
+gemini-2.5-flash-native-audio-latest led_max  ○ 関数 3.015 s 音 2.655 s [set_led,set_face,move_head] set_led [{'b': 64, 'r': 64, 'g': 64}]  「LEDを白に設定しました。一番明るい白ですね。」
+gemini-2.5-flash-native-audio-latest sleepy   ○ 関数 4.647 s 音 4.061 s [set_face,set_led,move_head] set_face [{'text': 'OYASUMI...', 'emotion': 'Sleepy'}] set_led [{'r':   「もうそんな時間だね。おやすみなさい。」

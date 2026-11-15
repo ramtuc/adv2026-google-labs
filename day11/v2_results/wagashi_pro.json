@@ -1,0 +1,9 @@
+{
+  "model": "gemini-3-pro-image",
+  "prompt": "上生菓子「雪うさぎ」の商品写真。白いうさぎの形の練り切りで、赤い目、緑の葉の耳。黒い漆の小皿にのせ、背景は落ち着いた和室。文字は入れない。",
+  "inputs": [],
+  "seconds": 21.8,
+  "text": "",
+  "output_tokens": 1247,
+  "thoughts_tokens": 187
+}

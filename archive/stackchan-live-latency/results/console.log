@@ -1,0 +1,63 @@
+E:\prog\adv2026-google-labs\day19\live_latency.py:15: DeprecationWarning: 'audioop' is deprecated and slated for removal in Python 3.13
+  import audioop  # Python 3.12 まで。16 kHz への変換に使う
+gemini-3.8-live                          hello   待ち 1.204 s  正しさ None  「こんにちは!システムもバッチリ動いていて、今日も元気いっぱいだよ。」
+gemini-3.8-live                          sram    待ち 1.088 s  正しさ True  「ESP32-S3の内蔵 SRAMは512キロバイトだよ。僕の頭脳もしっかり動いてるよ。」
+gemini-3.8-live                          wifi5g  待ち 1.098 s  正しさ True  「ESP32-S3のWi-Fiは、2.4GHz帯のみの対応だよ。5GHz帯には対応していないんだ。」
+gemini-3.8-live                          cpu     待ち 1.051 s  正しさ True  「ESP32-S3はデュアルコアで、最大240MHzで動作するよ。ぼくの頭脳もこれで動いているんだ！」
+gemini-3.8-live                          sleep   待ち 1.083 s  正しさ True  「スタックチャンの頭脳であるESP32-S3は、ディープスリープ中約8マイクロアンペアしか消費しません。とても省電力なんで」
+gemini-3.8-live-extended-thinking        hello   待ち 1.201 s  正しさ None  「こんにちは!今日も元気に動いていますよ。」
+gemini-3.8-live-extended-thinking        sram    待ち 1.085 s  正しさ True  「ESP32-S3の内蔵SRAMは、合計で512キロバイトです。」
+gemini-3.8-live-extended-thinking        wifi5g  待ち 1.207 s  正しさ True  「ESP32 S3のWi-Fiは、2.4GHzのみ対応しています。5GHz帯は使えません。」
+gemini-3.8-live-extended-thinking        cpu     待ち 1.059 s  正しさ True  「ESP32-S3 の CPU は、最大 240MHz で動作するデュアルコアプロセッサです。」
+gemini-3.8-live-extended-thinking        sleep   待ち 1.121 s  正しさ True  「ESP32-S3のディープスリープ中の消費電流は通常約8マイクロアンペアです。」
+gemini-3.1-flash-live-preview            hello   待ち 1.403 s  正しさ None  「こんにちは！ボクは元気いっぱいだよ。キミはどう？」
+gemini-3.1-flash-live-preview            sram    待ち 1.219 s  正しさ True  「内蔵SRAMは512KBだよ。その他にも、命令用とデータ用のキャッシュメモリがあるんだ。」
+gemini-3.1-flash-live-preview            wifi5g  待ち 1.185 s  正しさ True  「ううん、ESP32-S3のWi-Fiは2.4GHz帯だけに対応しているんだ。 5GHzは使えないんだよ。」
+gemini-3.1-flash-live-preview            cpu     待ち 1.251 s  正しさ True  「ESP32-S3は、デュアルコアで動いているよ。最大240MHzの速さで処理できるよ。」
+gemini-3.1-flash-live-preview            sleep   待ち 1.256 s  正しさ False  「ディープスリープ中は、通常数μA程度の非常に低い電力で動いているよ。バッテリー持ちを良くするのに役立つんだ。」
+gemini-2.5-flash-native-audio-latest     hello   待ち 7.744 s  正しさ None  「こんにちは！私は元気です。ESP32-S3で、今日も快調に動いています。」
+gemini-2.5-flash-native-audio-latest     sram    待ち 2.632 s  正しさ True  「ESP32-S3の内蔵SRAMは512KBです。」
+gemini-2.5-flash-native-audio-latest     wifi5g  待ち 3.501 s  正しさ False  「いいえ、ESP32-S35GHzには対応していません。」
+gemini-2.5-flash-native-audio-latest     cpu     待ち 4.299 s  正しさ True  「ESP32-S3のCPUはデュアルコアです。最大240MHzで動作します。」
+gemini-2.5-flash-native-audio-latest     sleep   待ち 3.049 s  正しさ False  「ESP32-S3のディープスリープ中の消費電流は非常に低いです。設定にもよりますが、数マイクロアンペア（μA）程度が一般」
+gemini-3.8-live                          hello   待ち 1.194 s  正しさ None  「こんにちは！今日も元気いっぱい、スタックチャンです。あなたの調子はどうですか？」
+gemini-3.8-live                          sram    待ち 1.137 s  正しさ True  「ESP32-S3の内蔵SRAMは、512キロバイトだよ。スタックチャンを動かすのに十分な容量だよ！」
+gemini-3.8-live                          wifi5g  待ち 1.103 s  正しさ True  「ESP32-S3は2.4GHz帯のWi-Fiにのみ対応していて、5GHz帯には非対応だよ。だから、2.4GHzのネットワ」
+gemini-3.8-live                          cpu     待ち 1.039 s  正しさ True  「ESP32-S3は、2つのコアで動いていて、最大240MHzで動作するよ。スタックチャンもこのパワーで動いてるんだ！」
+gemini-3.8-live                          sleep   待ち 1.085 s  正しさ False  「ESP32-S3のディープスリープ中の消費電流は、約8から10マイクロアンペアだよ。とても省電力で動くんだ！」
+gemini-3.8-live-extended-thinking        hello   待ち 1.21 s  正しさ None  「こんにちは！今日もシステムは快調で、元気いっぱいですよ。」
+gemini-3.8-live-extended-thinking        sram    待ち 1.369 s  正しさ True  「ESP32-S3の内蔵 SRAMは512KBです。たくさんのデータを処理できますよ。」
+gemini-3.8-live-extended-thinking        wifi5g  待ち 1.247 s  正しさ True  「ESP32 S3のWi Fiは2 4GHz帯にのみ対応しています。そのため、5GHz帯のWi Fiには接続できません。」
+gemini-3.8-live-extended-thinking        cpu     待ち 1.043 s  正しさ True  「ESP32-S3のCPUは2コアで、最大240MHzで動作します。」
+gemini-3.8-live-extended-thinking        sleep   待ち 1.176 s  正しさ True  「ESP32-S3のディープスリープ中の消費電流は、標準で約8マイクロアンペアですが、ULPコプロセッサーを使えば最小で0」
+gemini-3.1-flash-live-preview            hello   待ち 1.402 s  正しさ None  「こんにちは！ESP32-S3は絶好調だよ。きみと話せて嬉しいな。」
+gemini-3.1-flash-live-preview            sram    待ち 1.254 s  正しさ True  「内蔵SRAMは512キロバイトですよ。高速な処理に役立っています。」
+gemini-3.1-flash-live-preview            wifi5g  待ち 1.19 s  正しさ True  「ううん、ボクのWi-Fiは2.4GHzだけなんだ。5GHzには対応してないよ。」
+gemini-3.1-flash-live-preview            cpu     待ち 1.219 s  正しさ True  「スタックチャンだよ！ CPU はデュアルコアで、 最大 240MHzで動くよ。すごいでしょ！」
+gemini-3.1-flash-live-preview            sleep   待ち 1.244 s  正しさ False  「ディープスリープ中は、ほんの数マイクロアンペア程度の電力しか使わないよ。バッテリーを長持ちさせるのに最適なんだ。」
+gemini-2.5-flash-native-audio-latest     hello   待ち 8.471 s  正しさ None  「こんにちは！ESP32-S3 で今日も 順調に動いています。」
+gemini-2.5-flash-native-audio-latest     sram    待ち 2.375 s  正しさ True  「ESP32-S3の内蔵SRAMは512KBです。」
+gemini-2.5-flash-native-audio-latest     wifi5g  待ち 4.076 s  正しさ True  「ESP32-S3 は、 5GHzのWi-Fiには対応していません。 2.4GHzのみの対応ですよ。」
+gemini-2.5-flash-native-audio-latest     cpu     待ち 4.182 s  正しさ True  「ESP32-S3のCPUは、デュアルコアで、最大240MHzで動作します。」
+gemini-2.5-flash-native-audio-latest     sleep   待ち 3.295 s  正しさ False  「ESP32-S3中の消費電流は、通常10マイクロアンペア（µA）台です。設定や周辺回路によって異なります。」
+gemini-3.8-live                          hello   待ち 1.199 s  正しさ None  「こんにちは！今日も元気いっぱい動いていますよ。何かお手伝いしましょうか?」
+gemini-3.8-live                          sram    待ち 1.09 s  正しさ True  「ESP32-S3の内蔵SRAMは、512キロバイトだよ。スタックチャンを動かすのに十分な容量だね。」
+gemini-3.8-live                          wifi5g  待ち 1.1 s  正しさ True  「ESP32-S3は2.4GHz帯のWi-Fiのみに対応していて、5GHz帯には対応していないよ。だから、2.4GHzのネ」
+gemini-3.8-live                          cpu     待ち 1.06 s  正しさ True  「ESP32-S3は2コアで、最大240MHzで動くよ!僕の頭脳もこれで動いてるんだ。」
+gemini-3.8-live                          sleep   待ち 1.295 s  正しさ True  「ESP32-S3のディープスリープ時の消費電流は、約8マイクロアンペアとすごく低いんだよ。これなら電池でも長持ちするね！」
+gemini-3.8-live-extended-thinking        hello   待ち 1.211 s  正しさ None  「こんにちは!今日もESP32-S3のパワーで、ばっちり元気に動いていますよ。」
+gemini-3.8-live-extended-thinking        sram    待ち 1.256 s  正しさ True  「調べてみますね。ESP32-S3の内蔵SRAMは512キロバイトだよ！ぼくの頭脳のメモリなんだ！」
+gemini-3.8-live-extended-thinking        wifi5g  待ち 1.156 s  正しさ True  「ESP32-S3のWi-Fiは2.4ギガヘルツ帯のみに対応していて、5ギガヘルツ帯には対応していませんよ。」
+gemini-3.8-live-extended-thinking        cpu     待ち 1.144 s  正しさ True  「ESP32-S3 は2コア構成で、動作周波数は最大240MHzだよ。」
+gemini-3.8-live-extended-thinking        sleep   待ち 3.425 s  正しさ False  「ESP32-S3のディープスリープ時の消費電流は、RTCメモリ保持の状態でだいたい7」
+gemini-3.1-flash-live-preview            hello   待ち 1.417 s  正しさ None  「こんにちは！ボクは絶好調だよ。キミはどう？」
+gemini-3.1-flash-live-preview            sram    待ち 1.213 s  正しさ True  「内蔵SRAMは512KBだよ。他にもメモリがあるよ。」
+gemini-3.1-flash-live-preview            wifi5g  待ち None s  正しさ True  「ううん、ESP32-S3のWi-Fiは、2.4GHz帯だけに対応しているよ。5GHzは使えないんだ。」
+gemini-3.1-flash-live-preview            cpu     待ち 1.227 s  正しさ True  「ESP32-S3は、デュアルコアで動いているよ。最大240MHzで動作するんだ。」
+gemini-3.1-flash-live-preview            sleep   待ち 1.242 s  正しさ False  「ディープスリープ中は、数マイクロアンペア程度まで消費電流を下げられるよ。使い方によって多少変わるけどね。」
+gemini-2.5-flash-native-audio-latest     hello   待ち 7.033 s  正しさ None  「こんにちは！私は元気ですよ。あなたはどうですか？」
+gemini-2.5-flash-native-audio-latest     sram    待ち 2.605 s  正しさ True  「ESP32-S3 の 内蔵 SRAMは 512 KBです。」
+gemini-2.5-flash-native-audio-latest     wifi5g  待ち 4.255 s  正しさ True  「いいえ、ESP32-S3は2.4GHzのみ対応しています。 5GHzには対応していません。」
+gemini-2.5-flash-native-audio-latest     cpu     待ち 4.232 s  正しさ True  「ESP32-S3。最大240MHzで動作します。」
+gemini-2.5-flash-native-audio-latest     sleep   待ち 3.562 s  正しさ False  「ESP32-S3のディープスリープ中の消費電流は非常に低いです。
+設定にもよりますが、通常は10μA程度かそれ以下です。」
